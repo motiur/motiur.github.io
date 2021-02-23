@@ -1,5 +1,5 @@
 # [Projects](/projects)
-# [Teaching](/cse203)
+# [Teaching](/teaching)
 # [Learning](/learning)
 
 * * *
