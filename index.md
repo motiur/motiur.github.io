@@ -1,8 +1,9 @@
-# [Projects](https://mohammadmotiurrahman.github.io/csc101)
-# [Teaching](https://mohammadmotiurrahman.github.io/cse203)
+# [Projects](/projects)
+# [Teaching](/cse203)
+# [Learning](/learning)
 
 * * *
 
 [email](mailto:motiur.rahamn0@gmail.com)
 
-[github.com/mohammadmotiurrahman](https://github.com/motiur)
+[github.com/motiur](https://github.com/motiur)
