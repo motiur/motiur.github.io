@@ -4,3 +4,4 @@
 ## [Principles of Pharmacology](https://ocrtraining.cit.nih.gov/principles-clinical-pharmacology-2020-2021)
 ## [Drug discovery](https://www.coursera.org/learn/drug-discovery/home/welcome)
 ## [Tech Talks](https://video.ibm.com/recorded/129473429)
+## [Fullstack deep learning](https://fullstackdeeplearning.com/)
