@@ -5,3 +5,7 @@
 ## [Drug discovery](https://www.coursera.org/learn/drug-discovery/home/welcome)
 ## [Tech Talks](https://video.ibm.com/recorded/129473429)
 ## [Fullstack deep learning](https://fullstackdeeplearning.com/)
+## [Deep RL](http://rail.eecs.berkeley.edu/deeprlcourse/)
+## [Deep Unsupervised Learning](https://sites.google.com/view/berkeley-cs294-158-sp20/home)
+## [Machine Learning with Graphs](http://web.stanford.edu/class/cs224w/)
+## [Machine Learning Systems Design](https://stanford-cs329s.github.io/syllabus.html)
