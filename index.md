@@ -3,6 +3,4 @@
 
 * * *
 
-[email](mailto:motiur.rahamn0@gmail.com)
-
-[github.com/motiur](https://github.com/motiur)
+[email](mailto:motiur.rahamn0@gmail.com)   [github.com/motiur](https://github.com/motiur)
