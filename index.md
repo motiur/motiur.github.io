@@ -1,7 +1,5 @@
 ![Cake](/cake.jpg)
-# [Projects](/projects)
-# [Teaching](/teaching)
-# [Learning](/learning)
+# [Projects](/projects) # [Teaching](/teaching) # [Learning](/learning)
 
 * * *
 
