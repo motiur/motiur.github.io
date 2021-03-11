@@ -1,4 +1,4 @@
-!(Cake)[/cake.jpg]
+![Cake](/cake.jpg)
 # [Projects](/projects)
 # [Teaching](/teaching)
 # [Learning](/learning)
