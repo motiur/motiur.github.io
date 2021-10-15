@@ -1,2 +1,2 @@
 # Teaching
-## [Spring 2021](http://mohammadmotiurrahman.github.io/)
+## [Website](http://mohammadmotiurrahman.github.io/)
