@@ -1,7 +1,5 @@
 # [Projects](/projects)   
 # [Teaching](/teaching)   
-# [Learning](/learning)
-# [Paper Review](/paper_review)
 
 * * *
 
