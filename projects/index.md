@@ -1,4 +1,5 @@
 # Projects
-## [1]()
-
-## [2]()
+## Kaggle Projects.
+## Papers.
+## Research Ideas.
+## Mobile Apps.
