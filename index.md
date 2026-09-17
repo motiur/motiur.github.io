@@ -1,5 +1,6 @@
 # [Projects](/projects)   
 # [Teaching](/teaching)   
+# [Photos](/album)   
 
 * * *
 
