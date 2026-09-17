@@ -1,1 +1,302 @@
-Hello
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Journal</title>
+<!--
+  ─────────────────────────────────────────────────────────────
+  SETUP — 3 steps
+  ─────────────────────────────────────────────────────────────
+  1. PHOTOS  — create a folder named  photos/  next to this file.
+     Drop your images in it, then list them in the PHOTOS array
+     at the bottom of this file (src + caption).
+
+  2. COMMENTS (Giscus, free, uses GitHub Discussions)
+     a. In your repo: Settings → General → Features → enable "Discussions".
+     b. Install the giscus app on the repo: https://github.com/apps/giscus
+     c. Go to https://giscus.app , enter your repo, pick a category
+        (e.g. "Announcements"), mapping doesn't matter (we override it).
+        Copy the generated data-repo-id and data-category-id into
+        the GISCUS config at the bottom of this file.
+     Each photo gets its own comment thread automatically.
+
+  3. Push to your <username>.github.io repo (or any repo with
+     Pages enabled). Done.
+  ─────────────────────────────────────────────────────────────
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141216;        /* darkroom */
+    --surface:#1e1b22;
+    --line:#2c2833;
+    --text:#edeaf1;
+    --muted:#8e8798;
+    --safelight:#f2a33c; /* amber — active states only */
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{color-scheme:dark}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"Archivo",system-ui,sans-serif;
+    font-size:15px;line-height:1.55;
+    min-height:100svh;display:flex;flex-direction:column;
+  }
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  :focus-visible{outline:2px solid var(--safelight);outline-offset:2px;border-radius:4px}
+
+  header{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding:20px clamp(16px,4vw,32px) 8px;
+    max-width:920px;width:100%;margin:0 auto;
+  }
+  header h1{
+    font-size:15px;font-weight:600;letter-spacing:.02em;
+    font-variation-settings:"wdth" 110;
+  }
+  header .count{color:var(--muted);font-size:13px}
+
+  main{width:100%;max-width:920px;margin:0 auto;padding:8px clamp(16px,4vw,32px) 40px;flex:1}
+
+  /* ── stage ── */
+  .stage{
+    position:relative;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .stage img{
+    display:block;width:100%;height:min(66svh,560px);
+    object-fit:contain;background:var(--surface);
+    user-select:none;-webkit-user-drag:none;
+  }
+  .nav{
+    position:absolute;top:0;bottom:0;width:22%;min-width:56px;
+    display:flex;align-items:center;color:var(--text);
+    opacity:0;transition:opacity .18s ease;
+  }
+  .nav:hover,.nav:focus-visible{opacity:1}
+  .nav svg{width:30px;height:30px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))}
+  .nav.prev{left:0;justify-content:flex-start;padding-left:12px;
+    background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
+  .nav.next{right:0;justify-content:flex-end;padding-right:12px;
+    background:linear-gradient(270deg,rgba(0,0,0,.35),transparent)}
+  @media (hover:none){ .nav{opacity:.85;background:none} }
+
+  /* ── caption row ── */
+  .meta{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 2px 0;min-height:44px;
+  }
+  .caption{flex:1;color:var(--text)}
+  .caption small{display:block;color:var(--muted);font-size:12.5px}
+  .toggle{
+    display:flex;align-items:center;gap:7px;flex-shrink:0;
+    padding:7px 13px;border:1px solid var(--line);border-radius:999px;
+    color:var(--muted);font-size:13px;transition:color .15s,border-color .15s;
+  }
+  .toggle:hover{color:var(--text)}
+  .toggle[aria-expanded="true"]{color:var(--safelight);border-color:var(--safelight)}
+  .toggle svg{width:15px;height:15px}
+  .toggle .n{font-variant-numeric:tabular-nums}
+
+  /* ── filmstrip ── */
+  .strip{
+    display:flex;gap:8px;overflow-x:auto;padding:14px 2px 6px;
+    scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+  }
+  .strip button{
+    flex:0 0 auto;width:64px;height:48px;border-radius:6px;overflow:hidden;
+    border:1px solid var(--line);padding:0;opacity:.55;
+    transition:opacity .15s,border-color .15s;
+  }
+  .strip img{width:100%;height:100%;object-fit:cover;display:block}
+  .strip button:hover{opacity:.85}
+  .strip button[aria-current="true"]{opacity:1;border-color:var(--safelight)}
+
+  /* ── comments ── */
+  #comments{
+    margin-top:18px;border-top:1px solid var(--line);padding-top:18px;
+  }
+  #comments[hidden]{display:none}
+  #comments .hint{color:var(--muted);font-size:13.5px;max-width:52ch}
+  #comments .hint code{color:var(--text);font-size:12.5px}
+
+  .empty{
+    padding:64px 24px;text-align:center;color:var(--muted);
+    border:1px dashed var(--line);border-radius:var(--radius);
+  }
+  .empty code{color:var(--text)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="site-title">Photo Journal</h1>
+  <span class="count" id="counter" aria-live="polite"></span>
+</header>
+
+<main>
+  <figure class="stage" id="stage" hidden>
+    <img id="photo" alt="" decoding="async">
+    <button class="nav prev" id="prev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="nav next" id="next" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </figure>
+
+  <div class="meta" id="meta" hidden>
+    <div class="caption">
+      <span id="cap"></span>
+      <small id="date"></small>
+    </div>
+    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="comments">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Comments
+    </button>
+  </div>
+
+  <div class="strip" id="strip" role="tablist" aria-label="All photos" hidden></div>
+
+  <section id="comments" hidden aria-label="Comments for this photo">
+    <div id="giscus-slot"></div>
+  </section>
+
+  <div class="empty" id="empty" hidden>
+    No photos yet. Add images to the <code>photos/</code> folder,<br>
+    then list them in the <code>PHOTOS</code> array in this file.
+  </div>
+</main>
+
+<script>
+/* ══════════════ YOUR PHOTOS ══════════════
+   One entry per image. src is relative to this file.
+   Order here = order in the carousel.                  */
+const PHOTOS = [
+  { src: "photos/sample-1.jpg", caption: "First photo",  date: "2026-09-17" },
+  { src: "photos/sample-2.jpg", caption: "Second photo", date: "" },
+  // { src: "photos/your-file.jpg", caption: "…", date: "YYYY-MM-DD" },
+];
+
+/* ══════════════ GISCUS CONFIG ══════════════
+   Fill these from https://giscus.app (see setup notes at top). */
+const GISCUS = {
+  repo:       "your-username/your-username.github.io",
+  repoId:     "",            // ← from giscus.app
+  category:   "Announcements",
+  categoryId: "",            // ← from giscus.app
+};
+/* ════════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+let i = 0, open = false;
+
+function show(k, focusStrip){
+  if(!PHOTOS.length) return;
+  i = (k + PHOTOS.length) % PHOTOS.length;
+  const p = PHOTOS[i];
+  const img = $("photo");
+  img.src = p.src;
+  img.alt = p.caption || "Photo " + (i+1);
+  $("cap").textContent  = p.caption || "";
+  $("date").textContent = p.date || "";
+  $("counter").textContent = (i+1) + " / " + PHOTOS.length;
+  document.querySelectorAll("#strip button").forEach((b,k2)=>{
+    b.setAttribute("aria-current", k2===i ? "true" : "false");
+    if(k2===i && focusStrip) b.scrollIntoView({inline:"nearest", block:"nearest"});
+  });
+  // preload neighbors
+  [i+1, i-1].forEach(n=>{
+    const q = PHOTOS[(n+PHOTOS.length)%PHOTOS.length];
+    if(q){ const im = new Image(); im.src = q.src; }
+  });
+  if(open) mountGiscus();
+}
+
+function mountGiscus(){
+  const slot = $("giscus-slot");
+  slot.innerHTML = "";
+  if(!GISCUS.repoId || !GISCUS.categoryId){
+    slot.innerHTML = '<p class="hint">Comments aren\u2019t configured yet. Enable Discussions on the repo, install the giscus app, then paste <code>repoId</code> and <code>categoryId</code> from giscus.app into the GISCUS config in this file.</p>';
+    return;
+  }
+  const s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  s.async = true;
+  s.crossOrigin = "anonymous";
+  const term = PHOTOS[i].src;              // one thread per photo
+  Object.entries({
+    "data-repo": GISCUS.repo,
+    "data-repo-id": GISCUS.repoId,
+    "data-category": GISCUS.category,
+    "data-category-id": GISCUS.categoryId,
+    "data-mapping": "specific",
+    "data-term": term,
+    "data-strict": "0",
+    "data-reactions-enabled": "1",
+    "data-emit-metadata": "0",
+    "data-input-position": "top",
+    "data-theme": "noborder_dark",
+    "data-lang": "en",
+    "data-loading": "lazy",
+  }).forEach(([k,v]) => s.setAttribute(k, v));
+  slot.appendChild(s);
+}
+
+function toggleComments(){
+  open = !open;
+  $("toggle").setAttribute("aria-expanded", open);
+  $("comments").hidden = !open;
+  if(open){ mountGiscus(); $("comments").scrollIntoView({behavior:"smooth", block:"nearest"}); }
+}
+
+function init(){
+  if(!PHOTOS.length){ $("empty").hidden = false; return; }
+  $("stage").hidden = $("meta").hidden = $("strip").hidden = false;
+
+  const strip = $("strip");
+  PHOTOS.forEach((p,k)=>{
+    const b = document.createElement("button");
+    b.setAttribute("aria-label","Photo " + (k+1) + (p.caption? ": "+p.caption : ""));
+    const t = document.createElement("img");
+    t.src = p.src; t.alt = ""; t.loading = "lazy";
+    b.appendChild(t);
+    b.addEventListener("click", ()=>show(k));
+    strip.appendChild(b);
+  });
+
+  $("prev").addEventListener("click", ()=>show(i-1, true));
+  $("next").addEventListener("click", ()=>show(i+1, true));
+  $("toggle").addEventListener("click", toggleComments);
+
+  addEventListener("keydown", e=>{
+    if(e.target.closest("input,textarea,iframe")) return;
+    if(e.key==="ArrowLeft")  show(i-1, true);
+    if(e.key==="ArrowRight") show(i+1, true);
+  });
+
+  // swipe
+  let x0=null;
+  $("stage").addEventListener("touchstart", e=>{ x0=e.touches[0].clientX; }, {passive:true});
+  $("stage").addEventListener("touchend", e=>{
+    if(x0===null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0=null;
+    if(Math.abs(dx)>40) show(dx<0 ? i+1 : i-1, true);
+  }, {passive:true});
+
+  show(0);
+}
+init();
+</script>
+</body>
+</html>
