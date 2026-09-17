@@ -25,7 +25,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 <style>
   :root{
     --paper:#f1f0f4;--surface:#e9e7ee;--ink:#1a1720;--muted:#726c7a;
@@ -173,18 +172,6 @@ function meta(name){
   return { caption, date, place };
 }
 function keyFor(name){ return name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9_.-]/g,"_").slice(0,64); }
-/* iPhone HEIC/HEIF: convert to a JPEG blob URL in-browser; everything else passes through. */
-function resolveSrc(p){
-  if(!/\.(heic|heif)$/i.test(p.name)) return Promise.resolve(p.src);
-  if(p._url) return Promise.resolve(p._url);
-  if(p._conv) return p._conv;
-  if(!window.heic2any) return Promise.resolve(p.src);
-  p._conv = fetch(p.src).then(function(r){ if(!r.ok) throw 0; return r.blob(); })
-    .then(function(b){ return heic2any({blob:b, toType:"image/jpeg", quality:0.9}); })
-    .then(function(out){ var blob = Array.isArray(out)? out[0] : out; p._url = URL.createObjectURL(blob); return p._url; })
-    .catch(function(){ return p.src; });
-  return p._conv;
-}
 
 function fmtDate(d, withTime){
   try{
@@ -251,7 +238,7 @@ function render(){
   PHOTOS.forEach(function(p,k){
     const b=document.createElement("button");
     b.setAttribute("aria-label","Photo "+(k+1)+(p.caption? ": "+p.caption : ""));
-    const t=document.createElement("img"); t.alt=""; t.loading="lazy"; resolveSrc(p).then(function(u){ t.src=u; });
+    const t=document.createElement("img"); t.src=p.src; t.alt=""; t.loading="lazy";
     b.appendChild(t); b.addEventListener("click", function(){ show(k); }); strip.appendChild(b);
   });
   show(0);
@@ -259,14 +246,14 @@ function render(){
 function show(k, focusStrip){
   i=(k+PHOTOS.length)%PHOTOS.length;
   const p=PHOTOS[i], img=$("photo");
-  img.alt=p.caption||"Photo "+(i+1); resolveSrc(p).then(function(u){ if(PHOTOS[i]===p) img.src=u; });
+  img.src=p.src; img.alt=p.caption||"Photo "+(i+1);
   $("cap").textContent=p.caption||"";
   $("counter").textContent=(i+1)+" / "+PHOTOS.length;
   document.querySelectorAll("#strip button").forEach(function(b,k2){
     b.setAttribute("aria-current", k2===i?"true":"false");
     if(k2===i && focusStrip) b.scrollIntoView({inline:"nearest",block:"nearest"});
   });
-  [i+1,i-1].forEach(function(n){ const q=PHOTOS[(n+PHOTOS.length)%PHOTOS.length]; if(q) resolveSrc(q).then(function(u){ const im=new Image(); im.src=u; }); });
+  [i+1,i-1].forEach(function(n){ const q=PHOTOS[(n+PHOTOS.length)%PHOTOS.length]; if(q){const im=new Image();im.src=q.src;} });
   applyMeta(p); if(!p._metaTried) enrich(p); updateViews(p.name);
 }
 
@@ -275,7 +262,7 @@ fetch("https://api.github.com/repos/"+REPO+"/contents/"+DIR,{headers:{"Accept":"
   .then(function(files){
     if(!Array.isArray(files)) throw new Error("Folder not found");
     const pagePrefix=DIR.replace(/^.*?\//,"");
-    PHOTOS=files.filter(function(f){ return f.type==="file" && /\.(jpe?g|png|gif|webp|avif|heic|heif)$/i.test(f.name); })
+    PHOTOS=files.filter(function(f){ return f.type==="file" && /\.(jpe?g|png|gif|webp|avif)$/i.test(f.name); })
       .sort(function(a,b){ return a.name.localeCompare(b.name); })
       .map(function(f){ const m=meta(f.name); return { name:f.name, src:pagePrefix+"/"+f.name, caption:m.caption, date:m.date, place:m.place }; });
     render();
