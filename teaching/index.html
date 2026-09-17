@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching</title>
+<!--
+  TEACHING PAGE  (place at  teaching/index.html , NO front matter.)
+  Delete teaching/index.md so this becomes the /teaching page.
+
+  TO ADD A LINK: add another <li> inside <ul class="links">, like
+    <li><a href="https://...">Course name<span>term</span></a>...</li>
+  (copy an existing <li> including its arrow svg).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f1f0f4;--ink:#1a1720;--muted:#726c7a;--line:#dad6e0;--accent:#5e2b54}
+  *{box-sizing:border-box;margin:0}
+  html{color-scheme:light}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    line-height:1.55;min-height:100svh;display:flex;flex-direction:column;
+    padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+
+  .back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);
+    font-family:"Archivo",system-ui,sans-serif;font-weight:500;font-size:.95rem;
+    letter-spacing:.01em;transition:color .2s}
+  .back svg{width:16px;height:16px}
+  .back .t{position:relative}
+  .back .t::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;
+    background:var(--accent);transition:width .26s cubic-bezier(.2,.7,.3,1)}
+  .back:hover{color:var(--accent)}
+  .back:hover .t::after,.back:focus-visible .t::after{width:100%}
+
+  .wrap{width:100%;max-width:660px;margin:0 auto;flex:1}
+
+  .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(2.6rem,9vw,4.2rem);line-height:1.02;letter-spacing:-.015em;
+    font-optical-sizing:auto;margin:clamp(30px,7vw,64px) 0 clamp(6px,2vw,14px)}
+  .sub{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.05rem);margin-bottom:clamp(24px,5vw,40px)}
+
+  .links{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+  .links li{border-bottom:1px solid var(--line)}
+  .links li a{
+    position:relative;display:flex;align-items:baseline;gap:16px;
+    padding:clamp(17px,3.2vw,24px) 0;
+    font-size:clamp(1.4rem,5.5vw,2rem);font-weight:500;letter-spacing:-.01em;
+    transition:color .2s ease}
+  .links li a .note{color:var(--muted);font-size:.9rem;font-weight:400;flex:1}
+  .links li a .arrow{color:var(--accent);flex-shrink:0;align-self:center;
+    transition:transform .22s cubic-bezier(.2,.7,.3,1)}
+  .links li a .arrow svg{width:22px;height:22px;display:block}
+  .links li a::after{content:"";position:absolute;left:0;bottom:clamp(14px,2.6vw,20px);
+    height:2px;width:0;background:var(--accent);transition:width .26s cubic-bezier(.2,.7,.3,1)}
+  @media (hover:hover){
+    .links li a:hover,.links li a:focus-within{color:var(--accent)}
+    .links li a:hover .note{color:var(--ink)}
+    .links li a:hover .arrow,.links li a:focus-within .arrow{transform:translateX(6px)}
+    .links li a:hover::after,.links li a:focus-within::after{width:2.2em}
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+    .title{animation-delay:.04s}.sub{animation-delay:.10s}.l1{animation-delay:.18s}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="t">Home</span></a>
+
+  <div class="wrap">
+    <h1 class="title reveal">Teaching</h1>
+    <p class="sub reveal">Courses, materials and the class website.</p>
+
+    <ul class="links">
+      <li class="reveal l1"><a href="http://mohammadmotiurrahman.github.io/">
+        Website<span class="note">course pages &amp; materials</span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a></li>
+    </ul>
+  </div>
+</body>
+</html>
