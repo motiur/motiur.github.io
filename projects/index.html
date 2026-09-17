@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects</title>
 <!-- PROJECTS. Place at projects/index.html, NO front matter. Delete projects/index.md.
-     Add a publication inside <ol class="pubs">; add a project inside a category's <ul class="items">. -->
+     Each category is a collapsible <details class="cat">. Add a publication inside
+     <ol class="pubs">; add a project inside a category's <ul class="items">. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
@@ -24,15 +25,23 @@
 
   .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
     font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.02;letter-spacing:-.015em;
-    font-optical-sizing:auto;margin:clamp(20px,6vw,52px) 0 clamp(28px,6vw,48px)}
+    font-optical-sizing:auto;margin:clamp(20px,6vw,52px) 0 clamp(24px,5vw,40px)}
 
-  .cat{padding:clamp(22px,4vw,32px) 0;border-top:1px solid var(--line)}
-  .cat:last-child{border-bottom:1px solid var(--line)}
+  details.cat{border-top:1px solid var(--line)}
+  details.cat:last-of-type{border-bottom:1px solid var(--line)}
+  details.cat>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;
+    padding:clamp(20px,3.6vw,28px) 0}
+  details.cat>summary::-webkit-details-marker{display:none}
+  .cat .chead{flex:1;min-width:0}
   .cat h2{font-family:"Archivo",system-ui,sans-serif;font-weight:600;
     font-size:clamp(1.5rem,5.5vw,2.1rem);letter-spacing:-.01em}
   .cat .lead{color:var(--muted);font-size:.9rem;margin-top:5px}
+  .cat .chev{width:20px;height:20px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+  details.cat[open]>summary .chev{transform:rotate(90deg)}
+  details.cat>summary:hover h2{color:var(--accent)}
+  .cbody{padding-bottom:clamp(18px,3vw,26px)}
 
-  .items{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .items{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
   .items:empty{display:none}
   .items li a{position:relative;display:flex;align-items:baseline;gap:12px;
     padding:9px 0;font-size:1rem;transition:color .18s}
@@ -44,8 +53,9 @@
   .items li a:hover::after,.items li a:focus-visible::after{width:1.4em}
 
   /* publications */
-  .pubs{list-style:none;margin:18px 0 0;padding:0}
+  .pubs{list-style:none;margin:2px 0 0;padding:0}
   .pubs li{padding:14px 0}
+  .pubs li:first-child{padding-top:4px}
   .pubs li + li{border-top:1px solid var(--line)}
   .pt{font-weight:600;font-size:1.02rem;line-height:1.35}
   .pa{color:var(--muted);font-size:.88rem;margin-top:3px}
@@ -53,7 +63,7 @@
   .pm .venue{color:var(--muted);font-size:.85rem}
   .pm .cite{flex-shrink:0;color:var(--accent);font-weight:600;font-size:.76rem;
     font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:999px;padding:2px 10px}
-  .scholar{display:inline-block;margin-top:18px;color:var(--muted);font-size:.9rem;
+  .scholar{display:inline-block;margin-top:16px;color:var(--muted);font-size:.9rem;
     border-bottom:1px solid transparent;padding-bottom:2px;transition:color .18s,border-color .18s}
   .scholar:hover{color:var(--accent);border-color:var(--accent)}
 
@@ -69,57 +79,73 @@
   <div class="wrap">
     <h1 class="title reveal">Projects</h1>
 
-    <section class="cat reveal c1">
-      <h2>Kaggle Projects</h2>
-      <p class="lead">competition write-ups &amp; notebooks</p>
-      <ul class="items">
-        <!-- <li><a href="https://kaggle.com/...">Project title<span>1st place, 2026</span></a></li> -->
-      </ul>
-    </section>
+    <details class="cat reveal c1">
+      <summary>
+        <span class="chead"><h2>Kaggle Projects</h2><p class="lead">competition write-ups &amp; notebooks</p></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </summary>
+      <div class="cbody">
+        <ul class="items">
+          <!-- <li><a href="https://kaggle.com/...">Project title<span>1st place, 2026</span></a></li> -->
+        </ul>
+      </div>
+    </details>
 
-    <section class="cat reveal c2">
-      <h2>Publications</h2>
-      <p class="lead">peer-reviewed papers &amp; preprints</p>
-      <ol class="pubs">
-        <li>
-          <p class="pt">Machine Learning Facilitated Rice Prediction in Bangladesh</p>
-          <p class="pa">M. M. Rahman, N. Haq, R. M. Rahman</p>
-          <p class="pm"><span class="venue">Annual Global Online Conference on Information and Computer Technology (GOCICT), 2014</span><span class="cite">cited by 35</span></p>
-        </li>
-        <li>
-          <p class="pt">Application of data mining tools for rice yield prediction on clustered regions of Bangladesh</p>
-          <p class="pa">M. M. Rahman, N. Haq, R. M. Rahman</p>
-          <p class="pm"><span class="venue">17th International Conference on Computer and Information Technology (ICCIT), 2014</span><span class="cite">cited by 23</span></p>
-        </li>
-        <li>
-          <p class="pt">Recognizing Bangladeshi Currency for Visually Impaired</p>
-          <p class="pa">M. M. Rahman, B. Poon, M. A. Amin, H. Yan</p>
-          <p class="pm"><span class="venue">Communications in Computer and Information Science, vol. 481, pp. 129&ndash;135, Springer, 2014</span><span class="cite">cited by 12</span></p>
-        </li>
-        <li>
-          <p class="pt">Support System Using Microsoft Kinect and Mobile Phone for Daily Activity of Visually Impaired</p>
-          <p class="pa">M. M. Rahman, B. Poon, M. A. Amin, H. Yan</p>
-          <p class="pm"><span class="venue">Transactions on Engineering Technologies, pp. 425&ndash;440, Springer, 2015</span><span class="cite">cited by 5</span></p>
-        </li>
-      </ol>
-      <a class="scholar" href="https://scholar.google.com/citations?user=iDVkEzYAAAAJ&amp;hl=en">Full profile on Google Scholar</a>
-    </section>
+    <details class="cat reveal c2" open>
+      <summary>
+        <span class="chead"><h2>Publications</h2><p class="lead">peer-reviewed papers &amp; preprints</p></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </summary>
+      <div class="cbody">
+        <ol class="pubs">
+          <li>
+            <p class="pt">Machine Learning Facilitated Rice Prediction in Bangladesh</p>
+            <p class="pa">M. M. Rahman, N. Haq, R. M. Rahman</p>
+            <p class="pm"><span class="venue">Annual Global Online Conference on Information and Computer Technology (GOCICT), 2014</span><span class="cite">cited by 35</span></p>
+          </li>
+          <li>
+            <p class="pt">Application of data mining tools for rice yield prediction on clustered regions of Bangladesh</p>
+            <p class="pa">M. M. Rahman, N. Haq, R. M. Rahman</p>
+            <p class="pm"><span class="venue">17th International Conference on Computer and Information Technology (ICCIT), 2014</span><span class="cite">cited by 23</span></p>
+          </li>
+          <li>
+            <p class="pt">Recognizing Bangladeshi Currency for Visually Impaired</p>
+            <p class="pa">M. M. Rahman, B. Poon, M. A. Amin, H. Yan</p>
+            <p class="pm"><span class="venue">Communications in Computer and Information Science, vol. 481, pp. 129&ndash;135, Springer, 2014</span><span class="cite">cited by 12</span></p>
+          </li>
+          <li>
+            <p class="pt">Support System Using Microsoft Kinect and Mobile Phone for Daily Activity of Visually Impaired</p>
+            <p class="pa">M. M. Rahman, B. Poon, M. A. Amin, H. Yan</p>
+            <p class="pm"><span class="venue">Transactions on Engineering Technologies, pp. 425&ndash;440, Springer, 2015</span><span class="cite">cited by 5</span></p>
+          </li>
+        </ol>
+        <a class="scholar" href="https://scholar.google.com/citations?user=iDVkEzYAAAAJ&amp;hl=en">Full profile on Google Scholar</a>
+      </div>
+    </details>
 
-    <section class="cat reveal c3">
-      <h2>Research Ideas</h2>
-      <p class="lead">work in progress</p>
-      <ul class="items">
-        <!-- <li><a href="#">Idea title<span>short note</span></a></li> -->
-      </ul>
-    </section>
+    <details class="cat reveal c3">
+      <summary>
+        <span class="chead"><h2>Research Ideas</h2><p class="lead">work in progress</p></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </summary>
+      <div class="cbody">
+        <ul class="items">
+          <!-- <li><a href="#">Idea title<span>short note</span></a></li> -->
+        </ul>
+      </div>
+    </details>
 
-    <section class="cat reveal c4">
-      <h2>Mobile Apps</h2>
-      <p class="lead">things I&rsquo;ve shipped</p>
-      <ul class="items">
-        <!-- <li><a href="https://...">App name<span>iOS / Android</span></a></li> -->
-      </ul>
-    </section>
+    <details class="cat reveal c4">
+      <summary>
+        <span class="chead"><h2>Mobile Apps</h2><p class="lead">things I&rsquo;ve shipped</p></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </summary>
+      <div class="cbody">
+        <ul class="items">
+          <!-- <li><a href="https://...">App name<span>iOS / Android</span></a></li> -->
+        </ul>
+      </div>
+    </details>
   </div>
 </body>
 </html>
