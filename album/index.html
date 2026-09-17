@@ -3,68 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photo Journal</title>
+<title>Photos — Mohammad Motiur Rahman</title>
 <!--
+  ALBUM PAGE  (place this at  album/index.html , NO front matter, so the
+  Jekyll theme leaves it alone — same rule as the homepage.)
+
   Photos auto-load from your repo folder (set REPO + DIR below).
-  Each photo shows a VIEW COUNTER powered by Abacus, a free no-signup
-  counting service (abacus.jasoncameron.dev). Each photo's count is
-  keyed to its filename, so counts are per-photo.
-
-  How the count behaves: the first time a given browser sees a photo it
-  counts +1; after that the same browser only reads the number (so one
-  person refreshing doesn't inflate it). If the service is down the
-  counter just hides itself — the carousel still works.
-
-  Honest limits: the number is public (anyone can read/increment the key),
-  and it's an approximate "people reached", not a verified unique count.
-  Fine for a personal album; not analytics-grade.
+  Each photo shows a per-photo VIEW COUNTER via Abacus (free, no signup).
+  Styled to match the homepage: lilac paper, mulberry accent, Fraunces + Archivo.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#141216;--surface:#1e1b22;--line:#2c2833;--text:#edeaf1;--muted:#8e8798;--safelight:#f2a33c;--radius:10px}
+  :root{
+    --paper:#f1f0f4;--surface:#ffffff;--ink:#1a1720;--muted:#726c7a;
+    --line:#dad6e0;--accent:#5e2b54;--radius:12px;
+  }
   *{box-sizing:border-box;margin:0}
-  html{color-scheme:dark}
-  body{background:var(--bg);color:var(--text);font-family:"Archivo",system-ui,sans-serif;font-size:15px;line-height:1.55;min-height:100svh;display:flex;flex-direction:column}
+  html{color-scheme:light}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;font-size:15px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100svh;display:flex;flex-direction:column}
+  a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-  :focus-visible{outline:2px solid var(--safelight);outline-offset:2px;border-radius:4px}
-  header{display:flex;align-items:baseline;justify-content:space-between;padding:20px clamp(16px,4vw,32px) 8px;max-width:920px;width:100%;margin:0 auto}
-  header h1{font-size:15px;font-weight:600;letter-spacing:.02em;font-variation-settings:"wdth" 110}
-  header .count{color:var(--muted);font-size:13px}
-  main{width:100%;max-width:920px;margin:0 auto;padding:8px clamp(16px,4vw,32px) 40px;flex:1}
-  .stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-  .stage img{display:block;width:100%;height:min(66svh,560px);object-fit:contain;background:var(--surface);user-select:none;-webkit-user-drag:none}
-  .nav{position:absolute;top:0;bottom:0;width:22%;min-width:56px;display:flex;align-items:center;color:var(--text);opacity:0;transition:opacity .18s ease}
-  .nav:hover,.nav:focus-visible{opacity:1}
-  .nav svg{width:30px;height:30px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))}
-  .nav.prev{left:0;justify-content:flex-start;padding-left:12px;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
-  .nav.next{right:0;justify-content:flex-end;padding-right:12px;background:linear-gradient(270deg,rgba(0,0,0,.35),transparent)}
-  @media (hover:none){.nav{opacity:.85;background:none}}
-  .meta{display:flex;align-items:center;gap:12px;padding:12px 2px 0;min-height:44px}
-  .caption{flex:1;color:var(--text)}
-  .caption small{display:block;color:var(--muted);font-size:12.5px}
-  .views{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;color:var(--muted);font-size:13px;
-    border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-variant-numeric:tabular-nums;
-    transition:opacity .2s;white-space:nowrap}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    padding:clamp(24px,5vw,44px) clamp(20px,5vw,40px) 12px;max-width:900px;width:100%;margin:0 auto}
+  .home{position:relative;font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(1.05rem,3.4vw,1.35rem);letter-spacing:-.01em;color:var(--ink);
+    font-optical-sizing:auto;transition:color .2s}
+  .home::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
+    background:var(--accent);transition:width .26s cubic-bezier(.2,.7,.3,1)}
+  .home:hover,.home:focus-visible{color:var(--accent)}
+  .home:hover::after,.home:focus-visible::after{width:100%}
+  .count{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex-shrink:0}
+
+  main{width:100%;max-width:900px;margin:0 auto;padding:6px clamp(20px,5vw,40px) 48px;flex:1}
+
+  .stage{position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 24px 55px -34px rgba(94,43,84,.5)}
+  .stage img{display:block;width:100%;height:min(66svh,560px);object-fit:contain;
+    background:var(--surface);user-select:none;-webkit-user-drag:none}
+  .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;
+    border-radius:50%;background:rgba(255,255,255,.85);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--ink);
+    box-shadow:0 4px 16px rgba(26,23,32,.14);opacity:0;
+    transition:opacity .18s ease,color .18s,border-color .18s}
+  .nav.prev{left:14px}.nav.next{right:14px}
+  .nav svg{width:20px;height:20px}
+  .stage:hover .nav,.nav:focus-visible{opacity:1}
+  .nav:hover{color:var(--accent);border-color:var(--accent)}
+  @media (hover:none){.nav{opacity:.92}}
+
+  .meta{display:flex;align-items:center;gap:14px;padding:16px 2px 0;min-height:46px}
+  .caption{flex:1;min-width:0}
+  .caption .cap{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.05rem,3.2vw,1.25rem);line-height:1.3;color:var(--ink)}
+  .caption small{display:block;color:var(--muted);font-size:.8rem;letter-spacing:.02em;margin-top:3px}
+  .views{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;background:#fff;
+    border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--muted);
+    font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
   .views[hidden]{display:none}
-  .views svg{width:15px;height:15px}
-  .views .num{color:var(--text);font-weight:600}
+  .views svg{width:15px;height:15px;color:var(--accent)}
+  .views .num{color:var(--ink);font-weight:600}
   .views.loading .num{color:var(--muted)}
-  .strip{display:flex;gap:8px;overflow-x:auto;padding:14px 2px 6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-  .strip button{flex:0 0 auto;width:64px;height:48px;border-radius:6px;overflow:hidden;border:1px solid var(--line);padding:0;opacity:.55;transition:opacity .15s,border-color .15s}
+
+  .strip{display:flex;gap:9px;overflow-x:auto;padding:18px 2px 6px;
+    scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .strip button{flex:0 0 auto;width:66px;height:50px;border-radius:8px;overflow:hidden;
+    border:1px solid var(--line);padding:0;opacity:.6;background:#fff;
+    transition:opacity .15s,border-color .15s}
   .strip img{width:100%;height:100%;object-fit:cover;display:block}
-  .strip button:hover{opacity:.85}
-  .strip button[aria-current="true"]{opacity:1;border-color:var(--safelight)}
-  .note{padding:64px 24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);line-height:1.7}
-  .note code{color:var(--text)}
-  .note.err{border-color:#5a3a3a;color:#d8a3a3}
-  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+  .strip button:hover{opacity:.9}
+  .strip button[aria-current="true"]{opacity:1;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+
+  .note{padding:60px 24px;text-align:center;color:var(--muted);
+    border:1px dashed var(--line);border-radius:var(--radius);line-height:1.7}
+  .note code{color:var(--ink)}
+  .note.err{border-color:#c8a3bf;color:#8a3a6e}
+
+  @media (prefers-reduced-motion:no-preference){
+    .stage{opacity:0;transform:translateY(8px);animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
 </style>
 </head>
 <body>
 <header>
-  <h1 id="site-title">Photo Journal</h1>
+  <a class="home" href="/">Mohammad Motiur Rahman</a>
   <span class="count" id="counter" aria-live="polite"></span>
 </header>
 <main>
@@ -78,7 +108,7 @@
     </button>
   </figure>
   <div class="meta" id="meta" hidden>
-    <div class="caption"><span id="cap"></span><small id="date"></small></div>
+    <div class="caption"><span class="cap" id="cap"></span><small id="date"></small></div>
     <span class="views" id="views" hidden aria-live="polite" title="Views">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       <span class="num" id="views-num">—</span>
@@ -88,16 +118,12 @@
   <div class="note" id="status">Loading photos&hellip;</div>
 </main>
 <script>
-/* ============ SET THESE TWO ============ */
-const REPO = "motiur/motiur.github.io";   // owner/repo -- change if different
-const DIR  = "album/photos";              // folder path from repo root where images live
-/* If images sit in a photos/ folder at the repo root instead, use  "photos"  */
-
-/* Counter service + a namespace unique to your album so keys don't
-   collide with anyone else using the same free service. */
-const ABACUS_NS = "motiur-album";          // anything unique to you
+/* ============ SET THESE ============ */
+const REPO = "motiur/motiur.github.io";   // owner/repo
+const DIR  = "album/photos";              // folder path from repo root (use "photos" if at root)
+const ABACUS_NS = "motiur-album";         // anything unique to you
 const ABACUS    = "https://abacus.jasoncameron.dev";
-/* ====================================== */
+/* =================================== */
 
 const $ = id => document.getElementById(id);
 let PHOTOS = [], i = 0;
@@ -110,27 +136,24 @@ function meta(name){
   const date = m ? m[1]+"-"+m[2]+"-"+m[3] : "";
   return { caption, date };
 }
-/* a safe counter key from a filename */
 function keyFor(name){ return name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9_.-]/g,"_").slice(0,64); }
 
 function updateViews(name){
   const v = $("views"), num = $("views-num");
-  const key = keyFor(name);
-  const seen = "viewed:" + ABACUS_NS + ":" + key;
+  const key = keyFor(name), seen = "viewed:"+ABACUS_NS+":"+key;
   let already = false;
   try { already = localStorage.getItem(seen) === "1"; } catch(e){}
-  const endpoint = already ? "/get/" : "/hit/";   // hit = +1, get = read only
+  const endpoint = already ? "/get/" : "/hit/";
   v.hidden = false; v.classList.add("loading"); num.textContent = "—";
-
   fetch(ABACUS + endpoint + encodeURIComponent(ABACUS_NS) + "/" + encodeURIComponent(key))
     .then(function(r){ if(!r.ok) throw 0; return r.json(); })
     .then(function(d){
-      if(name !== PHOTOS[i].name) return;         // user moved on; ignore stale response
+      if(name !== PHOTOS[i].name) return;
       v.classList.remove("loading");
       num.textContent = Number(d.value).toLocaleString();
       if(!already){ try { localStorage.setItem(seen,"1"); } catch(e){} }
     })
-    .catch(function(){ v.hidden = true; });        // service down -> just hide it
+    .catch(function(){ v.hidden = true; });
 }
 
 function render(){
