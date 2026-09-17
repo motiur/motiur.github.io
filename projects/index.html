@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects</title>
 <!-- PROJECTS. Place at projects/index.html, NO front matter. Delete projects/index.md.
-     Each category is a collapsible <details class="cat">. Add a publication inside
-     <ol class="pubs">; add a project inside a category's <ul class="items">. -->
+     Each category is a collapsible <details class="cat">. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
@@ -67,6 +66,25 @@
     border-bottom:1px solid transparent;padding-bottom:2px;transition:color .18s,border-color .18s}
   .scholar:hover{color:var(--accent);border-color:var(--accent)}
 
+  /* research interests */
+  .rint{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .rint li{font-size:.95rem;line-height:1.5;color:var(--muted)}
+  .rint .rt{color:var(--ink);font-weight:600}
+
+  /* current research */
+  .subhead{margin-top:26px;margin-bottom:2px;color:var(--muted);font-size:.82rem;
+    font-weight:500;letter-spacing:.04em}
+  .proj{padding:16px 0}
+  .proj + .proj{border-top:1px solid var(--line)}
+  .ph{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 14px}
+  .pn{font-weight:600;font-size:1.02rem;line-height:1.3}
+  .pd{color:var(--muted);font-size:.82rem;font-variant-numeric:tabular-nums;flex-shrink:0}
+  .prole{color:var(--muted);font-size:.86rem;margin-top:3px}
+  .pbul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .pbul li{position:relative;padding-left:16px;font-size:.9rem;line-height:1.5}
+  .pbul li::before{content:"";position:absolute;left:2px;top:.62em;width:4px;height:4px;
+    border-radius:50%;background:var(--accent)}
+
   @media (prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
     .title{animation-delay:.04s}
@@ -123,15 +141,51 @@
       </div>
     </details>
 
-    <details class="cat reveal c3">
+    <details class="cat reveal c3" open>
       <summary>
-        <span class="chead"><h2>Research Ideas</h2><p class="lead">work in progress</p></span>
+        <span class="chead"><h2>Research</h2><p class="lead">interests &amp; current projects</p></span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
       </summary>
       <div class="cbody">
-        <ul class="items">
-          <!-- <li><a href="#">Idea title<span>short note</span></a></li> -->
+        <ul class="rint">
+          <li><span class="rt">Geometric deep learning</span> — Riemannian GCNs, hyperbolic networks, SPD-manifold learning, equivariant neural networks (SE(2)/SO(3)).</li>
+          <li><span class="rt">Privacy-preserving machine learning</span> — differential privacy (DP-SGD), federated learning, fully homomorphic encryption (FHE).</li>
+          <li><span class="rt">Visual speech recognition</span> — Bengali lip-reading using GAT + Transformer architectures.</li>
+          <li><span class="rt">Accessible AI for underserved communities</span> — on-device, low-resource ML for the Bengali deaf community.</li>
+          <li><span class="rt">Bioinformatics &amp; applied machine learning</span> for agriculture and healthcare.</li>
         </ul>
+
+        <p class="subhead">Current research</p>
+        <div class="projs">
+          <div class="proj">
+            <div class="ph"><span class="pn">Bengali Visual Speech Recognition (Lip Reading)</span><span class="pd">2024 &ndash; Present</span></div>
+            <p class="prole">Co-Investigator: Dr. Mahady Hasan &mdash; Independent University, Bangladesh</p>
+            <ul class="pbul">
+              <li>Multimodal lip-reading pipeline targeting Bangladesh&rsquo;s ~13.7 million deaf community.</li>
+              <li>Graph Attention Network (GAT) + Transformer over MediaPipe-extracted lip landmarks (40 landmarks from 478 facial keypoints); BiLSTM / attention-based temporal modelling.</li>
+              <li>Trained on the LRW dataset with A100 GPU (Google Colab); optimised Drive I/O via in-RAM dataset loading.</li>
+              <li>Funded by the IUB VC Research Fund and IUB Sponsored Research (2-year duration); aligned with UN SDG 10 &amp; SDG 4.</li>
+            </ul>
+          </div>
+          <div class="proj">
+            <div class="ph"><span class="pn">Geometric &amp; Equivariant Deep Learning</span><span class="pd">2023 &ndash; Present</span></div>
+            <p class="prole">Independent research</p>
+            <ul class="pbul">
+              <li>Implementation and evaluation of Riemannian GCNs, hyperbolic embeddings, and SPD-manifold models.</li>
+              <li>SE(2)-equivariant CNNs (ESCNN) vs. data-augmentation baselines on medical-imaging benchmarks.</li>
+              <li>Exploration of Manifold Neural ODEs, Hamiltonian neural networks, and persistent homology.</li>
+            </ul>
+          </div>
+          <div class="proj">
+            <div class="ph"><span class="pn">Privacy-Preserving Machine Learning</span><span class="pd">2023 &ndash; Present</span></div>
+            <p class="prole">Independent research</p>
+            <ul class="pbul">
+              <li>Differential Privacy (DP-SGD), Federated Learning (Flower + CoreML), and FHE pipelines (Zama AI / TFHE).</li>
+              <li>Design of a DP-GNN with attention mechanisms under DP-SGD for private graph learning.</li>
+              <li>Federated learning for clinical applications and on-device inference on iOS (Apple Swift HE).</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </details>
 
