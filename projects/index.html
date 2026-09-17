@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects</title>
+<!--
+  PROJECTS PAGE  (place at  projects/index.html , NO front matter, so the
+  Jekyll theme leaves it alone — same rule as the homepage and album.)
+  Delete projects/index.md so this becomes the /projects page.
+
+  TO ADD AN ENTRY: inside a category's <ul class="items">, add a line like
+    <li><a href="https://...">Title<span>short note</span></a></li>
+  The <span> note is optional.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f1f0f4;--ink:#1a1720;--muted:#726c7a;--line:#dad6e0;--accent:#5e2b54}
+  *{box-sizing:border-box;margin:0}
+  html{color-scheme:light}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    line-height:1.55;min-height:100svh;display:flex;flex-direction:column;
+    padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+
+  .back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);
+    font-family:"Archivo",system-ui,sans-serif;font-weight:500;font-size:.95rem;
+    letter-spacing:.01em;transition:color .2s}
+  .back svg{width:16px;height:16px}
+  .back .t{position:relative}
+  .back .t::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;
+    background:var(--accent);transition:width .26s cubic-bezier(.2,.7,.3,1)}
+  .back:hover{color:var(--accent)}
+  .back:hover .t::after,.back:focus-visible .t::after{width:100%}
+
+  .wrap{width:100%;max-width:660px;margin:0 auto;flex:1}
+
+  .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(2.6rem,9vw,4.2rem);line-height:1.02;letter-spacing:-.015em;
+    font-optical-sizing:auto;margin:clamp(30px,7vw,64px) 0 clamp(28px,6vw,48px)}
+
+  .cat{padding:clamp(22px,4vw,32px) 0;border-top:1px solid var(--line)}
+  .cat:last-child{border-bottom:1px solid var(--line)}
+  .cat h2{font-family:"Archivo",system-ui,sans-serif;font-weight:600;
+    font-size:clamp(1.35rem,4.5vw,1.7rem);letter-spacing:-.01em}
+  .cat .lead{color:var(--muted);font-size:.92rem;margin-top:5px}
+
+  .items{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .items:empty{display:none}
+  .items li a{
+    position:relative;display:flex;align-items:baseline;gap:12px;
+    padding:9px 0;font-size:1.02rem;transition:color .18s}
+  .items li a span{color:var(--muted);font-size:.86rem;flex:1}
+  .items li a::after{content:"";position:absolute;left:0;bottom:5px;height:1.5px;width:0;
+    background:var(--accent);transition:width .24s cubic-bezier(.2,.7,.3,1)}
+  .items li a:hover{color:var(--accent)}
+  .items li a:hover span{color:var(--ink)}
+  .items li a:hover::after,.items li a:focus-visible::after{width:1.4em}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+    .title{animation-delay:.04s}
+    .c1{animation-delay:.12s}.c2{animation-delay:.19s}.c3{animation-delay:.26s}.c4{animation-delay:.33s}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="t">Home</span></a>
+
+  <div class="wrap">
+    <h1 class="title reveal">Projects</h1>
+
+    <section class="cat reveal c1">
+      <h2>Kaggle Projects</h2>
+      <p class="lead">competition write-ups &amp; notebooks</p>
+      <ul class="items">
+        <!-- <li><a href="https://kaggle.com/...">Project title<span>1st place, 2026</span></a></li> -->
+      </ul>
+    </section>
+
+    <section class="cat reveal c2">
+      <h2>Papers</h2>
+      <p class="lead">publications &amp; preprints</p>
+      <ul class="items">
+        <!-- <li><a href="https://...">Paper title<span>venue, year</span></a></li> -->
+      </ul>
+    </section>
+
+    <section class="cat reveal c3">
+      <h2>Research Ideas</h2>
+      <p class="lead">work in progress</p>
+      <ul class="items">
+        <!-- <li><a href="#">Idea title<span>short note</span></a></li> -->
+      </ul>
+    </section>
+
+    <section class="cat reveal c4">
+      <h2>Mobile Apps</h2>
+      <p class="lead">things I&rsquo;ve shipped</p>
+      <ul class="items">
+        <!-- <li><a href="https://...">App name<span>iOS / Android</span></a></li> -->
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
