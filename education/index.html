@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Education</title>
+<!-- EDUCATION. Place at education/index.html, NO front matter. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f1f0f4;--ink:#1a1720;--muted:#726c7a;--line:#dad6e0;--accent:#5e2b54}
+  *{box-sizing:border-box;margin:0}
+  html{color-scheme:light}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;
+    padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+
+  .wrap{width:100%;max-width:640px;margin:0 auto;flex:1}
+
+  .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.02;letter-spacing:-.015em;
+    font-optical-sizing:auto;margin:clamp(20px,6vw,52px) 0 clamp(6px,2vw,12px)}
+  .sub{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.05rem);margin-bottom:clamp(20px,4vw,32px)}
+
+  .edu{border-top:1px solid var(--line)}
+  .eitem{padding:clamp(18px,3.4vw,26px) 0;border-bottom:1px solid var(--line)}
+  .ph{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 14px}
+  .pn{font-weight:600;font-size:clamp(1.05rem,3.4vw,1.25rem);letter-spacing:-.01em;line-height:1.3}
+  .pd{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums;flex-shrink:0}
+  .prole{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+    .title{animation-delay:.04s}.sub{animation-delay:.10s}
+    .e1{animation-delay:.18s}.e2{animation-delay:.25s}.e3{animation-delay:.32s}.e4{animation-delay:.39s}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="title reveal">Education</h1>
+    <p class="sub reveal">Degrees &amp; studies.</p>
+
+    <div class="edu">
+      <div class="eitem reveal e1">
+        <div class="ph"><span class="pn">M.Sc. in Computer Science</span><span class="pd">2015 &ndash; 2017</span></div>
+        <p class="prole">University of Washington, Tacoma &mdash; USA</p>
+      </div>
+      <div class="eitem reveal e2">
+        <div class="ph"><span class="pn">Language Studies &mdash; French &amp; German</span><span class="pd">2014 &ndash; 2015</span></div>
+        <p class="prole">Alliance Fran&ccedil;aise de Dhaka &middot; Goethe-Institut Bangladesh</p>
+      </div>
+      <div class="eitem reveal e3">
+        <div class="ph"><span class="pn">M.Sc. in Computer Science (2 semesters)</span><span class="pd">2014 &ndash; 2015</span></div>
+        <p class="prole">Independent University, Bangladesh &mdash; Dhaka</p>
+      </div>
+      <div class="eitem reveal e4">
+        <div class="ph"><span class="pn">B.Sc. in Computer Science</span><span class="pd">2008 &ndash; 2014</span></div>
+        <p class="prole">North South University &mdash; Dhaka, Bangladesh</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
