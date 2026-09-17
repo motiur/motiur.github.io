@@ -3,18 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photos — Mohammad Motiur Rahman</title>
+<title>Photos</title>
 <!--
-  ALBUM PAGE  (place this at  album/index.html , NO front matter, so the
-  Jekyll theme leaves it alone — same rule as the homepage.)
+  ALBUM PAGE  (place at  album/index.html , NO front matter so the theme leaves it alone.)
 
-  Photos auto-load from your repo folder (set REPO + DIR below).
-  Each photo shows a per-photo VIEW COUNTER via Abacus (free, no signup).
-  Styled to match the homepage: lilac paper, mulberry accent, Fraunces + Archivo.
+  METADATA: each photo shows WHERE and WHEN it was taken, read from the file:
+    - WHEN  = EXIF "DateTimeOriginal" (phone/camera photos usually have this)
+    - WHERE = EXIF GPS coordinates, turned into a place name via OpenStreetMap
+  If a photo has no EXIF date, it falls back to a date in the filename.
+  If a photo has no GPS, no place is shown.
+
+  Want to force nice labels (or fill gaps)? Add entries to MANUAL_META below,
+  keyed by filename — those always win over what's read from the file.
+
+  Photos still auto-load from your repo folder (set REPO + DIR), and each keeps
+  its per-photo view counter.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
 <style>
   :root{
     --paper:#f1f0f4;--surface:#ffffff;--ink:#1a1720;--muted:#726c7a;
@@ -24,28 +32,23 @@
   html{color-scheme:light}
   body{background:var(--paper);color:var(--ink);
     font-family:"Archivo",system-ui,sans-serif;font-size:15px;line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    min-height:100svh;display:flex;flex-direction:column}
+    -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-  header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
     padding:clamp(24px,5vw,44px) clamp(20px,5vw,40px) 12px;max-width:900px;width:100%;margin:0 auto}
-  .home{position:relative;font-family:"Fraunces",Georgia,serif;font-weight:500;
-    font-size:clamp(1.05rem,3.4vw,1.35rem);letter-spacing:-.01em;color:var(--ink);
-    font-optical-sizing:auto;transition:color .2s}
-  .home::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
-    background:var(--accent);transition:width .26s cubic-bezier(.2,.7,.3,1)}
-  .home:hover,.home:focus-visible{color:var(--accent)}
-  .home:hover::after,.home:focus-visible::after{width:100%}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.9rem;
+    transition:color .18s}
+  .back svg{width:16px;height:16px}
+  .back:hover{color:var(--accent)}
   .count{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex-shrink:0}
 
   main{width:100%;max-width:900px;margin:0 auto;padding:6px clamp(20px,5vw,40px) 48px;flex:1}
 
   .stage{position:relative;background:var(--surface);border:1px solid var(--line);
-    border-radius:var(--radius);overflow:hidden;
-    box-shadow:0 24px 55px -34px rgba(94,43,84,.5)}
+    border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 55px -34px rgba(94,43,84,.5)}
   .stage img{display:block;width:100%;height:min(66svh,560px);object-fit:contain;
     background:var(--surface);user-select:none;-webkit-user-drag:none}
   .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;
@@ -59,11 +62,16 @@
   .nav:hover{color:var(--accent);border-color:var(--accent)}
   @media (hover:none){.nav{opacity:.92}}
 
-  .meta{display:flex;align-items:center;gap:14px;padding:16px 2px 0;min-height:46px}
+  .meta{display:flex;align-items:flex-start;gap:14px;padding:16px 2px 0;min-height:46px}
   .caption{flex:1;min-width:0}
   .caption .cap{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:400;
     font-size:clamp(1.05rem,3.2vw,1.25rem);line-height:1.3;color:var(--ink)}
-  .caption small{display:block;color:var(--muted);font-size:.8rem;letter-spacing:.02em;margin-top:3px}
+  .caption .cap:empty{display:none}
+  .metaline{display:flex;flex-wrap:wrap;gap:5px 16px;margin-top:7px;
+    color:var(--muted);font-size:.82rem}
+  .mitem{display:inline-flex;align-items:center;gap:5px}
+  .mitem[hidden]{display:none}
+  .mitem svg{width:13px;height:13px;color:var(--accent);flex-shrink:0}
   .views{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;background:#fff;
     border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--muted);
     font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -94,7 +102,7 @@
 </head>
 <body>
 <header>
-  <a class="home" href="/">Mohammad Motiur Rahman</a>
+  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Home</a>
   <span class="count" id="counter" aria-live="polite"></span>
 </header>
 <main>
@@ -108,7 +116,19 @@
     </button>
   </figure>
   <div class="meta" id="meta" hidden>
-    <div class="caption"><span class="cap" id="cap"></span><small id="date"></small></div>
+    <div class="caption">
+      <span class="cap" id="cap"></span>
+      <span class="metaline">
+        <span class="mitem" id="m-place" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="m-place-txt"></span>
+        </span>
+        <span class="mitem" id="m-time" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <span id="m-time-txt"></span>
+        </span>
+      </span>
+    </div>
     <span class="views" id="views" hidden aria-live="polite" title="Views">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       <span class="num" id="views-num">—</span>
@@ -120,9 +140,15 @@
 <script>
 /* ============ SET THESE ============ */
 const REPO = "motiur/motiur.github.io";   // owner/repo
-const DIR  = "album/photos";              // folder path from repo root (use "photos" if at root)
-const ABACUS_NS = "motiur-album";         // anything unique to you
+const DIR  = "album/photos";              // folder from repo root (use "photos" if at root)
+const ABACUS_NS = "motiur-album";
 const ABACUS    = "https://abacus.jasoncameron.dev";
+
+/* Optional overrides / gap-fillers, keyed by filename. Always win over EXIF.
+   place: any label you like.  date: "YYYY-MM-DD".  datetime: any text you like. */
+const MANUAL_META = {
+  // "IMG_20220528_174840.jpg": { place: "Cox's Bazar, Bangladesh", date: "2022-05-28" },
+};
 /* =================================== */
 
 const $ = id => document.getElementById(id);
@@ -138,24 +164,76 @@ function meta(name){
 }
 function keyFor(name){ return name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9_.-]/g,"_").slice(0,64); }
 
+function fmtDate(d, withTime){
+  try{
+    const opts = withTime
+      ? {day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}
+      : {day:"numeric",month:"short",year:"numeric"};
+    return new Intl.DateTimeFormat("en-GB", opts).format(d);
+  }catch(e){ return ""; }
+}
+function fileDateText(s){
+  if(!s) return "";
+  const d = new Date(s+"T12:00:00");
+  return isNaN(d) ? s : fmtDate(d, false);
+}
+
+/* ---- views ---- */
 function updateViews(name){
   const v = $("views"), num = $("views-num");
   const key = keyFor(name), seen = "viewed:"+ABACUS_NS+":"+key;
-  let already = false;
-  try { already = localStorage.getItem(seen) === "1"; } catch(e){}
-  const endpoint = already ? "/get/" : "/hit/";
+  let already = false; try { already = localStorage.getItem(seen)==="1"; } catch(e){}
   v.hidden = false; v.classList.add("loading"); num.textContent = "—";
-  fetch(ABACUS + endpoint + encodeURIComponent(ABACUS_NS) + "/" + encodeURIComponent(key))
+  fetch(ABACUS + (already?"/get/":"/hit/") + encodeURIComponent(ABACUS_NS)+"/"+encodeURIComponent(key))
     .then(function(r){ if(!r.ok) throw 0; return r.json(); })
     .then(function(d){
       if(name !== PHOTOS[i].name) return;
-      v.classList.remove("loading");
-      num.textContent = Number(d.value).toLocaleString();
+      v.classList.remove("loading"); num.textContent = Number(d.value).toLocaleString();
       if(!already){ try { localStorage.setItem(seen,"1"); } catch(e){} }
     })
     .catch(function(){ v.hidden = true; });
 }
 
+/* ---- place from GPS via OpenStreetMap, cached ---- */
+function geocode(lat,lon){
+  const key = "geo:"+lat.toFixed(4)+","+lon.toFixed(4);
+  try{ const c=localStorage.getItem(key); if(c!==null) return Promise.resolve(c); }catch(e){}
+  const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en&zoom=12&addressdetails=1&lat="+lat+"&lon="+lon;
+  return fetch(url).then(function(r){ return r.ok? r.json():null; }).then(function(d){
+    let label="";
+    if(d && d.address){
+      const a=d.address;
+      const loc=a.city||a.town||a.village||a.hamlet||a.suburb||a.county||a.state_district||a.state||"";
+      label=[loc, a.country].filter(Boolean).join(", ");
+    } else if(d && d.display_name){ label=d.display_name.split(",").slice(0,2).join(",").trim(); }
+    try{ localStorage.setItem(key,label); }catch(e){}
+    return label;
+  }).catch(function(){ return ""; });
+}
+
+/* ---- metadata display ---- */
+function applyMeta(p){
+  if(!PHOTOS[i] || p.name!==PHOTOS[i].name) return;
+  const man = MANUAL_META[p.name] || {};
+  const place = man.place || p._geoPlace || "";
+  const time  = man.datetime || (man.date? fileDateText(man.date):"") || p._exifTime || fileDateText(p.date);
+  const mp=$("m-place"), mt=$("m-time");
+  if(place){ mp.hidden=false; $("m-place-txt").textContent=place; } else mp.hidden=true;
+  if(time){  mt.hidden=false; $("m-time-txt").textContent=time; }   else mt.hidden=true;
+}
+function enrich(p){
+  p._metaTried = true;
+  if(!window.exifr){ return; }
+  window.exifr.parse(p.src, { gps:true }).then(function(x){
+    if(!x) return;
+    if(x.DateTimeOriginal) p._exifTime = fmtDate(x.DateTimeOriginal, true);
+    if(x.latitude!=null && x.longitude!=null){
+      return geocode(x.latitude, x.longitude).then(function(pl){ if(pl) p._geoPlace = pl; });
+    }
+  }).catch(function(){}).then(function(){ applyMeta(p); });
+}
+
+/* ---- carousel ---- */
 function render(){
   if(!PHOTOS.length){
     $("status").innerHTML = 'No images found in <code>'+DIR+'</code>. Upload some through GitHub and refresh.';
@@ -167,27 +245,25 @@ function render(){
   PHOTOS.forEach(function(p,k){
     const b = document.createElement("button");
     b.setAttribute("aria-label","Photo "+(k+1)+(p.caption? ": "+p.caption : ""));
-    const t = document.createElement("img");
-    t.src = p.src; t.alt = ""; t.loading = "lazy";
-    b.appendChild(t);
-    b.addEventListener("click", function(){ show(k); });
+    const t = document.createElement("img"); t.src=p.src; t.alt=""; t.loading="lazy";
+    b.appendChild(t); b.addEventListener("click", function(){ show(k); });
     strip.appendChild(b);
   });
   show(0);
 }
-
 function show(k, focusStrip){
   i = (k + PHOTOS.length) % PHOTOS.length;
   const p = PHOTOS[i], img = $("photo");
   img.src = p.src; img.alt = p.caption || "Photo "+(i+1);
-  $("cap").textContent  = p.caption || "";
-  $("date").textContent = p.date || "";
+  $("cap").textContent = p.caption || "";
   $("counter").textContent = (i+1)+" / "+PHOTOS.length;
   document.querySelectorAll("#strip button").forEach(function(b,k2){
     b.setAttribute("aria-current", k2===i ? "true":"false");
     if(k2===i && focusStrip) b.scrollIntoView({inline:"nearest",block:"nearest"});
   });
   [i+1,i-1].forEach(function(n){ const q=PHOTOS[(n+PHOTOS.length)%PHOTOS.length]; if(q){const im=new Image();im.src=q.src;} });
+  applyMeta(p);
+  if(!p._metaTried) enrich(p);
   updateViews(p.name);
 }
 
