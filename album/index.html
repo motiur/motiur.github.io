@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Photo Journal</title>
 <!--
-  HOW UPLOADS WORK
-  This page asks GitHub to list your photos folder when it loads, so any
-  image you upload through GitHub (repo -> Add file -> Upload files) shows
-  up automatically on the next refresh. You do NOT edit a list in this file.
+  Photos auto-load from your repo folder (set REPO + DIR below).
+  Each photo shows a VIEW COUNTER powered by Abacus, a free no-signup
+  counting service (abacus.jasoncameron.dev). Each photo's count is
+  keyed to its filename, so counts are per-photo.
 
-  Set REPO and DIR below to point at the folder your images are in.
+  How the count behaves: the first time a given browser sees a photo it
+  counts +1; after that the same browser only reads the number (so one
+  person refreshing doesn't inflate it). If the service is down the
+  counter just hides itself — the carousel still works.
 
-  Optional captions: name a file  beach--sunset-in-cox.jpg  and the part
-  after "--" becomes the caption ("sunset in cox"). A YYYYMMDD or
-  YYYY-MM-DD anywhere in the name becomes the date.
-
-  COMMENTS (Giscus): enable Discussions, install the giscus app, paste
-  repoId + categoryId into the GISCUS block.
+  Honest limits: the number is public (anyone can read/increment the key),
+  and it's an approximate "people reached", not a verified unique count.
+  Fine for a personal album; not analytics-grade.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,6 @@
   *{box-sizing:border-box;margin:0}
   html{color-scheme:dark}
   body{background:var(--bg);color:var(--text);font-family:"Archivo",system-ui,sans-serif;font-size:15px;line-height:1.55;min-height:100svh;display:flex;flex-direction:column}
-  a{color:inherit}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   :focus-visible{outline:2px solid var(--safelight);outline-offset:2px;border-radius:4px}
   header{display:flex;align-items:baseline;justify-content:space-between;padding:20px clamp(16px,4vw,32px) 8px;max-width:920px;width:100%;margin:0 auto}
@@ -45,19 +44,18 @@
   .meta{display:flex;align-items:center;gap:12px;padding:12px 2px 0;min-height:44px}
   .caption{flex:1;color:var(--text)}
   .caption small{display:block;color:var(--muted);font-size:12.5px}
-  .toggle{display:flex;align-items:center;gap:7px;flex-shrink:0;padding:7px 13px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;transition:color .15s,border-color .15s}
-  .toggle:hover{color:var(--text)}
-  .toggle[aria-expanded="true"]{color:var(--safelight);border-color:var(--safelight)}
-  .toggle svg{width:15px;height:15px}
+  .views{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;color:var(--muted);font-size:13px;
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-variant-numeric:tabular-nums;
+    transition:opacity .2s;white-space:nowrap}
+  .views[hidden]{display:none}
+  .views svg{width:15px;height:15px}
+  .views .num{color:var(--text);font-weight:600}
+  .views.loading .num{color:var(--muted)}
   .strip{display:flex;gap:8px;overflow-x:auto;padding:14px 2px 6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
   .strip button{flex:0 0 auto;width:64px;height:48px;border-radius:6px;overflow:hidden;border:1px solid var(--line);padding:0;opacity:.55;transition:opacity .15s,border-color .15s}
   .strip img{width:100%;height:100%;object-fit:cover;display:block}
   .strip button:hover{opacity:.85}
   .strip button[aria-current="true"]{opacity:1;border-color:var(--safelight)}
-  #comments{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
-  #comments[hidden]{display:none}
-  #comments .hint{color:var(--muted);font-size:13.5px;max-width:52ch}
-  #comments .hint code{color:var(--text);font-size:12.5px}
   .note{padding:64px 24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);line-height:1.7}
   .note code{color:var(--text)}
   .note.err{border-color:#5a3a3a;color:#d8a3a3}
@@ -81,15 +79,12 @@
   </figure>
   <div class="meta" id="meta" hidden>
     <div class="caption"><span id="cap"></span><small id="date"></small></div>
-    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="comments">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Comments
-    </button>
+    <span class="views" id="views" hidden aria-live="polite" title="Views">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span class="num" id="views-num">—</span>
+    </span>
   </div>
   <div class="strip" id="strip" role="tablist" aria-label="All photos" hidden></div>
-  <section id="comments" hidden aria-label="Comments for this photo">
-    <div id="giscus-slot"></div>
-  </section>
   <div class="note" id="status">Loading photos&hellip;</div>
 </main>
 <script>
@@ -98,17 +93,14 @@ const REPO = "motiur/motiur.github.io";   // owner/repo -- change if different
 const DIR  = "album/photos";              // folder path from repo root where images live
 /* If images sit in a photos/ folder at the repo root instead, use  "photos"  */
 
-/* ============ GISCUS (comments) ============ */
-const GISCUS = {
-  repo:       "motiur/motiur.github.io",
-  repoId:     "",            // from giscus.app
-  category:   "Announcements",
-  categoryId: "",            // from giscus.app
-};
-/* ========================================== */
+/* Counter service + a namespace unique to your album so keys don't
+   collide with anyone else using the same free service. */
+const ABACUS_NS = "motiur-album";          // anything unique to you
+const ABACUS    = "https://abacus.jasoncameron.dev";
+/* ====================================== */
 
 const $ = id => document.getElementById(id);
-let PHOTOS = [], i = 0, open = false;
+let PHOTOS = [], i = 0;
 
 function meta(name){
   const base = name.replace(/\.[^.]+$/,"");
@@ -117,6 +109,28 @@ function meta(name){
   const m = base.match(/(20\d{2})[-_]?(\d{2})[-_]?(\d{2})/);
   const date = m ? m[1]+"-"+m[2]+"-"+m[3] : "";
   return { caption, date };
+}
+/* a safe counter key from a filename */
+function keyFor(name){ return name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9_.-]/g,"_").slice(0,64); }
+
+function updateViews(name){
+  const v = $("views"), num = $("views-num");
+  const key = keyFor(name);
+  const seen = "viewed:" + ABACUS_NS + ":" + key;
+  let already = false;
+  try { already = localStorage.getItem(seen) === "1"; } catch(e){}
+  const endpoint = already ? "/get/" : "/hit/";   // hit = +1, get = read only
+  v.hidden = false; v.classList.add("loading"); num.textContent = "—";
+
+  fetch(ABACUS + endpoint + encodeURIComponent(ABACUS_NS) + "/" + encodeURIComponent(key))
+    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(d){
+      if(name !== PHOTOS[i].name) return;         // user moved on; ignore stale response
+      v.classList.remove("loading");
+      num.textContent = Number(d.value).toLocaleString();
+      if(!already){ try { localStorage.setItem(seen,"1"); } catch(e){} }
+    })
+    .catch(function(){ v.hidden = true; });        // service down -> just hide it
 }
 
 function render(){
@@ -151,56 +165,27 @@ function show(k, focusStrip){
     if(k2===i && focusStrip) b.scrollIntoView({inline:"nearest",block:"nearest"});
   });
   [i+1,i-1].forEach(function(n){ const q=PHOTOS[(n+PHOTOS.length)%PHOTOS.length]; if(q){const im=new Image();im.src=q.src;} });
-  if(open) mountGiscus();
-}
-
-function mountGiscus(){
-  const slot = $("giscus-slot"); slot.innerHTML = "";
-  if(!GISCUS.repoId || !GISCUS.categoryId){
-    slot.innerHTML = '<p class="hint">Comments aren\u2019t configured yet. Enable Discussions, install the giscus app, then paste <code>repoId</code> and <code>categoryId</code> from giscus.app into the GISCUS block in this file.</p>';
-    return;
-  }
-  const s = document.createElement("script");
-  s.src = "https://giscus.app/client.js"; s.async = true; s.crossOrigin = "anonymous";
-  const attrs = {
-    "data-repo":GISCUS.repo,"data-repo-id":GISCUS.repoId,
-    "data-category":GISCUS.category,"data-category-id":GISCUS.categoryId,
-    "data-mapping":"specific","data-term":PHOTOS[i].src,"data-strict":"0",
-    "data-reactions-enabled":"1","data-emit-metadata":"0","data-input-position":"top",
-    "data-theme":"noborder_dark","data-lang":"en","data-loading":"lazy"
-  };
-  Object.keys(attrs).forEach(function(k){ s.setAttribute(k, attrs[k]); });
-  slot.appendChild(s);
-}
-
-function toggleComments(){
-  open = !open;
-  $("toggle").setAttribute("aria-expanded", open);
-  $("comments").hidden = !open;
-  if(open){ mountGiscus(); $("comments").scrollIntoView({behavior:"smooth",block:"nearest"}); }
+  updateViews(p.name);
 }
 
 fetch("https://api.github.com/repos/"+REPO+"/contents/"+DIR, { headers:{ "Accept":"application/vnd.github+json" } })
   .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
   .then(function(files){
     if(!Array.isArray(files)) throw new Error("Folder not found");
-    const pagePrefix = DIR.replace(/^.*?\//,"");   // "album/photos" -> "photos"
+    const pagePrefix = DIR.replace(/^.*?\//,"");
     PHOTOS = files
       .filter(function(f){ return f.type==="file" && /\.(jpe?g|png|gif|webp|avif)$/i.test(f.name); })
       .sort(function(a,b){ return a.name.localeCompare(b.name); })
-      .map(function(f){ const m=meta(f.name); return { src: pagePrefix+"/"+f.name, caption:m.caption, date:m.date }; });
+      .map(function(f){ const m=meta(f.name); return { name:f.name, src: pagePrefix+"/"+f.name, caption:m.caption, date:m.date }; });
     render();
   })
   .catch(function(err){
     $("status").className = "note err";
-    $("status").innerHTML =
-      'Could not load the photo list ('+err.message+').<br>'+
-      'Check that <code>REPO</code> = <code>'+REPO+'</code> and <code>DIR</code> = <code>'+DIR+'</code> are right, and the repo is public.';
+    $("status").innerHTML = 'Could not load the photo list ('+err.message+').<br>Check <code>REPO</code> and <code>DIR</code>, and that the repo is public.';
   });
 
 $("prev").addEventListener("click", function(){ show(i-1,true); });
 $("next").addEventListener("click", function(){ show(i+1,true); });
-$("toggle").addEventListener("click", toggleComments);
 addEventListener("keydown", function(e){
   if(e.target.closest("input,textarea,iframe")) return;
   if(e.key==="ArrowLeft")  show(i-1,true);
