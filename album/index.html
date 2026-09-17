@@ -6,17 +6,30 @@
 <title>Photos</title>
 <!--
   ALBUM PAGE  (place at  album/index.html , NO front matter.)
-  WHERE / WHEN under each photo: 1) MANUAL_META  2) filename shortcut  3) EXIF.
-  Filename shortcuts:  @Place Name  |  --caption  |  YYYYMMDD (date fallback)
-  Facebook/social exports strip EXIF — use MANUAL_META or @ for those.
+
+  WHERE / WHEN under each photo comes from, in order of preference:
+    1. MANUAL_META below  (keyed by filename — always wins)
+    2. Filename shortcut   (see below)
+    3. EXIF in the photo   (capture time; GPS -> place via OpenStreetMap)
+
+  FILENAME SHORTCUTS (rename a file to embed info, no code editing):
+    @Place Name   ->  place label      e.g.  boat-ride@Cox's Bazar.jpg
+    --caption     ->  caption          e.g.  boat-ride--evening on the water.jpg
+    YYYYMMDD      ->  date (fallback)  e.g.  20220528_boat.jpg
+  You can combine them:  20220528--evening on the water@Cox's Bazar.jpg
+
+  Note: Facebook/most social exports strip EXIF, so those photos have no
+  embedded date or GPS — use MANUAL_META or the @ shortcut for those.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
 <style>
-  :root{--paper:#f1f0f4;--surface:#e9e7ee;--ink:#1a1720;--muted:#726c7a;
-    --line:#dad6e0;--accent:#5e2b54;--radius:12px;--stage-h:min(68svh,600px)}
+  :root{
+    --paper:#f1f0f4;--surface:#e9e7ee;--ink:#1a1720;--muted:#726c7a;
+    --line:#dad6e0;--accent:#5e2b54;--radius:12px;--stage-h:min(68svh,600px);
+  }
   *{box-sizing:border-box;margin:0}
   html{color-scheme:light}
   body{background:var(--paper);color:var(--ink);
@@ -29,8 +42,8 @@
   header{display:flex;align-items:center;justify-content:space-between;gap:16px;
     padding:clamp(24px,5vw,44px) clamp(20px,5vw,40px) 12px;max-width:900px;width:100%;margin:0 auto}
   .back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);
-    font-family:"Archivo",system-ui,sans-serif;font-weight:500;font-size:.95rem;
-    letter-spacing:.01em;transition:color .2s}
+    font-family:"Archivo",system-ui,sans-serif;font-weight:500;
+    font-size:.95rem;letter-spacing:.01em;transition:color .2s}
   .back svg{width:16px;height:16px}
   .back .t{position:relative}
   .back .t::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;
@@ -95,7 +108,6 @@
 </head>
 <body>
 <header>
-  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="t">Home</span></a>
   <span class="count" id="counter" aria-live="polite"></span>
 </header>
 <main>
@@ -136,6 +148,9 @@ const REPO = "motiur/motiur.github.io";
 const DIR  = "album/photos";
 const ABACUS_NS = "motiur-album";
 const ABACUS    = "https://abacus.jasoncameron.dev";
+
+/* Overrides / gap-fillers, keyed by filename. Always win.
+   Fill these for photos whose location was stripped (e.g. Facebook exports). */
 const MANUAL_META = {
   // "792176906_10216446709356700_6740821373407791264_n.jpg": { place:"Dhaka, Bangladesh", date:"2019-06-01" },
   // "IMG_20220528_174840.jpg": { place:"Cox's Bazar, Bangladesh" },
@@ -157,6 +172,7 @@ function meta(name){
   return { caption, date, place };
 }
 function keyFor(name){ return name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9_.-]/g,"_").slice(0,64); }
+
 function fmtDate(d, withTime){
   try{
     const opts = withTime
@@ -179,6 +195,7 @@ function updateViews(name){
       if(!already){ try{ localStorage.setItem(seen,"1"); }catch(e){} } })
     .catch(function(){ v.hidden=true; });
 }
+
 function geocode(lat,lon){
   const key="geo:"+lat.toFixed(4)+","+lon.toFixed(4);
   try{ const c=localStorage.getItem(key); if(c!==null) return Promise.resolve(c); }catch(e){}
@@ -192,6 +209,7 @@ function geocode(lat,lon){
     try{ localStorage.setItem(key,label); }catch(e){} return label;
   }).catch(function(){ return ""; });
 }
+
 function applyMeta(p){
   if(!PHOTOS[i] || p.name!==PHOTOS[i].name) return;
   const man=MANUAL_META[p.name]||{};
@@ -212,6 +230,7 @@ function enrich(p){
     }
   }).catch(function(){}).then(function(){ applyMeta(p); });
 }
+
 function render(){
   if(!PHOTOS.length){ $("status").innerHTML='No images found in <code>'+DIR+'</code>. Upload some through GitHub and refresh.'; return; }
   $("status").hidden=true; $("stage").hidden=$("meta").hidden=$("strip").hidden=false;
@@ -237,6 +256,7 @@ function show(k, focusStrip){
   [i+1,i-1].forEach(function(n){ const q=PHOTOS[(n+PHOTOS.length)%PHOTOS.length]; if(q){const im=new Image();im.src=q.src;} });
   applyMeta(p); if(!p._metaTried) enrich(p); updateViews(p.name);
 }
+
 fetch("https://api.github.com/repos/"+REPO+"/contents/"+DIR,{headers:{"Accept":"application/vnd.github+json"}})
   .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
   .then(function(files){
@@ -251,6 +271,7 @@ fetch("https://api.github.com/repos/"+REPO+"/contents/"+DIR,{headers:{"Accept":"
     $("status").className="note err";
     $("status").innerHTML='Could not load the photo list ('+err.message+').<br>Check <code>REPO</code> and <code>DIR</code>, and that the repo is public.';
   });
+
 $("prev").addEventListener("click", function(){ show(i-1,true); });
 $("next").addEventListener("click", function(){ show(i+1,true); });
 addEventListener("keydown", function(e){
