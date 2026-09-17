@@ -4,15 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects</title>
-<!--
-  PROJECTS PAGE  (place at  projects/index.html , NO front matter, so the
-  Jekyll theme leaves it alone — same rule as the homepage and album.)
-  Delete projects/index.md so this becomes the /projects page.
-
-  TO ADD AN ENTRY: inside a category's <ul class="items">, add a line like
-    <li><a href="https://...">Title<span>short note</span></a></li>
-  The <span> note is optional.
--->
+<!-- PROJECTS. Place at projects/index.html, NO front matter. Delete projects/index.md.
+     Add an entry inside a category's <ul class="items">:
+       <li><a href="https://...">Title<span>short note</span></a></li> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
@@ -21,8 +15,8 @@
   *{box-sizing:border-box;margin:0}
   html{color-scheme:light}
   body{background:var(--paper);color:var(--ink);
-    font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-    line-height:1.55;min-height:100svh;display:flex;flex-direction:column;
+    font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;
     padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
@@ -37,24 +31,23 @@
   .back:hover{color:var(--accent)}
   .back:hover .t::after,.back:focus-visible .t::after{width:100%}
 
-  .wrap{width:100%;max-width:660px;margin:0 auto;flex:1}
+  .wrap{width:100%;max-width:640px;margin:0 auto;flex:1}
 
   .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
-    font-size:clamp(2.6rem,9vw,4.2rem);line-height:1.02;letter-spacing:-.015em;
+    font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.02;letter-spacing:-.015em;
     font-optical-sizing:auto;margin:clamp(30px,7vw,64px) 0 clamp(28px,6vw,48px)}
 
   .cat{padding:clamp(22px,4vw,32px) 0;border-top:1px solid var(--line)}
   .cat:last-child{border-bottom:1px solid var(--line)}
   .cat h2{font-family:"Archivo",system-ui,sans-serif;font-weight:600;
-    font-size:clamp(1.35rem,4.5vw,1.7rem);letter-spacing:-.01em}
-  .cat .lead{color:var(--muted);font-size:.92rem;margin-top:5px}
+    font-size:clamp(1.5rem,5.5vw,2.1rem);letter-spacing:-.01em}
+  .cat .lead{color:var(--muted);font-size:.9rem;margin-top:5px}
 
   .items{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
   .items:empty{display:none}
-  .items li a{
-    position:relative;display:flex;align-items:baseline;gap:12px;
-    padding:9px 0;font-size:1.02rem;transition:color .18s}
-  .items li a span{color:var(--muted);font-size:.86rem;flex:1}
+  .items li a{position:relative;display:flex;align-items:baseline;gap:12px;
+    padding:9px 0;font-size:1rem;transition:color .18s}
+  .items li a span{color:var(--muted);font-size:.9rem;flex:1}
   .items li a::after{content:"";position:absolute;left:0;bottom:5px;height:1.5px;width:0;
     background:var(--accent);transition:width .24s cubic-bezier(.2,.7,.3,1)}
   .items li a:hover{color:var(--accent)}
@@ -71,7 +64,6 @@
 </head>
 <body>
   <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="t">Home</span></a>
-
   <div class="wrap">
     <h1 class="title reveal">Projects</h1>
 
