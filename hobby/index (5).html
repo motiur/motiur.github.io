@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hobby</title>
+<meta name="description" content="Hobby projects by Mohammad Motiur Rahman.">
+<!-- HOBBY. Place at hobby/index.html, NO front matter. Delete hobby/index.md. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f1f0f4;--ink:#1a1720;--muted:#726c7a;--line:#dad6e0;--accent:#5e2b54}
+  *{box-sizing:border-box;margin:0}
+  html{color-scheme:light}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;
+    padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+
+  .wrap{width:100%;max-width:640px;margin:0 auto;flex:1}
+
+  .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
+    font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.02;letter-spacing:-.015em;
+    font-optical-sizing:auto;margin:clamp(20px,6vw,52px) 0 clamp(6px,2vw,12px)}
+  .sub{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.05rem);margin-bottom:clamp(20px,4vw,32px)}
+
+  nav{display:flex;flex-direction:column;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dest{display:flex;align-items:center;gap:16px;padding:clamp(18px,3.4vw,26px) 0}
+  .dest + .dest{border-top:1px solid var(--line)}
+  .dest .body{flex:1;min-width:0}
+  .dest .label{position:relative;display:inline-block;
+    font-size:clamp(1.4rem,5.2vw,1.95rem);font-weight:500;
+    letter-spacing:-.01em;line-height:1.15;transition:color .2s ease}
+  .dest .label::after{content:"";position:absolute;left:0;bottom:-4px;
+    height:2px;width:100%;max-width:var(--uw,0);background:var(--accent);
+    transition:max-width .26s cubic-bezier(.2,.7,.3,1)}
+  .dest .desc{display:block;color:var(--muted);font-size:.9rem;margin-top:7px;transition:color .2s ease}
+  .dest .arrow{color:var(--accent);flex-shrink:0;
+    transition:transform .22s cubic-bezier(.2,.7,.3,1)}
+  .dest .arrow svg{width:22px;height:22px;display:block}
+  @media (hover:hover){
+    .dest:hover .label,.dest:focus-visible .label{color:var(--accent);--uw:2.2em}
+    .dest:hover .desc{color:var(--ink)}
+    .dest:hover .arrow,.dest:focus-visible .arrow{transform:translateX(6px)}
+  }
+  @media (hover:none){ .dest .arrow{transform:translateX(2px)} }
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+    .title{animation-delay:.04s}.sub{animation-delay:.10s}
+    .r1{animation-delay:.18s}.r2{animation-delay:.25s}.r3{animation-delay:.32s}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="title reveal">Hobby</h1>
+    <p class="sub reveal">Engineering ideas that I think need to exist.</p>
+
+    <nav aria-label="Hobby projects">
+      <a class="dest reveal r1" href="https://github.com/motiur/motiur.github.io/tree/master/hobby/banglaLetterTracing/">
+        <span class="body">
+          <span class="label">Bangla Letter Tracing</span>
+          <span class="desc">handwriting practice for kids</span>
+        </span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="dest reveal r2" href="https://github.com/motiur/motiur.github.io/blob/master/hobby/darziStudio/">
+        <span class="body">
+          <span class="label">Darzi Studio</span>
+          <span class="desc">design your own salwar kameez</span>
+        </span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="dest reveal r3" href="https://github.com/motiur/motiur.github.io/tree/master/hobby/sareeColoring/">
+        <span class="body">
+          <span class="label">Saree Coloring</span>
+          <span class="desc">a coloring book of sarees</span>
+        </span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>
