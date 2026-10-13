@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Grade Change Form</title>
 
-<!-- PDF engine (html2canvas + jsPDF bundled) -->
+<!-- PDF engine -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -20,7 +20,6 @@
   }
 
   *{box-sizing:border-box;}
-
   html,body{height:100%;}
 
   body{
@@ -36,7 +35,7 @@
 
   /* ---------- Card ---------- */
   .page{
-    max-width:880px;
+    max-width:900px;
     margin:0 auto;
     background:#fff;
     border-radius:14px;
@@ -64,7 +63,7 @@
     display:block;
     height:64px;
     width:auto;
-    max-width:180px;
+    max-width:200px;
     object-fit:contain;
   }
 
@@ -208,91 +207,181 @@
     position:absolute;
     left:-10000px;
     top:0;
-    width:820px;
+    width:794px; /* A4 width at 96 dpi */
   }
 
-  /* ---------- PDF document styling ---------- */
+  /* =========================================================
+     PDF DOCUMENT STYLING
+     Designed to look like a formal Word form on A4 paper
+     ========================================================= */
   .pdf-doc{
-    width:820px;
-    padding:38px 44px 44px;
+    width:794px;            /* A4 width  @96dpi */
+    min-height:1123px;      /* A4 height @96dpi */
+    padding:48px 56px 48px;
     background:#fff;
-    color:#111;
-    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#000;
+    font-family:"Times New Roman","Georgia",serif;
+    font-size:13px;
+    line-height:1.4;
+    position:relative;
   }
 
+  /* Header */
   .pdf-head{
     display:flex;
     align-items:center;
     gap:18px;
     padding-bottom:14px;
-    margin-bottom:20px;
-    border-bottom:2px solid var(--brand);
+    margin-bottom:6px;
+    border-bottom:2px solid #000;
   }
 
+  .pdf-head .pdf-logo{flex:0 0 auto;}
+
   .pdf-head img{
-    height:58px;
+    height:62px;
     width:auto;
-    max-width:170px;
+    max-width:190px;
     object-fit:contain;
   }
 
   .pdf-head .logo-placeholder{
-    height:58px;
-    width:58px;
+    height:62px;
+    width:62px;
     font-size:18px;
-    border-radius:10px;
+    border-radius:8px;
+    font-family:"Segoe UI",Arial,sans-serif;
+  }
+
+  .pdf-head .pdf-title{
+    flex:1;
+    text-align:center;
   }
 
   .pdf-head h1{
     margin:0;
-    font-size:20px;
+    font-size:19px;
     font-weight:700;
-    color:#111;
+    letter-spacing:.4px;
+    text-transform:uppercase;
   }
 
   .pdf-head .pdf-sub{
-    margin-top:2px;
+    margin-top:3px;
     font-size:12.5px;
-    color:#555;
+    font-style:italic;
+    color:#222;
   }
 
-  .pdf-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px 20px;
+  /* Form table */
+  .pdf-form{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:18px;
+    table-layout:fixed;
   }
 
-  .pdf-field{break-inside:avoid;}
+  .pdf-form td{
+    vertical-align:top;
+    padding:6px 0;
+    font-size:12.5px;
+  }
 
-  .pdf-field.wide{grid-column:1 / -1;}
-
-  .pdf-label{
-    font-size:11.5px;
+  .pdf-form td.label{
+    width:38%;
+    padding-right:10px;
     font-weight:700;
-    color:#333;
-    margin-bottom:4px;
     line-height:1.35;
   }
 
-  .pdf-value{
-    min-height:22px;
-    padding:4px 2px 5px;
+  .pdf-form td.label--full{
+    width:100%;
+    padding-right:0;
+    font-weight:700;
+    line-height:1.35;
+  }
+
+  .pdf-form td.value{
+    width:62%;
+    padding-right:0;
+  }
+
+  .pdf-form td.value--full{
+    width:100%;
+    padding-right:0;
+    padding-bottom:10px;
+  }
+
+  /* Fill-in lines */
+  .pdf-line{
+    display:block;
+    min-height:18px;
+    border-bottom:1px solid #000;
+    padding:1px 2px 2px;
     font-size:12.5px;
-    line-height:1.5;
-    color:#111;
-    border-bottom:1px solid #b9b9b9;
+    line-height:1.4;
     white-space:pre-wrap;
     word-wrap:break-word;
     overflow-wrap:anywhere;
   }
 
+  .pdf-line--blank{
+    /* keeps a blank ruled line even when the field is empty */
+  }
+
+  .pdf-line--tall{
+    min-height:90px;
+    border:1px solid #000;
+    padding:6px 8px;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+    font-size:12.5px;
+    line-height:1.45;
+  }
+
+  /* Group heading (for 9 / 10) */
+  .pdf-group-title{
+    font-weight:700;
+    font-size:12.5px;
+    margin:14px 0 6px;
+    line-height:1.35;
+  }
+
+  .pdf-sub{
+    margin-left:14px;
+    margin-bottom:6px;
+    font-size:12.5px;
+  }
+
+  .pdf-sub .pdf-line{
+    min-height:16px;
+    margin-top:2px;
+  }
+
+  /* NB note */
   .pdf-note{
-    margin-top:26px;
-    padding-top:12px;
-    border-top:1px solid #ddd;
+    margin-top:28px;
+    padding-top:10px;
+    border-top:1px solid #000;
     font-size:11.5px;
     font-style:italic;
-    color:#444;
+    line-height:1.4;
+  }
+
+  /* Footer page number (visual only) */
+  .pdf-footer{
+    position:absolute;
+    left:56px;
+    right:56px;
+    bottom:22px;
+    display:flex;
+    justify-content:space-between;
+    font-size:10.5px;
+    color:#333;
+    font-family:"Segoe UI",Arial,sans-serif;
+    border-top:1px solid #999;
+    padding-top:4px;
   }
 
   /* ---------- Print fallback ---------- */
@@ -329,8 +418,8 @@
   <!-- ================= HEADER / LOGO ================= -->
   <header class="form-header">
     <div class="brand-logo" id="brandLogo">
-      <!-- 👉 Replace "logo.png" with your own logo file (keep it in the same folder) -->
-      <img id="logoImg" src="logo.png" alt="Institution Logo" />
+      <!-- Replace with your IUB logo file (same folder) -->
+      <img id="logoImg" src="logo.png" alt="IUB Logo" />
     </div>
     <div>
       <h1>Grade Change Form</h1>
@@ -355,68 +444,69 @@
 
 <script>
 /* =========================================================
-   1. FIELD DEFINITIONS
-   label  : exact text from the original document
-   wide   : takes the full width in the generated PDF
+   1. FIELD DEFINITIONS  (exact text from the original form)
    ========================================================= */
 const FIELDS = [
-  { id:"studentName",       label:"1. Name of the Student",                                                    type:"text",     placeholder:"Full name of the student", required:true },
-  { id:"studentId",         label:"2. Student's Identification Number",                                        type:"text",     placeholder:"e.g., 2210xxx", required:true },
-  { id:"courseNumber",      label:"3. Course Number",                                                          type:"text",     placeholder:"e.g., CSE 303", required:true },
-  { id:"courseTitle",       label:"4. Course Title",                                                           type:"text",     placeholder:"e.g., Data Structures", required:true },
-  { id:"section",           label:"5. Section (of the Student for the Course)",                                type:"text",     placeholder:"e.g., 01" },
-  { id:"department",        label:"6. Department (of the Course)",                                             type:"text",     placeholder:"e.g., Department of Computer Science & Engineering" },
-  { id:"school",            label:"7. School (of the Course)",                                                 type:"text",     placeholder:"e.g., School of Engineering & Computer Science" },
-  { id:"enrolmentSemester", label:"8. Course Enrolment Semester with Year",                                    type:"text",     placeholder:"e.g., Spring 2025" },
+  { id:"studentName",       label:"1. Name of the Student",                                                    type:"text",     placeholder:"Full name of the student", required:true, pdfGroup:"top" },
+  { id:"studentId",         label:"2. Student's Identification Number",                                        type:"text",     placeholder:"e.g., 2210xxx", required:true, pdfGroup:"top" },
+  { id:"courseNumber",      label:"3. Course Number",                                                          type:"text",     placeholder:"e.g., CSE 303", required:true, pdfGroup:"top" },
+  { id:"courseTitle",       label:"4. Course Title",                                                           type:"text",     placeholder:"e.g., Data Structures", required:true, pdfGroup:"top" },
+  { id:"section",           label:"5. Section (of the Student for the Course)",                                type:"text",     placeholder:"e.g., 01", pdfGroup:"top" },
+  { id:"department",        label:"6. Department (of the Course)",                                             type:"text",     placeholder:"e.g., Department of Computer Science & Engineering", pdfGroup:"top" },
+  { id:"school",            label:"7. School (of the Course)",                                                 type:"text",     placeholder:"e.g., School of Engineering & Computer Science", pdfGroup:"top" },
+  { id:"enrolmentSemester", label:"8. Course Enrolment Semester with Year",                                    type:"text",     placeholder:"e.g., Spring 2025", pdfGroup:"top" },
 
-  { id:"currentGrade",      label:"9. a. Current Grade and its Numerical Equivalence (as recorded earlier)",   type:"text",     placeholder:"e.g., B+ (3.30)", required:true, group:"9" },
-  { id:"currentBreakdown",  label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 08/10, Assignments 18/20, Midterm 24/30, Final 32/40", wide:true, group:"9" },
-  { id:"currentSemester",   label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", group:"9" },
+  { id:"currentGrade",      label:"a. Current Grade and its Numerical Equivalence (as recorded earlier)",     type:"text",     placeholder:"e.g., B+ (3.30)", required:true, pdfGroup:"9" },
+  { id:"currentBreakdown",  label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 08/10, Assignments 18/20, Midterm 24/30, Final 32/40", pdfGroup:"9" },
+  { id:"currentSemester",   label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", pdfGroup:"9" },
 
-  { id:"proposedGrade",     label:"10. a. Proposed Grade for Change and its Numerical Equivalence",            type:"text",     placeholder:"e.g., A- (3.70)", required:true, group:"10" },
-  { id:"proposedBreakdown", label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 10/10, Assignments 19/20, Midterm 26/30, Final 36/40", wide:true, group:"10" },
-  { id:"proposedSemester",  label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", group:"10" },
+  { id:"proposedGrade",     label:"a. Proposed Grade for Change and its Numerical Equivalence",               type:"text",     placeholder:"e.g., A- (3.70)", required:true, pdfGroup:"10" },
+  { id:"proposedBreakdown", label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 10/10, Assignments 19/20, Midterm 26/30, Final 36/40", pdfGroup:"10" },
+  { id:"proposedSemester",  label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", pdfGroup:"10" },
 
   { id:"justification",     label:"11. Precise Reason and Justification in support of Grade Change (in around 250 words)",
                             type:"textarea", placeholder:"Explain clearly and precisely the reason for the grade change…",
-                            required:true, wide:true, rows:7, counter:250 },
+                            required:true, rows:7, counter:250, pdfGroup:"11" },
 
-  { id:"instructorName",    label:"12. Name of the Course Instructor",                                         type:"text",     placeholder:"Full name", required:true },
-  { id:"designation",       label:"13. Designation of the Instructor",                                         type:"text",     placeholder:"e.g., Assistant Professor" },
-  { id:"instructorStatus",  label:"14. Status of the Instructor (part-time/ full-time)",                       type:"select",   options:["Part-time","Full-time"] },
-  { id:"employeeId",        label:"15. Instructor's Employee Identify Number",                                 type:"text",     placeholder:"e.g., EMP-12345" },
-  { id:"email",             label:"16. IUB Official e-mail address (instructor's)",                            type:"email",    placeholder:"name@iub.edu.bd", wide:true }
+  { id:"instructorName",    label:"12. Name of the Course Instructor",                                         type:"text",     placeholder:"Full name", required:true, pdfGroup:"bottom" },
+  { id:"designation",       label:"13. Designation of the Instructor",                                         type:"text",     placeholder:"e.g., Assistant Professor", pdfGroup:"bottom" },
+  { id:"instructorStatus",  label:"14. Status of the Instructor (part-time/ full-time)",                       type:"select",   options:["Part-time","Full-time"], pdfGroup:"bottom" },
+  { id:"employeeId",        label:"15. Instructor's Employee Identify Number",                                 type:"text",     placeholder:"e.g., EMP-12345", pdfGroup:"bottom" },
+  { id:"email",             label:"16. IUB Official e-mail address (instructor's)",                            type:"email",    placeholder:"name@iub.edu.bd", pdfGroup:"bottom" }
 ];
 
 /* =========================================================
-   2. BUILD THE FORM
+   2. BUILD THE WEB FORM
    ========================================================= */
 const form = document.getElementById("gradeChangeForm");
 
 FIELDS.forEach(field => {
   const wrap = document.createElement("div");
-  wrap.className = "field" + (field.wide ? " field--wide" : "");
+  wrap.className = "field";
 
   const label = document.createElement("label");
   label.setAttribute("for", field.id);
-  label.innerHTML = field.label + (field.required ? ' <span class="req">*</span>' : "");
+
+  /* For 9a/9b/9c and 10a/10b/10c prepend the number in the web form */
+  const prefix = (field.pdfGroup === "9" || field.pdfGroup === "10")
+    ? (field.pdfGroup + ". ")
+    : "";
+
+  label.innerHTML = prefix + field.label + (field.required ? ' <span class="req">*</span>' : "");
   wrap.appendChild(label);
 
   let input;
-
   if (field.type === "textarea") {
     input = document.createElement("textarea");
     input.rows = field.rows || 3;
   } else if (field.type === "select") {
     input = document.createElement("select");
     const blank = document.createElement("option");
-    blank.value = "";
-    blank.textContent = "Select…";
+    blank.value = ""; blank.textContent = "Select…";
     input.appendChild(blank);
     field.options.forEach(opt => {
       const o = document.createElement("option");
-      o.value = opt;
-      o.textContent = opt;
+      o.value = opt; o.textContent = opt;
       input.appendChild(o);
     });
   } else {
@@ -429,14 +519,12 @@ FIELDS.forEach(field => {
   if (field.placeholder) input.placeholder = field.placeholder;
   if (field.required) input.required = true;
 
-  /* clear error styling while typing */
   const clearInvalid = () => input.classList.remove("invalid");
   input.addEventListener("input", clearInvalid);
   input.addEventListener("change", clearInvalid);
 
   wrap.appendChild(input);
 
-  /* word counter for the justification field */
   if (field.counter) {
     const counter = document.createElement("div");
     counter.className = "counter";
@@ -456,7 +544,7 @@ FIELDS.forEach(field => {
 });
 
 /* =========================================================
-   3. LOGO FALLBACK (if logo.png is not found)
+   3. LOGO FALLBACK
    ========================================================= */
 (function handleLogo() {
   const img = document.getElementById("logoImg");
@@ -503,56 +591,255 @@ function logoMarkup() {
   return container ? container.innerHTML : "";
 }
 
+/* ---------------------------------------------------------
+   Helper: build one labelled row (label on left, ruled value)
+   --------------------------------------------------------- */
+function makeRow(labelText, valueText) {
+  const tr = document.createElement("tr");
+
+  const tdLabel = document.createElement("td");
+  tdLabel.className = "label";
+  tdLabel.textContent = labelText;
+
+  const tdValue = document.createElement("td");
+  tdValue.className = "value";
+  const line = document.createElement("span");
+  line.className = "pdf-line";
+  line.textContent = valueText || "\u00A0";   // keeps the ruled line visible
+  tdValue.appendChild(line);
+
+  tr.appendChild(tdLabel);
+  tr.appendChild(tdValue);
+  return tr;
+}
+
+/* ---------------------------------------------------------
+   Helper: build a full-width labelled row (label above, ruled value)
+   --------------------------------------------------------- */
+function makeFullRow(labelText, valueText, tall) {
+  const tr = document.createElement("tr");
+
+  const td = document.createElement("td");
+  td.className = "value--full";
+  td.colSpan = 2;
+
+  const lbl = document.createElement("div");
+  lbl.className = "pdf-label";
+  lbl.style.fontWeight = "700";
+  lbl.style.marginBottom = "4px";
+  lbl.textContent = labelText;
+
+  const line = document.createElement("span");
+  line.className = tall ? "pdf-line--tall" : "pdf-line";
+  line.textContent = valueText || (tall ? "" : "\u00A0");
+
+  td.appendChild(lbl);
+  td.appendChild(line);
+
+  tr.appendChild(td);
+  return tr;
+}
+
 /* =========================================================
    5. BUILD THE PRINTABLE (PDF) DOCUMENT
    ========================================================= */
 function buildPdfDocument() {
-  const values = getValues();
+  const v = getValues();
 
   const doc = document.createElement("div");
   doc.className = "pdf-doc";
 
-  /* header */
+  /* ---------- HEADER (logo + title) ---------- */
   const head = document.createElement("div");
   head.className = "pdf-head";
   head.innerHTML =
     '<div class="pdf-logo">' + logoMarkup() + '</div>' +
-    '<div>' +
+    '<div class="pdf-title">' +
       '<h1>Grade Change Form</h1>' +
       '<div class="pdf-sub">Independent University, Bangladesh</div>' +
-    '</div>';
+    '</div>' +
+    '<div style="width:62px"></div>'; /* balance the logo width so the title stays centred */
   doc.appendChild(head);
 
-  /* fields */
-  const grid = document.createElement("div");
-  grid.className = "pdf-grid";
+  /* ---------- FORM TABLE ---------- */
+  const table = document.createElement("table");
+  table.className = "pdf-form";
 
-  FIELDS.forEach(f => {
-    const item = document.createElement("div");
-    item.className = "pdf-field" + (f.wide ? " wide" : "");
+  /* --- Fields 1–8 (two per row, label + value) --- */
+  const topFields = FIELDS.filter(f => f.pdfGroup === "top");
+  for (let i = 0; i < topFields.length; i += 2) {
+    const left  = topFields[i];
+    const right = topFields[i + 1];
 
-    const label = document.createElement("div");
-    label.className = "pdf-label";
-    label.textContent = f.label;
+    if (right) {
+      const tr = document.createElement("tr");
 
-    const value = document.createElement("div");
-    value.className = "pdf-value";
-    const v = values[f.id];
-    value.textContent = v || "\u00A0";   /* keeps the ruled line visible */
+      /* left pair */
+      const tdL = document.createElement("td");
+      tdL.className = "label";
+      tdL.textContent = left.label;
 
-    item.appendChild(label);
-    item.appendChild(value);
-    grid.appendChild(item);
-  });
+      const tdLV = document.createElement("td");
+      tdLV.className = "value";
+      const lineL = document.createElement("span");
+      lineL.className = "pdf-line";
+      lineL.textContent = v[left.id] || "\u00A0";
+      tdLV.appendChild(lineL);
 
-  doc.appendChild(grid);
+      /* right pair */
+      const tdR = document.createElement("td");
+      tdR.className = "label";
+      tdR.style.paddingLeft = "18px";
+      tdR.textContent = right.label;
 
-  /* footer note */
+      const tdRV = document.createElement("td");
+      tdRV.className = "value";
+      const lineR = document.createElement("span");
+      lineR.className = "pdf-line";
+      lineR.textContent = v[right.id] || "\u00A0";
+      tdRV.appendChild(lineR);
+
+      tr.appendChild(tdL);
+      tr.appendChild(tdLV);
+      tr.appendChild(tdR);
+      tr.appendChild(tdRV);
+      table.appendChild(tr);
+    } else {
+      /* odd one left over — put it full width */
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 4;
+      td.className = "value--full";
+      const lbl = document.createElement("div");
+      lbl.style.fontWeight = "700";
+      lbl.style.marginBottom = "4px";
+      lbl.textContent = left.label;
+      const line = document.createElement("span");
+      line.className = "pdf-line";
+      line.textContent = v[left.id] || "\u00A0";
+      td.appendChild(lbl);
+      td.appendChild(line);
+      tr.appendChild(td);
+      table.appendChild(tr);
+    }
+  }
+
+  /* --- Field 9 : Current Grade --- */
+  {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 4;
+    td.className = "value--full";
+    const title = document.createElement("div");
+    title.className = "pdf-group-title";
+    title.textContent = "9. Current Grade and its Numerical Equivalence (as recorded earlier)";
+    td.appendChild(title);
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  table.appendChild(makeFullRow("a. Current Grade and its Numerical Equivalence:", v.currentGrade));
+  table.appendChild(makeFullRow("b. Break-down of the Marks:", v.currentBreakdown, true));
+  table.appendChild(makeFullRow("c. Semester and Year:", v.currentSemester));
+
+  /* --- Field 10 : Proposed Grade --- */
+  {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 4;
+    td.className = "value--full";
+    const title = document.createElement("div");
+    title.className = "pdf-group-title";
+    title.textContent = "10. Proposed Grade for Change and its Numerical Equivalence";
+    td.appendChild(title);
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  table.appendChild(makeFullRow("a. Proposed Grade for Change and its Numerical Equivalence:", v.proposedGrade));
+  table.appendChild(makeFullRow("b. Break-down of the Marks:", v.proposedBreakdown, true));
+  table.appendChild(makeFullRow("c. Semester and Year:", v.proposedSemester));
+
+  /* --- Field 11 : Justification --- */
+  table.appendChild(
+    makeFullRow(
+      "11. Precise Reason and Justification in support of Grade Change (in around 250 words):",
+      v.justification,
+      true
+    )
+  );
+
+  /* --- Fields 12–16 (two per row where possible) --- */
+  const bottomFields = FIELDS.filter(f => f.pdfGroup === "bottom");
+  for (let i = 0; i < bottomFields.length; i += 2) {
+    const left  = bottomFields[i];
+    const right = bottomFields[i + 1];
+
+    if (right) {
+      const tr = document.createElement("tr");
+
+      const tdL = document.createElement("td");
+      tdL.className = "label";
+      tdL.textContent = left.label;
+
+      const tdLV = document.createElement("td");
+      tdLV.className = "value";
+      const lineL = document.createElement("span");
+      lineL.className = "pdf-line";
+      lineL.textContent = v[left.id] || "\u00A0";
+      tdLV.appendChild(lineL);
+
+      const tdR = document.createElement("td");
+      tdR.className = "label";
+      tdR.style.paddingLeft = "18px";
+      tdR.textContent = right.label;
+
+      const tdRV = document.createElement("td");
+      tdRV.className = "value";
+      const lineR = document.createElement("span");
+      lineR.className = "pdf-line";
+      lineR.textContent = v[right.id] || "\u00A0";
+      tdRV.appendChild(lineR);
+
+      tr.appendChild(tdL);
+      tr.appendChild(tdLV);
+      tr.appendChild(tdR);
+      tr.appendChild(tdRV);
+      table.appendChild(tr);
+    } else {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 4;
+      td.className = "value--full";
+      const lbl = document.createElement("div");
+      lbl.style.fontWeight = "700";
+      lbl.style.marginBottom = "4px";
+      lbl.textContent = left.label;
+      const line = document.createElement("span");
+      line.className = "pdf-line";
+      line.textContent = v[left.id] || "\u00A0";
+      td.appendChild(lbl);
+      td.appendChild(line);
+      tr.appendChild(td);
+      table.appendChild(tr);
+    }
+  }
+
+  doc.appendChild(table);
+
+  /* ---------- NB NOTE ---------- */
   const note = document.createElement("div");
   note.className = "pdf-note";
   note.textContent =
     "NB: The filled-in Application Form in PDF format is to be uploaded for review and approval.";
   doc.appendChild(note);
+
+  /* ---------- FOOTER (page feel) ---------- */
+  const footer = document.createElement("div");
+  footer.className = "pdf-footer";
+  footer.innerHTML =
+    '<span>Grade Change Form</span>' +
+    '<span>Independent University, Bangladesh</span>' +
+    '<span>Page 1 of 1</span>';
+  doc.appendChild(footer);
 
   return doc;
 }
@@ -583,7 +870,6 @@ downloadBtn.addEventListener("click", async () => {
   downloadBtn.disabled = true;
   downloadBtn.textContent = "Generating PDF…";
 
-  /* build the document off-screen */
   holder.innerHTML = "";
   const pdfDoc = buildPdfDocument();
   holder.appendChild(pdfDoc);
@@ -592,7 +878,7 @@ downloadBtn.addEventListener("click", async () => {
                     .replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "_");
 
   const options = {
-    margin: [10, 10, 12, 10],
+    margin: [0, 0, 0, 0],
     filename: "Grade_Change_Form_" + student + ".pdf",
     image: { type: "jpeg", quality: 0.98 },
     html2canvas: {
