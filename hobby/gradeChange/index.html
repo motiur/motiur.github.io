@@ -202,190 +202,41 @@
     color:var(--muted);
   }
 
-  /* =========================================================
-     OFF-SCREEN PDF RENDER HOLDER
-     Kept off the visible area but still in the render tree so
-     html2canvas can capture it at the correct size.
-     ========================================================= */
+  /* ---------- PDF output styled to match the supplied Word form ---------- */
   #pdfHolder{
-    position:absolute;
-    left:-10000px;
-    top:0;
-    width:794px;    /* A4 width @ 96dpi */
-    height:auto;
-    overflow:visible;
-    pointer-events:none;
+    position:absolute; left:-10000px; top:0; width:816px; height:auto;
+    overflow:visible; pointer-events:none;
   }
-
-  /* =========================================================
-     PDF DOCUMENT — EXACT A4 SIZE (794 x 1123 px @ 96 dpi)
-     ========================================================= */
   .pdf-doc{
-    width:794px;           /* A4 width  = 210mm @ 96dpi */
-    min-height:1123px;     /* A4 height = 297mm @ 96dpi */
-    padding:42px 48px 48px;
-    background:#ffffff;
-    color:#000;
-    font-family:"Times New Roman","Georgia",serif;
-    font-size:12.5px;
-    line-height:1.42;
-    box-sizing:border-box;
-    position:relative;
+    width:816px; height:1056px; padding:12px 86px 20px;
+    background:#fff; color:#111; font-family:Arial, Helvetica, sans-serif;
+    font-size:16px; line-height:1.35; box-sizing:border-box; position:relative;
+    overflow:hidden;
   }
-
-  /* ---------- Header ---------- */
-  .pdf-head{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding-bottom:12px;
-    margin-bottom:14px;
-    border-bottom:2px solid #000;
-  }
-
-  .pdf-head .pdf-logo{flex:0 0 auto;}
-
-  .pdf-head img{
-    height:58px;
-    width:auto;
-    max-width:180px;
-    object-fit:contain;
-  }
-
-  .pdf-head .logo-placeholder{
-    height:58px;
-    width:58px;
-    font-size:18px;
-    border-radius:8px;
-    font-family:"Segoe UI",Arial,sans-serif;
-  }
-
-  .pdf-head .pdf-title{
-    flex:1;
-    text-align:center;
-    padding-right:58px;   /* balances the logo width so the title stays centred */
-  }
-
-  .pdf-head h1{
-    margin:0;
-    font-size:19px;
-    font-weight:700;
-    letter-spacing:.4px;
-    text-transform:uppercase;
-  }
-
-  .pdf-head .pdf-sub{
-    margin-top:3px;
-    font-size:12px;
-    font-style:italic;
-    color:#222;
-  }
-
-  /* ---------- Form table ---------- */
-  .pdf-form{
-    width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-  }
-
-  .pdf-form td{
-    vertical-align:top;
-    padding:5px 0;
-    font-size:12.5px;
-    page-break-inside:avoid;
-    break-inside:avoid;
-  }
-
-  .pdf-form tr{
-    page-break-inside:avoid;
-    break-inside:avoid;
-  }
-
-  .pdf-form td.label{
-    width:20%;
-    padding-right:8px;
-    font-weight:700;
-    line-height:1.3;
-    word-wrap:break-word;
-  }
-
-  .pdf-form td.value{
-    width:30%;
-    padding-right:14px;
-  }
-
-  .pdf-form td.value--full{
-    width:100%;
-    padding-right:0;
-    padding-bottom:8px;
-  }
-
-  /* Fill-in ruled lines */
-  .pdf-line{
-    display:block;
-    min-height:17px;
-    border-bottom:1px solid #000;
-    padding:0 2px 1px;
-    font-size:12.5px;
-    line-height:1.35;
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    overflow-wrap:anywhere;
-  }
-
-  .pdf-line--tall{
-    display:block;
-    min-height:78px;
-    border:1px solid #000;
-    padding:5px 7px;
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    overflow-wrap:anywhere;
-    font-size:12.5px;
-    line-height:1.42;
-  }
-
-  /* Group headings for sections 9, 10 */
-  .pdf-group-title{
-    font-weight:700;
-    font-size:12.5px;
-    margin:12px 0 4px;
-    line-height:1.35;
-  }
-
-  /* Sub-item label (a., b., c.) */
-  .pdf-sub-label{
-    font-weight:700;
-    font-size:12.5px;
-    margin-bottom:3px;
-    line-height:1.35;
-  }
-
-  /* NB note */
-  .pdf-note{
-    margin-top:22px;
-    padding-top:8px;
-    border-top:1px solid #000;
-    font-size:11px;
-    font-style:italic;
-    line-height:1.4;
-  }
-
-  /* Footer */
-  .pdf-footer{
-    position:absolute;
-    left:48px;
-    right:48px;
-    bottom:18px;
-    display:flex;
-    justify-content:space-between;
-    font-size:10px;
-    color:#333;
-    font-family:"Segoe UI",Arial,sans-serif;
-    border-top:1px solid #999;
-    padding-top:3px;
-  }
-
+  .pdf-head{display:block; text-align:center; margin:0 0 7px; padding:0 0 10px; border-bottom:1px solid #111;}
+  .pdf-head .pdf-logo{height:150px; display:flex; justify-content:center; align-items:flex-start;}
+  .pdf-head img{display:block; width:260px; height:auto; max-height:145px; object-fit:contain;}
+  .pdf-head .logo-placeholder{display:none;}
+  .pdf-head .pdf-title{padding:0; text-align:center;}
+  .pdf-head h1{font-family:Arial,Helvetica,sans-serif; font-size:18px; line-height:1.2; font-weight:700; margin:0; text-transform:none; letter-spacing:0;}
+  .pdf-head .pdf-sub{display:none;}
+  .pdf-form{width:100%; border-collapse:collapse; table-layout:fixed; font-family:Arial,Helvetica,sans-serif;}
+  .pdf-form td{vertical-align:top; padding:1px 0; font-size:16px; line-height:1.3;}
+  .pdf-form tr{break-inside:avoid; page-break-inside:avoid;}
+  .pdf-form td.label{width:auto; padding-right:0; font-weight:400; line-height:1.3; white-space:nowrap;}
+  .pdf-form td.value{width:auto; padding-left:0; padding-right:0;}
+  .pdf-form td.value--full{width:100%; padding:0 0 2px;}
+  .pdf-line{display:inline-block; min-height:18px; border-bottom:1px dotted #222; padding:0 2px 0; font-size:16px; line-height:1.2; white-space:pre-wrap; overflow-wrap:anywhere; vertical-align:bottom;}
+  .pdf-line--tall{display:block; height:52px; border:1px solid #111; padding:0; position:relative; white-space:pre-wrap; overflow-wrap:anywhere; font-size:16px; line-height:1.3;}
+  .pdf-line--tall:before,.pdf-line--tall:after{content:"";position:absolute;left:0;right:0;border-top:1px solid #111;}
+  .pdf-line--tall.justification-box:before,.pdf-line--tall.justification-box:after{display:none;}
+  .pdf-line--tall:before{top:25px}.pdf-line--tall:after{top:51px}
+  .pdf-group-title{font-weight:400;font-size:16px;margin:0;line-height:1.3;display:inline;}
+  .pdf-sub-label{font-weight:400;font-size:16px;margin:0;line-height:1.3;display:inline;}
+  .pdf-note{position:absolute;left:10px;right:10px;bottom:44px;margin:0;padding:0;border:0;font-size:16px;font-style:normal;line-height:1.4;}
+  .pdf-footer{position:absolute;right:22px;bottom:8px;display:block;font-size:11px;color:#111;font-family:Arial,sans-serif;border:0;padding:0;}
+  .pdf-footer span:first-child,.pdf-footer span:nth-child(2){display:none;}
+  .pdf-footer span:last-child{display:block;}
   /* ---------- Print fallback ---------- */
   @media print{
     body{background:#fff;padding:0;}
@@ -661,118 +512,75 @@ function makeFullRow(labelText, valueText, tall) {
    ========================================================= */
 function buildPdfDocument() {
   const v = getValues();
-
   const doc = document.createElement("div");
   doc.className = "pdf-doc";
-
-  /* ---------- HEADER ---------- */
+  const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
   const head = document.createElement("div");
   head.className = "pdf-head";
-  head.innerHTML =
-    '<div class="pdf-logo">' + logoMarkup() + '</div>' +
-    '<div class="pdf-title">' +
-      '<h1>Grade Change Form</h1>' +
-      '<div class="pdf-sub">Independent University, Bangladesh</div>' +
-    '</div>';
+  head.innerHTML = '<div class="pdf-logo"><img src="data:image/jpeg;base64,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" alt="Independent University, Bangladesh"></div>' +
+    '<div class="pdf-title"><h1>Application Form for Grade Change</h1></div>';
   doc.appendChild(head);
 
-  /* ---------- FORM TABLE ---------- */
   const table = document.createElement("table");
   table.className = "pdf-form";
-
-  /* Fields 1–8 — two per row */
-  const topFields = FIELDS.filter(f => f.group === "top");
-  for (let i = 0; i < topFields.length; i += 2) {
-    const a = topFields[i];
-    const b = topFields[i + 1];
-    if (b) {
-      table.appendChild(
-        makeDoubleRow(a.label, v[a.id], b.label, v[b.id])
-      );
-    } else {
-      table.appendChild(
-        makeDoubleRow(a.label, v[a.id])
-      );
-    }
-  }
-
-  /* Section 9 */
-  {
+  const row = (label, id, width) => {
     const tr = document.createElement("tr");
     const td = document.createElement("td");
-    td.colSpan = 4;
-    td.className = "value--full";
-    const title = document.createElement("div");
-    title.className = "pdf-group-title";
-    title.textContent = "9. Current Grade and its Numerical Equivalence (as recorded earlier)";
-    td.appendChild(title);
-    tr.appendChild(td);
-    table.appendChild(tr);
-  }
-  table.appendChild(makeFullRow("a. Current Grade and its Numerical Equivalence:", v.currentGrade));
-  table.appendChild(makeFullRow("b. Break-down of the Marks:", v.currentBreakdown, true));
-  table.appendChild(makeFullRow("c. Semester and Year:", v.currentSemester));
+    td.style.width = "100%";
+    td.style.whiteSpace = "nowrap";
+    td.innerHTML = '<span class="pdf-sub-label">' + esc(label) + '</span><span class="pdf-line" style="width:' + (width || "auto") + ';min-width:40px"></span>';
+    tr.appendChild(td); table.appendChild(tr);
+  };
+  const full = (label, id, height) => {
+    const tr = document.createElement("tr"), td = document.createElement("td");
+    td.colSpan = 1; td.className = "value--full";
+    td.innerHTML = '<div class="pdf-sub-label">' + esc(label) + '</div>' +
+      '<div class="pdf-line' + (height ? '--tall' : '') + '"' + (height ? ' style="margin-left:40px;width:calc(100% - 40px)"' : '') + '>' + esc(v[id]) + '</div>';
+    tr.appendChild(td); table.appendChild(tr);
+  };
+  const lineField = (label, id, width) => {
+    const tr = document.createElement("tr"), td = document.createElement("td");
+    td.style.whiteSpace = "nowrap";
+    const value = v[id] ? esc(v[id]) : "&nbsp;";
+    td.innerHTML = '<span class="pdf-sub-label">' + esc(label) + '</span><span class="pdf-line" style="width:' + width + ';margin-left:0">' + value + '</span>';
+    tr.appendChild(td); table.appendChild(tr);
+  };
 
-  /* Section 10 */
-  {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.colSpan = 4;
-    td.className = "value--full";
-    const title = document.createElement("div");
-    title.className = "pdf-group-title";
-    title.textContent = "10. Proposed Grade for Change and its Numerical Equivalence";
-    td.appendChild(title);
-    tr.appendChild(td);
-    table.appendChild(tr);
-  }
-  table.appendChild(makeFullRow("a. Proposed Grade for Change and its Numerical Equivalence:", v.proposedGrade));
-  table.appendChild(makeFullRow("b. Break-down of the Marks:", v.proposedBreakdown, true));
-  table.appendChild(makeFullRow("c. Semester and Year:", v.proposedSemester));
-
-  /* Section 11 */
-  table.appendChild(
-    makeFullRow(
-      "11. Precise Reason and Justification in support of Grade Change (in around 250 words):",
-      v.justification,
-      true
-    )
-  );
-
-  /* Fields 12–16 — two per row */
-  const bottomFields = FIELDS.filter(f => f.group === "bottom");
-  for (let i = 0; i < bottomFields.length; i += 2) {
-    const a = bottomFields[i];
-    const b = bottomFields[i + 1];
-    if (b) {
-      table.appendChild(
-        makeDoubleRow(a.label, v[a.id], b.label, v[b.id])
-      );
-    } else {
-      table.appendChild(
-        makeDoubleRow(a.label, v[a.id])
-      );
-    }
-  }
-
+  lineField("1.  Name of the Student:", "studentName", "calc(100% - 190px)");
+  lineField("2.  Student’s Identification Number:", "studentId", "calc(100% - 267px)");
+  lineField("3.  Course Number:", "courseNumber", "calc(100% - 145px)");
+  lineField("4.  Course Title:", "courseTitle", "calc(100% - 125px)");
+  lineField("5.  Section (of the Student for the Course):", "section", "calc(100% - 330px)");
+  lineField("6.  Department (of the Course):", "department", "calc(100% - 255px)");
+  lineField("7.  School (of the Course):", "school", "calc(100% - 220px)");
+  lineField("8.  Course Enrolment Semester with Year:", "enrolmentSemester", "calc(100% - 325px)");
+  lineField("9.   a. Current Grade and its Numerical Equivalence (as recorded earlier):", "currentGrade", "calc(100% - 560px)");
+  full("      b. Break-down of the Marks:", "currentBreakdown", true);
+  lineField("      c. Semester and Year:", "currentSemester", "calc(100% - 180px)");
+  lineField("10.  a. Proposed Grade for Change and its Numerical Equivalence:", "proposedGrade", "calc(100% - 515px)");
+  full("      b. Break-down of the Marks:", "proposedBreakdown", true);
+  lineField("      c. Semester and Year:", "proposedSemester", "calc(100% - 180px)");
+  full("11.  Precise Reason and Justification in support of Grade Change (in around 250 words):", "justification", true);
+  // Give the justification box the same generous writing area as the Word form.
+  table.lastElementChild.querySelector(".pdf-line--tall").classList.add("justification-box");
+  table.lastElementChild.querySelector(".pdf-line--tall").style.height = "190px";
+  table.lastElementChild.querySelector(".pdf-line--tall").style.marginLeft = "28px";
+  table.lastElementChild.querySelector(".pdf-line--tall").style.width = "calc(100% - 40px)";
+  lineField("12.  Name of the Course Instructor:", "instructorName", "calc(100% - 270px)");
+  lineField("13.  Designation of the Instructor:", "designation", "calc(100% - 250px)");
+  lineField("14.  Status of the Instructor (part-time/ full-time):", "instructorStatus", "calc(100% - 355px)");
+  lineField("15.  Instructor’s Employee Identify Number:", "employeeId", "calc(100% - 325px)");
+  lineField("16.  IUB Official e-mail address (instructor’s):", "email", "calc(100% - 325px)");
   doc.appendChild(table);
 
-  /* ---------- NB NOTE ---------- */
   const note = document.createElement("div");
   note.className = "pdf-note";
-  note.textContent =
-    "NB: The filled-in Application Form in PDF format is to be uploaded for review and approval.";
+  note.textContent = "NB: The filled-in Application Form in PDF format is to be uploaded for review and approval.";
   doc.appendChild(note);
-
-  /* ---------- FOOTER ---------- */
   const footer = document.createElement("div");
   footer.className = "pdf-footer";
-  footer.innerHTML =
-    '<span>Grade Change Form</span>' +
-    '<span>Independent University, Bangladesh</span>' +
-    '<span>Page 1 of 1</span>';
+  footer.innerHTML = '<span>Grade Change Form</span><span>Independent University, Bangladesh</span><span>(3)</span>';
   doc.appendChild(footer);
-
   return doc;
 }
 
@@ -821,13 +629,13 @@ downloadBtn.addEventListener("click", async () => {
       useCORS: true,
       allowTaint: true,
       backgroundColor: "#ffffff",
-      width: 794,                               /* capture exactly A4 width */
-      windowWidth: 794,
+      width: 816,                               /* capture exactly US Letter width */
+      windowWidth: 816,
       scrollX: 0,
       scrollY: 0,
       logging: false
     },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
     pagebreak: { mode: ["css", "legacy"], avoid: ["tr", ".pdf-line--tall", ".pdf-note"] }
   };
 
