@@ -204,8 +204,8 @@
 
   /* ---------- PDF output styled to match the supplied Word form ---------- */
   #pdfHolder{
-    position:absolute; left:-10000px; top:0; width:816px; height:auto;
-    overflow:visible; pointer-events:none;
+    position:fixed; left:0; top:0; width:816px; height:auto;
+    overflow:visible; pointer-events:none; z-index:-1;
   }
   .pdf-doc{
     width:816px; height:1056px; padding:12px 86px 20px;
@@ -630,9 +630,11 @@ downloadBtn.addEventListener("click", async () => {
       allowTaint: true,
       backgroundColor: "#ffffff",
       width: 816,                               /* capture exactly US Letter width */
-      windowWidth: 816,
+      windowWidth: Math.max(816, document.documentElement.clientWidth),
       scrollX: 0,
       scrollY: 0,
+      x: 0,
+      y: 0,
       logging: false
     },
     jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
