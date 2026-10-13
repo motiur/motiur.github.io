@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grade Change Form</title>
+
+<!-- PDF engine (html2canvas + jsPDF bundled) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+  :root{
+    --brand:#1a4d8f;
+    --brand-dark:#123a6b;
+    --text:#202124;
+    --muted:#5f6368;
+    --border:#dadce0;
+    --bg:#eef1f6;
+    --danger:#d93025;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{height:100%;}
+
+  body{
+    margin:0;
+    padding:24px 12px 60px;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Card ---------- */
+  .page{
+    max-width:880px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 1px 3px rgba(16,24,40,.08), 0 12px 32px rgba(16,24,40,.10);
+  }
+
+  .topbar{
+    height:8px;
+    border-radius:14px 14px 0 0;
+    background:linear-gradient(90deg,var(--brand),#2f7ad6);
+  }
+
+  /* ---------- Header ---------- */
+  .form-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:24px 32px;
+    border-bottom:1px solid #e8eaed;
+  }
+
+  .brand-logo{flex:0 0 auto;}
+
+  .brand-logo img{
+    display:block;
+    height:64px;
+    width:auto;
+    max-width:180px;
+    object-fit:contain;
+  }
+
+  .logo-placeholder{
+    height:64px;
+    width:64px;
+    border-radius:12px;
+    background:var(--brand);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:1px;
+  }
+
+  .form-header h1{
+    margin:0 0 3px;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+
+  .form-header p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- Form body ---------- */
+  form{
+    padding:26px 32px 8px;
+  }
+
+  .field{
+    margin-bottom:22px;
+  }
+
+  .field label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14.5px;
+    font-weight:500;
+    color:#1f2937;
+  }
+
+  .req{color:var(--danger);margin-left:2px;}
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea{
+    width:100%;
+    padding:12px 14px;
+    font:inherit;
+    font-size:15px;
+    color:var(--text);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    transition:border-color .15s, box-shadow .15s, background .15s;
+  }
+
+  textarea{
+    min-height:90px;
+    resize:vertical;
+    line-height:1.55;
+  }
+
+  input::placeholder,
+  textarea::placeholder{color:#9aa0a6;}
+
+  input:focus,
+  select:focus,
+  textarea:focus{
+    outline:none;
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px rgba(26,77,143,.12);
+  }
+
+  input.invalid,
+  select.invalid,
+  textarea.invalid{
+    border-color:var(--danger);
+    background:#fff8f7;
+    box-shadow:0 0 0 3px rgba(217,48,37,.10);
+  }
+
+  .counter{
+    margin-top:6px;
+    text-align:right;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  .counter.over{color:var(--danger);font-weight:600;}
+
+  /* ---------- Action bar ---------- */
+  .actions{
+    position:sticky;
+    bottom:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:20px 32px 24px;
+    margin-top:8px;
+    border-top:1px solid #e8eaed;
+    border-radius:0 0 14px 14px;
+    background:#fafbfc;
+  }
+
+  .btn{
+    padding:12px 24px;
+    font:inherit;
+    font-size:15px;
+    font-weight:600;
+    border-radius:8px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:background .15s, box-shadow .15s, opacity .15s;
+  }
+
+  .btn:disabled{opacity:.65;cursor:not-allowed;}
+
+  .btn-primary{background:var(--brand);color:#fff;}
+  .btn-primary:hover:not(:disabled){background:var(--brand-dark);}
+
+  .btn-ghost{background:#fff;border-color:var(--border);color:#3c4043;}
+  .btn-ghost:hover:not(:disabled){background:#f1f3f4;}
+
+  .hint{
+    margin:0 32px 4px;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- Off-screen PDF holder ---------- */
+  #pdfHolder{
+    position:absolute;
+    left:-10000px;
+    top:0;
+    width:820px;
+  }
+
+  /* ---------- PDF document styling ---------- */
+  .pdf-doc{
+    width:820px;
+    padding:38px 44px 44px;
+    background:#fff;
+    color:#111;
+    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  .pdf-head{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding-bottom:14px;
+    margin-bottom:20px;
+    border-bottom:2px solid var(--brand);
+  }
+
+  .pdf-head img{
+    height:58px;
+    width:auto;
+    max-width:170px;
+    object-fit:contain;
+  }
+
+  .pdf-head .logo-placeholder{
+    height:58px;
+    width:58px;
+    font-size:18px;
+    border-radius:10px;
+  }
+
+  .pdf-head h1{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#111;
+  }
+
+  .pdf-head .pdf-sub{
+    margin-top:2px;
+    font-size:12.5px;
+    color:#555;
+  }
+
+  .pdf-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 20px;
+  }
+
+  .pdf-field{break-inside:avoid;}
+
+  .pdf-field.wide{grid-column:1 / -1;}
+
+  .pdf-label{
+    font-size:11.5px;
+    font-weight:700;
+    color:#333;
+    margin-bottom:4px;
+    line-height:1.35;
+  }
+
+  .pdf-value{
+    min-height:22px;
+    padding:4px 2px 5px;
+    font-size:12.5px;
+    line-height:1.5;
+    color:#111;
+    border-bottom:1px solid #b9b9b9;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+  }
+
+  .pdf-note{
+    margin-top:26px;
+    padding-top:12px;
+    border-top:1px solid #ddd;
+    font-size:11.5px;
+    font-style:italic;
+    color:#444;
+  }
+
+  /* ---------- Print fallback ---------- */
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{box-shadow:none;border-radius:0;max-width:none;}
+    .topbar,.actions,.hint{display:none !important;}
+    .form-header{padding:0 0 14px;}
+    form{padding:16px 0 0;}
+    input,select,textarea{
+      border:none;
+      border-bottom:1px solid #999;
+      border-radius:0;
+      padding:4px 0;
+      background:transparent;
+    }
+    textarea{min-height:60px;}
+    .field{margin-bottom:14px;}
+  }
+
+  @media (max-width:600px){
+    .form-header{flex-direction:column;align-items:flex-start;padding:20px;}
+    form{padding:20px 20px 4px;}
+    .actions{padding:16px 20px 20px;}
+    .form-header h1{font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="topbar"></div>
+
+  <!-- ================= HEADER / LOGO ================= -->
+  <header class="form-header">
+    <div class="brand-logo" id="brandLogo">
+      <!-- 👉 Replace "logo.png" with your own logo file (keep it in the same folder) -->
+      <img id="logoImg" src="logo.png" alt="Institution Logo" />
+    </div>
+    <div>
+      <h1>Grade Change Form</h1>
+      <p>Independent University, Bangladesh</p>
+    </div>
+  </header>
+
+  <!-- ================= FORM ================= -->
+  <form id="gradeChangeForm" novalidate autocomplete="off"></form>
+
+  <p class="hint">Fields marked with <span class="req">*</span> are required.</p>
+
+  <div class="actions">
+    <button type="button" class="btn btn-primary" id="downloadBtn">Download as PDF</button>
+    <button type="button" class="btn btn-ghost" id="printBtn">Print</button>
+    <button type="button" class="btn btn-ghost" id="resetBtn">Reset Form</button>
+  </div>
+</div>
+
+<!-- Off-screen container where the printable document is built -->
+<div id="pdfHolder" aria-hidden="true"></div>
+
+<script>
+/* =========================================================
+   1. FIELD DEFINITIONS
+   label  : exact text from the original document
+   wide   : takes the full width in the generated PDF
+   ========================================================= */
+const FIELDS = [
+  { id:"studentName",       label:"1. Name of the Student",                                                    type:"text",     placeholder:"Full name of the student", required:true },
+  { id:"studentId",         label:"2. Student's Identification Number",                                        type:"text",     placeholder:"e.g., 2210xxx", required:true },
+  { id:"courseNumber",      label:"3. Course Number",                                                          type:"text",     placeholder:"e.g., CSE 303", required:true },
+  { id:"courseTitle",       label:"4. Course Title",                                                           type:"text",     placeholder:"e.g., Data Structures", required:true },
+  { id:"section",           label:"5. Section (of the Student for the Course)",                                type:"text",     placeholder:"e.g., 01" },
+  { id:"department",        label:"6. Department (of the Course)",                                             type:"text",     placeholder:"e.g., Department of Computer Science & Engineering" },
+  { id:"school",            label:"7. School (of the Course)",                                                 type:"text",     placeholder:"e.g., School of Engineering & Computer Science" },
+  { id:"enrolmentSemester", label:"8. Course Enrolment Semester with Year",                                    type:"text",     placeholder:"e.g., Spring 2025" },
+
+  { id:"currentGrade",      label:"9. a. Current Grade and its Numerical Equivalence (as recorded earlier)",   type:"text",     placeholder:"e.g., B+ (3.30)", required:true, group:"9" },
+  { id:"currentBreakdown",  label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 08/10, Assignments 18/20, Midterm 24/30, Final 32/40", wide:true, group:"9" },
+  { id:"currentSemester",   label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", group:"9" },
+
+  { id:"proposedGrade",     label:"10. a. Proposed Grade for Change and its Numerical Equivalence",            type:"text",     placeholder:"e.g., A- (3.70)", required:true, group:"10" },
+  { id:"proposedBreakdown", label:"b. Break-down of the Marks",                                                type:"textarea", placeholder:"e.g., Attendance 10/10, Assignments 19/20, Midterm 26/30, Final 36/40", wide:true, group:"10" },
+  { id:"proposedSemester",  label:"c. Semester and Year",                                                      type:"text",     placeholder:"e.g., Spring 2025", group:"10" },
+
+  { id:"justification",     label:"11. Precise Reason and Justification in support of Grade Change (in around 250 words)",
+                            type:"textarea", placeholder:"Explain clearly and precisely the reason for the grade change…",
+                            required:true, wide:true, rows:7, counter:250 },
+
+  { id:"instructorName",    label:"12. Name of the Course Instructor",                                         type:"text",     placeholder:"Full name", required:true },
+  { id:"designation",       label:"13. Designation of the Instructor",                                         type:"text",     placeholder:"e.g., Assistant Professor" },
+  { id:"instructorStatus",  label:"14. Status of the Instructor (part-time/ full-time)",                       type:"select",   options:["Part-time","Full-time"] },
+  { id:"employeeId",        label:"15. Instructor's Employee Identify Number",                                 type:"text",     placeholder:"e.g., EMP-12345" },
+  { id:"email",             label:"16. IUB Official e-mail address (instructor's)",                            type:"email",    placeholder:"name@iub.edu.bd", wide:true }
+];
+
+/* =========================================================
+   2. BUILD THE FORM
+   ========================================================= */
+const form = document.getElementById("gradeChangeForm");
+
+FIELDS.forEach(field => {
+  const wrap = document.createElement("div");
+  wrap.className = "field" + (field.wide ? " field--wide" : "");
+
+  const label = document.createElement("label");
+  label.setAttribute("for", field.id);
+  label.innerHTML = field.label + (field.required ? ' <span class="req">*</span>' : "");
+  wrap.appendChild(label);
+
+  let input;
+
+  if (field.type === "textarea") {
+    input = document.createElement("textarea");
+    input.rows = field.rows || 3;
+  } else if (field.type === "select") {
+    input = document.createElement("select");
+    const blank = document.createElement("option");
+    blank.value = "";
+    blank.textContent = "Select…";
+    input.appendChild(blank);
+    field.options.forEach(opt => {
+      const o = document.createElement("option");
+      o.value = opt;
+      o.textContent = opt;
+      input.appendChild(o);
+    });
+  } else {
+    input = document.createElement("input");
+    input.type = field.type;
+  }
+
+  input.id = field.id;
+  input.name = field.id;
+  if (field.placeholder) input.placeholder = field.placeholder;
+  if (field.required) input.required = true;
+
+  /* clear error styling while typing */
+  const clearInvalid = () => input.classList.remove("invalid");
+  input.addEventListener("input", clearInvalid);
+  input.addEventListener("change", clearInvalid);
+
+  wrap.appendChild(input);
+
+  /* word counter for the justification field */
+  if (field.counter) {
+    const counter = document.createElement("div");
+    counter.className = "counter";
+    counter.id = field.id + "Counter";
+    counter.textContent = "0 / " + field.counter + " words";
+    wrap.appendChild(counter);
+
+    const update = () => {
+      const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
+      counter.textContent = words + " / " + field.counter + " words";
+      counter.classList.toggle("over", words > field.counter);
+    };
+    input.addEventListener("input", update);
+  }
+
+  form.appendChild(wrap);
+});
+
+/* =========================================================
+   3. LOGO FALLBACK (if logo.png is not found)
+   ========================================================= */
+(function handleLogo() {
+  const img = document.getElementById("logoImg");
+  const swap = () => {
+    const ph = document.createElement("div");
+    ph.className = "logo-placeholder";
+    ph.textContent = "IUB";
+    if (img && img.parentNode) img.parentNode.replaceChild(ph, img);
+  };
+  if (img) {
+    img.addEventListener("error", swap);
+    if (img.complete && img.naturalWidth === 0) swap();
+  }
+})();
+
+/* =========================================================
+   4. HELPERS
+   ========================================================= */
+function getValues() {
+  const values = {};
+  FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    values[f.id] = el ? el.value.trim() : "";
+  });
+  return values;
+}
+
+function validate() {
+  let firstInvalid = null;
+  FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    if (!el) return;
+    const value = el.value.trim();
+    let bad = f.required && !value;
+    if (!bad && f.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) bad = true;
+    el.classList.toggle("invalid", bad);
+    if (bad && !firstInvalid) firstInvalid = el;
+  });
+  return firstInvalid;
+}
+
+function logoMarkup() {
+  const container = document.getElementById("brandLogo");
+  return container ? container.innerHTML : "";
+}
+
+/* =========================================================
+   5. BUILD THE PRINTABLE (PDF) DOCUMENT
+   ========================================================= */
+function buildPdfDocument() {
+  const values = getValues();
+
+  const doc = document.createElement("div");
+  doc.className = "pdf-doc";
+
+  /* header */
+  const head = document.createElement("div");
+  head.className = "pdf-head";
+  head.innerHTML =
+    '<div class="pdf-logo">' + logoMarkup() + '</div>' +
+    '<div>' +
+      '<h1>Grade Change Form</h1>' +
+      '<div class="pdf-sub">Independent University, Bangladesh</div>' +
+    '</div>';
+  doc.appendChild(head);
+
+  /* fields */
+  const grid = document.createElement("div");
+  grid.className = "pdf-grid";
+
+  FIELDS.forEach(f => {
+    const item = document.createElement("div");
+    item.className = "pdf-field" + (f.wide ? " wide" : "");
+
+    const label = document.createElement("div");
+    label.className = "pdf-label";
+    label.textContent = f.label;
+
+    const value = document.createElement("div");
+    value.className = "pdf-value";
+    const v = values[f.id];
+    value.textContent = v || "\u00A0";   /* keeps the ruled line visible */
+
+    item.appendChild(label);
+    item.appendChild(value);
+    grid.appendChild(item);
+  });
+
+  doc.appendChild(grid);
+
+  /* footer note */
+  const note = document.createElement("div");
+  note.className = "pdf-note";
+  note.textContent =
+    "NB: The filled-in Application Form in PDF format is to be uploaded for review and approval.";
+  doc.appendChild(note);
+
+  return doc;
+}
+
+/* =========================================================
+   6. ACTIONS
+   ========================================================= */
+const downloadBtn = document.getElementById("downloadBtn");
+const printBtn    = document.getElementById("printBtn");
+const resetBtn    = document.getElementById("resetBtn");
+const holder      = document.getElementById("pdfHolder");
+
+downloadBtn.addEventListener("click", async () => {
+  const firstInvalid = validate();
+  if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstInvalid.focus({ preventScroll: true });
+    return;
+  }
+
+  if (typeof html2pdf === "undefined") {
+    alert("PDF library could not be loaded (you may be offline). The print dialog will open instead — choose 'Save as PDF'.");
+    window.print();
+    return;
+  }
+
+  const originalText = downloadBtn.textContent;
+  downloadBtn.disabled = true;
+  downloadBtn.textContent = "Generating PDF…";
+
+  /* build the document off-screen */
+  holder.innerHTML = "";
+  const pdfDoc = buildPdfDocument();
+  holder.appendChild(pdfDoc);
+
+  const student = (document.getElementById("studentName").value || "Student")
+                    .replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "_");
+
+  const options = {
+    margin: [10, 10, 12, 10],
+    filename: "Grade_Change_Form_" + student + ".pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: "#ffffff",
+      windowWidth: 900,
+      scrollX: 0,
+      scrollY: 0
+    },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["css", "legacy"] }
+  };
+
+  try {
+    await html2pdf().set(options).from(pdfDoc).save();
+  } catch (err) {
+    console.error(err);
+    alert("Sorry, the PDF could not be generated. Please use the Print button and choose 'Save as PDF'.");
+  } finally {
+    holder.innerHTML = "";
+    downloadBtn.disabled = false;
+    downloadBtn.textContent = originalText;
+  }
+});
+
+printBtn.addEventListener("click", () => window.print());
+
+resetBtn.addEventListener("click", () => {
+  if (!confirm("Clear all the information you have entered?")) return;
+  form.reset();
+  form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  const counter = document.getElementById("justificationCounter");
+  if (counter) {
+    counter.textContent = "0 / 250 words";
+    counter.classList.remove("over");
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+</body>
+</html>
