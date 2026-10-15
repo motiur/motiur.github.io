@@ -1,1 +1,1253 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>World Dress Globe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a night-sky globe fills the screen; picking a country tucks it into the top-right corner
+   and the country's garments fill the page below, each opening onto a coloring sheet. */
+:root {
+  --sky: #0a0f1f;        /* night behind the globe */
+  --panel: #121a31;      /* raised surfaces */
+  --panel2: #1a2442;
+  --ink: #ece6d9;        /* text */
+  --muted: #a3abc4;
+  --rule: #2a355a;
+  --brass: #e0ad4f;      /* accent: thread-of-gold */
+  --brass-ink: #1b1406;
+  --paper: #fbf8f1;      /* coloring paper */
+  --line: #2b2622;
+  --display: "Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --c-national: #e0ad4f; --c-ethnic: #6fc2a9; --c-bridal: #ef8fa6; --c-ceremonial: #9fa8f0; --c-historical: #c9a27a;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--sky); color: var(--ink); font: 15px/1.5 var(--body); }
+body.globe-mode { overflow: hidden; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--brass); }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
 
+/* ---------- globe layer ---------- */
+#globe { position: fixed; inset: 0; z-index: 5; transition: top .7s cubic-bezier(.6,.05,.2,1), right .7s cubic-bezier(.6,.05,.2,1), width .7s cubic-bezier(.6,.05,.2,1), height .7s cubic-bezier(.6,.05,.2,1), border-radius .7s; }
+#globe canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#globe canvas.dragging { cursor: grabbing; }
+body.country-mode #globe { position: absolute; inset: auto; top: calc(env(safe-area-inset-top, 0px) + 10px); right: max(10px, env(safe-area-inset-right, 0px)); width: 104px; height: 104px; border-radius: 50%; }
+body.country-mode #globe canvas { cursor: pointer; }
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+body.country-mode #stars { opacity: .35; }
+
+.hud { position: fixed; z-index: 6; left: 0; right: 0; pointer-events: none; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.hud > * { pointer-events: auto; }
+#top { top: calc(env(safe-area-inset-top, 0px) + 14px); display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-end; justify-content: space-between; }
+#top h1 { font: 400 clamp(26px, 5vw, 40px)/1 var(--display); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+#top h1 small { display: block; font: 500 12px/1.3 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.search { position: relative; width: min(320px, 100%); }
+.search input { width: 100%; box-sizing: border-box; background: rgba(18,26,49,.85); border: 1px solid var(--rule); border-radius: 999px; padding: 10px 16px; backdrop-filter: blur(6px); }
+.search input::placeholder { color: var(--muted); }
+#sugg { position: absolute; top: calc(100% + 6px); left: 0; right: 0; margin: 0; padding: 4px; list-style: none; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; max-height: 260px; overflow: auto; }
+#sugg button { width: 100%; text-align: left; background: none; border: 0; padding: 8px 10px; border-radius: 8px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
+#sugg button:hover, #sugg button.on { background: var(--panel2); }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; box-shadow: 0 0 0 1px rgba(255,255,255,.35); }
+#sugg small { color: var(--muted); margin-left: auto; }
+body.country-mode #top, body.country-mode #legend { display: none; }
+
+#legend { bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+#legend p { margin: 0; max-width: 34em; color: var(--muted); font-size: 13px; background: rgba(10,15,31,.6); padding: 8px 12px; border-radius: 10px; }
+#legend b { color: var(--ink); font-weight: 600; }
+#tip { position: fixed; z-index: 7; pointer-events: none; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 8px 12px; font-size: 13px; max-width: 240px; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+#tip b { display: block; font: 400 17px/1.2 var(--display); }
+#tip span { color: var(--muted); }
+#tip i { font-style: normal; display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+#loading { position: fixed; inset: 0; display: grid; place-items: center; z-index: 4; color: var(--muted); }
+
+/* ---------- country view ---------- */
+#country { position: relative; z-index: 3; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: calc(env(safe-area-inset-top, 0px) + 18px) 48px; max-width: 1180px; margin: 0 auto; }
+.chead { padding-right: 116px; min-height: 104px; }
+.crumb { background: none; border: 0; color: var(--muted); padding: 0; cursor: pointer; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.crumb:hover { color: var(--brass); }
+.chead h2 { font: 400 clamp(34px, 7vw, 60px)/1.02 var(--display); margin: 6px 0 8px; text-wrap: balance; }
+.iconic { display: flex; gap: 10px; align-items: center; color: var(--muted); flex-wrap: wrap; }
+.iconic .dot { width: 16px; height: 16px; }
+.iconic b { color: var(--ink); font-weight: 600; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 6px; }
+.chip { border: 1px solid var(--rule); background: var(--panel); border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.chip small { font-variant-numeric: tabular-nums; opacity: .75; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; }
+.catnote { color: var(--muted); font-size: 13.5px; max-width: 62em; margin: 10px 0 18px; }
+.saree { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 14px; margin: 0 0 18px; font-size: 14px; max-width: 62em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; display: flex; flex-direction: column; width: 100%; height: 100%; transition: transform .15s, border-color .15s; }
+.card:hover { transform: translateY(-2px); border-color: var(--brass); }
+.thumb { aspect-ratio: 2 / 3; background: var(--paper); display: block; width: 100%; }
+.thumb svg { width: 100%; height: 100%; display: block; }
+.card .cap { padding: 10px 12px 12px; display: grid; gap: 4px; min-width: 0; }
+.card .cap b { font-weight: 600; line-height: 1.25; }
+.card .cap span { color: var(--muted); font-size: 12.5px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.tag i { width: 8px; height: 8px; border-radius: 50%; }
+.empty { color: var(--muted); }
+
+/* ---------- coloring workspace ---------- */
+#work { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 24px; align-items: start; margin-top: 18px; }
+.stagebox { background: var(--paper); border-radius: 6px; box-shadow: 0 18px 50px rgba(0,0,0,.45); max-width: 560px; width: 100%; justify-self: center; }
+.stagebox svg { display: block; width: 100%; height: auto; }
+.stagebox .r { cursor: pointer; }
+.side { display: grid; gap: 18px; min-width: 0; }
+.wtitle h3 { font: 400 clamp(28px, 4.5vw, 40px)/1.05 var(--display); margin: 4px 0 4px; text-wrap: balance; }
+.wtitle .nv { color: var(--muted); font-size: 16px; }
+.box { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
+.box h4 { margin: 0; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sws { display: flex; flex-wrap: wrap; gap: 8px; }
+.sw { width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(255,255,255,.18); cursor: pointer; padding: 0; }
+.sw[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 3px var(--brass); }
+.sw.erase { background: repeating-linear-gradient(45deg, var(--paper) 0 5px, #d9d2c4 5px 10px); }
+.custom { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+.custom input { width: 38px; height: 30px; border: 0; padding: 0; background: none; cursor: pointer; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { border: 1px solid var(--rule); background: var(--panel2); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+.btn:hover:not(:disabled) { border-color: var(--brass); }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.main { background: var(--brass); color: var(--brass-ink); border-color: var(--brass); font-weight: 600; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.seg button { border: 0; background: none; padding: 8px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--sky); }
+.now { font-size: 13px; color: var(--muted); }
+.notes dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 14px; }
+.notes dt { color: var(--muted); }
+.notes dd { margin: 0; min-width: 0; }
+.notes p { margin: 0; max-width: 62ch; }
+.notes .alt { border-top: 1px solid var(--rule); padding-top: 8px; }
+.notes .alt b { font-weight: 600; }
+.small { font-size: 12.5px; color: var(--muted); }
+.navrow { display: flex; justify-content: space-between; gap: 8px; }
+dialog { background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 16px; max-width: min(92vw, 460px); padding: 16px; }
+dialog::backdrop { background: rgba(4,6,14,.7); }
+dialog img { width: 100%; height: auto; border-radius: 6px; background: var(--paper); }
+h2.cname { font: 400 clamp(30px, 6vw, 48px)/1.05 var(--display); margin: 6px 0 0; }
+.chips.tight { margin: 14px 0 10px; }
+.strip { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 12px; scroll-snap-type: x proximity; scrollbar-width: thin; }
+.mini-card { flex: none; width: 92px; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0; overflow: hidden; cursor: pointer; text-align: left; scroll-snap-align: start; }
+.mini-card[aria-current="true"] { border-color: var(--brass); box-shadow: 0 0 0 2px var(--brass); }
+.mini-card .thumb { aspect-ratio: 2 / 3; }
+.mini-card .mc { display: block; font-size: 11.5px; line-height: 1.25; padding: 6px 7px 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wtitle { margin-top: 10px; }
+@media (max-width: 760px) {
+  .chips.tight { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+  .chips.tight .chip { flex: none; }
+  .mini-card { width: 76px; }
+  #work { grid-template-columns: minmax(0, 1fr); }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .chead { padding-right: 104px; }
+  body.country-mode #globe { width: 86px; height: 86px; }
+  #legend p { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { #globe, .card { transition: none; } }
+</style>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<div id="loading">Loading the map…</div>
+<div id="globe"><canvas id="gc" aria-label="Globe of the world's countries. Drag to turn it, pinch or scroll to zoom, and tap a country to see its garments." role="img"></canvas></div>
+<header class="hud" id="top">
+  <h1>World Dress Globe<small>195 countries · <span id="nG"></span> garments to color</small></h1>
+  <div class="search" role="search">
+    <label for="q" class="small" style="position:absolute;left:-9999px">Find a country</label>
+    <input id="q" type="search" placeholder="Find a country" autocomplete="off" aria-controls="sugg" aria-autocomplete="list">
+    <ul id="sugg" hidden></ul>
+  </div>
+</header>
+<footer class="hud" id="legend">
+  <p>Each country is painted in the main color of its <b>most iconic garment</b>. Drag to turn the globe, scroll or pinch to zoom, and tap a country to start coloring its dress. Small island states are shown as dots.</p>
+</footer>
+<div id="tip" hidden></div>
+<main id="country" hidden></main>
+<dialog id="saveDlg" aria-labelledby="saveT">
+  <h4 id="saveT" style="margin:0 0 8px;font:400 22px var(--display)">Your page</h4>
+  <img id="saveImg" alt="Your colored page">
+  <p class="small">Long-press the picture (or right-click it) and choose Save image.</p>
+  <div class="row" style="justify-content:flex-end"><button class="btn" type="button" id="saveClose">Close</button></div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+/* drawing engine for the World Dress Globe: shape builder + garment templates */
+const W = 600, H = 900;
+const MANGO = [[0,22],[-16,22],[-20,2],[-10,-10],[-4,-18],[6,-22],[14,-20],[8,-16],[6,-10],[10,-2],[16,10],[12,22],[0,22]];
+function B() {
+  const R = [], f = n => Math.round(n * 10) / 10;
+  const b = {
+    R,
+    path(g, d) { R.push({ g, d }); },
+    rect(g, x, y, w, h) { b.path(g, `M${f(x)},${f(y)}h${f(w)}v${f(h)}h${f(-w)}Z`); },
+    poly(g, pts) { b.path(g, 'M' + pts.map(p => f(p[0]) + ',' + f(p[1])).join('L') + 'Z'); },
+    circ(g, cx, cy, r) { b.path(g, `M${f(cx - r)},${f(cy)}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0Z`); },
+    diamond(g, cx, cy, rx, ry) { b.poly(g, [[cx, cy - ry], [cx + rx, cy], [cx, cy + ry], [cx - rx, cy]]); },
+    mango(g, cx, cy, s, fx = 1) {
+      const p = MANGO.map(([x, y]) => f(cx + x * s * fx) + ',' + f(cy + y * s));
+      b.path(g, `M${p[0]}C${p[1]} ${p[2]} ${p[3]}C${p[4]} ${p[5]} ${p[6]}C${p[7]} ${p[8]} ${p[9]}C${p[10]} ${p[11]} ${p[12]}Z`);
+    },
+    leaf(g, x, y, len, wid, deg) {
+      const a = deg * Math.PI / 180, ux = Math.cos(a), uy = Math.sin(a), px = -uy, py = ux;
+      const tx = x + ux * len, ty = y + uy * len, mx = x + ux * len / 2, my = y + uy * len / 2;
+      b.path(g, `M${f(x)},${f(y)}Q${f(mx + px * wid)},${f(my + py * wid)} ${f(tx)},${f(ty)}Q${f(mx - px * wid)},${f(my - py * wid)} ${f(x)},${f(y)}Z`);
+    },
+    step(g, cx, cy, r, n) {            // stepped diamond, the blocky outline ikat gives
+      const u = r / n, q = [];
+      for (let i = 0; i < n; i++) q.push([i * u, -(n - i) * u], [(i + 1) * u, -(n - i) * u]);
+      const rev = q.slice().reverse();
+      const pts = [...q, ...rev.map(([x, y]) => [x, -y]), ...q.map(([x, y]) => [-x, -y]), ...rev.map(([x, y]) => [-x, y])];
+      b.poly(g, pts.map(([x, y]) => [cx + x, cy + y]));
+    },
+    star(g, cx, cy, r1, r2, n) {
+      const pts = [];
+      for (let i = 0; i < 2 * n; i++) { const a = i * Math.PI / n - Math.PI / 2, r = i % 2 ? r2 : r1; pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]); }
+      b.poly(g, pts);
+    }
+  };
+  return b;
+}
+function extras(b) {
+  const f = n => Math.round(n * 10) / 10;
+  b.ellipse = (g, cx, cy, rx, ry) => b.path(g, `M${f(cx - rx)},${f(cy)}a${rx},${ry} 0 1,0 ${2 * rx},0a${rx},${ry} 0 1,0 ${-2 * rx},0Z`);
+  b.arch = (g, x, y, w, h) => { const r = f(w / 2); b.path(g, `M${f(x)},${f(y + h)}V${f(y + r)}A${r},${r} 0 0,1 ${f(x + w)},${f(y + r)}V${f(y + h)}Z`); };
+  b.flower = (gp, gc, cx, cy, r, n, w, rot = 0) => {
+    for (let k = 0; k < n; k++) { const d = rot + k * 360 / n, a = d * Math.PI / 180; b.leaf(gp, cx + Math.cos(a) * r * .2, cy + Math.sin(a) * r * .2, r * .8, w, d); }
+    if (gc) b.circ(gc, cx, cy, Math.max(3, Math.round(r * 2.2) / 10));
+  };
+  b.stepTri = (g, cx, by, hw, h, n) => {            // stepped pyramid, the mandir outline of Dhaka cloth
+    const u = hw / n, v = h / n, L = [];
+    for (let i = 0; i < n; i++) L.push([cx - hw + i * u, by - i * v], [cx - hw + i * u, by - (i + 1) * v]);
+    b.poly(g, [...L, ...L.slice().reverse().map(([x, y]) => [2 * cx - x, y])]);
+  };
+  return b;
+}
+const NB = () => extras(B());
+const r1 = n => Math.round(n * 10) / 10;
+function mot(b, k, g, gc, cx, cy, s, fx = 1, g3) {
+  g3 = g3 || gc; const f = fx;
+  switch (k) {
+    case 'diamond': b.diamond(g, cx, cy, s * .7, s); break;
+    case 'diamond2': b.diamond(g, cx, cy, s * .72, s); b.diamond(gc, cx, cy, s * .36, s * .5); break;
+    case 'square': b.rect(g, cx - s * .7, cy - s * .7, s * 1.4, s * 1.4); break;
+    case 'square2': b.rect(g, cx - s * .8, cy - s * .8, s * 1.6, s * 1.6); b.rect(gc, cx - s * .38, cy - s * .38, s * .76, s * .76); break;
+    case 'dot': b.circ(g, cx, cy, r1(s)); break;
+    case 'circle': b.circ(g, cx, cy, r1(s)); if (gc) b.circ(gc, cx, cy, r1(s * .4)); break;
+    case 'ring': b.circ(g, cx, cy, r1(s)); b.circ(gc, cx, cy, r1(s * .55)); break;
+    case 'coin': b.circ(g, cx, cy, r1(s)); b.circ(gc, cx, cy, r1(s * .62)); if (s > 9) b.circ(g3, cx, cy, r1(s * .26)); break;
+    case 'flower': b.flower(g, gc, cx, cy, s, 6, s * .28, -90); break;
+    case 'flower4': b.flower(g, gc, cx, cy, s, 4, s * .3, 45); break;
+    case 'flower8': b.flower(g, gc, cx, cy, s, 8, s * .22, -90); break;
+    case 'lotus': b.flower(g, null, cx, cy, s, 10, s * .2, -90); b.flower(gc, null, cx, cy, s * .58, 8, s * .13, -67.5); b.circ(g, cx, cy, r1(Math.max(3, s * .16))); break;
+    case 'lotus3': b.flower(g, null, cx, cy, s, 10, s * .2, -90); b.flower(gc, null, cx, cy, s * .6, 8, s * .14, -67.5); b.circ(g3, cx, cy, r1(Math.max(3, s * .18))); break;
+    case 'chakra': b.circ(g, cx, cy, r1(s)); b.flower(gc, null, cx, cy, s * .92, 8, s * .2, 0); b.circ(g3, cx, cy, r1(Math.max(3, s * .24))); break;
+    case 'sun': b.flower(g, null, cx, cy, s, 12, s * .1, -90); b.circ(gc, cx, cy, r1(s * .45)); if (s > 24) b.circ(g3, cx, cy, r1(s * .16)); break;
+    case 'star': b.star(g, cx, cy, s, s * .42, 8); b.circ(gc, cx, cy, r1(Math.max(2.5, s * .2))); break;
+    case 'star4': b.star(g, cx, cy, s, s * .4, 4); break;
+    case 'mango': b.mango(g, cx, cy, s / 22, f); if (s > 16) b.circ(gc, cx - f, cy + s * .4, r1(s * .22)); break;
+    case 'kalka': b.mango(g, cx, cy, s / 22, f); b.mango(gc, cx - f * s * .04, cy + s * .2, s / 22 * .58, f); b.circ(g3, cx - f * s * .06, cy + s * .36, r1(Math.max(2.5, s * .1))); break;
+    case 'sprig': b.leaf(gc, cx + s * .9, cy, s * 1.4, s * .32, -28); b.leaf(gc, cx + s * .9, cy, s * 1.4, s * .32, 28); b.flower(g, g3, cx, cy, s, 5, s * .3, -90); break;
+    case 'leaf': b.leaf(g, cx, cy + s, s * 2, s * .5, -90); break;
+    case 'step': b.step(g, cx, cy, s, 3); b.rect(gc, cx - s * .2, cy - s * .2, s * .4, s * .4); break;
+    case 'temple': b.stepTri(g, cx, cy + s, s, s * 2, 4); break;
+    case 'tri': b.poly(g, [[cx - s, cy + s], [cx, cy - s], [cx + s, cy + s]]); break;
+    case 'tri2': b.poly(g, [[cx - s, cy + s], [cx, cy - s], [cx + s, cy + s]]); b.poly(gc, [[cx - s * .45, cy + s * .8], [cx, cy - s * .1], [cx + s * .45, cy + s * .8]]); break;
+    case 'brick': b.rect(g, cx - s, cy - s * .5, s * 2, s); break;
+    case 'wave': b.leaf(g, cx - s, cy, s * 2, s * .6, 0); break;
+    case 'fish':
+      b.poly(g, [[cx - s * .8 * f, cy], [cx - s * 1.5 * f, cy - s * .5], [cx - s * 1.5 * f, cy + s * .5]]);
+      b.leaf(g, cx - s * f, cy, s * 2, s * .62, f > 0 ? 0 : 180);
+      b.circ(gc, cx + s * .55 * f, cy - s * .06, r1(Math.max(2.5, s * .13))); break;
+    case 'turtle':
+      [[-.7, -.6], [.7, -.6], [-.7, .6], [.7, .6]].forEach(([dx, dy]) => b.circ(g, cx + dx * s, cy + dy * s, r1(s * .26)));
+      b.circ(g, cx + s * 1.15 * f, cy, r1(s * .3)); b.ellipse(gc, cx, cy, r1(s), r1(s * .72)); break;
+    case 'moon': { const R = r1(s), R2 = r1(s * 1.3); b.path(g, `M${r1(cx)},${r1(cy - s)}A${R},${R} 0 1,0 ${r1(cx)},${r1(cy + s)}A${R2},${R2} 0 0,1 ${r1(cx)},${r1(cy - s)}Z`); break; }
+    case 'cloud': b.ellipse(g, cx - s * .55, cy + s * .1, r1(s * .5), r1(s * .34)); b.ellipse(g, cx + s * .55, cy + s * .1, r1(s * .5), r1(s * .34)); b.ellipse(g, cx, cy - s * .12, r1(s * .62), r1(s * .46)); break;
+    case 'tulsi':
+      b.rect(gc, cx - s * .36, cy + s * .8, s * .72, s * .36);
+      b.leaf(g, cx, cy + s * .8, s * 1.8, s * .1, -90);
+      [[.45, -38], [.45, -142], [-.1, -45], [-.1, -135], [-.6, -55], [-.6, -125]].forEach(([dy, a]) => b.leaf(g, cx, cy + dy * s, s * .78, s * .16, a)); break;
+    case 'elephant':
+      b.leaf(g, cx - s * f, cy - s * .1, s * .5, s * .08, f > 0 ? 125 : 55);
+      b.rect(g, cx - .62 * s * f - .15 * s, cy + .3 * s, .3 * s, .75 * s); b.rect(g, cx + .42 * s * f - .15 * s, cy + .3 * s, .3 * s, .75 * s);
+      b.ellipse(g, cx, cy, r1(s), r1(s * .62)); b.rect(gc, cx - .42 * s, cy - .58 * s, .8 * s, .62 * s);
+      b.circ(g, cx + 1.02 * s * f, cy - .28 * s, r1(s * .44)); b.leaf(g, cx + 1.32 * s * f, cy - .2 * s, s * .95, s * .15, f > 0 ? 82 : 98);
+      b.ellipse(gc, cx + .8 * s * f, cy - .24 * s, r1(s * .24), r1(s * .36)); b.circ(g3, cx + 1.16 * s * f, cy - .38 * s, r1(Math.max(2.2, s * .07))); break;
+    case 'bird':
+      b.leaf(g, cx - s * .6 * f, cy + s * .1, s * 1.1, s * .2, f > 0 ? 158 : 22);
+      b.ellipse(g, cx, cy, r1(s * .8), r1(s * .5)); b.leaf(gc, cx + s * .25 * f, cy - s * .05, s * .85, s * .22, f > 0 ? 172 : 8);
+      b.circ(g, cx + s * .78 * f, cy - s * .42, r1(s * .32));
+      b.poly(g3, [[cx + s * 1.05 * f, cy - s * .52], [cx + s * 1.4 * f, cy - s * .36], [cx + s * 1.05 * f, cy - s * .26]]); break;
+    case 'boat': b.poly(g, [[cx - s, cy + s * .1], [cx + s, cy + s * .1], [cx + s * .6, cy + s * .6], [cx - s * .6, cy + s * .6]]); b.poly(gc, [[cx - s * .05, cy - s * .9], [cx + s * .65, cy - s * .05], [cx - s * .05, cy - s * .05]]); break;
+    case 'axe': b.rect(g, cx - s * .09, cy - s * .9, s * .18, s * 1.8); b.poly(gc, [[cx + s * .09, cy - s * .85], [cx + s * .8, cy - s], [cx + s * .8, cy - s * .1], [cx + s * .09, cy - s * .3]]); break;
+    case 'fan': [-146, -118, -90, -62, -34].forEach(a => b.leaf(g, cx, cy + s * .5, s * 1.3, s * .2, a)); b.rect(gc, cx - s * .1, cy + s * .5, s * .2, s * .5); break;
+    case 'crab':
+      [-1, 1].forEach(q => [22, 0, -22].forEach(a => b.leaf(gc, cx + q * s * .45, cy, s * .75, s * .1, q > 0 ? a : 180 - a)));
+      b.ellipse(g, cx, cy, r1(s * .6), r1(s * .42)); b.circ(g3, cx - s * .75, cy - s * .62, r1(s * .2)); b.circ(g3, cx + s * .75, cy - s * .62, r1(s * .2)); break;
+  }
+}
+
+/* ---------- world dress: line drawings built from a garment's type and description ---------- */
+/* Every garment page is drawn from a template for its kind of garment (robe, jacket, skirt,
+   trousers, wrap, headwear, footwear and so on). Words in the source's description choose the
+   collar, sleeves, length, sash and pattern, so a kimono and a thawb come out differently. */
+function GB() {
+  const b = NB(), CL = [], LN = [], TY = {}; let cur = null;
+  const raw = b.path; b.path = (g, d) => { raw(g, d); if (cur != null) b.R[b.R.length - 1].k = cur; };
+  b.clip = d => { CL.push(d); cur = CL.length - 1; };
+  b.unclip = () => { cur = null; };
+  b.line = d => LN.push(d);
+  b.typ = TY; b.done = () => { b.R.clips = CL; b.R.lines = LN; b.R.typ = TY; return b.R; };
+  return b;
+}
+const f1 = n => Math.round(n * 10) / 10;
+const P2 = pts => 'M' + pts.map(p => f1(p[0]) + ',' + f1(p[1])).join('L') + 'Z';
+const lerp = (a, b, t) => a + (b - a) * t;
+// x on a polyline side at height y (pts sorted by y)
+function sideAt(pts, y) {
+  for (let i = 0; i < pts.length - 1; i++) { const [x0, y0] = pts[i], [x1, y1] = pts[i + 1]; if (y >= y0 && y <= y1) return y1 === y0 ? x1 : lerp(x0, x1, (y - y0) / (y1 - y0)); }
+  return y < pts[0][1] ? pts[0][0] : pts[pts.length - 1][0];
+}
+// horizontal band between y1 and y2 of a shape with left/right side polylines
+function bandPts(L, Rt, y1, y2) {
+  const ys = [y1, ...L.concat(Rt).map(p => p[1]).filter(y => y > y1 && y < y2), y2].sort((a, b) => a - b);
+  const u = [...new Set(ys)];
+  return [...u.map(y => [sideAt(L, y), y]), ...u.slice().reverse().map(y => [sideAt(Rt, y), y])];
+}
+
+const WCOL = { red:'#b3242c', crimson:'#9e1b32', scarlet:'#c8102e', maroon:'#6e1423', pink:'#e07a9b', rose:'#d0687f', orange:'#e07020', saffron:'#f09a1c', yellow:'#f2c230', gold:'#c99a2e', golden:'#c99a2e', brown:'#7a4a2a', tan:'#c9a36b', fawn:'#c9a36b', beige:'#e8d9b8', cream:'#f4ead0', ivory:'#f6efdc', white:'#f7f4ec', silver:'#b8bcc2', grey:'#8a8f94', gray:'#8a8f94', black:'#1e1c1c', navy:'#1f2f5c', indigo:'#2b3a7a', blue:'#2c5aa0', 'light-blue':'#8fb8de', turquoise:'#2aa198', teal:'#147a78', green:'#2f7d3a', 'dark green':'#1f5a2e', olive:'#6b6b2a', purple:'#5b2c83', violet:'#6d3fa0', magenta:'#b0306f' };
+const WPAL = [  // fallback palettes, chosen by a hash of the id so neighbouring pages differ
+  ['#b3242c', '#c99a2e', '#1f2f5c', '#f4ead0'], ['#147a78', '#e07a9b', '#c99a2e', '#f7f4ec'], ['#2c5aa0', '#f2c230', '#b3242c', '#f7f4ec'],
+  ['#5b2c83', '#c99a2e', '#2f7d3a', '#f4ead0'], ['#2f7d3a', '#b3242c', '#f2c230', '#f7f4ec'], ['#6e1423', '#c99a2e', '#147a78', '#f4ead0'],
+  ['#1e1c1c', '#b3242c', '#c99a2e', '#f7f4ec'], ['#e07020', '#5b2c83', '#2f7d3a', '#f4ead0'], ['#1f2f5c', '#c8102e', '#f7f4ec', '#c99a2e'],
+  ['#8fb8de', '#1f2f5c', '#f7f4ec', '#c99a2e'], ['#c9a36b', '#6e1423', '#1e1c1c', '#f4ead0'], ['#d0687f', '#147a78', '#f2c230', '#f7f4ec']
+];
+const hashS = s => { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+function colorsIn(t) {
+  const out = []; t = t.toLowerCase();
+  Object.keys(WCOL).forEach(k => { const i = t.search(new RegExp('\\b' + k + '\\b')); if (i >= 0) out.push([i, WCOL[k]]); });
+  return out.sort((a, b) => a[0] - b[0]).map(x => x[1]).filter((c, i, a) => a.indexOf(c) === i);
+}
+const has = (t, re) => re.test(t);
+
+// read the description for drawing choices
+function readGarment(o) {
+  const clean = x => x.replace(/,? ?with or without [^.,;]*/gi, '').replace(/,? ?(worn|tucked) (over|under|beneath|with|into) [^.,;]*/gi, '').replace(/,? ?(paired|used) with [^.,;]*/gi, '');
+  const t = (o.name + ' ' + o.what + ' ' + o.who + ' ' + (o.sig || '')).toLowerCase(), w = clean(o.name + ' ' + o.what).toLowerCase();
+  const named = colorsIn(o.what + ' ' + o.name);
+  const pal = WPAL[hashS(o.id) % WPAL.length].slice();
+  let c = named.length ? [...named, ...pal.filter(x => !named.includes(x))] : pal;
+  if (!named.length && o.tint && WCOL[o.tint]) c = [WCOL[o.tint], ...pal.filter(x => x !== WCOL[o.tint])];
+  if (!named.length && /keffiyeh|kufiyye|krama|gamchha/i.test(o.name)) c = ['#f7f4ec', /krama|gamchha/i.test(o.name) ? '#b3242c' : '#1e1c1c', '#c99a2e', '#f4ead0'];
+  const plainWhite = !named.length && /^(thawb|dishdasha|kandura|kandoora|yemeni thobe|omani dishdasha|thoob|jubbah)$/i.test(o.name);
+  if (plainWhite) c = ['#f7f4ec', '#c99a2e', '#8a8f94', '#f4ead0'];
+  const pat = has(w, /check|chequer|checker|plaid|tartan|chamathwi/) ? 'checks'
+    : has(w, /stripe|striped|lurik|mufahhah|strips/) ? 'stripes'
+    : has(w, /ikat|kasuri|hol\b|mudmee/) ? 'ikat'
+    : has(w, /dragon|python|flying-fish|bullfighting/) ? 'clouds'
+    : has(w, /brocade|damask|floral|flower|jasmine|bingata|komon|repeating pattern|patterned|batik|print/) ? 'floral'
+    : has(w, /embroider|tatreez|sequin|bead|mirror|kasabu|couch|zari|gold thread|spangle/) ? 'embroidered'
+    : has(w, /dot|spot|tie-dy|bandhani|jumputan/) ? 'dots'
+    : has(w, /pleat/) ? 'pleats'
+    : has(w, /plain|solid|single-colou?r|monochrome|white cotton|undyed/) ? 'plain' : ['sprigs', 'floral', 'dots', 'embroidered', 'sprigs'][hashS(o.id + 'p') % 5];
+  return {
+    t, w, c, pat: plainWhite ? 'plain' : pat, named: named.length > 0,
+    sleeve: has(w, /sleeveless|no sleeves|without sleeves|vest|waistcoat|bib|strapless|halter/) ? 'none'
+      : has(w, /short-sleeve|short sleeve|half-arm|puffed short/) ? 'short'
+      : has(w, /swinging sleeve|long sleeve.*swing|furisode|wide sleeve|loose sleeve|large sleeve|billowing|unused sleeve|false sleeve|hanging sleeve|butterfly sleeve|bell sleeve|flared.*sleeve|open sleeve/) ? 'wide'
+      : 'long',
+    collar: has(w, /hanbok|jeogori|chosŏn|chima jeogori|durumagi|hanfu|\bdeel\b|chuba|\bgho\b|giao lĩnh|dopo|simui|wonsam|hwarot|cross-collar|cross collar|overlap|wrapped left over right|left over right|lap-front|wrap-front|wrap front|ties at one shoulder|overlaps/) ? 'cross'
+      : has(w, /stand|mandarin|high collar|high-necked|high neck|nehru|closed-neck|closed neck|raised stiff collar|stiff collar|standing collar|collar band|five disc buttons/) ? 'stand'
+      : has(w, /v-neck|v neck|shawl collar|lapel/) ? 'v'
+      : has(w, /open-front|open front|cloak|cape|open at the front|front opening|swing jacket|overcoat|outer coat|\bcoat\b/) ? 'open'
+      : 'round',
+    sash: has(t, /sash|obi|belt|belted|girdle|kera|cummerbund|tied at the waist|tied with|waistband/),
+    buttons: has(w, /button|disc|frog/),
+    pockets: has(w, /pocket/),
+    fur: has(w, /fur|sheepskin|fleece|otter|beaver|lamb/),
+    tassel: has(w, /tassel|fringe/),
+    gold: has(w, /gold|zari|brocade|metallic|kasavu|songket/),
+    flare: has(w, /flare|flared|fans out|full skirt|bell-shaped|frock|gown|anarkali|swing/),
+    long: has(w, /ankle|floor|full-length|to the heels|reaching below the knee|long robe|long gown|long dress|long coat/),
+    knee: has(w, /knee|hip-length|hip length|waist-length|short/),
+    pleat: has(w, /pleat|folds|gathered/)
+  };
+}
+
+// fill a clipped area with the chosen pattern
+function fillPattern(b, g, gp, gc, x0, y0, x1, y1, pat, d, s = 1) {
+  const W_ = x1 - x0, H_ = y1 - y0;
+  if (pat === 'stripes') { const n = Math.max(6, Math.round(W_ / 26)), sw = W_ / n; for (let i = 0; i < n; i += 2) b.rect(gp, x0 + i * sw, y0, sw * .55, H_); }
+  else if (pat === 'checks') { const sq = 30 * s; for (let y = y0, r = 0; y < y1; y += sq, r++) for (let x = x0 + (r % 2) * sq, k = 0; x < x1; x += 2 * sq, k++) b.rect(gp, x, y, sq, sq); }
+  else if (pat === 'pleats') { for (let x = x0 + 14; x < x1; x += 22) b.rect(gp, x, y0, 4, H_); }
+  else if (pat === 'ikat') { const sp = 54 * s; for (let y = y0 + sp / 2, r = 0; y < y1 + sp; y += sp * .8, r++) for (let x = x0 + (r % 2 ? sp / 2 : 0); x < x1 + sp; x += sp) { b.step(gp, x, y, 20 * s, 4); b.diamond(gc, x, y, 6 * s, 8 * s); } }
+  else if (pat === 'clouds') { const sp = 70 * s; for (let y = y0 + 40, r = 0; y < y1 + 30; y += sp, r++) for (let x = x0 + (r % 2 ? sp / 2 : 10); x < x1 + 30; x += sp) { mot(b, 'cloud', gp, gc, x, y, 16 * s); } }
+  else if (pat === 'floral') { const sp = 62 * s; for (let y = y0 + 30, r = 0; y < y1 + 30; y += sp * .85, r++) for (let x = x0 + (r % 2 ? sp / 2 : 8); x < x1 + 30; x += sp) { mot(b, r % 2 ? 'flower' : 'flower8', gp, gc, x, y, 14 * s); } }
+  else if (pat === 'dots') { const sp = 30 * s; for (let y = y0 + 12, r = 0; y < y1 + 10; y += sp, r++) for (let x = x0 + (r % 2 ? sp / 2 : 6); x < x1 + 10; x += sp) b.circ(gp, x, y, 4.5 * s); }
+  else if (pat === 'embroidered') { const sp = 74 * s; for (let y = y0 + 44, r = 0; y < y1 + 30; y += sp, r++) for (let x = x0 + (r % 2 ? sp / 2 : 14); x < x1 + 30; x += sp) mot(b, r % 2 ? 'star' : 'lotus', gp, gc, x, y, 12 * s); }
+  else if (pat === 'sprigs') { const sp = 64 * s; for (let y = y0 + 36, r = 0; y < y1 + 20; y += sp, r++) for (let x = x0 + (r % 2 ? sp / 2 : 12); x < x1 + 20; x += sp) mot(b, 'sprig', gp, gc, x, y, 11 * s); }
+}
+// a decorated band (trim) along a polygon, with a small repeat inside it
+function bandMotifs(b, g, pts, horizontal, gp) {
+  b.poly(g, pts);
+  if (!gp) return;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  b.clip(P2(pts));
+  if (horizontal) { const h = y1 - y0; if (h >= 14) for (let x = x0 + h * .8; x < x1; x += h * 1.4) b.diamond(gp, x, (y0 + y1) / 2, h * .32, h * .38); }
+  else { const w = x1 - x0; if (w >= 14) for (let y = y0 + w * .8; y < y1; y += w * 1.4) b.diamond(gp, (x0 + x1) / 2, y, w * .32, w * .38); }
+  b.unclip();
+}
+
+/* ---- upper garments: robe, coat, jacket, tunic, shirt, dress, vest ---- */
+function drawTop(b, G, opt) {
+  const cx = 300, top = opt.top, hem = opt.hem, sh = opt.sh || 118, nw = opt.nw || 40;
+  const waist = top + (hem - top) * .42, flare = opt.flare || 0;
+  const bodyHalfTop = sh - 6, bodyHalfHem = opt.hemHalf || (sh + 4 + flare);
+  const L = [[cx - sh, top + 22], [cx - bodyHalfTop + 4, waist], [cx - bodyHalfHem, hem]];
+  const Rt = L.map(([x, y]) => [2 * cx - x, y]);
+  const neckL = [cx - nw, top], neckR = [cx + nw, top];
+  const necky = G.collar === 'v' || G.collar === 'open' || G.collar === 'cross' ? top + 26 : top + 22;
+  // sleeves first so the body sits over their seams
+  const sl = opt.sleeve || G.sleeve, armY = top + 22, pitY = top + (opt.pit || 96);
+  if (sl !== 'none') {
+    const side = s => {
+      const sx = cx + s * sh, ax = cx + s * (sh - 8);
+      let pts, cuff;
+      if (sl === 'wide') {           // T-shaped hanging sleeve, as on kimono, hanbok, deel
+        const ox = cx + s * (sh + 150), dropTop = armY - 4, dropBot = pitY + (opt.wideDrop || 150);
+        pts = [[sx, armY], [ox, dropTop], [ox, dropBot], [cx + s * (sh + 34), dropBot], [ax, pitY]];
+        cuff = [[ox - s * 22, dropTop + 1], [ox, dropTop], [ox, dropBot], [ox - s * 22, dropBot]];
+      } else if (sl === 'short') {
+        const ox = cx + s * (sh + 70);
+        pts = [[sx, armY], [ox, armY + 40], [ox - s * 18, pitY + 30], [ax, pitY]];
+        cuff = [[ox - s * 8, armY + 36], [ox, armY + 40], [ox - s * 18, pitY + 30], [ox - s * 25, pitY + 24]];
+      } else {                        // long sleeve angled down
+        const len = 210, ang = (opt.ang || 58) * Math.PI / 180, ux = Math.cos(ang) * s, uy = Math.sin(ang);
+        const cw = opt.cuffW || 46, ex = sx + ux * len, ey = armY + uy * len, px = -uy * s, py = ux * s;
+        const e1 = [ex + px * 0 * cw, ey], e2 = [ex - Math.sin(ang) * cw * s * -1, ey + Math.cos(ang) * cw * -1];
+        const tip1 = [ex, ey], tip2 = [ex - s * Math.sin(ang) * -cw * -1, ey - Math.cos(ang) * cw];
+        pts = [[sx, armY], [ex + s * Math.sin(ang) * cw * .5, ey - Math.cos(ang) * cw * .5], [ex - s * Math.sin(ang) * cw * .5, ey + Math.cos(ang) * cw * .5], [ax, pitY]];
+        const a = pts[1], c2 = pts[2], back = 26, bx = -ux * back, by = -uy * back;
+        cuff = [[a[0] + bx, a[1] + by], a, c2, [c2[0] + bx, c2[1] + by]];
+        void e1; void e2; void tip1; void tip2;
+      }
+      b.poly('Sleeves', pts);
+      if (opt.cuffs !== false) bandMotifs(b, 'Cuffs', cuff, false, G.gold ? 'Cuff pattern' : null);
+      if (G.fur && opt.furCuff !== false) b.poly('Fur trim', cuff);
+    };
+    side(-1); side(1);
+  }
+  // body
+  const body = [neckL, [cx - sh, armY], ...L, ...Rt.slice().reverse(), [cx + sh, armY], neckR, [cx, necky]];
+  b.poly('Body', body);
+  const bx0 = cx - bodyHalfHem - 10, bx1 = cx + bodyHalfHem + 10;
+  if (G.pat !== 'plain') { b.clip(P2(body)); fillPattern(b, 'Body', 'Pattern', 'Pattern centres', bx0, top, bx1, hem, G.pat, null, opt.ps || 1); b.unclip(); }
+  // hem band
+  const hb = opt.hemBand ?? (G.gold || G.pat === 'embroidered' ? 38 : 22);
+  if (hb) bandMotifs(b, 'Hem border', bandPts(L, Rt, hem - hb, hem), true, hb >= 30 ? 'Border pattern' : null);
+  // front: collar and opening
+  const col = opt.collar || G.collar;
+  if (col === 'cross') {           // overlapping front panel and a collar band running to the right side
+    const ex = cx + bodyHalfTop - 6, ey = top + (opt.crossY || 210);
+    const flap = [[cx - nw, top], [cx - nw + 18, top], [ex, ey - 6], [sideAt(Rt, ey + 40), ey + 40], [sideAt(Rt, hem - hb), hem - hb], [cx + 26, hem - hb], [cx + 26, ey + 50]];
+    b.poly('Front panel', flap);
+    if (G.pat !== 'plain') { b.clip(P2(flap)); fillPattern(b, 'Front panel', 'Pattern', 'Pattern centres', cx, top, bx1, hem, G.pat, null, opt.ps || 1); b.unclip(); }
+    b.poly('Collar', [[cx - nw - 6, top - 6], [cx - nw + 22, top - 6], [ex + 4, ey + 8], [ex - 16, ey + 24], [cx - nw - 6, top + 14]]);
+    b.poly('Collar', [[cx + nw + 6, top - 6], [cx + nw - 16, top - 6], [cx - 6, top + 46], [cx + 6, top + 60]]);
+  } else if (col === 'stand') {
+    b.poly('Collar', [[cx - nw - 4, top - 22], [cx + nw + 4, top - 22], [cx + nw + 2, top + 6], [cx - nw - 2, top + 6]]);
+    if (opt.qipao) { b.poly('Placket', [[cx + 6, top + 6], [cx + 22, top + 6], [cx + sh - 6, top + 80], [cx + sh - 12, top + 96]]); }
+    else b.poly('Placket', [[cx - 12, top + 6], [cx + 12, top + 6], [cx + 12, opt.placket || (hem - hb)], [cx - 12, opt.placket || (hem - hb)]]);
+  } else if (col === 'v') {
+    b.poly('Front edges', [[cx - nw, top], [cx - nw + 16, top], [cx + 4, top + 150], [cx + 4, hem - hb], [cx - 12, hem - hb], [cx - 12, top + 156]]);
+    b.poly('Front edges', [[cx + nw, top], [cx + nw - 16, top], [cx + 12, top + 146], [cx + 12, hem - hb], [cx + 26, hem - hb], [cx + 26, top + 152]]);
+  } else if (col === 'open') {
+    const gap = opt.gap ?? 34;
+    b.poly('Under-layer', [[cx - nw + 10, top + 2], [cx + nw - 10, top + 2], [cx + gap * .5, hem], [cx - gap * .5, hem]]);
+    bandMotifs(b, 'Front edges', [[cx - nw, top], [cx - nw + 20, top - 2], [cx - gap * .5 + 4, hem], [cx - gap * .5 - 18, hem]], false, G.gold || G.pat === 'embroidered' ? 'Edge pattern' : null);
+    bandMotifs(b, 'Front edges', [[cx + nw, top], [cx + nw - 20, top - 2], [cx + gap * .5 - 4, hem], [cx + gap * .5 + 18, hem]], false, G.gold || G.pat === 'embroidered' ? 'Edge pattern' : null);
+  } else {                           // round neck with a short slit
+    b.path('Neckline', `M${cx - nw - 8},${top - 4}Q${cx},${top + 44} ${cx + nw + 8},${top - 4}L${cx + nw - 4},${top - 4}Q${cx},${top + 30} ${cx - nw + 4},${top - 4}Z`);
+    if (opt.panel) { const pw = opt.panel; b.poly('Front panel', [[cx - pw, top + 26], [cx + pw, top + 26], [cx + pw, opt.panelTo || hem - hb], [cx - pw, opt.panelTo || hem - hb]]); b.clip(P2([[cx - pw, top + 26], [cx + pw, top + 26], [cx + pw, opt.panelTo || hem - hb], [cx - pw, opt.panelTo || hem - hb]])); fillPattern(b, 'Front panel', 'Panel pattern', 'Panel pattern centres', cx - pw, top + 26, cx + pw, opt.panelTo || hem, 'embroidered', null, .8); b.unclip(); }
+    else b.poly('Placket', [[cx - 9, top + 26], [cx + 9, top + 26], [cx + 9, top + 120], [cx - 9, top + 120]]);
+  }
+  if (G.buttons && col !== 'open') for (let y = top + 26; y < (col === 'cross' ? top + 140 : top + 160); y += 26) b.circ('Buttons', col === 'cross' ? cx + 70 : cx, y, 5);
+  if (G.pockets) [[-1], [1]].forEach(([s]) => { b.rect('Pockets', cx + s * 70 - 30, top + 70, 60, 46); b.rect('Pockets', cx + s * 70 - 34, hem - hb - 120, 68, 56); });
+  if (G.sash && opt.sashY !== null) {
+    const sy = opt.sashY || waist, sh2 = opt.sashH || 34;
+    bandMotifs(b, 'Sash', [[sideAt(L, sy) - 4, sy], [sideAt(Rt, sy) + 4, sy], [sideAt(Rt, sy + sh2) + 4, sy + sh2], [sideAt(L, sy + sh2) - 4, sy + sh2]], true, 'Sash pattern');
+    if (opt.bow) { b.ellipse('Sash knot', cx + 40, sy + sh2 / 2, 26, 22); b.poly('Sash ends', [[cx + 30, sy + sh2], [cx + 54, sy + sh2], [cx + 70, sy + sh2 + 120], [cx + 40, sy + sh2 + 118]]); }
+  }
+  if (G.fur && opt.furHem !== false) bandMotifs(b, 'Fur trim', bandPts(L, Rt, hem - 16, hem), true, null);
+  return { L, Rt, waist };
+}
+
+/* ---- lower garments ---- */
+function drawSkirt(b, G, top, hem, opt = {}) {
+  const cx = 300, w0 = opt.w0 || 110, w1 = opt.w1 || (G.flare ? 230 : 150), wb = opt.wb ?? 26;
+  const L = [[cx - w0, top], [cx - w1, hem]], Rt = [[cx + w0, top], [cx + w1, hem]];
+  const sk = [[cx - w0, top], [cx + w0, top], [cx + w1, hem], [cx - w1, hem]];
+  b.poly('Skirt', sk);
+  const pat = opt.pat || G.pat;
+  if (pat !== 'plain') { b.clip(P2(sk)); fillPattern(b, 'Skirt', 'Skirt pattern', 'Skirt pattern centres', cx - w1, top, cx + w1, hem, pat === 'pleats' ? 'pleats' : pat, null, opt.ps || 1); b.unclip(); }
+  if (opt.wrap) { b.poly('Wrap fold', [[cx + w0 * .35, top], [cx + w0 * .35 + 18, top], [cx + w1 * .45 + 22, hem], [cx + w1 * .45, hem]]); }
+  if (G.pleat || opt.pleats) for (let i = -3; i <= 3; i++) b.line(`M${f1(cx + i * w0 / 4)},${top + wb}L${f1(cx + i * w1 / 4)},${hem - 30}`);
+  const bands = opt.bands || [[46, G.gold ? 'gold' : 'p'], [10]];
+  let y = hem;
+  bands.forEach(([h, kind]) => { bandMotifs(b, kind ? 'Hem border' : 'Hem lines', bandPts(L, Rt, y - h, y), true, h >= 30 ? 'Border pattern' : null); y -= h; });
+  if (wb) b.poly('Waistband', [[cx - w0 - 4, top - wb + 4], [cx + w0 + 4, top - wb + 4], [cx + w0 + 2, top + 4], [cx - w0 - 2, top + 4]]);
+  if (opt.knot) { b.ellipse('Knot', cx + w0 * .4, top + 10, 22, 16); }
+}
+function drawTrousers(b, G, top, hem, opt = {}) {
+  const cx = 300, w0 = opt.w0 || 112, wide = opt.wide ?? 1, gap = 14;
+  const legW = opt.fitted ? 52 : (wide > 1.2 ? 120 : 84), crotch = top + (opt.crotch || 200);
+  [-1, 1].forEach(s => {
+    const outerTop = cx + s * w0, outerHem = cx + s * (gap / 2 + legW * 2 * (opt.fitted ? .62 : 1) - 10), innerHem = cx + s * (gap / 2 + (opt.fitted ? 26 : 10));
+    const leg = [[cx, top], [outerTop, top], [cx + s * (w0 + (wide > 1.2 ? 30 : 6)), crotch], [outerHem, hem], [innerHem, hem], [cx + s * gap / 2, crotch]];
+    b.poly('Trouser legs', leg);
+    if (G.pat === 'stripes' || G.pat === 'checks') { b.clip(P2(leg)); fillPattern(b, 'Trouser legs', 'Trouser pattern', 'Trouser pattern', cx - 250, top, cx + 250, hem, G.pat, null); b.unclip(); }
+    const cuffH = opt.cuff ?? 30;
+    if (cuffH) b.poly('Cuffs', [[outerHem + s * 2, hem - cuffH], [innerHem - s * 2, hem - cuffH], [innerHem, hem], [outerHem, hem]]);
+    if (opt.fitted) for (let y = hem - cuffH - 16; y > hem - 170; y -= 18) b.line(`M${f1(innerHem)},${f1(y)}Q${f1((innerHem + outerHem) / 2)},${f1(y + 8)} ${f1(outerHem)},${f1(y - 2)}`);
+    if (wide > 1.2 || G.pleat) for (let k = 1; k <= 3; k++) b.line(`M${f1(cx + s * (w0 * k / 4))},${top + 30}L${f1(lerp(innerHem, outerHem, k / 4))},${hem - cuffH - 10}`);
+  });
+  b.poly('Waistband', [[cx - w0 - 4, top - 24], [cx + w0 + 4, top - 24], [cx + w0 + 2, top + 4], [cx - w0 - 2, top + 4]]);
+  if (opt.cord !== false) { b.path('Drawstring', `M${cx - 6},${top - 6}q-30,40 -14,110l10,0q-10,-60 12,-104z`); }
+}
+
+/* ---- flat cloths: wrap, shawl, sash, apron ---- */
+function drawCloth(b, G, opt = {}) {
+  const x0 = opt.x0 || 110, x1 = opt.x1 || 490, y0 = opt.y0 || 120, y1 = opt.y1 || 800, bw = opt.bw ?? 40;
+  b.rect('Cloth', x0, y0, x1 - x0, y1 - y0);
+  const pat = opt.pat || G.pat;
+  if (pat !== 'plain') { b.clip(P2([[x0, y0], [x1, y0], [x1, y1], [x0, y1]])); fillPattern(b, 'Cloth', 'Pattern', 'Pattern centres', x0, y0, x1, y1, pat, null, opt.ps || 1); b.unclip(); }
+  if (bw) {
+    bandMotifs(b, 'Borders', [[x0, y0], [x0 + bw, y0], [x0 + bw, y1], [x0, y1]], false, bw >= 28 ? 'Border pattern' : null);
+    bandMotifs(b, 'Borders', [[x1 - bw, y0], [x1, y0], [x1, y1], [x1 - bw, y1]], false, bw >= 28 ? 'Border pattern' : null);
+    const eh = opt.end || 90;
+    bandMotifs(b, 'End panels', [[x0 + bw, y1 - eh], [x1 - bw, y1 - eh], [x1 - bw, y1], [x0 + bw, y1]], true, 'End pattern');
+    b.rect('End lines', x0 + bw, y1 - eh - 14, x1 - x0 - 2 * bw, 8);
+    if (opt.bothEnds) { bandMotifs(b, 'End panels', [[x0 + bw, y0], [x1 - bw, y0], [x1 - bw, y0 + eh], [x0 + bw, y0 + eh]], true, 'End pattern'); b.rect('End lines', x0 + bw, y0 + eh + 6, x1 - x0 - 2 * bw, 8); }
+  }
+  if (G.tassel || opt.fringe) for (let x = x0 + 6; x < x1 - 4; x += 14) b.rect('Fringe', x, y1, 6, 36);
+}
+function drawSash(b, G) {
+  const band = 'M60,330Q300,380 540,330L540,400Q300,450 60,400Z';
+  b.path('Sash', band);
+  b.clip(band); fillPattern(b, 'Sash', 'Pattern', 'Pattern centres', 60, 320, 540, 460, G.pat === 'plain' ? 'stripes' : G.pat, null, .7); b.unclip();
+  const e1 = [[270, 420], [320, 420], [300, 820], [240, 812]], e2 = [[310, 420], [356, 418], [430, 790], [374, 806]];
+  [e1, e2].forEach(e => { b.poly('Sash ends', e); b.clip(P2(e)); fillPattern(b, 'Sash ends', 'Pattern', 'Pattern centres', 230, 420, 440, 830, G.pat === 'plain' ? 'stripes' : G.pat, null, .7); b.unclip(); });
+  b.poly('End borders', [[244, 770], [302, 776], [300, 820], [240, 812]]); b.poly('End borders', [[380, 760], [424, 752], [430, 790], [374, 806]]);
+  if (G.tassel || has(G.w, /fringe|tassel/)) { for (let x = 244; x < 300; x += 12) b.rect('Fringe', x, 816, 6, 34); for (let k = 0; k < 4; k++) b.rect('Fringe', 380 + k * 12, 800 - k * 4, 6, 34); }
+  b.path('Knot', 'M262,340L346,340L356,436L252,436Z');
+}
+function drawApron(b, G) {
+  const pts = [[190, 240], [410, 240], [440, 820], [160, 820]];
+  b.poly('Apron', pts);
+  if (G.pat !== 'plain') { b.clip(P2(pts)); fillPattern(b, 'Apron', 'Pattern', 'Pattern centres', 160, 240, 440, 820, G.pat === 'sprigs' ? 'stripes' : G.pat, null); b.unclip(); }
+  bandMotifs(b, 'Hem border', [[163, 760], [437, 760], [440, 820], [160, 820]], true, 'Border pattern');
+  b.rect('Waistband', 150, 210, 300, 32);
+  b.poly('Ties', [[150, 216], [70, 300], [90, 312], [150, 236]]); b.poly('Ties', [[450, 216], [530, 300], [510, 312], [450, 236]]);
+}
+
+/* ---- headwear ---- */
+function drawHead(b, G, o) {
+  const w = G.w, cx = 300;
+  const nm = o.name.toLowerCase();
+  const kind = has(nm, /\bagal\b|\baqal\b/) ? 'cord'
+    : has(nm, /war bonnet|feathered headgear/) || has(w, /^feathered/) ? 'feather'
+    : has(nm + ' ' + w, /wreath|garland/) ? 'wreath'
+    : has(w, /earflap/) && !has(w, /fur hat/) ? 'earflap'
+    : has(nm + ' ' + w, /sombrero|cowboy|akubra|panama hat|chupalla|vueltiao|welsh hat|het gymreig|cork hat|calgary/) ? 'brim'
+    : has(w, /mask|burqa'a|face mask|stiff ornamental/) ? 'mask'
+    : has(nm + ' ' + w, /keffiyeh|ghutra|gutra|gotra|shemagh|hatta|kufiyye|square scarf|square cotton scarf|chequered keffiyeh|red-and-white checked/) ? 'square'
+    : has(nm, /agal|aqal/) || has(w, /^.{0,20}cord that holds|black cord/) ? 'cord'
+    : has(w, /hood|bashlyk|kimeshek/) ? 'hood'
+    : has(nm + ' ' + w, /veil|headscarf|head scarf|hijab|shayla|shailah|tichel|kelaghayi|mandili|zhaulyk|lachak|shambar|bolifothi|tudung|niqab|lithma|chachvon|kerchief|bandana|scarf|head covering|veil/) && !has(nm, /turban|cap|hat/) ? 'scarf'
+    : has(nm + ' ' + w, /\bcrown\b|tiara|diadem|fengguan|deyhim|liang|jokduri|kiani|bulang/) ? 'crown'
+    : has(nm + ' ' + w, /tantour|tantur|saukele|shokulo|tall bridal|tall cone|conical headdress|conical headgear|sibone|bogtag|shatweh|palti|lomphok|tall pointed/) ? 'tall'
+    : has(nm + ' ' + w, /turban|amameh|pagri|safa|dastar|pheta|peta|lungi|gaung|jamana|laffe|sarik|sarık|shash|khăn vấn|coiled|wrapped|wound|tengkolok|tanjak|destar|blangkon|koiyet|elechek|khobong|putong|maung|mũ phốc|head wrap|headwrap|massar|meshedda|esamah/) ? 'turban'
+    : has(nm + ' ' + w, /fur hat|papakha|telpek|sheepskin|tymaq|shaggy|börik|borik|fleece/) ? 'fur'
+    : has(nm + ' ' + w, /fez|tarbush|tarboush|tarboosh|skullcap|skull-cap|\bcap\b|kufi|kippah|taqiy|songkok|topi|kumma|doʻppi|doppi|tahya|tahýa|toqi|kolah|kolāh|arakhchi|araqchin|araqçın|thaakihaa|pakol|tubeteika|karakul|kalpak|qalpaq|calpac|koloz|labbadeh|smadeh|araqiyyeh|bonnet|gulle/) && !has(w, /brim(?!less)|wide-brimmed|wings/) ? (has(nm + ' ' + w, /cone|conical|pointed|koloz|labbadeh|aiyr/) ? 'cone' : 'cap')
+    : has(nm + ' ' + w, /cone|conical|leaf hat|salakot|nón|pointed/) ? 'cone'
+    : has(nm + ' ' + w, /wings|black gauze|futou|wusha|cánh|kanmuri/) ? 'winged'
+    : has(nm + ' ' + w, /bucket|tembel|brimless/) ? 'bucket'
+    : has(nm + ' ' + w, /brim|hat\b|gat\b|buntal|bowler|felt/) ? 'brim'
+    : has(nm + ' ' + w, /headdress|headpiece|headgear/) ? 'tall'
+    : 'cap';
+  if (kind === 'cap') {
+    const tall = has(w, /fez|tarboush|tarbush|cylindrical|songkok|jinnah|sindhi|tall|kumma|taqiyah|fes/) ? 150 : 80, square = has(w, /square|doʻppi|doppi|tahya|toqi|chusti|four-cornered/);
+    const top = 470 - tall, pts = square ? [[160, 470], [440, 470], [420, top], [300, top - 30], [180, top]] : [[150, 470], [450, 470], [430, top + 10], [170, top + 10]];
+    b.poly('Cap', pts);
+    if (!square) b.ellipse('Crown', cx, top + 10, 130, 28);
+    b.clip(P2(pts)); fillPattern(b, 'Cap', 'Pattern', 'Pattern centres', 150, top - 40, 450, 470, G.pat === 'plain' ? 'sprigs' : G.pat, null, .9); b.unclip();
+    bandMotifs(b, 'Band', [[150, 430], [450, 430], [450, 470], [150, 470]], true, 'Band pattern');
+    if (has(w, /fez|tarboush|tarbush|tassel/)) { b.poly('Tassel', [[cx, top - 14], [cx + 8, top - 14], [cx + 90, top + 120], [cx + 70, top + 124]]); }
+    if (has(w, /sindhi/)) b.arch('Front cut-out', 260, 360, 80, 110);
+    b.ellipse('Head opening', cx, 470, 150, 22);
+  } else if (kind === 'feather') {
+    for (let i = 0; i < 15; i++) { const a = Math.PI * (1.08 + i * 0.84 / 14), x1 = cx + Math.cos(a) * 330, y1 = 560 + Math.sin(a) * 380, mx = cx + Math.cos(a) * 120, my = 560 + Math.sin(a) * 140, nx = -Math.sin(a) * 24, ny = Math.cos(a) * 24;
+      b.path('Feathers', `M${f1(mx - nx * .4)},${f1(my - ny * .4)}Q${f1((mx + x1) / 2 - nx)},${f1((my + y1) / 2 - ny)} ${f1(x1)},${f1(y1)}Q${f1((mx + x1) / 2 + nx)},${f1((my + y1) / 2 + ny)} ${f1(mx + nx * .4)},${f1(my + ny * .4)}Z`);
+      b.path('Feather tips', `M${f1(x1)},${f1(y1)}L${f1(x1 - (x1 - mx) * .18 - nx * .5)},${f1(y1 - (y1 - my) * .18 - ny * .5)}L${f1(x1 - (x1 - mx) * .18 + nx * .5)},${f1(y1 - (y1 - my) * .18 + ny * .5)}Z`); }
+    const band = [[150, 520], [450, 520], [450, 590], [150, 590]]; b.poly('Browband', band); bandMotifs(b, 'Browband', band, true, 'Beadwork');
+    b.poly('Trailers', [[150, 590], [190, 590], [170, 860], [130, 860]]); b.poly('Trailers', [[410, 590], [450, 590], [470, 860], [430, 860]]);
+  } else if (kind === 'earflap') {
+    const dome = 'M140,520Q130,250 300,230Q470,250 460,520Z';
+    b.path('Cap', dome); b.clip(dome); fillPattern(b, 'Cap', 'Pattern', 'Pattern centres', 130, 220, 470, 520, G.pat === 'plain' ? 'ikat' : G.pat, null, .8);
+    for (let k = 0; k < 4; k++) b.rect('Stripes', 120, 300 + k * 50, 360, 10);
+    b.unclip();
+    b.path('Earflaps', 'M140,500L220,500L210,660Q180,700 150,660Z'); b.path('Earflaps', 'M380,500L460,500L450,660Q420,700 390,660Z');
+    b.rect('Ties', 176, 680, 8, 160); b.rect('Ties', 416, 680, 8, 160); b.circ('Pom-poms', 180, 850, 18); b.circ('Pom-poms', 420, 850, 18); b.circ('Pom-poms', 300, 214, 22);
+    bandMotifs(b, 'Band', [[140, 480], [460, 480], [460, 520], [140, 520]], true, null);
+  } else if (kind === 'wreath') {
+    b.ellipse('Base', cx, 470, 190, 70); b.ellipse('Head opening', cx, 470, 150, 44);
+    for (let i = 0; i < 11; i++) { const a = Math.PI * (1.05 + i * 0.9 / 10), x = cx + Math.cos(a) * 200, y = 470 + Math.sin(a) * 150 - (i === 5 ? 50 : 0), r = i === 5 ? 70 : 52;
+      for (let k = 0; k < 5; k++) { const q = k * Math.PI * 2 / 5; b.ellipse('Petals', x + Math.cos(q) * r * .55, y + Math.sin(q) * r * .55, r * .42, r * .42); }
+      b.circ('Flower centres', x, y, r * .3); }
+    for (let i = 0; i < 4; i++) b.poly('Ribbons', [[260 + i * 24, 530], [278 + i * 24, 530], [250 + i * 40, 860], [230 + i * 40, 860]]);
+  } else if (kind === 'winged') {
+    const cap = 'M190,520L190,380Q190,300 300,300Q410,300 410,380L410,520Z';
+    b.path('Cap', cap); b.path('Crown', 'M220,330Q300,200 380,330Q300,300 220,330Z');
+    b.poly('Wings', [[190, 410], [30, 380], [30, 420], [190, 450]]); b.poly('Wings', [[410, 410], [570, 380], [570, 420], [410, 450]]);
+    bandMotifs(b, 'Band', [[190, 480], [410, 480], [410, 520], [190, 520]], true, null);
+    b.ellipse('Head opening', cx, 520, 110, 18);
+  } else if (kind === 'brim' || kind === 'bucket') {
+    b.ellipse('Brim', cx, 520, kind === 'bucket' ? 200 : 260, kind === 'bucket' ? 46 : 70);
+    const crownTop = kind === 'brim' && has(w, /tall|high|gat\b|sombrero/) ? 270 : 360;
+    const cr = [[180, 520], [420, 520], [400, crownTop], [200, crownTop]]; b.poly('Crown', cr);
+    b.ellipse('Crown top', cx, crownTop, 100, 24);
+    if (has(w, /corks strung/)) for (let i = 0; i < 9; i++) { const x = 70 + i * 57.5; b.rect('Cords', x - 1.5, 560, 3, 120); b.rect('Corks', x - 9, 680, 18, 40); }
+    bandMotifs(b, 'Band', [[184, 480], [416, 480], [420, 520], [180, 520]], true, null);
+    if (G.pat !== 'plain') { b.clip(P2(cr)); fillPattern(b, 'Crown', 'Pattern', 'Pattern centres', 180, crownTop, 420, 480, G.pat, null, .9); b.unclip(); }
+  } else if (kind === 'cone') {
+    const tall = has(w, /tall|lomphok|labbadeh|koloz|pointed/);
+    const pts = tall ? [[180, 640], [420, 640], [300, 140]] : [[60, 560], [540, 560], [300, 300]];
+    b.poly('Hat', pts);
+    for (let i = 1; i <= 5; i++) { const t = i / 6; b.line(`M${f1(lerp(pts[2][0], pts[0][0], t))},${f1(lerp(pts[2][1], pts[0][1], t))}L${f1(lerp(pts[2][0], pts[1][0], t))},${f1(lerp(pts[2][1], pts[1][1], t))}`); }
+    if (!tall && has(w, /strap|chin|leaf|nón|salakot|palm|straw|bamboo|rattan/)) { b.poly('Chin strap', [[230, 560], [250, 560], [290, 720], [270, 720]]); b.poly('Chin strap', [[370, 560], [350, 560], [310, 720], [330, 720]]); }
+    bandMotifs(b, 'Rim', tall ? [[180, 610], [420, 610], [420, 640], [180, 640]] : [[60, 548], [540, 548], [540, 566], [60, 566]], true, null);
+    if (tall) { b.clip(P2(pts)); fillPattern(b, 'Hat', 'Pattern', 'Pattern centres', 180, 140, 420, 610, G.pat === 'plain' ? 'sprigs' : G.pat, null, .8); b.unclip(); }
+  } else if (kind === 'turban') {
+    b.ellipse('Turban', cx, 420, 190, 130);
+    for (let k = 0; k < 6; k++) b.path('Folds', `M${110 + k * 6},${360 + k * 22}Q300,${300 + k * 40} ${490 - k * 6},${380 + k * 16}l0,16Q300,${318 + k * 40} ${110 + k * 6},${376 + k * 22}Z`);
+    b.ellipse('Head opening', cx, 540, 150, 26);
+    if (has(w, /tail|end|lungi|safa|pagri/)) b.poly('Loose end', [[440, 480], [480, 470], [520, 760], [470, 770]]);
+    if (has(w, /cap|kulokh|kolah/)) b.ellipse('Inner cap', cx, 300, 70, 40);
+  } else if (kind === 'fur') {
+    const pts = []; for (let i = 0; i <= 24; i++) { const a = Math.PI * (1 + i / 24), r = 180 + (i % 2 ? 18 : 0); pts.push([cx + Math.cos(a) * r * 1.05, 520 + Math.sin(a) * r * (has(w, /tall|telpek|papakha/) ? 1.45 : 1)]); }
+    b.poly('Fur', pts);
+    for (let y = 300; y < 500; y += 46) for (let x = 160 + (y % 92 ? 23 : 0); x < 440; x += 46) b.path('Curls', `M${x},${y}q12,-14 24,0q-12,14 -24,0z`);
+    b.ellipse('Head opening', cx, 520, 170, 26);
+  } else if (kind === 'square') {    // folded headcloth seen flat, with its check pattern
+    const sq = [[300, 120], [560, 420], [300, 720], [40, 420]];
+    b.poly('Cloth', sq);
+    if (G.pat !== 'plain') { b.clip(P2(sq)); fillPattern(b, 'Cloth', 'Pattern', 'Pattern centres', 40, 120, 560, 720, has(w, /check|chequer|shemagh|keffiyeh|hatta/) ? 'checks' : G.pat, null, .7); b.unclip(); }
+    bandMotifs(b, 'Borders', [[300, 120], [340, 166], [80, 466], [40, 420]], false, null);
+    bandMotifs(b, 'Borders', [[300, 120], [560, 420], [520, 466], [260, 166]], false, null);
+    if (G.tassel || has(w, /tassel|fringe|shemagh/)) for (let i = 0; i < 18; i++) { const t = i / 17, x = lerp(40, 300, t), y = lerp(420, 720, t); b.rect('Fringe', x - 3, y, 6, 30); }
+  } else if (kind === 'cord') {
+    b.ellipse('Cord', cx, 420, 210, 70); b.ellipse('Head opening', cx, 420, 170, 46); b.ellipse('Cord', cx, 470, 210, 70); b.ellipse('Head opening', cx, 470, 170, 46);
+    b.poly('Tassels', [[470, 470], [490, 470], [520, 720], [496, 724]]);
+  } else if (kind === 'mask') {
+    b.path('Mask', 'M140,320Q300,260 460,320L440,520Q380,600 300,700Q220,600 160,520Z');
+    b.ellipse('Eye openings', 230, 400, 44, 22); b.ellipse('Eye openings', 370, 400, 44, 22);
+    b.rect('Stiffener', 294, 300, 12, 380);
+    b.poly('Ties', [[140, 330], [60, 300], [60, 320], [146, 350]]); b.poly('Ties', [[460, 330], [540, 300], [540, 320], [454, 350]]);
+  } else if (kind === 'hood') {
+    b.path('Hood', 'M300,140C460,140 500,300 490,460L470,620L380,620L380,420Q300,300 220,420L220,620L130,620L110,460C100,300 140,140 300,140Z');
+    b.path('Face opening', 'M300,330Q380,330 380,460L380,620L220,620L220,460Q220,330 300,330Z');
+    b.poly('Lappets', [[130, 620], [220, 620], [210, 860], [120, 860]]); b.poly('Lappets', [[380, 620], [470, 620], [480, 860], [390, 860]]);
+    b.clip('M300,140C460,140 500,300 490,460L470,620L380,620L380,420Q300,300 220,420L220,620L130,620L110,460C100,300 140,140 300,140Z'); fillPattern(b, 'Hood', 'Pattern', 'Pattern centres', 100, 140, 500, 620, G.pat === 'plain' ? 'embroidered' : G.pat, null, .8); b.unclip();
+  } else if (kind === 'scarf') {
+    b.path('Scarf', 'M300,160C440,160 480,280 470,420C470,560 520,700 560,830L40,830C80,700 130,560 130,420C120,280 160,160 300,160Z');
+    if (has(nm + ' ' + w, /niqab|lithma|face veil|all but the eyes/)) { b.path('Eye slit', 'M200,360Q300,330 400,360Q300,390 200,360Z'); b.line('M140,400Q300,380 460,400'); }
+    else b.path('Face opening', 'M300,280Q390,280 390,420Q390,560 300,560Q210,560 210,420Q210,280 300,280Z');
+    b.clip('M300,160C440,160 480,280 470,420C470,560 520,700 560,830L40,830C80,700 130,560 130,420C120,280 160,160 300,160Z'); fillPattern(b, 'Scarf', 'Pattern', 'Pattern centres', 40, 160, 560, 830, G.pat === 'sprigs' ? 'floral' : G.pat, null, .9); b.unclip();
+    bandMotifs(b, 'Hem border', [[44, 800], [556, 800], [560, 830], [40, 830]], true, null);
+    if (G.tassel) for (let x = 46; x < 556; x += 16) b.rect('Fringe', x, 830, 6, 34);
+  } else if (kind === 'crown') {
+    const pts = [[130, 600], [470, 600], [480, 330], [420, 420], [380, 260], [340, 400], [300, 200], [260, 400], [220, 260], [180, 420], [120, 330]];
+    b.poly('Crown', pts);
+    b.clip(P2(pts)); fillPattern(b, 'Crown', 'Ornament', 'Ornament centres', 110, 190, 490, 600, 'embroidered', null, .8); b.unclip();
+    bandMotifs(b, 'Band', [[130, 540], [470, 540], [470, 600], [130, 600]], true, 'Band pattern');
+    [[120, 330], [220, 260], [300, 200], [380, 260], [480, 330]].forEach(([x, y]) => b.circ('Jewels', x, y - 10, 14));
+    for (let i = 0; i < 9; i++) b.circ('Pendants', 150 + i * 37.5, 630, 10);
+  } else {                            // tall headdress
+    const pts = [[200, 760], [400, 760], [340, 120], [260, 120]];
+    b.poly('Headdress', pts);
+    b.clip(P2(pts)); fillPattern(b, 'Headdress', 'Ornament', 'Ornament centres', 120, 100, 480, 760, 'embroidered', null, .8); b.unclip();
+    bandMotifs(b, 'Band', [[198, 720], [402, 720], [400, 760], [200, 760]], true, 'Band pattern');
+    b.path('Veil', 'M340,130Q520,300 560,880L460,880Q440,500 330,150Z');
+    for (let i = 0; i < 9; i++) b.circ('Pendants', 210 + i * 23, 790, 9);
+  }
+}
+
+/* ---- footwear ---- */
+function drawFoot(b, G) {
+  const w = G.w;
+  const boot = has(w, /boot|makhsi|ichigi|kovush|köwüş|jizmet|podines|çizme|top-boot/), sandal = has(w, /sandal|chappal|zōri|zori|phanat|capal|na'l|thong|flip/), sock = has(w, /sock|tabi|jorab/), clog = has(w, /clog|wooden|geta|bakya|kafsh/);
+  const pat = G.pat === 'plain' ? 'plain' : (G.pat === 'sprigs' || G.pat === 'dots' ? 'embroidered' : G.pat);
+  if (boot || sock) {                 // a pair in side view, toes to the right
+    [[70, 120], [250, 300]].forEach(([ox, oy], k) => {
+      const tall = boot ? 330 : 250, x0 = ox, y0 = oy, fy = y0 + tall + 120;
+      const shaft = [[x0, y0], [x0 + 130, y0], [x0 + 140, fy - 110], [x0 + 230, fy - 60], [x0 + 260, fy - 20], [x0 + 255, fy], [x0 - 5, fy], [x0 - 10, fy - 60]];
+      b.poly(boot ? 'Boot' : 'Sock', shaft);
+      if (pat !== 'plain') { b.clip(P2(shaft)); fillPattern(b, boot ? 'Boot' : 'Sock', 'Pattern', 'Pattern centres', x0 - 20, y0 + 40, x0 + 270, fy, pat, null, .6); b.unclip(); }
+      b.rect(boot ? 'Top band' : 'Cuff', x0 - 2, y0, 134, boot ? 34 : 46);
+      if (boot) { b.poly('Sole', [[x0 - 8, fy], [x0 + 258, fy], [x0 + 262, fy + 16], [x0 - 10, fy + 16]]); b.rect('Heel', x0 - 10, fy + 16, 50, 26); if (has(w, /tassel/)) b.poly('Tassels', [[x0 + 120, y0 + 30], [x0 + 140, y0 + 30], [x0 + 160, y0 + 120], [x0 + 136, y0 + 124]]); }
+      if (sock && has(w, /split|tabi/)) b.line(`M${x0 + 225},${fy - 58}L${x0 + 236},${fy}`);
+      void k;
+    });
+  } else {                             // a pair seen from above
+    [[190, -1], [410, 1]].forEach(([ox]) => {
+      const sole = `M${ox},170C${ox + 70},170 ${ox + 78},280 ${ox + 70},400C${ox + 64},520 ${ox + 80},640 ${ox + 64},740C${ox + 50},800 ${ox - 50},800 ${ox - 64},740C${ox - 80},640 ${ox - 64},520 ${ox - 70},400C${ox - 78},280 ${ox - 70},170 ${ox},170Z`;
+      b.path(clog ? 'Wooden sole' : 'Sole', sole);
+      if (clog && has(w, /geta/)) { b.rect('Teeth', ox - 66, 300, 132, 26); b.rect('Teeth', ox - 62, 610, 124, 26); }
+      if (sandal || (clog && has(w, /geta|bakya|strap|thong/))) {
+        if (has(w, /thong|zōri|zori|geta|flip|toe/)) { b.rect('Straps', ox - 7, 220, 14, 130); b.path('Straps', `M${ox - 66},420Q${ox},300 ${ox + 66},420L${ox + 60},446Q${ox},336 ${ox - 60},446Z`); }
+        else { b.path('Straps', `M${ox - 70},300Q${ox},250 ${ox + 70},300L${ox + 70},350Q${ox},300 ${ox - 70},350Z`); b.path('Straps', `M${ox - 70},420Q${ox},370 ${ox + 70},420L${ox + 70},470Q${ox},420 ${ox - 70},470Z`); b.path('Straps', `M${ox - 66},620L${ox - 30},560L${ox + 30},560L${ox + 66},620L${ox + 60},650L${ox + 24},594L${ox - 24},594L${ox - 60},650Z`); }
+      } else {
+        const up = `M${ox - 70},540C${ox - 78},420 ${ox - 72},290 ${ox - 60},230C${ox - 40},176 ${ox + 40},176 ${ox + 60},230C${ox + 72},290 ${ox + 78},420 ${ox + 70},540Q${ox},490 ${ox - 70},540Z`;
+        b.path('Upper', up);
+        if (pat !== 'plain') { b.clip(up); fillPattern(b, 'Upper', 'Pattern', 'Pattern centres', ox - 80, 170, ox + 80, 560, pat, null, .55); b.unclip(); }
+        if (has(w, /pointed|khussa|jutti|mojri|curled|velvet/)) b.path('Toe', `M${ox - 36},200Q${ox},90 ${ox + 36},200Q${ox},170 ${ox - 36},200Z`);
+      }
+    });
+  }
+}
+
+/* ---- the page for one garment ---- */
+function garmentPage(o) {
+  const b = GB(), G = readGarment(o), t = o.type, w = G.w;
+  const hemLong = G.knee && !G.long ? 640 : 830;
+  const C = G.c;   // colors: [main, second, third, light]
+  if (t === 'headwear') drawHead(b, G, o);
+  else if (t === 'footwear') drawFoot(b, G);
+  else if (t === 'sash') drawSash(b, G);
+  else if (t === 'apron') drawApron(b, G);
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /bilum|pouch|\bbag\b|algibeira/)) {
+    const heart = has(w, /heart/), bag = heart ? 'M300,820C160,700 90,560 110,420C130,300 260,300 300,400C340,300 470,300 490,420C510,560 440,700 300,820Z' : 'M120,360L480,360Q500,600 440,800Q300,850 160,800Q100,600 120,360Z';
+    b.path(heart ? 'Pouch' : 'Bag', bag); b.clip(bag); fillPattern(b, heart ? 'Pouch' : 'Bag', heart ? 'Beads' : 'Looping', heart ? 'Bead centres' : 'Loop centres', 90, 300, 510, 840, heart ? 'dots' : 'checks', null, .7); b.unclip();
+    if (heart) b.path('Opening', 'M220,420Q300,470 380,420L370,450Q300,500 230,450Z');
+    else { b.path('Strap', 'M150,370Q120,90 300,90Q480,90 450,370L420,370Q440,130 300,130Q160,130 180,370Z'); bandMotifs(b, 'Rim', [[120, 360], [480, 360], [478, 400], [122, 400]], true, null); }
+  }
+  else if (t === 'accessory' && has(w, /disk|disc/) && !has(w, /armband|strands|necklace/)) {
+    b.circ('Shell disc', 300, 420, 230); b.circ('Turtle-shell fretwork', 300, 420, 170);
+    for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; b.path('Fret openings', `M${f1(300 + Math.cos(a) * 60)},${f1(420 + Math.sin(a) * 60)}L${f1(300 + Math.cos(a + .2) * 160)},${f1(420 + Math.sin(a + .2) * 160)}L${f1(300 + Math.cos(a - .2) * 160)},${f1(420 + Math.sin(a - .2) * 160)}Z`); }
+    b.circ('Centre bead', 300, 420, 30); b.rect('Cord', 296, 80, 8, 112);
+  }
+  else if (t === 'accessory' && has(w, /necktie|cord or braided/)) {
+    b.path('Cord', 'M160,80Q300,330 290,420L282,860L296,860L304,430Q310,330 440,80L426,76Q300,300 300,380Q300,300 174,76Z');
+    b.path('Cord', 'M310,430L330,860L344,860L318,420Z');
+    b.ellipse('Slide', 300, 420, 70, 84); b.ellipse('Stone', 300, 420, 40, 50);
+    b.rect('Metal tips', 276, 860, 26, 36); b.rect('Metal tips', 324, 860, 26, 36);
+  }
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /knife|dagger|sgian/)) {
+    b.path('Blade', 'M290,120L310,120L322,560L300,600L278,560Z'); b.rect('Guard', 250, 560, 100, 22); b.path('Handle', 'M270,582L330,582L320,780L280,780Z');
+    for (let y = 610; y < 770; y += 30) b.rect('Handle bands', 274, y, 52, 8); b.circ('Pommel', 300, 800, 28);
+  }
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /tuft|gamsbart/)) {
+    for (let i = 0; i < 19; i++) { const a = Math.PI * (1.15 + i * 0.7 / 18), x = 300 + Math.cos(a) * 300, y = 640 + Math.sin(a) * 460; b.path('Hair', `M290,640Q${f1((300 + x) / 2 - 10)},${f1((640 + y) / 2)} ${f1(x)},${f1(y)}Q${f1((300 + x) / 2 + 10)},${f1((640 + y) / 2)} 310,640Z`); }
+    b.path('Binding', 'M260,630L340,630L330,760L270,760Z'); b.rect('Binding bands', 262, 660, 76, 14); b.rect('Binding bands', 266, 700, 68, 14);
+  }
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /armband|arm ring|wristband|brass rings/)) {
+    for (let k = 0; k < 6; k++) { b.ellipse('Rings', 300, 220 + k * 90, 170, 46); b.ellipse('Ring openings', 300, 214 + k * 90, 140, 30); }
+    if (has(w, /diamond/)) for (let k = 0; k < 6; k++) b.poly('Diamonds', [[300, 470 - 30], [330, 470], [300, 470 + 30], [270, 470]].map(([x, y]) => [x + (k - 2.5) * 50, y]));
+  }
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /necklace|beads|bead|collar|strands|neck|pendant|breastplate|chest|ornament|money|brooch|shell/)) {
+    const n = has(w, /tiered|layered|stack|strands|collar|many/) ? 5 : 3;
+    for (let k = 0; k < n; k++) { const r = 140 + k * (n > 3 ? 30 : 42), cy = 170;
+      for (let i = 0; i <= 22; i++) { const a = Math.PI * (0.08 + i * 0.84 / 22), x = 300 + Math.cos(a) * r * 1.15, y = cy + Math.sin(a) * r * 1.6; b.circ(k % 2 ? 'Beads' : 'Bead strands', x, y, 13 + k); } }
+    if (has(o.name.toLowerCase() + ' ' + w, /pendant|breastplate|crescent|shell|tiki|brooch|disc/)) {
+      if (has(o.name.toLowerCase(), /tiki/)) { b.path('Pendant', 'M300,520C380,520 400,600 390,700C380,780 340,820 300,820C260,820 220,780 210,700C200,600 220,520 300,520Z'); b.circ('Eyes', 265, 620, 22); b.circ('Eyes', 335, 620, 22); b.path('Mouth', 'M260,720Q300,750 340,720Q300,770 260,720Z'); }
+      else if (has(w, /crescent/)) b.path('Pendant', 'M120,520Q300,900 480,520Q300,760 120,520Z');
+      else { b.circ('Pendant', 300, 680, 110); b.circ('Pendant centre', 300, 680, 50); }
+    }
+  }
+  else if (t === 'accessory' && has(o.name.toLowerCase() + ' ' + w, /backpack|sporran|horġa|kwa|handbag|pouch|bag|susu/)) {
+    const bag = 'M150,360L450,360Q470,600 420,800Q300,840 180,800Q130,600 150,360Z';
+    b.path('Bag', bag); b.clip(bag); fillPattern(b, 'Bag', 'Pattern', 'Pattern centres', 120, 340, 480, 840, G.pat === 'plain' ? 'checks' : G.pat, null, .7); b.unclip();
+    b.path('Flap', 'M150,360L450,360L430,500Q300,560 170,500Z'); b.path('Strap', 'M170,370Q140,80 300,80Q460,80 430,370L405,370Q430,120 300,120Q170,120 195,370Z');
+    if (has(o.name.toLowerCase(), /sporran/)) for (let i = 0; i < 3; i++) b.rect('Tassels', 250 + i * 40, 560, 16, 160);
+  }
+  else if (t === 'accessory') { b.path('Gourd', 'M300,120C330,120 336,200 334,320C332,520 360,700 330,820Q300,860 270,820C240,700 268,520 266,320C264,200 270,120 300,120Z'); b.ellipse('Fibre loops', 300, 200, 70, 18); b.ellipse('Fibre loops', 300, 120, 50, 14); }
+  else if (t === 'shawl' && has(w, /cape|cloak/)) { const d = 'M300,120C360,120 380,150 380,190L560,840L40,840L220,190C220,150 240,120 300,120Z'; b.path('Cape', d); if (G.pat !== 'plain') { b.clip(d); fillPattern(b, 'Cape', 'Pattern', 'Pattern centres', 40, 120, 560, 840, G.pat, null); b.unclip(); } b.ellipse('Neck opening', 300, 170, 60, 22); bandMotifs(b, 'Hem border', [[48, 810], [552, 810], [560, 840], [40, 840]], true, null); }
+  else if (t === 'shawl') { drawCloth(b, G, { x0: 90, x1: 510, y0: 110, y1: 780, bw: G.pat === 'checks' ? 0 : 34, end: 110, bothEnds: true, fringe: has(w, /fringe|tassel|krama|shawl|pashmina|jamavar|ulos/) }); }
+  else if (t === 'wrap') {
+    if (has(o.name.toLowerCase(), /chador|chadari|sitara/) || has(w, /full-body|full body|cloak|cape|burka|over head and body|head and body|whole body/)) {
+      const d = 'M300,90C420,90 470,170 470,260L560,860L40,860L130,260C130,170 180,90 300,90Z'; b.path('Covering', d);
+      if (has(w, /chadari|mesh/)) { b.rect('Face grille', 240, 170, 120, 80); for (let x = 248; x < 360; x += 12) b.line(`M${x},172L${x},248`); }
+      if (G.pat !== 'plain') { b.clip(d); fillPattern(b, 'Covering', 'Pattern', 'Pattern centres', 40, 90, 560, 860, G.pat, null); b.unclip(); }
+      if (has(w, /chadari|pleat|burqa/)) for (let x = 120; x < 500; x += 34) b.line(`M${x + (x - 300) * -.4},300L${x + (x - 300) * .2},850`);
+      bandMotifs(b, 'Hem border', [[48, 830], [552, 830], [560, 860], [40, 860]], true, null);
+    } else if (has(w, /chest|torso|kemben|breast|tube.*dress|strapless/)) {
+      drawSkirt(b, G, 150, 820, { w0: 150, w1: 160, wb: 0, wrap: true, bands: [[60, 'p'], [12], [12]] });
+    } else if (has(w, /waist|hip|lower|loincloth|between the legs|skirt|sarong|lungi|mundu|dhoti|dhuti|sampot|futa|ma'awaz|wizar|izaar|tehmat|godd|pinon|thami|panchi|phanek|rignai|dakmanda|wanglai|jainsem|tais|longyi|paso|kira|feyli|samping|tapis|malong|kain|sarama|songket|tenun|lufid|bahag|wanes|tube/) && !has(w, /shawl|over the shoulder|scarf|neck/)) {
+      const kira = has(w, /pinned at both shoulders|kira/);
+      if (kira) drawTop(b, G, { top: 150, hem: 820, sleeve: 'none', collar: 'cross', hemBand: 30, pit: 80, sashY: 470 });
+      else drawSkirt(b, G, 190, has(w, /knee|thigh|loincloth|short/) ? 620 : 830, { w0: 132, w1: has(w, /between the legs|loincloth|kben|dhoti|dhuti|chong/) ? 140 : 150, wrap: true, knot: has(w, /tied|knot|tuck/), pat: G.pat, bands: has(w, /border|hem|stripe|kara|kasavu|tassel/) ? [[50, 'p'], [12]] : [[30, 'p'], [10]] });
+      if (has(w, /between the legs|kben|kraben|dhoti|dhuti|loincloth/)) { b.poly('Pleated front', [[280, 190], [320, 190], [340, 640], [260, 640]]); for (let x = 270; x < 335; x += 12) b.line(`M${x + 10},200L${x},630`); }
+      if (G.tassel) for (let x = 156; x < 446; x += 14) b.rect('Fringe', x, has(w, /knee|thigh|loincloth|short/) ? 620 : 830, 6, 30);
+    } else drawCloth(b, G, { bw: has(w, /border|edge/) ? 40 : 26, fringe: G.tassel });
+  }
+  else if (t === 'skirt') drawSkirt(b, G, 160, 830, { w1: G.flare || has(w, /pleat|full|flared|ghagra|lehenga|chima|saya/) ? 250 : (has(w, /tube|tubular|wrap|sarong|sinh|htamein|longyi|redda/) ? 150 : 190), wrap: has(w, /wrap|sarong|tube|tubular|longyi|htamein|sinh/), pleats: has(w, /pleat|gathered|chima/), bands: has(w, /hem|border|foot|tin sinh|gold|embroidered/) ? [[60, 'p'], [12], [20, 'p']] : [[40, 'p'], [10]] });
+  else if (t === 'trousers') drawTrousers(b, G, 140, 830, { wide: has(w, /wide|baggy|loose|voluminous|very|full|pleated|hakama|shalwar|şalvar|sirwal|salwar|gharara|sharara|vraka|ezor|lozim|harem|billow/) ? 1.5 : 1, fitted: has(w, /tight|fitted|churidar|cigarette|narrow|close/), cuff: has(w, /cuff|ankle|gathered/) ? 36 : 20, crotch: has(w, /sirwal|shalwar|salwar|şalvar|vraka|dropped|low/) ? 330 : 220 });
+  else if (t === 'outfit') {
+    const skirt = has(w, /skirt|petticoat|pollera|chima|saya|ghagra|lehenga|langa|pavadai|mekhela|baro't saya|kurung|sinh|feyli|gunyu|htamein|sarong|jupe|beldemchi/);
+    const trousers = has(w, /trouser|bombacha|breeches|slacks|suit\b|liqui|pants|pajama|pyjama|suruwal|shalwar|salwar|baji|seluar|tunban|partug|sirwal|shal u|bà ba|ba ba/);
+    if (skirt) { drawSkirt(b, G, 400, 850, { w0: 104, w1: 220, pleats: true, bands: [[46, 'p'], [10]] }); drawTop(b, G, { top: 130, hem: has(w, /long|kurung|kebaya panjang/) ? 560 : 420, hemBand: 20, sashY: null, ps: .9 }); }
+    else if (trousers) { drawTrousers(b, G, 470, 860, { w0: 100, wide: has(w, /wide|baggy|loose|shalwar|salwar|sirwal|tunban/) ? 1.5 : 1, fitted: has(w, /tight|fitted|churidar|suruwal/), cord: false }); drawTop(b, G, { top: 120, hem: has(w, /long|kameez|kurta|tunic|perahan|daura|dishdasha/) ? 660 : 500, hemBand: 22, sashY: null, ps: .9 }); }
+    else drawTop(b, G, { top: 140, hem: 830, flare: 80, hemBand: 40, sleeve: has(w, /layer|jūnihitoe|court/) ? 'wide' : G.sleeve, collar: has(w, /layer|jūnihitoe|hanfu|ryus/) ? 'cross' : G.collar });
+  }
+  else {  // upper garments
+    const hem = { shirt: 520, jacket: 500, vest: 520, tunic: has(w, /knee|short/) ? 620 : 720, robe: G.knee && !G.long ? 680 : 840, coat: G.knee && !G.long ? 680 : 830, dress: has(w, /knee|short/) ? 640 : 840 }[t] || 760;
+    const isQipao = has(w, /cheongsam|qipao|high collar.*slit/);
+    const kimono = has(w, /kimono|yukata|furisode|tomesode|uchikake|hōmongi|iromuji|komon|mofuku|meisen|kosode|nagajuban|t-shaped|attus/);
+    const panel = has(w, /panel|nashal|thuraya|front pocket|duch|embroidered front|embroidered panel/);
+    drawTop(b, G, {
+      top: 130, hem, sleeve: t === 'vest' ? 'none' : (kimono ? 'wide' : G.sleeve), collar: kimono ? 'cross' : (isQipao ? 'stand' : G.collar), qipao: isQipao,
+      flare: t === 'dress' ? (G.flare ? 120 : 60) : (t === 'robe' && G.flare ? 70 : (t === 'coat' ? 24 : 0)), hemBand: kimono && !G.gold ? 0 : undefined,
+      wideDrop: has(w, /furisode|swinging/) ? 300 : 150, sash: G.sash, bow: kimono, sashY: G.sash ? 130 + (hem - 130) * .36 : null, sashH: kimono ? 60 : 30,
+      panel: panel ? 60 : 0, panelTo: panel ? hem - 40 : 0, gap: has(w, /cloak|bisht|abaya|aba\b|open-front|open front/) ? 60 : 30
+    });
+    if (has(w, /triangle/)) b.poly('Gold triangle', [[300, hem - 230], [400, hem - 30], [200, hem - 30]]);
+    if (has(w, /slit|split/) && t !== 'shirt') { b.line(`M${300 - 150},${hem - 200}L${300 - 152},${hem}`); b.line(`M${300 + 150},${hem - 200}L${300 + 152},${hem}`); }
+  }
+  // typical colors: first named color for the main cloth, then the palette
+  const R = b.done(), main = C[0], sec = C[1], third = C[2], light = C[3] || '#f4ead0';
+  const gold = G.gold ? '#c99a2e' : third;
+  const MAP = {
+    Body: main, Sleeves: main, 'Front panel': main, Skirt: main, 'Trouser legs': main, Cloth: main, Covering: main, Sash: G.sash ? sec : main, Apron: main, Cap: main, Hat: main, Crown: main,
+    Turban: main, Folds: sec, Fur: G.named ? main : '#3a2a1e', Curls: G.named ? sec : '#5a4330', Scarf: main, Hood: main, Mask: G.named ? main : '#7a6a2a', Headdress: main, Boot: main, Sock: G.named ? main : light, Upper: main, Gourd: '#d9b56a',
+    Pattern: sec, 'Pattern centres': gold, 'Panel pattern': gold, 'Panel pattern centres': sec, 'Skirt pattern': sec, 'Skirt pattern centres': gold, 'Trouser pattern': sec, Ornament: gold, 'Ornament centres': sec,
+    Collar: G.gold ? gold : sec, Placket: sec, Buttons: gold, Pockets: main, Cuffs: sec, 'Cuff pattern': gold, 'Hem border': sec, 'Border pattern': gold, 'Hem lines': gold, Neckline: sec,
+    'Front edges': sec, 'Edge pattern': gold, 'Under-layer': light, 'Sash pattern': gold, 'Sash knot': sec, 'Sash ends': sec, 'Sash edges': gold, 'Second end': sec, Knot: sec,
+    'Fur trim': '#6b4a2e', Waistband: sec, Drawstring: light, 'Wrap fold': sec, Borders: sec, 'End panels': sec, 'End pattern': gold, 'End lines': gold, Fringe: sec, Ties: sec, Band: sec, 'Band pattern': gold,
+    'Head opening': '#3a3330', 'Face opening': '#e8d6c0', 'Front cut-out': '#3a3330', Tassel: '#1e1c1c', Brim: main, 'Crown top': main, Wings: '#1e1c1c', Rim: sec, 'Chin strap': sec, 'Loose end': main, 'Inner cap': sec,
+    Cord: '#1e1c1c', Tassels: '#1e1c1c', 'Eye openings': '#e8d6c0', Stiffener: '#7a5a2a', Lappets: main, Pendants: gold, Veil: light, Sole: '#6b4a2e', 'Wooden sole': '#a8784a', Teeth: '#7a5534', Straps: sec, Heel: '#3a2a1e', 'Top band': sec, Opening: '#3a3330', Toe: main, 'Pleated front': main, 'Face grille': sec, 'Fibre loops': '#7a5534', Jewels: '#b3242c', 'Gold triangle': '#c99a2e', Cape: main, 'Neck opening': '#3a3330', 'Eye slit': '#3a3330', 'End borders': gold, 'Second end': sec, 'Top band ': sec,
+    Feathers: '#f4efe4', Blade: '#c0c0c0', Guard: '#c99a2e', Handle: '#1e1c1c', 'Handle bands': '#c0c0c0', Pommel: '#c99a2e', Hair: '#4a3a2a', Binding: '#c0c0c0', 'Binding bands': '#c99a2e', Rings: '#c99a2e', 'Ring openings': '#fffdf6', Diamonds: '#b3242c', Beads: sec, 'Bead strands': main, Pendant: '#f4efe4', 'Pendant centre': gold, Eyes: '#1e1c1c', Mouth: '#1e1c1c', Flap: sec, Tassels: '#1e1c1c', Stripes: third, Earflaps: main, 'Pom-poms': sec, 'Feather tips': '#1e1c1c', Browband: sec, Beadwork: gold, Trailers: main, Base: '#4a6b2e', Petals: main, 'Flower centres': gold, Ribbons: sec,
+    Bag: main, Pouch: main, Beads: gold, 'Bead centres': sec, Looping: sec, 'Loop centres': gold, Strap: sec, 'Shell disc': '#f4efe4', 'Turtle-shell fretwork': '#7a5534', 'Fret openings': '#f4efe4', 'Centre bead': '#b3242c', Slide: '#c0c0c0', Stone: '#2e8b88', 'Metal tips': '#c0c0c0', Cords: '#7a5534', Corks: '#c9a66b'
+  };
+  R.forEach(r => { if (!R.typ[r.g]) R.typ[r.g] = MAP[r.g] || sec; });
+  // keep a motif from vanishing into its ground
+  const pairs = [['Pattern', 'Body'], ['Pattern', 'Cloth'], ['Skirt pattern', 'Skirt'], ['Border pattern', 'Hem border'], ['Sash pattern', 'Sash'], ['End pattern', 'End panels'], ['Pattern', 'Cap'], ['Band pattern', 'Band'], ['Edge pattern', 'Front edges'], ['Pattern', 'Scarf']];
+  pairs.forEach(([a, g]) => { if (R.typ[a] && R.typ[a] === R.typ[g]) R.typ[a] = R.typ[a] === light ? main : light; });
+  return R;
+}
+
+if (typeof module !== 'undefined') module.exports = { garmentPage, readGarment };
+if (typeof module !== 'undefined') module.exports.colorsIn = colorsIn; if (typeof module !== 'undefined') module.exports.WCOL = WCOL;
+
+</script>
+<script>
+(function () {
+const META = [{"n":"Afghanistan","a3":"AFG","num":"004","reg":"South Asia","cont":"Asia","ll":[33,65],"area":652230,"col":"#f7f4ec","icon":"Perahan tunban","iconId":"afghanistan-perahan-tunban","k":10,"cats":{"national":6,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Albania","a3":"ALB","num":"008","reg":"Southern Europe","cont":"Europe","ll":[41,20],"area":28748,"col":"#f7f4ec","icon":"Fustanella","iconId":"albania-fustanella","k":11,"cats":{"national":7,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Algeria","a3":"DZA","num":"012","reg":"North Africa","cont":"Africa","ll":[28,3],"area":2381741,"col":"#f7f4ec","icon":"Burnous","iconId":"algeria-burnous","k":16,"cats":{"national":9,"ethnic":4,"bridal":1,"ceremonial":2,"historical":0}},{"n":"Andorra","a3":"AND","num":"020","reg":"Southern Europe","cont":"Europe","ll":[42.5,1.5],"area":468,"col":"#f7f4ec","icon":"Andorran women's costume","iconId":"andorra-andorran-women-s-costume","k":2,"cats":{"national":0,"ethnic":0,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Angola","a3":"AGO","num":"024","reg":"Central Africa","cont":"Africa","ll":[-12.5,18.5],"area":1246700,"col":"#e07020","icon":"Pano","iconId":"angola-pano","k":6,"cats":{"national":1,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Antigua and Barbuda","a3":"ATG","num":"028","reg":"Caribbean","cont":"Americas","ll":[17.05,-61.8],"area":442,"col":"#b3242c","icon":"Antiguan national dress","iconId":"antigua-and--antiguan-national-dress","k":1,"cats":{"national":0,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Argentina","a3":"ARG","num":"032","reg":"South America","cont":"Americas","ll":[-34,-64],"area":2780400,"col":"#c9a36b","icon":"Gaucho outfit","iconId":"argentina-gaucho-outfit","k":8,"cats":{"national":1,"ethnic":7,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Armenia","a3":"ARM","num":"051","reg":"Western Asia","cont":"Asia","ll":[40,45],"area":29743,"col":"#b3242c","icon":"Taraz","iconId":"armenia-taraz","k":19,"cats":{"national":7,"ethnic":10,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Australia","a3":"AUS","num":"036","reg":"Oceania","cont":"Oceania","ll":[-27,133],"area":7692024,"col":"#7a4a2a","icon":"Akubra","iconId":"australia-akubra","k":6,"cats":{"national":2,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Austria","a3":"AUT","num":"040","reg":"Western Europe","cont":"Europe","ll":[47.33333333,13.33333333],"area":83871,"col":"#2f7d3a","icon":"Dirndl","iconId":"austria-dirndl","k":11,"cats":{"national":7,"ethnic":1,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Azerbaijan","a3":"AZE","num":"031","reg":"Western Asia","cont":"Asia","ll":[40.5,47.5],"area":86600,"col":"#6e1423","icon":"Chukha","iconId":"azerbaijan-chukha","k":6,"cats":{"national":2,"ethnic":3,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Bahamas","a3":"BHS","num":"044","reg":"Caribbean","cont":"Americas","ll":[24.25,-76],"area":13943,"col":"#2aa198","icon":"Androsia","iconId":"bahamas-androsia","k":4,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Bahrain","a3":"BHR","num":"048","reg":"Western Asia","cont":"Asia","ll":[26,50.55],"area":765,"col":"#f7f4ec","icon":"Thawb","iconId":"bahrain-thawb","k":16,"cats":{"national":10,"ethnic":5,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Bangladesh","a3":"BGD","num":"050","reg":"South Asia","cont":"Asia","ll":[24,90],"area":147570,"col":"#f7f4ec","icon":"Panjabi","iconId":"bangladesh-panjabi","k":20,"cats":{"national":7,"ethnic":12,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Barbados","a3":"BRB","num":"052","reg":"Caribbean","cont":"Americas","ll":[13.16666666,-59.53333333],"area":430,"col":"#f7f4ec","icon":"Landship uniform","iconId":"barbados-landship-uniform","k":1,"cats":{"national":0,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Belarus","a3":"BLR","num":"112","reg":"Eastern Europe","cont":"Europe","ll":[53,28],"area":207600,"col":"#c99a2e","icon":"Slutsk sash","iconId":"belarus-slutsk-sash","k":4,"cats":{"national":3,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Belgium","a3":"BEL","num":"056","reg":"Western Europe","cont":"Europe","ll":[50.83333333,4],"area":30528,"col":"#b3242c","icon":"Gille costume","iconId":"belgium-gille-costume","k":5,"cats":{"national":2,"ethnic":2,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Belize","a3":"BLZ","num":"084","reg":"Central America","cont":"Americas","ll":[17.25,-88.75],"area":22966,"col":"#b3242c","icon":"Huipil","iconId":"belize-huipil","k":4,"cats":{"national":0,"ethnic":2,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Benin","a3":"BEN","num":"204","reg":"West Africa","cont":"Africa","ll":[9.5,2.25],"area":112622,"col":"#2c5aa0","icon":"Agbada","iconId":"benin-agbada","k":9,"cats":{"national":2,"ethnic":6,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Bhutan","a3":"BTN","num":"064","reg":"South Asia","cont":"Asia","ll":[27.5,90.5],"area":38394,"col":"#e07020","icon":"Kira","iconId":"bhutan-kira","k":8,"cats":{"national":7,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Bolivia","a3":"BOL","num":"068","reg":"South America","cont":"Americas","ll":[-17,-65],"area":1098581,"col":"#9e1b32","icon":"Andean pollera","iconId":"bolivia-andean-pollera","k":12,"cats":{"national":0,"ethnic":11,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Bosnia and Herzegovina","a3":"BIH","num":"070","reg":"Southern Europe","cont":"Europe","ll":[44,18],"area":51209,"col":"#6e1423","icon":"Dimije","iconId":"bosnia-and-h-dimije","k":10,"cats":{"national":5,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Botswana","a3":"BWA","num":"072","reg":"Southern Africa","cont":"Africa","ll":[-22,24],"area":582000,"col":"#2b3a7a","icon":"Leteisi","iconId":"botswana-leteisi","k":5,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":0,"historical":2}},{"n":"Brazil","a3":"BRA","num":"076","reg":"South America","cont":"Americas","ll":[-10,-55],"area":8515767,"col":"#f7f4ec","icon":"Baiana dress","iconId":"brazil-baiana-dress","k":7,"cats":{"national":1,"ethnic":4,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Brunei","a3":"BRN","num":"096","reg":"Southeast Asia","cont":"Asia","ll":[4.5,114.66666666],"area":5765,"col":"#c99a2e","icon":"Baju kurung","iconId":"brunei-baju-kurung","k":9,"cats":{"national":4,"ethnic":4,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Bulgaria","a3":"BGR","num":"100","reg":"Eastern Europe","cont":"Europe","ll":[43,25],"area":110879,"col":"#1e1c1c","icon":"Sukman","iconId":"bulgaria-sukman","k":9,"cats":{"national":7,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Burkina Faso","a3":"BFA","num":"854","reg":"West Africa","cont":"Africa","ll":[13,-2],"area":272967,"col":"#2b3a7a","icon":"Faso dan fani","iconId":"burkina-faso-faso-dan-fani","k":5,"cats":{"national":4,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Burundi","a3":"BDI","num":"108","reg":"East Africa","cont":"Africa","ll":[-3.5,30],"area":27834,"col":"#e07020","icon":"Imvutano","iconId":"burundi-imvutano","k":4,"cats":{"national":0,"ethnic":2,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Cabo Verde","a3":"CPV","num":"132","reg":"West Africa","cont":"Africa","ll":[16,-24],"area":4033,"col":"#2b3a7a","icon":"Pánu di téra","iconId":"cabo-verde-panu-di-tera","k":3,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Cambodia","a3":"KHM","num":"116","reg":"Southeast Asia","cont":"Asia","ll":[13,105],"area":181035,"col":"#c99a2e","icon":"Sampot","iconId":"cambodia-sampot","k":13,"cats":{"national":6,"ethnic":0,"bridal":1,"ceremonial":5,"historical":1}},{"n":"Cameroon","a3":"CMR","num":"120","reg":"Central Africa","cont":"Africa","ll":[6,12],"area":475442,"col":"#2b3a7a","icon":"Ndop","iconId":"cameroon-ndop","k":6,"cats":{"national":5,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Canada","a3":"CAN","num":"124","reg":"North America","cont":"Americas","ll":[60,-95],"area":9984670,"col":"#b3242c","icon":"Ceinture fléchée","iconId":"canada-ceinture-flechee","k":22,"cats":{"national":2,"ethnic":15,"bridal":0,"ceremonial":5,"historical":0}},{"n":"Central African Republic","a3":"CAF","num":"140","reg":"Central Africa","cont":"Africa","ll":[7,21],"area":622984,"col":"#7a4a2a","icon":"Roko","iconId":"central-afri-roko","k":2,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Chad","a3":"TCD","num":"148","reg":"Central Africa","cont":"Africa","ll":[15,19],"area":1284000,"col":"#f7f4ec","icon":"Jalabiya","iconId":"chad-jalabiya","k":5,"cats":{"national":4,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Chile","a3":"CHL","num":"152","reg":"South America","cont":"Americas","ll":[-30,-71],"area":756102,"col":"#7a4a2a","icon":"Chamanto","iconId":"chile-chamanto","k":11,"cats":{"national":1,"ethnic":7,"bridal":0,"ceremonial":3,"historical":0}},{"n":"China","a3":"CHN","num":"156","reg":"East Asia","cont":"Asia","ll":[35,105],"area":9706961,"col":"#b3242c","icon":"Cheongsam (qipao)","iconId":"china-cheongsam-qipao","k":26,"cats":{"national":4,"ethnic":8,"bridal":1,"ceremonial":3,"historical":10}},{"n":"Colombia","a3":"COL","num":"170","reg":"South America","cont":"Americas","ll":[4,-72],"area":1141748,"col":"#f4ead0","icon":"Sombrero vueltiao","iconId":"colombia-sombrero-vueltiao","k":8,"cats":{"national":1,"ethnic":7,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Comoros","a3":"COM","num":"174","reg":"East Africa","cont":"Africa","ll":[-12.16666666,44.25],"area":1862,"col":"#e07020","icon":"Shiromani","iconId":"comoros-shiromani","k":6,"cats":{"national":6,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Costa Rica","a3":"CRI","num":"188","reg":"Central America","cont":"Americas","ll":[10,-84],"area":51100,"col":"#f7f4ec","icon":"Costa Rican traje típico","iconId":"costa-rica-costa-rican-traje-tipico","k":4,"cats":{"national":0,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Croatia","a3":"HRV","num":"191","reg":"Southern Europe","cont":"Europe","ll":[45.16666666,15.5],"area":56594,"col":"#b3242c","icon":"Šibenik cap","iconId":"croatia-sibenik-cap","k":12,"cats":{"national":3,"ethnic":8,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Cuba","a3":"CUB","num":"192","reg":"Caribbean","cont":"Americas","ll":[21.5,-80],"area":109884,"col":"#f7f4ec","icon":"Guayabera","iconId":"cuba-guayabera","k":3,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Cyprus","a3":"CYP","num":"196","reg":"Western Asia","cont":"Asia","ll":[35,33],"area":9251,"col":"#c99a2e","icon":"Sayia","iconId":"cyprus-sayia","k":11,"cats":{"national":11,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Czechia","a3":"CZE","num":"203","reg":"Eastern Europe","cont":"Europe","ll":[49.75,15.5],"area":78865,"col":"#b3242c","icon":"Kroj","iconId":"czechia-kroj","k":4,"cats":{"national":1,"ethnic":1,"bridal":2,"ceremonial":0,"historical":0}},{"n":"Côte d'Ivoire","a3":"CIV","num":"384","reg":"West Africa","cont":"Africa","ll":[8,-5],"area":322463,"col":"#2b3a7a","icon":"Pagne baoulé","iconId":"cote-d-ivoir-pagne-baoule","k":5,"cats":{"national":3,"ethnic":0,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Democratic Republic of the Congo","a3":"COD","num":"180","reg":"Central Africa","cont":"Africa","ll":[0,25],"area":2344858,"col":"#c9a36b","icon":"Kuba ceremonial skirt","iconId":"democratic-r-kuba-ceremonial-skirt","k":7,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Denmark","a3":"DNK","num":"208","reg":"Northern Europe","cont":"Europe","ll":[56,10],"area":43094,"col":"#b3242c","icon":"Folkedragt","iconId":"denmark-folkedragt","k":5,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":2,"historical":1}},{"n":"Djibouti","a3":"DJI","num":"262","reg":"East Africa","cont":"Africa","ll":[11.5,43],"area":23200,"col":"#e07020","icon":"Baati","iconId":"djibouti-baati","k":10,"cats":{"national":0,"ethnic":9,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Dominica","a3":"DMA","num":"212","reg":"Caribbean","cont":"Americas","ll":[15.41666666,-61.33333333],"area":751,"col":"#f7f4ec","icon":"Wob dwiyet","iconId":"dominica-wob-dwiyet","k":5,"cats":{"national":4,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Dominican Republic","a3":"DOM","num":"214","reg":"Caribbean","cont":"Americas","ll":[19,-70.66666666],"area":48671,"col":"#f7f4ec","icon":"Chacabana","iconId":"dominican-re-chacabana","k":3,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Ecuador","a3":"ECU","num":"218","reg":"South America","cont":"Americas","ll":[-2,-77.5],"area":276841,"col":"#f7f4ec","icon":"Otavalo women's dress","iconId":"ecuador-otavalo-women-s-dress","k":11,"cats":{"national":0,"ethnic":10,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Egypt","a3":"EGY","num":"818","reg":"North Africa","cont":"Africa","ll":[27,30],"area":1002450,"col":"#f7f4ec","icon":"Galabeya","iconId":"egypt-galabeya","k":12,"cats":{"national":1,"ethnic":3,"bridal":0,"ceremonial":0,"historical":8}},{"n":"El Salvador","a3":"SLV","num":"222","reg":"Central America","cont":"Americas","ll":[13.83333333,-88.91666666],"area":21041,"col":"#f7f4ec","icon":"Pipil huipil","iconId":"el-salvador-pipil-huipil","k":3,"cats":{"national":0,"ethnic":3,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Equatorial Guinea","a3":"GNQ","num":"226","reg":"Central Africa","cont":"Africa","ll":[2,10],"area":28051,"col":"#2f7d3a","icon":"Patterned skirt and head scarf","iconId":"equatorial-g-patterned-skirt-and-head-scarf","k":1,"cats":{"national":1,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Eritrea","a3":"ERI","num":"232","reg":"East Africa","cont":"Africa","ll":[15,39],"area":117600,"col":"#f7f4ec","icon":"Zuria","iconId":"eritrea-zuria","k":5,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Estonia","a3":"EST","num":"233","reg":"Northern Europe","cont":"Europe","ll":[59,26],"area":45227,"col":"#b3242c","icon":"Estonian folk costume","iconId":"estonia-estonian-folk-costume","k":6,"cats":{"national":1,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Eswatini","a3":"SWZ","num":"748","reg":"Southern Africa","cont":"Africa","ll":[-26.5,31.5],"area":17364,"col":"#b3242c","icon":"Lihiya","iconId":"eswatini-lihiya","k":4,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Ethiopia","a3":"ETH","num":"231","reg":"East Africa","cont":"Africa","ll":[8,38],"area":1104300,"col":"#f7f4ec","icon":"Habesha kemis","iconId":"ethiopia-habesha-kemis","k":15,"cats":{"national":6,"ethnic":7,"bridal":1,"ceremonial":1,"historical":0}},{"n":"Fiji","a3":"FJI","num":"242","reg":"Oceania","cont":"Oceania","ll":[-18,175],"area":18272,"col":"#1f2f5c","icon":"Sulu","iconId":"fiji-sulu","k":5,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Finland","a3":"FIN","num":"246","reg":"Northern Europe","cont":"Europe","ll":[64,26],"area":338424,"col":"#2c5aa0","icon":"Kansallispuku","iconId":"finland-kansallispuku","k":8,"cats":{"national":1,"ethnic":5,"bridal":1,"ceremonial":1,"historical":0}},{"n":"France","a3":"FRA","num":"250","reg":"Western Europe","cont":"Europe","ll":[46,2],"area":551695,"col":"#1e1c1c","icon":"Beret","iconId":"france-beret","k":9,"cats":{"national":2,"ethnic":4,"bridal":0,"ceremonial":1,"historical":2}},{"n":"Gabon","a3":"GAB","num":"266","reg":"Central Africa","cont":"Africa","ll":[-1,11.75],"area":267668,"col":"#c9a36b","icon":"Raffia ritual costume","iconId":"gabon-raffia-ritual-costume","k":3,"cats":{"national":3,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Gambia","a3":"GMB","num":"270","reg":"West Africa","cont":"Africa","ll":[13.46666666,-16.56666666],"area":10689,"col":"#2c5aa0","icon":"Grand boubou","iconId":"gambia-grand-boubou","k":5,"cats":{"national":4,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Georgia","a3":"GEO","num":"268","reg":"Western Asia","cont":"Asia","ll":[42,43.5],"area":69700,"col":"#1e1c1c","icon":"Bashlyk","iconId":"georgia-bashlyk","k":6,"cats":{"national":1,"ethnic":4,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Germany","a3":"DEU","num":"276","reg":"Western Europe","cont":"Europe","ll":[51,9],"area":357114,"col":"#2f7d3a","icon":"Dirndl","iconId":"germany-dirndl","k":14,"cats":{"national":6,"ethnic":4,"bridal":0,"ceremonial":3,"historical":1}},{"n":"Ghana","a3":"GHA","num":"288","reg":"West Africa","cont":"Africa","ll":[8,-2],"area":238533,"col":"#c99a2e","icon":"Kente","iconId":"ghana-kente","k":7,"cats":{"national":2,"ethnic":2,"bridal":1,"ceremonial":2,"historical":0}},{"n":"Greece","a3":"GRC","num":"300","reg":"Southern Europe","cont":"Europe","ll":[39,22],"area":131990,"col":"#f7f4ec","icon":"Fustanella","iconId":"greece-fustanella","k":25,"cats":{"national":3,"ethnic":4,"bridal":0,"ceremonial":7,"historical":11}},{"n":"Grenada","a3":"GRD","num":"308","reg":"Caribbean","cont":"Americas","ll":[12.11666666,-61.66666666],"area":344,"col":"#f2c230","icon":"Bélé dress","iconId":"grenada-bele-dress","k":3,"cats":{"national":0,"ethnic":0,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Guatemala","a3":"GTM","num":"320","reg":"Central America","cont":"Americas","ll":[15.5,-90.25],"area":108889,"col":"#b3242c","icon":"Huipil","iconId":"guatemala-huipil","k":6,"cats":{"national":1,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Guinea","a3":"GIN","num":"324","reg":"West Africa","cont":"Africa","ll":[11,-10],"area":245857,"col":"#2b3a7a","icon":"Léppi","iconId":"guinea-leppi","k":3,"cats":{"national":3,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Guinea-Bissau","a3":"GNB","num":"624","reg":"West Africa","cont":"Africa","ll":[12,-15],"area":36125,"col":"#c9a36b","icon":"Bijagó girl's fibre skirt","iconId":"guinea-bissa-bijago-girl-s-fibre-skirt","k":2,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Guyana","a3":"GUY","num":"328","reg":"South America","cont":"Americas","ll":[5,-59],"area":214969,"col":"#f7f4ec","icon":"Guayabera","iconId":"guyana-guayabera","k":3,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Haiti","a3":"HTI","num":"332","reg":"Caribbean","cont":"Americas","ll":[19,-72.41666666],"area":27750,"col":"#2c5aa0","icon":"Zaka costume","iconId":"haiti-zaka-costume","k":3,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Honduras","a3":"HND","num":"340","reg":"Central America","cont":"Americas","ll":[15,-86.5],"area":112492,"col":"#f7f4ec","icon":"Cacautare women's dress","iconId":"honduras-cacautare-women-s-dress","k":5,"cats":{"national":3,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Hungary","a3":"HUN","num":"348","reg":"Eastern Europe","cont":"Europe","ll":[47,20],"area":93028,"col":"#8a8f94","icon":"Cifraszűr","iconId":"hungary-cifraszur","k":8,"cats":{"national":8,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Iceland","a3":"ISL","num":"352","reg":"Northern Europe","cont":"Europe","ll":[65,-18],"area":103000,"col":"#1e1c1c","icon":"Peysuföt","iconId":"iceland-peysufot","k":7,"cats":{"national":4,"ethnic":0,"bridal":0,"ceremonial":1,"historical":2}},{"n":"India","a3":"IND","num":"356","reg":"South Asia","cont":"Asia","ll":[20,77],"area":3287590,"col":"#f09a1c","icon":"Kurta","iconId":"india-kurta","k":24,"cats":{"national":12,"ethnic":6,"bridal":4,"ceremonial":0,"historical":2}},{"n":"Indonesia","a3":"IDN","num":"360","reg":"Southeast Asia","cont":"Asia","ll":[-5,120],"area":1904569,"col":"#9e1b32","icon":"Kebaya","iconId":"indonesia-kebaya","k":24,"cats":{"national":6,"ethnic":10,"bridal":3,"ceremonial":4,"historical":1}},{"n":"Iran","a3":"IRN","num":"364","reg":"South Asia","cont":"Asia","ll":[32,53],"area":1648195,"col":"#1e1c1c","icon":"Chador","iconId":"iran-chador","k":20,"cats":{"national":2,"ethnic":7,"bridal":1,"ceremonial":2,"historical":8}},{"n":"Iraq","a3":"IRQ","num":"368","reg":"Western Asia","cont":"Asia","ll":[33,44],"area":438317,"col":"#f7f4ec","icon":"Thawb","iconId":"iraq-thawb","k":11,"cats":{"national":5,"ethnic":5,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Ireland","a3":"IRL","num":"372","reg":"Northern Europe","cont":"Europe","ll":[53,-8],"area":70273,"col":"#f09a1c","icon":"Léine","iconId":"ireland-leine","k":8,"cats":{"national":3,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Israel","a3":"ISR","num":"376","reg":"Western Asia","cont":"Asia","ll":[31.47,35.13],"area":20770,"col":"#f7f4ec","icon":"Tallit","iconId":"israel-tallit","k":6,"cats":{"national":2,"ethnic":2,"bridal":1,"ceremonial":1,"historical":0}},{"n":"Italy","a3":"ITA","num":"380","reg":"Southern Europe","cont":"Europe","ll":[42.83333333,12.83333333],"area":301336,"col":"#f7f4ec","icon":"Toga virilis","iconId":"italy-toga-virilis","k":23,"cats":{"national":1,"ethnic":9,"bridal":0,"ceremonial":2,"historical":11}},{"n":"Jamaica","a3":"JAM","num":"388","reg":"Caribbean","cont":"Americas","ll":[18.25,-77.5],"area":10991,"col":"#b3242c","icon":"Bandana skirt","iconId":"jamaica-bandana-skirt","k":5,"cats":{"national":1,"ethnic":3,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Japan","a3":"JPN","num":"392","reg":"East Asia","cont":"Asia","ll":[36,138],"area":377930,"col":"#9e1b32","icon":"Kimono","iconId":"japan-kimono","k":27,"cats":{"national":9,"ethnic":4,"bridal":2,"ceremonial":11,"historical":1}},{"n":"Jordan","a3":"JOR","num":"400","reg":"Western Asia","cont":"Asia","ll":[31,36],"area":89342,"col":"#f7f4ec","icon":"Thawb","iconId":"jordan-thawb","k":6,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Kazakhstan","a3":"KAZ","num":"398","reg":"Central Asia","cont":"Asia","ll":[48,68],"area":2724900,"col":"#f7f4ec","icon":"Köylek","iconId":"kazakhstan-koylek","k":12,"cats":{"national":11,"ethnic":0,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Kenya","a3":"KEN","num":"404","reg":"East Africa","cont":"Africa","ll":[1,38],"area":580367,"col":"#b3242c","icon":"Shuka","iconId":"kenya-shuka","k":8,"cats":{"national":5,"ethnic":3,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Kiribati","a3":"KIR","num":"296","reg":"Oceania","cont":"Oceania","ll":[1.41666666,173],"area":811,"col":"#7a4a2a","icon":"Sennit armour","iconId":"kiribati-sennit-armour","k":4,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Kuwait","a3":"KWT","num":"414","reg":"Western Asia","cont":"Asia","ll":[29.5,45.75],"area":17818,"col":"#f7f4ec","icon":"Thawb","iconId":"kuwait-thawb","k":13,"cats":{"national":7,"ethnic":5,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Kyrgyzstan","a3":"KGZ","num":"417","reg":"Central Asia","cont":"Asia","ll":[41,75],"area":199951,"col":"#f7f4ec","icon":"Ak-kalpak","iconId":"kyrgyzstan-ak-kalpak","k":6,"cats":{"national":2,"ethnic":2,"bridal":1,"ceremonial":1,"historical":0}},{"n":"Laos","a3":"LAO","num":"418","reg":"Southeast Asia","cont":"Asia","ll":[18,105],"area":236800,"col":"#c99a2e","icon":"Sinh","iconId":"laos-sinh","k":12,"cats":{"national":1,"ethnic":10,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Latvia","a3":"LVA","num":"428","reg":"Northern Europe","cont":"Europe","ll":[57,25],"area":64559,"col":"#f7f4ec","icon":"Latvian folk costume","iconId":"latvia-latvian-folk-costume","k":6,"cats":{"national":4,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Lebanon","a3":"LBN","num":"422","reg":"Western Asia","cont":"Asia","ll":[33.83333333,35.83333333],"area":10452,"col":"#f7f4ec","icon":"Thawb","iconId":"lebanon-thawb","k":8,"cats":{"national":0,"ethnic":6,"bridal":0,"ceremonial":0,"historical":2}},{"n":"Lesotho","a3":"LSO","num":"426","reg":"Southern Africa","cont":"Africa","ll":[-29.5,28.5],"area":30355,"col":"#2c5aa0","icon":"Basotho blanket","iconId":"lesotho-basotho-blanket","k":4,"cats":{"national":0,"ethnic":3,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Liberia","a3":"LBR","num":"430","reg":"West Africa","cont":"Africa","ll":[6.5,-9.5],"area":111369,"col":"#e07020","icon":"Lappa","iconId":"liberia-lappa","k":5,"cats":{"national":4,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Libya","a3":"LBY","num":"434","reg":"North Africa","cont":"Africa","ll":[25,17],"area":1759540,"col":"#f7f4ec","icon":"Burnous","iconId":"libya-burnous","k":12,"cats":{"national":8,"ethnic":2,"bridal":1,"ceremonial":1,"historical":0}},{"n":"Liechtenstein","a3":"LIE","num":"438","reg":"Western Europe","cont":"Europe","ll":[47.26666666,9.53333333],"area":160,"col":"#1e1c1c","icon":"Liechtenstein national dress","iconId":"liechtenstei-liechtenstein-national-dress","k":5,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Lithuania","a3":"LTU","num":"440","reg":"Northern Europe","cont":"Europe","ll":[56,24],"area":65300,"col":"#2f7d3a","icon":"Lithuanian national costume","iconId":"lithuania-lithuanian-national-costume","k":9,"cats":{"national":8,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Luxembourg","a3":"LUX","num":"442","reg":"Western Europe","cont":"Europe","ll":[49.75,6.16666666],"area":2586,"col":"#2c5aa0","icon":"Luxembourg folk costume","iconId":"luxembourg-luxembourg-folk-costume","k":1,"cats":{"national":0,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Madagascar","a3":"MDG","num":"450","reg":"East Africa","cont":"Africa","ll":[-20,47],"area":587041,"col":"#f7f4ec","icon":"Lamba","iconId":"madagascar-lamba","k":4,"cats":{"national":4,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Malawi","a3":"MWI","num":"454","reg":"East Africa","cont":"Africa","ll":[-13.5,34],"area":118484,"col":"#2c5aa0","icon":"Chitenje","iconId":"malawi-chitenje","k":4,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Malaysia","a3":"MYS","num":"458","reg":"Southeast Asia","cont":"Asia","ll":[2.5,112.5],"area":330803,"col":"#147a78","icon":"Baju Melayu","iconId":"malaysia-baju-melayu","k":28,"cats":{"national":13,"ethnic":9,"bridal":1,"ceremonial":3,"historical":2}},{"n":"Maldives","a3":"MDV","num":"462","reg":"South Asia","cont":"Asia","ll":[3.25,73],"area":300,"col":"#b3242c","icon":"Dhiguhedhun","iconId":"maldives-dhiguhedhun","k":7,"cats":{"national":3,"ethnic":0,"bridal":2,"ceremonial":2,"historical":0}},{"n":"Mali","a3":"MLI","num":"466","reg":"West Africa","cont":"Africa","ll":[17,-4],"area":1240192,"col":"#7a4a2a","icon":"Bogolan boubou","iconId":"mali-bogolan-boubou","k":7,"cats":{"national":4,"ethnic":2,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Malta","a3":"MLT","num":"470","reg":"Southern Europe","cont":"Europe","ll":[35.83333333,14.58333333],"area":316,"col":"#1e1c1c","icon":"Għonnella","iconId":"malta-gonnella","k":5,"cats":{"national":4,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Marshall Islands","a3":"MHL","num":"584","reg":"Oceania","cont":"Oceania","ll":[9,168],"area":181,"col":"#d0687f","icon":"Wau","iconId":"marshall-isl-wau","k":3,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Mauritania","a3":"MRT","num":"478","reg":"West Africa","cont":"Africa","ll":[20,-12],"area":1030700,"col":"#2b3a7a","icon":"Melhfa","iconId":"mauritania-melhfa","k":4,"cats":{"national":2,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Mauritius","a3":"MUS","num":"480","reg":"East Africa","cont":"Africa","ll":[-20.28333333,57.55],"area":2040,"col":"#d0687f","icon":"Sega dress","iconId":"mauritius-sega-dress","k":8,"cats":{"national":3,"ethnic":3,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Mexico","a3":"MEX","num":"484","reg":"North America","cont":"Americas","ll":[23,-102],"area":1964375,"col":"#1e1c1c","icon":"Charro outfit","iconId":"mexico-charro-outfit","k":21,"cats":{"national":2,"ethnic":13,"bridal":0,"ceremonial":0,"historical":6}},{"n":"Micronesia","a3":"FSM","num":"583","reg":"Oceania","cont":"Oceania","ll":[6.91666666,158.25],"area":702,"col":"#e07020","icon":"Lavalava","iconId":"micronesia-lavalava","k":2,"cats":{"national":0,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Moldova","a3":"MDA","num":"498","reg":"Eastern Europe","cont":"Europe","ll":[47,29],"area":33846,"col":"#f7f4ec","icon":"Ie","iconId":"moldova-ie","k":11,"cats":{"national":8,"ethnic":3,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Monaco","a3":"MCO","num":"492","reg":"Western Europe","cont":"Europe","ll":[43.73333333,7.4],"area":2.02,"col":"#b3242c","icon":"Monegasque folk dress","iconId":"monaco-monegasque-folk-dress","k":3,"cats":{"national":0,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Mongolia","a3":"MNG","num":"496","reg":"East Asia","cont":"Asia","ll":[46,105],"area":1564110,"col":"#2c5aa0","icon":"Deel","iconId":"mongolia-deel","k":5,"cats":{"national":4,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Montenegro","a3":"MNE","num":"499","reg":"Southern Europe","cont":"Europe","ll":[42.5,19.3],"area":13812,"col":"#b3242c","icon":"Montenegrin cap","iconId":"montenegro-montenegrin-cap","k":8,"cats":{"national":6,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Morocco","a3":"MAR","num":"504","reg":"North Africa","cont":"Africa","ll":[32,-5],"area":446550,"col":"#7a4a2a","icon":"Djellaba","iconId":"morocco-djellaba","k":9,"cats":{"national":7,"ethnic":1,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Mozambique","a3":"MOZ","num":"508","reg":"East Africa","cont":"Africa","ll":[-18.25,35],"area":801590,"col":"#e07020","icon":"Capulana","iconId":"mozambique-capulana","k":5,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Myanmar","a3":"MMR","num":"104","reg":"Southeast Asia","cont":"Asia","ll":[22,98],"area":676578,"col":"#2f7d3a","icon":"Longyi","iconId":"myanmar-longyi","k":14,"cats":{"national":5,"ethnic":3,"bridal":0,"ceremonial":4,"historical":2}},{"n":"Namibia","a3":"NAM","num":"516","reg":"Southern Africa","cont":"Africa","ll":[-22,17],"area":825615,"col":"#b3242c","icon":"Herero long dress","iconId":"namibia-herero-long-dress","k":7,"cats":{"national":1,"ethnic":5,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Nauru","a3":"NRU","num":"520","reg":"Oceania","cont":"Oceania","ll":[-0.53333333,166.91666666],"area":21,"col":"#c9a36b","icon":"Nauruan fibre clothing","iconId":"nauru-nauruan-fibre-clothing","k":2,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Nepal","a3":"NPL","num":"524","reg":"South Asia","cont":"Asia","ll":[28,84],"area":147181,"col":"#d0687f","icon":"Dhaka topi","iconId":"nepal-dhaka-topi","k":11,"cats":{"national":7,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Netherlands","a3":"NLD","num":"528","reg":"Western Europe","cont":"Europe","ll":[52.5,5.75],"area":41850,"col":"#1e1c1c","icon":"Volendam costume","iconId":"netherlands-volendam-costume","k":7,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":1,"historical":1}},{"n":"New Zealand","a3":"NZL","num":"554","reg":"Oceania","cont":"Oceania","ll":[-41,174],"area":270467,"col":"#7a4a2a","icon":"Kākahu","iconId":"new-zealand-kakahu","k":6,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Nicaragua","a3":"NIC","num":"558","reg":"Central America","cont":"Americas","ll":[13,-85],"area":130373,"col":"#f7f4ec","icon":"Huipil","iconId":"nicaragua-huipil","k":6,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Niger","a3":"NER","num":"562","reg":"West Africa","cont":"Africa","ll":[16,8],"area":1267000,"col":"#2b3a7a","icon":"Tagelmust","iconId":"niger-tagelmust","k":9,"cats":{"national":4,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Nigeria","a3":"NGA","num":"566","reg":"West Africa","cont":"Africa","ll":[10,8],"area":923768,"col":"#2b3a7a","icon":"Agbada","iconId":"nigeria-agbada","k":26,"cats":{"national":4,"ethnic":17,"bridal":3,"ceremonial":2,"historical":0}},{"n":"North Korea","a3":"PRK","num":"408","reg":"East Asia","cont":"Asia","ll":[40,127],"area":120538,"col":"#f7f4ec","icon":"Chosŏn-ot","iconId":"north-korea-choson-ot","k":4,"cats":{"national":3,"ethnic":0,"bridal":1,"ceremonial":0,"historical":0}},{"n":"North Macedonia","a3":"MKD","num":"807","reg":"Southern Europe","cont":"Europe","ll":[41.83333333,22],"area":25713,"col":"#b3242c","icon":"Macedonian national costume","iconId":"north-macedo-macedonian-national-costume","k":5,"cats":{"national":1,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Norway","a3":"NOR","num":"578","reg":"Northern Europe","cont":"Europe","ll":[62,10],"area":323802,"col":"#b8bcc2","icon":"Bunad","iconId":"norway-bunad","k":10,"cats":{"national":3,"ethnic":5,"bridal":1,"ceremonial":1,"historical":0}},{"n":"Oman","a3":"OMN","num":"512","reg":"Western Asia","cont":"Asia","ll":[21,57],"area":309500,"col":"#f7f4ec","icon":"Thawb","iconId":"oman-thawb","k":11,"cats":{"national":7,"ethnic":3,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Pakistan","a3":"PAK","num":"586","reg":"South Asia","cont":"Asia","ll":[30,70],"area":881912,"col":"#2f7d3a","icon":"Shalwar kameez","iconId":"pakistan-shalwar-kameez","k":27,"cats":{"national":4,"ethnic":17,"bridal":6,"ceremonial":0,"historical":0}},{"n":"Palau","a3":"PLW","num":"585","reg":"Oceania","cont":"Oceania","ll":[7.5,134.5],"area":459,"col":"#c9a36b","icon":"Gerévut","iconId":"palau-gerevut","k":2,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Palestine","a3":"PSE","num":"275","reg":"Western Asia","cont":"Asia","ll":[31.9,35.2],"area":6220,"col":"#1e1c1c","icon":"Thawb","iconId":"palestine-thawb","k":19,"cats":{"national":8,"ethnic":8,"bridal":2,"ceremonial":0,"historical":1}},{"n":"Panama","a3":"PAN","num":"591","reg":"Central America","cont":"Americas","ll":[9,-80],"area":75417,"col":"#f7f4ec","icon":"Pollera","iconId":"panama-pollera","k":7,"cats":{"national":2,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Papua New Guinea","a3":"PNG","num":"598","reg":"Oceania","cont":"Oceania","ll":[-6,147],"area":462840,"col":"#b3242c","icon":"Huli wig","iconId":"papua-new-gu-huli-wig","k":8,"cats":{"national":2,"ethnic":6,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Paraguay","a3":"PRY","num":"600","reg":"South America","cont":"Americas","ll":[-23,-58],"area":406752,"col":"#f7f4ec","icon":"Ao po'i","iconId":"paraguay-ao-po-i","k":3,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Peru","a3":"PER","num":"604","reg":"South America","cont":"Americas","ll":[-10,-76],"area":1285216,"col":"#b3242c","icon":"Poncho","iconId":"peru-poncho","k":12,"cats":{"national":1,"ethnic":9,"bridal":0,"ceremonial":0,"historical":2}},{"n":"Philippines","a3":"PHL","num":"608","reg":"Southeast Asia","cont":"Asia","ll":[13,122],"area":342353,"col":"#f4ead0","icon":"Barong tagalog","iconId":"philippines-barong-tagalog","k":20,"cats":{"national":7,"ethnic":5,"bridal":0,"ceremonial":0,"historical":8}},{"n":"Poland","a3":"POL","num":"616","reg":"Eastern Europe","cont":"Europe","ll":[52,20],"area":312679,"col":"#9e1b32","icon":"Kontusz","iconId":"poland-kontusz","k":16,"cats":{"national":4,"ethnic":11,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Portugal","a3":"PRT","num":"620","reg":"Southern Europe","cont":"Europe","ll":[39.5,-8],"area":92090,"col":"#b3242c","icon":"Traje à Vianesa","iconId":"portugal-traje-a-vianesa","k":7,"cats":{"national":1,"ethnic":5,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Qatar","a3":"QAT","num":"634","reg":"Western Asia","cont":"Asia","ll":[25.5,51.25],"area":11586,"col":"#f7f4ec","icon":"Thawb","iconId":"qatar-thawb","k":13,"cats":{"national":8,"ethnic":4,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Republic of the Congo","a3":"COG","num":"178","reg":"Central Africa","cont":"Africa","ll":[-1,15],"area":342000,"col":"#f2c230","icon":"Liputa","iconId":"republic-of--liputa","k":2,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Romania","a3":"ROU","num":"642","reg":"Eastern Europe","cont":"Europe","ll":[46,25],"area":238391,"col":"#f7f4ec","icon":"Ie","iconId":"romania-ie","k":13,"cats":{"national":8,"ethnic":5,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Russia","a3":"RUS","num":"643","reg":"Eastern Europe","cont":"Europe","ll":[60,100],"area":17098242,"col":"#b3242c","icon":"Sarafan","iconId":"russia-sarafan","k":22,"cats":{"national":7,"ethnic":6,"bridal":1,"ceremonial":8,"historical":0}},{"n":"Rwanda","a3":"RWA","num":"646","reg":"East Africa","cont":"Africa","ll":[-2,30],"area":26338,"col":"#f4ead0","icon":"Mushanana","iconId":"rwanda-mushanana","k":7,"cats":{"national":1,"ethnic":2,"bridal":0,"ceremonial":4,"historical":0}},{"n":"Saint Kitts and Nevis","a3":"KNA","num":"659","reg":"Caribbean","cont":"Americas","ll":[17.33333333,-62.75],"area":261,"col":"#f7f4ec","icon":"Kittitian women's national dress","iconId":"saint-kitts--kittitian-women-s-national-dress","k":2,"cats":{"national":0,"ethnic":2,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Saint Lucia","a3":"LCA","num":"662","reg":"Caribbean","cont":"Americas","ll":[13.88333333,-60.96666666],"area":616,"col":"#f7f4ec","icon":"Wob dwiyet","iconId":"saint-lucia-wob-dwiyet","k":3,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Saint Vincent and the Grenadines","a3":"VCT","num":"670","reg":"Caribbean","cont":"Americas","ll":[13.25,-61.2],"area":389,"col":"#f7f4ec","icon":"Vincentian national dress","iconId":"saint-vincen-vincentian-national-dress","k":1,"cats":{"national":0,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Samoa","a3":"WSM","num":"882","reg":"Oceania","cont":"Oceania","ll":[-13.58333333,-172.33333333],"area":2842,"col":"#b3242c","icon":"Puletasi","iconId":"samoa-puletasi","k":5,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"San Marino","a3":"SMR","num":"674","reg":"Southern Europe","cont":"Europe","ll":[43.76666666,12.41666666],"area":61,"col":"#2c5aa0","icon":"Crossbow Corps dress","iconId":"san-marino-crossbow-corps-dress","k":3,"cats":{"national":0,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Saudi Arabia","a3":"SAU","num":"682","reg":"Western Asia","cont":"Asia","ll":[25,45],"area":2149690,"col":"#f7f4ec","icon":"Thawb","iconId":"saudi-arabia-thawb","k":14,"cats":{"national":8,"ethnic":4,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Senegal","a3":"SEN","num":"686","reg":"West Africa","cont":"Africa","ll":[14,-14],"area":196722,"col":"#2c5aa0","icon":"Grand boubou","iconId":"senegal-grand-boubou","k":6,"cats":{"national":5,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Serbia","a3":"SRB","num":"688","reg":"Southern Europe","cont":"Europe","ll":[44,21],"area":88361,"col":"#8a8f94","icon":"Šajkača","iconId":"serbia-sajkaca","k":12,"cats":{"national":8,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Seychelles","a3":"SYC","num":"690","reg":"East Africa","cont":"Africa","ll":[-4.58333333,55.66666666],"area":452,"col":"#2c5aa0","icon":"Penwar","iconId":"seychelles-penwar","k":3,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Sierra Leone","a3":"SLE","num":"694","reg":"West Africa","cont":"Africa","ll":[8.5,-11.5],"area":71740,"col":"#b3242c","icon":"Ronko","iconId":"sierra-leone-ronko","k":5,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Singapore","a3":"SGP","num":"702","reg":"Southeast Asia","cont":"Asia","ll":[1.36666666,103.8],"area":710,"col":"#147a78","icon":"Baju kurung","iconId":"singapore-baju-kurung","k":11,"cats":{"national":1,"ethnic":8,"bridal":0,"ceremonial":1,"historical":1}},{"n":"Slovakia","a3":"SVK","num":"703","reg":"Eastern Europe","cont":"Europe","ll":[48.66666666,19.5],"area":49037,"col":"#b3242c","icon":"Slovak kroj","iconId":"slovakia-slovak-kroj","k":4,"cats":{"national":3,"ethnic":1,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Slovenia","a3":"SVN","num":"705","reg":"Southern Europe","cont":"Europe","ll":[46.11666666,14.81666666],"area":20273,"col":"#f7f4ec","icon":"Peča","iconId":"slovenia-peca","k":8,"cats":{"national":3,"ethnic":4,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Solomon Islands","a3":"SLB","num":"090","reg":"Oceania","cont":"Oceania","ll":[-8,159],"area":28896,"col":"#b3242c","icon":"Kabilato","iconId":"solomon-isla-kabilato","k":7,"cats":{"national":1,"ethnic":6,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Somalia","a3":"SOM","num":"706","reg":"East Africa","cont":"Africa","ll":[10,49],"area":637657,"col":"#e07020","icon":"Dirac","iconId":"somalia-dirac","k":7,"cats":{"national":7,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"South Africa","a3":"ZAF","num":"710","reg":"Southern Africa","cont":"Africa","ll":[-29,24],"area":1221037,"col":"#1e1c1c","icon":"Isidwaba","iconId":"south-africa-isidwaba","k":15,"cats":{"national":1,"ethnic":11,"bridal":1,"ceremonial":1,"historical":1}},{"n":"South Korea","a3":"KOR","num":"410","reg":"East Asia","cont":"Asia","ll":[37,127.5],"area":100210,"col":"#e07a9b","icon":"Hanbok","iconId":"south-korea-hanbok","k":14,"cats":{"national":11,"ethnic":1,"bridal":1,"ceremonial":0,"historical":1}},{"n":"South Sudan","a3":"SSD","num":"728","reg":"East Africa","cont":"Africa","ll":[7,30],"area":619745,"col":"#b3242c","icon":"Malual","iconId":"south-sudan-malual","k":5,"cats":{"national":2,"ethnic":2,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Spain","a3":"ESP","num":"724","reg":"Southern Europe","cont":"Europe","ll":[40,-4],"area":505992,"col":"#b3242c","icon":"Traje de flamenca","iconId":"spain-traje-de-flamenca","k":12,"cats":{"national":3,"ethnic":6,"bridal":0,"ceremonial":2,"historical":1}},{"n":"Sri Lanka","a3":"LKA","num":"144","reg":"South Asia","cont":"Asia","ll":[7,81],"area":65610,"col":"#f7f4ec","icon":"Osariya","iconId":"sri-lanka-osariya","k":6,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Sudan","a3":"SDN","num":"729","reg":"North Africa","cont":"Africa","ll":[15,30],"area":1886068,"col":"#f7f4ec","icon":"Toub","iconId":"sudan-toub","k":7,"cats":{"national":4,"ethnic":2,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Suriname","a3":"SUR","num":"740","reg":"South America","cont":"Americas","ll":[4,-56],"area":163820,"col":"#e07020","icon":"Koto","iconId":"suriname-koto","k":8,"cats":{"national":0,"ethnic":8,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Sweden","a3":"SWE","num":"752","reg":"Northern Europe","cont":"Europe","ll":[62,15],"area":450295,"col":"#2c5aa0","icon":"Sverigedräkten","iconId":"sweden-sverigedrakten","k":10,"cats":{"national":4,"ethnic":3,"bridal":1,"ceremonial":2,"historical":0}},{"n":"Switzerland","a3":"CHE","num":"756","reg":"Western Europe","cont":"Europe","ll":[47,8],"area":41284,"col":"#f7f4ec","icon":"Appenzell women's costume","iconId":"switzerland-appenzell-women-s-costume","k":9,"cats":{"national":1,"ethnic":6,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Syria","a3":"SYR","num":"760","reg":"Western Asia","cont":"Asia","ll":[35,38],"area":185180,"col":"#f7f4ec","icon":"Thawb","iconId":"syria-thawb","k":16,"cats":{"national":5,"ethnic":8,"bridal":1,"ceremonial":1,"historical":1}},{"n":"São Tomé and Príncipe","a3":"STP","num":"678","reg":"Central Africa","cont":"Africa","ll":[1,7],"area":964,"col":"#f7f4ec","icon":"Traditional shirt","iconId":"sao-tome-and-traditional-shirt","k":2,"cats":{"national":0,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Tajikistan","a3":"TJK","num":"762","reg":"Central Asia","cont":"Asia","ll":[39,71],"area":143100,"col":"#9e1b32","icon":"Kurta (women's)","iconId":"tajikistan-kurta-women-s","k":11,"cats":{"national":9,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Tanzania","a3":"TZA","num":"834","reg":"East Africa","cont":"Africa","ll":[-6,35],"area":945087,"col":"#f2c230","icon":"Kanga","iconId":"tanzania-kanga","k":9,"cats":{"national":5,"ethnic":3,"bridal":1,"ceremonial":0,"historical":0}},{"n":"Thailand","a3":"THA","num":"764","reg":"Southeast Asia","cont":"Asia","ll":[15,100],"area":513120,"col":"#c99a2e","icon":"Chut thai phra ratcha niyom","iconId":"thailand-chut-thai-phra-ratcha-niyom","k":8,"cats":{"national":2,"ethnic":1,"bridal":0,"ceremonial":3,"historical":2}},{"n":"Timor-Leste","a3":"TLS","num":"626","reg":"Southeast Asia","cont":"Asia","ll":[-8.83333333,125.91666666],"area":14874,"col":"#b3242c","icon":"Tais mane","iconId":"timor-leste-tais-mane","k":6,"cats":{"national":3,"ethnic":2,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Togo","a3":"TGO","num":"768","reg":"West Africa","cont":"Africa","ll":[8,1.16666666],"area":56785,"col":"#c99a2e","icon":"Pagne","iconId":"togo-pagne","k":2,"cats":{"national":1,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Tonga","a3":"TON","num":"776","reg":"Oceania","cont":"Oceania","ll":[-20,-175],"area":747,"col":"#c9a36b","icon":"Ta'ovala","iconId":"tonga-ta-ovala","k":6,"cats":{"national":3,"ethnic":1,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Trinidad and Tobago","a3":"TTO","num":"780","reg":"Caribbean","cont":"Americas","ll":[11,-61],"area":5130,"col":"#e07020","icon":"Booboo","iconId":"trinidad-and-booboo","k":11,"cats":{"national":0,"ethnic":3,"bridal":0,"ceremonial":8,"historical":0}},{"n":"Tunisia","a3":"TUN","num":"788","reg":"North Africa","cont":"Africa","ll":[34,9],"area":163610,"col":"#f4ead0","icon":"Jebba","iconId":"tunisia-jebba","k":7,"cats":{"national":6,"ethnic":0,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Turkey","a3":"TUR","num":"792","reg":"Western Asia","cont":"Asia","ll":[39,35],"area":783562,"col":"#9e1b32","icon":"Ottoman kaftan","iconId":"turkey-ottoman-kaftan","k":29,"cats":{"national":14,"ethnic":5,"bridal":1,"ceremonial":0,"historical":9}},{"n":"Turkmenistan","a3":"TKM","num":"795","reg":"Central Asia","cont":"Asia","ll":[40,60],"area":488100,"col":"#1e1c1c","icon":"Telpek","iconId":"turkmenistan-telpek","k":5,"cats":{"national":5,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Tuvalu","a3":"TUV","num":"798","reg":"Oceania","cont":"Oceania","ll":[-8,178],"area":26,"col":"#f2c230","icon":"Te titi tao","iconId":"tuvalu-te-titi-tao","k":5,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Uganda","a3":"UGA","num":"800","reg":"East Africa","cont":"Africa","ll":[1,32],"area":241550,"col":"#f2c230","icon":"Gomesi","iconId":"uganda-gomesi","k":3,"cats":{"national":3,"ethnic":0,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Ukraine","a3":"UKR","num":"804","reg":"Eastern Europe","cont":"Europe","ll":[49,32],"area":603500,"col":"#f7f4ec","icon":"Vyshyvanka","iconId":"ukraine-vyshyvanka","k":13,"cats":{"national":9,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"United Arab Emirates","a3":"ARE","num":"784","reg":"Western Asia","cont":"Asia","ll":[24,54],"area":83600,"col":"#f7f4ec","icon":"Thawb","iconId":"united-arab--thawb","k":13,"cats":{"national":9,"ethnic":3,"bridal":0,"ceremonial":1,"historical":0}},{"n":"United Kingdom","a3":"GBR","num":"826","reg":"Northern Europe","cont":"Europe","ll":[54,-2],"area":242900,"col":"#b3242c","icon":"Kilt","iconId":"united-kingd-kilt","k":22,"cats":{"national":7,"ethnic":7,"bridal":2,"ceremonial":3,"historical":3}},{"n":"United States","a3":"USA","num":"840","reg":"North America","cont":"Americas","ll":[38,-97],"area":9372610,"col":"#c9a36b","icon":"Cowboy hat","iconId":"united-state-cowboy-hat","k":27,"cats":{"national":1,"ethnic":20,"bridal":0,"ceremonial":5,"historical":1}},{"n":"Uruguay","a3":"URY","num":"858","reg":"South America","cont":"Americas","ll":[-33,-56],"area":181034,"col":"#c9a36b","icon":"Gaucho outfit","iconId":"uruguay-gaucho-outfit","k":5,"cats":{"national":1,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Uzbekistan","a3":"UZB","num":"860","reg":"Central Asia","cont":"Asia","ll":[41,64],"area":447400,"col":"#2c5aa0","icon":"Chopon","iconId":"uzbekistan-chopon","k":8,"cats":{"national":7,"ethnic":0,"bridal":0,"ceremonial":0,"historical":1}},{"n":"Vanuatu","a3":"VUT","num":"548","reg":"Oceania","cont":"Oceania","ll":[-16,167],"area":12189,"col":"#2c5aa0","icon":"Aelan dres","iconId":"vanuatu-aelan-dres","k":3,"cats":{"national":1,"ethnic":1,"bridal":0,"ceremonial":1,"historical":0}},{"n":"Vatican City","a3":"VAT","num":"336","reg":"Southern Europe","cont":"Europe","ll":[41.9,12.45],"area":0.44,"col":"#f7f4ec","icon":"White papal cassock","iconId":"vatican-city-white-papal-cassock","k":18,"cats":{"national":0,"ethnic":0,"bridal":0,"ceremonial":18,"historical":0}},{"n":"Venezuela","a3":"VEN","num":"862","reg":"South America","cont":"Americas","ll":[8,-66],"area":916445,"col":"#f7f4ec","icon":"Liqui liqui","iconId":"venezuela-liqui-liqui","k":8,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":3,"historical":0}},{"n":"Vietnam","a3":"VNM","num":"704","reg":"Southeast Asia","cont":"Asia","ll":[16.16666666,107.83333333],"area":331212,"col":"#b3242c","icon":"Áo dài","iconId":"vietnam-ao-dai","k":24,"cats":{"national":6,"ethnic":10,"bridal":1,"ceremonial":3,"historical":4}},{"n":"Yemen","a3":"YEM","num":"887","reg":"Western Asia","cont":"Asia","ll":[15,48],"area":527968,"col":"#f7f4ec","icon":"Thawb","iconId":"yemen-thawb","k":8,"cats":{"national":4,"ethnic":4,"bridal":0,"ceremonial":0,"historical":0}},{"n":"Zambia","a3":"ZMB","num":"894","reg":"East Africa","cont":"Africa","ll":[-15,30],"area":752612,"col":"#e07020","icon":"Chitenge","iconId":"zambia-chitenge","k":7,"cats":{"national":2,"ethnic":3,"bridal":0,"ceremonial":2,"historical":0}},{"n":"Zimbabwe","a3":"ZWE","num":"716","reg":"East Africa","cont":"Africa","ll":[-20,30],"area":390757,"col":"#2f7d3a","icon":"Chitenge","iconId":"zimbabwe-chitenge","k":3,"cats":{"national":2,"ethnic":0,"bridal":0,"ceremonial":0,"historical":1}}];
+const VW = 600, VH = 900, PAPER = '#fbf8f1', INK = '#2b2622';
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const CATS = [['national', 'National dress'], ['ethnic', 'Ethnic & regional'], ['bridal', 'Bridal'], ['ceremonial', 'Ceremonial'], ['historical', 'Historical']];
+const CATLABEL = Object.fromEntries(CATS);
+const CATCOL = k => getComputedStyle(document.documentElement).getPropertyValue('--c-' + k).trim();
+const TONE = { robe:'Robe', coat:'Coat', jacket:'Jacket', tunic:'Tunic', shirt:'Shirt or blouse', dress:'Dress', skirt:'Skirt', trousers:'Trousers', wrap:'Wrapped cloth', shawl:'Shawl or scarf', sash:'Sash or belt', vest:'Vest', headwear:'Headwear', footwear:'Footwear', outfit:'Whole outfit', apron:'Apron', accessory:'Accessory' };
+const CNAME = {}; Object.keys(WCOL).forEach(k => { if (!CNAME[WCOL[k]]) CNAME[WCOL[k]] = k[0].toUpperCase() + k.slice(1); });
+const MORE = [...new Set(Object.values(WCOL))].concat(['#e9c46a', '#2a9d8f', '#8ab17d', '#f4a261', '#3d405b', '#81b29a']).filter((c, i, a) => a.indexOf(c) === i);
+const SAREE_URL = 'https://claude.ai/artifact/Sm46Dj1zFFUnqyAZVW9oEh';
+const byNum = {}, byName = {}, byA3 = {};
+META.forEach(m => { byNum[m.num] = m; byName[m.n] = m; byA3[m.a3] = m; });
+$('nG').textContent = META.reduce((s, m) => s + m.k, 0).toLocaleString();
+
+let store = {};
+try { store = JSON.parse(localStorage.getItem('wdg-v1') || '{}') || {}; } catch (e) { store = {}; }
+store.fills = store.fills || {};
+const persist = () => { try { localStorage.setItem('wdg-v1', JSON.stringify(store)); } catch (e) {} };
+
+/* ---------- stars ---------- */
+function drawStars() {
+  const c = $('stars'), d = devicePixelRatio || 1, w = innerWidth, h = innerHeight;
+  c.width = w * d; c.height = h * d; c.style.width = w + 'px'; c.style.height = h + 'px';
+  const x = c.getContext('2d'); x.scale(d, d); x.fillStyle = '#0a0f1f'; x.fillRect(0, 0, w, h);
+  let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < Math.round(w * h / 2600); i++) { x.globalAlpha = .25 + rnd() * .6; x.fillStyle = rnd() > .85 ? '#ffe9c4' : '#dfe6ff'; x.beginPath(); x.arc(rnd() * w, rnd() * h, rnd() * 1.1 + .2, 0, 7); x.fill(); }
+}
+drawStars();
+
+/* ---------- globe ---------- */
+const canvas = $('gc'), ctx = canvas.getContext('2d');
+const proj = d3.geoOrthographic().clipAngle(90).precision(.4).rotate([-20, -18, 0]);
+const gpath = d3.geoPath(proj, ctx);
+const grat = d3.geoGraticule10();
+let feats = [], dots = [], zoomK = 1, hover = null, selected = null, size = [0, 0], mini = false;
+const NOT_LISTED = '#3a4566';
+
+function resize() {
+  const r = $('globe').getBoundingClientRect(), d = devicePixelRatio || 1;
+  size = [r.width, r.height];
+  canvas.width = Math.max(1, Math.round(r.width * d)); canvas.height = Math.max(1, Math.round(r.height * d));
+  ctx.setTransform(d, 0, 0, d, 0, 0);
+  fit(); draw();
+}
+function fit() {
+  const [w, h] = size;
+  if (mini) { proj.translate([w / 2, h / 2]).scale(w / 2 * .9); return; }
+  const base = Math.min(w * (w < 640 ? 1.1 : 1), h * (w < 640 ? .8 : .9)) * .42;
+  proj.translate([w / 2, h / 2 + (w < 640 ? 18 : 10)]).scale(base * zoomK);
+}
+function visible(ll) { const r = proj.rotate(); return d3.geoDistance(ll, [-r[0], -r[1]]) < Math.PI / 2 - .02; }
+function draw() {
+  const [w, h] = size, r = proj.scale(), [cx, cy] = proj.translate();
+  ctx.clearRect(0, 0, w, h);
+  if (!mini) {
+    const glow = ctx.createRadialGradient(cx, cy, r * .96, cx, cy, r * 1.22);
+    glow.addColorStop(0, 'rgba(120,175,255,.38)'); glow.addColorStop(1, 'rgba(120,175,255,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
+  }
+  const ocean = ctx.createRadialGradient(cx - r * .35, cy - r * .4, r * .05, cx, cy, r);
+  ocean.addColorStop(0, '#2f6aa0'); ocean.addColorStop(.7, '#163a66'); ocean.addColorStop(1, '#0c2244');
+  ctx.beginPath(); gpath({ type: 'Sphere' }); ctx.fillStyle = ocean; ctx.fill();
+  ctx.beginPath(); gpath(grat); ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = .6; ctx.stroke();
+  ctx.lineJoin = 'round';
+  for (const f of feats) {
+    ctx.beginPath(); gpath(f);
+    ctx.fillStyle = f.m ? f.m.col : NOT_LISTED; ctx.fill();
+    ctx.strokeStyle = 'rgba(8,12,26,.55)'; ctx.lineWidth = mini ? .3 : .55; ctx.stroke();
+  }
+  const hl = (m, col, lw) => {
+    const f = feats.find(x => x.m === m);
+    if (f) { ctx.beginPath(); gpath(f); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.stroke(); }
+  };
+  if (hover && hover !== selected) hl(hover, 'rgba(255,255,255,.95)', 1.6);
+  if (selected) hl(selected, '#e0ad4f', mini ? 1.6 : 2.4);
+  const shade = ctx.createRadialGradient(cx - r * .38, cy - r * .42, r * .1, cx, cy, r * 1.02);
+  shade.addColorStop(0, 'rgba(255,255,255,.12)'); shade.addColorStop(.45, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(0,4,20,.55)');
+  ctx.beginPath(); gpath({ type: 'Sphere' }); ctx.fillStyle = shade; ctx.fill();
+  if (!mini) for (const m of dots) {
+    const ll = [m.ll[1], m.ll[0]]; if (!visible(ll)) continue;
+    const [x, y] = proj(ll), rr = m === hover || m === selected ? 6 : 4.2;
+    ctx.beginPath(); ctx.arc(x, y, rr + 2.2, 0, 7); ctx.fillStyle = m === selected ? '#e0ad4f' : 'rgba(255,255,255,.85)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, rr, 0, 7); ctx.fillStyle = m.col; ctx.fill();
+  }
+}
+function hit(x, y) {
+  for (const m of dots) { const ll = [m.ll[1], m.ll[0]]; if (!visible(ll)) continue; const p = proj(ll); if (Math.hypot(p[0] - x, p[1] - y) < 11) return m; }
+  const p = proj.invert([x, y]); if (!p || !visible(p)) return null;
+  for (const f of feats) {
+    if (!f.m) continue;
+    const b = f.b, wrap = b[0][0] > b[1][0];
+    if (p[1] < b[0][1] - .5 || p[1] > b[1][1] + .5) continue;
+    if (!wrap && (p[0] < b[0][0] - .5 || p[0] > b[1][0] + .5)) continue;
+    if (d3.geoContains(f, p)) return f.m;
+  }
+  return null;
+}
+function inSphere(x, y) { const [cx, cy] = proj.translate(); return Math.hypot(x - cx, y - cy) <= proj.scale(); }
+
+/* rotation and zoom by hand: one finger turns, two fingers or the wheel zoom */
+let spinT = 0, idleUntil = 0, anim = null;
+const ptrs = new Map(); let drag = null, pinch = null, moved = 0;
+canvas.addEventListener('pointerdown', e => {
+  canvas.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.offsetX, e.offsetY]); moved = 0; anim = null;
+  idleUntil = performance.now() + 7000;
+  if (ptrs.size === 1) drag = { p: [e.offsetX, e.offsetY], r: proj.rotate() };
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), k: zoomK }; drag = null; }
+});
+canvas.addEventListener('pointermove', e => {
+  if (!ptrs.has(e.pointerId)) { if (!mini && e.pointerType === 'mouse') hoverAt(e.offsetX, e.offsetY, e.clientX, e.clientY); return; }
+  ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
+  if (mini) return;
+  if (pinch && ptrs.size === 2) { const [a, b] = [...ptrs.values()]; zoomK = Math.max(.7, Math.min(8, pinch.k * Math.hypot(a[0] - b[0], a[1] - b[1]) / pinch.d)); moved = 99; fit(); draw(); return; }
+  if (drag) {
+    const dx = e.offsetX - drag.p[0], dy = e.offsetY - drag.p[1]; moved = Math.max(moved, Math.hypot(dx, dy));
+    if (moved > 4) { canvas.classList.add('dragging'); $('tip').hidden = true; }
+    const k = 75 / proj.scale();
+    proj.rotate([drag.r[0] + dx * k * 1.6, Math.max(-85, Math.min(85, drag.r[1] - dy * k * 1.6)), 0]); draw();
+  }
+});
+function endPtr(e) {
+  const wasTap = ptrs.size === 1 && moved < 6 && !pinch;
+  ptrs.delete(e.pointerId); canvas.classList.remove('dragging');
+  if (ptrs.size < 2) pinch = null; if (!ptrs.size) drag = null;
+  if (!wasTap || e.type === 'pointercancel') return;
+  if (mini) { goGlobe(); return; }
+  const m = hit(e.offsetX, e.offsetY);
+  if (m) openCountry(m, true);
+  else { hover = null; $('tip').hidden = true; draw(); }
+}
+canvas.addEventListener('pointerup', endPtr); canvas.addEventListener('pointercancel', endPtr);
+canvas.addEventListener('pointerleave', () => { if (!ptrs.size) { hover = null; $('tip').hidden = true; draw(); } });
+canvas.addEventListener('wheel', e => { if (mini) return; e.preventDefault(); zoomK = Math.max(.7, Math.min(8, zoomK * Math.exp(-e.deltaY * .0015))); idleUntil = performance.now() + 7000; fit(); draw(); }, { passive: false });
+function hoverAt(x, y, cx, cy) {
+  const m = inSphere(x, y) ? hit(x, y) : null;
+  if (m !== hover) { hover = m; draw(); }
+  if (m) showTip(m, cx, cy); else $('tip').hidden = true;
+  canvas.style.cursor = m ? 'pointer' : '';
+}
+function showTip(m, x, y, tap) {
+  const t = $('tip');
+  t.innerHTML = `<b>${esc(m.n)}</b><i><span class="dot" style="background:${m.col}"></span>${esc(m.icon)}</i><span>${m.k} garment${m.k === 1 ? '' : 's'}${tap ? ' · tap again to open' : ''}</span>`;
+  t.hidden = false;
+  const w = t.offsetWidth, h = t.offsetHeight;
+  t.style.left = Math.min(innerWidth - w - 10, Math.max(10, x + 14)) + 'px';
+  t.style.top = Math.min(innerHeight - h - 10, Math.max(10, y + 14)) + 'px';
+}
+function tick(now) {
+  if (anim) {
+    const t = Math.min(1, (now - anim.t0) / anim.dur), e = d3.easeCubicInOut(t);
+    proj.rotate(anim.ri(e)); if (anim.ki) { zoomK = anim.ki(e); fit(); }
+    draw(); if (t === 1) { const done = anim.done; anim = null; done && done(); }
+  } else if (!mini && !ptrs.size && now > idleUntil && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const r = proj.rotate(); proj.rotate([r[0] + .06, r[1], 0]); draw();
+  }
+  requestAnimationFrame(tick);
+}
+function turnTo(m, done, k) {
+  let ll = [m.ll[1], m.ll[0]];
+  const f = feats.find(x => x.m === m); if (f && m.area > 3000) ll = f.c;
+  const r0 = proj.rotate(), r1 = [-ll[0], -ll[1], 0];
+  r1[0] = r0[0] + ((((r1[0] - r0[0]) % 360) + 540) % 360 - 180);
+  anim = { t0: performance.now(), dur: 900, ri: d3.interpolate(r0, r1), ki: k ? d3.interpolate(zoomK, k) : null, done };
+}
+
+/* ---------- search ---------- */
+let sIdx = -1;
+function suggest() {
+  const q = $('q').value.trim().toLowerCase(), ul = $('sugg');
+  if (!q) { ul.hidden = true; return; }
+  const list = META.filter(m => m.n.toLowerCase().includes(q) || m.icon.toLowerCase().includes(q)).sort((a, b) => (b.n.toLowerCase().startsWith(q) - a.n.toLowerCase().startsWith(q)) || a.n.localeCompare(b.n)).slice(0, 8);
+  sIdx = -1;
+  ul.innerHTML = list.length ? list.map(m => `<li><button type="button" data-a3="${m.a3}"><span class="dot" style="background:${m.col}"></span>${esc(m.n)}<small>${esc(m.icon)}</small></button></li>`).join('') : '<li class="small" style="padding:8px 10px">No country by that name. Try a shorter word.</li>';
+  ul.hidden = false;
+}
+$('q').addEventListener('input', suggest);
+$('q').addEventListener('keydown', e => {
+  const bs = [...$('sugg').querySelectorAll('button')]; if (!bs.length) return;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); sIdx = (sIdx + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length; bs.forEach((b, i) => b.classList.toggle('on', i === sIdx)); }
+  if (e.key === 'Enter') { e.preventDefault(); (bs[sIdx] || bs[0]).click(); }
+  if (e.key === 'Escape') $('sugg').hidden = true;
+});
+$('sugg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('sugg').hidden = true; $('q').value = ''; openCountry(byA3[b.dataset.a3]); });
+
+/* ---------- data ---------- */
+const DATA = {};
+function loadCont(cont) {
+  if (!DATA[cont]) DATA[cont] = fetch('data/' + cont.toLowerCase() + '.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  return DATA[cont];
+}
+const garment = (row, src) => {
+  const [id, c, n, nv, t, who, what, sig, si, cat, alts, img, tint] = row;
+  return { id, country: c, name: n, native: nv, type: t, who, what, sig, cat, tint, img, src: src[si] || null, alts: alts.map(a => ({ n: a[0], nv: a[1], who: a[2], what: a[3], sig: a[4], src: src[a[5]] || null })) };
+};
+const pageCache = {};
+const pageOf = g => pageCache[g.id] || (pageCache[g.id] = garmentPage({ id: g.id, name: g.name, native: g.native, type: g.type, who: g.who, what: g.what, sig: g.sig, tint: g.tint }));
+function svgFor(g, fills, interactive) {
+  const R = pageOf(g), F = fills || {};
+  const pfx = interactive ? 'w' : 't' + g.id.replace(/[^a-z0-9]/gi, '');
+  const defs = (R.clips || []).map((d, i) => `<clipPath id="${pfx}k${i}"><path d="${d}"/></clipPath>`).join('');
+  const body = R.map((r, i) => `<path class="r" data-i="${i}" d="${r.d}" fill="${F[i] || PAPER}"${r.k != null ? ` clip-path="url(#${pfx}k${r.k})"` : ''}/>`).join('');
+  const lines = (R.lines || []).map(d => `<path d="${d}"/>`).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${VH}"${interactive ? ` role="img" aria-label="${esc(g.name)}, line drawing to color"` : ' aria-hidden="true"'}>${defs ? `<defs>${defs}</defs>` : ''}<rect width="${VW}" height="${VH}" fill="${PAPER}"/><g stroke="${INK}" stroke-width="${interactive ? 1.3 : 2}" stroke-linejoin="round">${body}</g>${lines ? `<g fill="none" stroke="${INK}" stroke-width="1.1" stroke-linecap="round" pointer-events="none">${lines}</g>` : ''}</svg>`;
+}
+
+/* ---------- views ---------- */
+let cur = null, curList = [], curCat = 'all', curG = null;
+function setMode(country) {
+  mini = country;
+  document.body.classList.toggle('country-mode', country); document.body.classList.toggle('globe-mode', !country);
+  $('country').hidden = !country; $('tip').hidden = true;
+  const ro = () => { resize(); };
+  ro(); setTimeout(ro, 380); setTimeout(ro, 760);
+}
+function openCountry(m, color) {
+  if (!m) return;
+  selected = m; hover = null; $('tip').hidden = true; idleUntil = performance.now() + 1e9;
+  const go = () => { setMode(true); showCountry(m, color ? m.iconId || true : null); };
+  if (mini) { turnTo(m); go(); } else turnTo(m, go, Math.max(zoomK, 1.6));
+}
+function goGlobe() {
+  setMode(false); try { history.replaceState(null, '', '#'); } catch (e) {}
+  zoomK = 1.4; fit(); idleUntil = performance.now() + 5000; cur = null; curG = null; window.scrollTo(0, 0); draw();
+}
+async function showCountry(m, gid) {
+  cur = m; curCat = 'all'; curG = null;
+  try { history.replaceState(null, '', '#' + m.a3); } catch (e) {}
+  const C = $('country');
+  C.innerHTML = head(m) + `<p class="empty">Loading ${esc(m.n)}’s garments…</p>`;
+  window.scrollTo(0, 0);
+  let d;
+  try { d = await loadCont(m.cont); } catch (e) { C.innerHTML = head(m) + `<p class="empty">The garment list for ${esc(m.cont)} did not load. Check the connection and pick the country again.</p>`; return; }
+  if (cur !== m) return;
+  curList = d.rows.filter(r => r[1] === m.n).map(r => garment(r, d.src));
+  const ic = curList.findIndex(g => g.id === m.iconId); if (ic > 0) curList.unshift(curList.splice(ic, 1)[0]);
+  if (gid) { const g = curList.find(x => x.id === gid) || curList[0]; if (g) return openGarment(g); }
+  drawCountry();
+}
+function head(m) {
+  return `<div class="chead"><button class="crumb" type="button" data-act="globe">‹ Back to the globe</button><h2>${esc(m.n)}</h2>
+  <div class="iconic"><span class="dot" style="background:${m.col}"></span><span>Iconic garment: <b>${esc(m.icon)}</b></span><span>· ${esc(m.reg)}</span></div></div>`;
+}
+function drawCountry() {
+  const m = cur, C = $('country');
+  const counts = {}; CATS.forEach(([k]) => { counts[k] = curList.filter(g => g.cat === k).length; });
+  const chips = `<div class="chips" role="group" aria-label="Show garments by kind"><button class="chip" type="button" data-cat="all" aria-pressed="${curCat === 'all'}">All<small>${curList.length}</small></button>` +
+    CATS.filter(([k]) => counts[k]).map(([k, l]) => `<button class="chip" type="button" data-cat="${k}" aria-pressed="${curCat === k}"><i style="background:var(--c-${k})"></i>${l}<small>${counts[k]}</small></button>`).join('') + `</div>`;
+  const list = curList.filter(g => curCat === 'all' || g.cat === curCat);
+  const sareeNote = (m.n === 'India' || m.n === 'Bangladesh') ? `<p class="saree">The sarees of ${esc(m.n)} have a book of their own, with 116 sarees drawn in detail: <a href="${SAREE_URL}" target="_blank" rel="noopener">Saree Coloring Book</a>. This page holds the rest of the country’s dress.</p>` : '';
+  C.innerHTML = head(m) + chips +
+    `<p class="catnote">${catNote(curCat, list.length, m.n)}</p>` + sareeNote +
+    `<ul class="grid">` + list.map(g => `<li><button class="card" type="button" data-g="${esc(g.id)}"><span class="thumb" data-t="${esc(g.id)}"></span><span class="cap"><span class="tag"><i style="background:var(--c-${g.cat})"></i>${CATLABEL[g.cat]}</span><b>${esc(g.name)}</b><span>${esc(TONE[g.type])}${g.alts.length ? ` · also ${g.alts.length} similar` : ''}</span></span></button></li>`).join('') + `</ul>`;
+  lazyThumbs();
+}
+function catNote(cat, n, c) {
+  const base = {
+    all: `Every garment the sources describe for ${c}, each with its own page to color. Where two garments came out as the same drawing, they share one page and the second is listed on it.`,
+    national: 'Dress worn widely across the country and often treated as its national costume.',
+    ethnic: 'Dress of a particular people, Indigenous nation, minority or region within the country.',
+    bridal: 'What brides and grooms wear for weddings.',
+    ceremonial: 'Dress for rituals, religious office, festivals, dances, royal courts and guards.',
+    historical: 'Dress of earlier periods that is no longer everyday wear, such as court robes, ancient garments and period fashions.'
+  }[cat];
+  return base + (cat !== 'all' ? ` ${n} here. The category is my reading of who the source says wears it.` : '');
+}
+let io = null;
+function lazyThumbs() {
+  if (io) io.disconnect();
+  const els = [...document.querySelectorAll('.thumb[data-t]')];
+  const fill = el => { const g = curList.find(x => x.id === el.dataset.t); if (g) el.innerHTML = svgFor(g, store.fills[g.id]); el.removeAttribute('data-t'); };
+  if (!('IntersectionObserver' in window)) { els.forEach(fill); return; }
+  io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); fill(en.target); } }), { rootMargin: '300px' });
+  els.forEach(el => io.observe(el));
+}
+
+/* ---------- coloring ---------- */
+let color = '#b3242c', colorName = 'Red', fillMode = 'one', undo = [], redo = [], els = [];
+function openGarment(g, keepScroll) {
+  curG = g; undo = []; redo = [];
+  try { history.replaceState(null, '', '#' + cur.a3); } catch (e) {}
+  const G = readGarment({ id: g.id, name: g.name, who: g.who, what: g.what, sig: g.sig, tint: g.tint });
+  const typ = G.c.slice(0, 4).map((h, i) => [CNAME[h] || ['Main', 'Second', 'Third', 'Light'][i], h]);
+  if (!store.color) { color = typ[0][1]; colorName = typ[0][0]; }
+  const list = curList.filter(x => curCat === 'all' || x.cat === curCat), ix = list.indexOf(g);
+  const sw = ([n, c]) => `<button class="sw" type="button" data-c="${c}" data-n="${esc(n)}" title="${esc(n)}" aria-label="${esc(n)}" aria-pressed="${color === c}" style="background:${c}"></button>`;
+  const srcLink = s => s ? `<a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a>` : 'No source recorded';
+  const photo = g.img ? `<a href="${esc(g.img[0])}" target="_blank" rel="noopener">${esc(g.img[1].replace(/^Category: /, 'Commons category: '))}</a>` : `<a href="https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(g.name + ' ' + g.country)}&title=Special:MediaSearch&type=image" target="_blank" rel="noopener">Search Wikimedia Commons</a>`;
+  const counts = {}; CATS.forEach(([k]) => { counts[k] = curList.filter(x => x.cat === k).length; });
+  const chips = `<div class="chips tight" role="group" aria-label="Show garments by kind"><button class="chip" type="button" data-cat="all" aria-pressed="${curCat === 'all'}">All<small>${curList.length}</small></button>` +
+    CATS.filter(([k]) => counts[k]).map(([k, l]) => `<button class="chip" type="button" data-cat="${k}" aria-pressed="${curCat === k}"><i style="background:var(--c-${k})"></i>${l}<small>${counts[k]}</small></button>`).join('') + `</div>`;
+  const strip = `<div class="strip" role="list" aria-label="${esc(cur.n)}’s garments">` + list.map(x => `<button class="mini-card" role="listitem" type="button" data-g="${esc(x.id)}" aria-current="${x === g}" title="${esc(x.name)}"><span class="thumb" data-t="${esc(x.id)}"></span><span class="mc">${esc(x.name)}</span></button>`).join('') + `</div>`;
+  const sareeNote = (cur.n === 'India' || cur.n === 'Bangladesh') ? `<p class="saree">The sarees of ${esc(cur.n)} have a book of their own: <a href="${SAREE_URL}" target="_blank" rel="noopener">Saree Coloring Book</a>.</p>` : '';
+  $('country').innerHTML = `<div class="chead"><div class="row" style="gap:16px"><button class="crumb" type="button" data-act="globe">‹ Globe</button><button class="crumb" type="button" data-act="list">See all ${curList.length} as a grid</button></div>
+    <h2 class="cname">${esc(cur.n)}</h2></div>${chips}${strip}${sareeNote}
+    <div class="wtitle"><span class="tag"><i style="background:var(--c-${g.cat})"></i>${CATLABEL[g.cat]} · ${esc(TONE[g.type])}</span><h3>${esc(g.name)}</h3>${g.native && g.native !== g.name ? `<div class="nv" lang="">${esc(g.native)}</div>` : ''}</div>
+  <div id="work">
+    <div class="stagebox" id="stage">${svgFor(g, store.fills[g.id], true)}</div>
+    <div class="side">
+      <div class="box"><h4>Colors</h4>
+        <div class="small">Typical for this garment</div><div class="sws">${typ.map(sw).join('')}</div>
+        <div class="small">More threads</div><div class="sws"><button class="sw erase" type="button" data-c="" data-n="Eraser" title="Eraser" aria-label="Eraser" aria-pressed="${color === ''}"></button>${MORE.map(c => sw([CNAME[c] || c, c])).join('')}</div>
+        <label class="custom" for="pick"><input type="color" id="pick" value="${color || '#b3242c'}">Any other color</label>
+        <div class="now" id="now">Painting with ${esc(colorName)}</div>
+      </div>
+      <div class="box"><h4>Tools</h4>
+        <div class="row"><div class="seg" role="group" aria-label="What a tap fills"><button type="button" data-mode="one" aria-pressed="${fillMode === 'one'}">One shape</button><button type="button" data-mode="all" aria-pressed="${fillMode === 'all'}">All matching</button></div></div>
+        <div class="row"><button class="btn" type="button" id="undo" disabled>Undo</button><button class="btn" type="button" id="redo" disabled>Redo</button><button class="btn" type="button" id="typical">Typical colors</button><button class="btn" type="button" id="clear">Start over</button><button class="btn main" type="button" id="save">Save picture</button></div>
+        <div class="navrow"><button class="btn" type="button" id="prevG" ${ix <= 0 ? 'disabled' : ''}>‹ Previous</button><span class="small" style="align-self:center">${ix + 1} of ${list.length}</span><button class="btn" type="button" id="nextG" ${ix >= list.length - 1 ? 'disabled' : ''}>Next ›</button></div>
+      </div>
+      <div class="box notes"><h4>About this garment</h4>
+        <dl><dt>Country</dt><dd>${esc(g.country)}</dd><dt>Worn by</dt><dd>${esc(g.who)}</dd>${g.native && g.native !== g.name ? `<dt>Local name</dt><dd>${esc(g.native)}</dd>` : ''}</dl>
+        <p>${esc(g.what)}</p>${g.sig ? `<p><b>Why it matters.</b> ${esc(g.sig)}</p>` : ''}
+        ${g.alts.length ? `<div class="alt"><h4 style="margin-bottom:6px">Shares this page</h4>${g.alts.map(a => `<p style="margin-bottom:8px"><b>${esc(a.n)}</b>${a.nv && a.nv !== a.n ? ` (${esc(a.nv)})` : ''}. ${esc(a.what)}${a.sig ? ' ' + esc(a.sig) : ''} <span class="small">Worn by ${esc(a.who)}. Source: ${srcLink(a.src)}.</span></p>`).join('')}<p class="small">These came out as the same drawing, so they are colored on one page.</p></div>` : ''}
+        <p class="small">Source: ${srcLink(g.src)}. Photographs: ${photo}.</p>
+        <p class="small">The drawing is original, built from a template for its kind of garment. Words in the source’s description chose the collar, sleeves, length and pattern; the exact shapes are mine, and so are the typical colors unless the source names them. It is not traced from a photograph.</p>
+      </div>
+    </div>
+  </div>`;
+  els = [...document.querySelectorAll('#stage .r')];
+  lazyThumbs();
+  const on = document.querySelector('.mini-card[aria-current="true"]'); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
+  if (keepScroll == null) window.scrollTo(0, 0); else window.scrollTo(0, keepScroll);
+}
+function setFill(changes) {
+  if (!changes.length) return;
+  const F = store.fills[curG.id] = store.fills[curG.id] || {};
+  changes.forEach(([i, , next]) => { if (next) F[i] = next; else delete F[i]; els[i].setAttribute('fill', next || PAPER); });
+  persist(); refreshUndo();
+}
+function refreshUndo() { if ($('undo')) { $('undo').disabled = !undo.length; $('redo').disabled = !redo.length; } }
+function paint(i) {
+  const R = pageOf(curG), F = store.fills[curG.id] || {};
+  const idx = fillMode === 'all' ? R.map((r, j) => r.g === R[i].g ? j : -1).filter(j => j >= 0) : [i];
+  const ch = idx.map(j => [j, F[j] || '', color]).filter(c => c[1] !== c[2]);
+  if (!ch.length) return; undo.push(ch); redo = []; setFill(ch);
+}
+function bulk(make) {
+  const R = pageOf(curG), F = store.fills[curG.id] || {};
+  const ch = R.map((r, j) => [j, F[j] || '', make(r, j)]).filter(c => c[1] !== c[2]);
+  if (!ch.length) return; undo.push(ch); redo = []; setFill(ch);
+}
+function setColor(c, n) {
+  color = c; colorName = n; store.color = c; persist();
+  document.querySelectorAll('.sw').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === c));
+  if ($('now')) $('now').textContent = c ? 'Painting with ' + n : 'Erasing';
+}
+function savePicture() {
+  const svg = svgFor(curG, store.fills[curG.id], false);
+  const img = new Image(), url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  img.onload = () => {
+    const c = document.createElement('canvas'); c.width = 1200; c.height = 1800;
+    const x = c.getContext('2d'); x.drawImage(img, 0, 0, 1200, 1800);
+    x.fillStyle = '#6b6258'; x.font = '28px Georgia, serif'; x.textAlign = 'center';
+    x.fillText(curG.name + ' · ' + curG.country, 600, 1770);
+    try { $('saveImg').src = c.toDataURL('image/png'); } catch (e) { $('saveImg').src = url; }
+    $('saveDlg').showModal();
+  };
+  img.src = url;
+}
+
+/* ---------- one click handler for the country view ---------- */
+$('country').addEventListener('click', e => {
+  const t = e.target;
+  const act = t.closest('[data-act]'); if (act) { if (act.dataset.act === 'globe') goGlobe(); else { curG = null; drawCountry(); window.scrollTo(0, 0); } return; }
+  const chip = t.closest('.chip'); if (chip) { curCat = chip.dataset.cat; if (curG) { const l = curList.filter(x => curCat === 'all' || x.cat === curCat); openGarment(l.includes(curG) ? curG : l[0], scrollY); } else drawCountry(); return; }
+  const card = t.closest('.card, .mini-card'); if (card) { const g = curList.find(x => x.id === card.dataset.g); if (g) openGarment(g, card.classList.contains('mini-card') ? scrollY : null); return; }
+  const r = t.closest('#stage .r'); if (r) { paint(+r.dataset.i); return; }
+  const sw = t.closest('.sw'); if (sw) { setColor(sw.dataset.c, sw.dataset.n); return; }
+  const md = t.closest('[data-mode]'); if (md) { fillMode = md.dataset.mode; document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', b === md)); return; }
+  const id = t.closest('button') && t.closest('button').id;
+  if (id === 'undo' && undo.length) { const ch = undo.pop(); redo.push(ch); setFill(ch.map(([i, a, b]) => [i, b, a])); }
+  if (id === 'redo' && redo.length) { const ch = redo.pop(); undo.push(ch); setFill(ch); }
+  if (id === 'clear') bulk(() => '');
+  if (id === 'typical') { const R = pageOf(curG); bulk(r => R.typ[r.g] || ''); }
+  if (id === 'save') savePicture();
+  if (id === 'prevG' || id === 'nextG') { const list = curList.filter(x => curCat === 'all' || x.cat === curCat), ix = list.indexOf(curG) + (id === 'nextG' ? 1 : -1); if (list[ix]) openGarment(list[ix], scrollY); }
+});
+$('country').addEventListener('input', e => { if (e.target.id === 'pick') setColor(e.target.value, 'your color'); });
+$('saveClose').addEventListener('click', () => $('saveDlg').close());
+
+/* ---------- start ---------- */
+fetch('countries.json').then(r => r.json()).then(topo => {
+  const fc = topojson.feature(topo, topo.objects.countries);
+  // simplification left some rings open or turned the wrong way; close them and turn them back
+  function fixGeo(f, d3) {
+    const g = f.geometry; if (!g) return;
+    let polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+    polys = polys.map(p => p.map(r => { const a = r[0], z = r[r.length - 1]; if (a[0] !== z[0] || a[1] !== z[1]) r = r.concat([a]); return r; }).filter(r => r.length >= 4)).filter(p => p.length);
+    polys.forEach(p => { if (d3.geoArea({ type: 'Polygon', coordinates: p }) > 2 * Math.PI) p.forEach(r => r.reverse()); });
+    if (g.type === 'Polygon') g.coordinates = polys[0] || []; else g.coordinates = polys;
+  }
+  fc.features.forEach(f => fixGeo(f, d3));
+  feats = fc.features.map(f => Object.assign(f, { m: byNum[f.id] || null, b: d3.geoBounds(f), c: d3.geoCentroid(f) }));
+  const have = new Set(feats.filter(f => f.m).map(f => f.m));
+  dots = META.filter(m => !have.has(m) || m.area < 1500);
+  $('loading').remove();
+  addEventListener('resize', () => { drawStars(); resize(); });
+  resize(); requestAnimationFrame(tick);
+  const h = location.hash.slice(1); if (byA3[h]) { selected = byA3[h]; const m = byA3[h]; proj.rotate([-m.ll[1], -m.ll[0], 0]); setMode(true); showCountry(m, m.iconId || true); }
+  else document.body.classList.add('globe-mode');
+}).catch(() => { $('loading').textContent = 'The map did not load. Reload the page to try again.'; });
+window.__wdg = { META, openCountry, goGlobe, loadCont, garment, svgFor, openGarment: id => { const g = curList.find(x => x.id === id); if (g) openGarment(g); }, list: () => curList, hit, proj };
+})();
+</script>
+
+</body></html>
