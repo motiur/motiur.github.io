@@ -96,7 +96,7 @@ path.d{fill:none;stroke:var(--sheet-ink);stroke-width:1;stroke-linecap:round;poi
 </style>
 
 <div class="wrap">
-  <div class="bar"><h1>World Car Globe</h1><span class="tag">Pilot · 6 European countries</span></div>
+  <div class="bar"><h1>World Car Globe</h1><span class="tag">Pilot · 16 countries</span></div>
 
   <section id="home">
     <div id="stage">
@@ -284,7 +284,307 @@ const CARS=[
  notes:{what:'A compact electric crossover: a smooth nose with no grille, glass roofline, a slim light bar, plain wheels and a charge port. It is a type, not a particular model.',
   who:'Norway registered 179,550 new passenger cars in 2025, and 95.9% of them were fully electric, according to the Norwegian Road Federation. Tax incentives drove the shift.',
   why:'Only about a third of the cars on Norwegian roads are electric, because older cars stay in use. The country shows how quickly new sales can change while the fleet turns over slowly.'},
- src:[['Just Auto: Norway 2025 registrations','https://www.just-auto.com/?p=188386'],['Hydrocarbon Processing (Reuters): Norway 96% electric','https://hydrocarbonprocessing.com/news/2026/01/norways-new-car-sales-were-96-electric-in-2025/'],['Business Report: nearly all new cars in Norway are electric','https://businessreport.co.za/technology/2026-01-22-nearly-all-new-cars-sold-in-norway-are-now-electric/']]}
+ src:[['Just Auto: Norway 2025 registrations','https://www.just-auto.com/?p=188386'],['Hydrocarbon Processing (Reuters): Norway 96% electric','https://hydrocarbonprocessing.com/news/2026/01/norways-new-car-sales-were-96-electric-in-2025/'],['Business Report: nearly all new cars in Norway are electric','https://businessreport.co.za/technology/2026-01-22-nearly-all-new-cars-sold-in-norway-are-now-electric/']]},
+
+/* ---------- new cars below ---------- */
+
+{id:'jp-compact-sedan',country:'Japan',cat:'Classic',name:'Compact sedan',era:'1960s',dy:12,
+ sum:'A small, well-built saloon that put car ownership within reach of millions.',
+ colors:['#c9ced4','#b3202a','#2b2f35','#e8edf1','#6f8aa3'],
+ regions:[
+  ['body','M40 136C40 116 58 106 90 102C130 88 180 80 230 80C280 80 320 94 350 106C372 114 382 124 382 136V142H40Z','#c9ced4','Body'],
+  ['trim','M46 118H376V124H46Z','#b3202a','Side trim'],
+  ['glass','M140 100C160 86 190 82 220 82L230 96H140Z','#bcd4e0','Rear window'],
+  ['glass','M236 84C260 86 284 96 296 102H236Z','#bcd4e0','Front window'],
+  ['lamp','M362 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M40 108H52V120H40Z','#b3202a','Tail lamp'],
+  ['trim','M30 138H56V146H30Z','#8a929b','Rear bumper'],
+  ['trim','M360 138H386V146H360Z','#8a929b','Front bumper'],
+  ['arch',ARCH(100,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(100,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(100,138,30,5),spokes(310,138,30,5),'M230 82V96','M150 110H170','M250 110H270'],
+ notes:{what:'A compact two-box saloon with a modest roofline, simple trim and small wheels. The drawing is a generic small saloon of the type that spread car ownership in Japan and beyond.',
+  who:'The Toyota Corolla arrived in 1966 with the copy line “plus 100cc of roominess” and became a hit with buyers moving up from kei cars. The Honda Civic followed in 1972 with a European-influenced front-wheel-drive hatchback layout.',
+  why:'The Corolla went on to become the best-selling car nameplate in history. Its success, and that of the Civic, helped make Japanese compact cars a global standard for reliability and value.'},
+ src:[['Nostalgic Hero: genealogy of basic cars','https://nosweb.jp/nostalgichero/articles/detail/9671'],['Best Car Web: 10 cars that shaped the Japanese market','https://bestcarweb.jp/'],['Toyota Corolla history (Wikipedia)','https://en.wikipedia.org/wiki/Toyota_Corolla']]},
+
+{id:'us-people-car',country:'United States of America',cat:'Historical',name:'People\'s car',era:'1908–1927',dy:12,
+ sum:'A simple, high-riding car built on a moving assembly line at a price ordinary families could afford.',
+ colors:['#1a1a1a','#7a4a2b','#b8bec6','#d9d3c0','#4a4f56'],
+ regions:[
+  ['body','M60 120C60 100 80 90 120 86C170 76 240 72 290 76C340 80 370 96 378 120V136H60Z','#1a1a1a','Body'],
+  ['body','M378 104H392V132H378Z','#1a1a1a','Radiator shell'],
+  ['seat','M100 76H128V92H100Z','#7a4a2b','Seat'],
+  ['seat','M150 76H178V92H150Z','#7a4a2b','Seat'],
+  ['glass','M240 74L252 60L262 62L250 78Z','#bcd4e0','Windscreen'],
+  ['lamp','M376 90a10 10 0 1 0 20 0a10 10 0 1 0-20 0Z','#d9d3c0','Lamp'],
+  ['trim','M48 118H60V136H48Z','#b8bec6','Radiator'],
+  ['trim','M370 134H394V140H370Z','#b8bec6','Front bumper'],
+  ['arch',ARCH(110,138,30),'#4a4f56','Wheel arch'],['arch',ARCH(310,138,30),'#4a4f56','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#d9d3c0'),...wheel(310,138,30,'#2b2f35','#d9d3c0')],
+ deco:[spokes(110,138,30,6),spokes(310,138,30,6),'M200 82V124','M240 74L252 60','M270 78H350','M80 98H360'],
+ notes:{what:'A tall, simple open car with a flat radiator, two seats and wooden spoke wheels. It is drawn as the general type that put America on wheels, not as a restored example.',
+  who:'Henry Ford introduced the Model T in 1908 at $850. By 1924 the price had fallen to about $300 after moving assembly line production began at Highland Park in 1913. More than 15 million were built.',
+  why:'The Model T made car ownership possible for the average American family for the first time, and the moving assembly line it inspired reshaped manufacturing worldwide.'},
+ src:[['The Model T: A Centennial History (Johns Hopkins)','https://books.google.com.sg/books/about/The_Model_T.html'],['Smithsonian: Model T collection','https://www.americanhistory.si.edu/'],['OERTX: Prosperity and the Production of Popular Entertainment','https://oertx.highered.texas.gov/']]},
+
+{id:'cz-early-limousine',country:'Czech Republic',cat:'Historical',name:'Early limousine',era:'1890s',dy:0,
+ sum:'A carriage-like body with a rear engine and a long bonnet, one of the first cars built in Central Europe.',
+ colors:['#2b4fa0','#7a4a2b','#c9a24a','#2b2f35','#d9d3c0'],
+ regions:[
+  ['body','M40 110Q40 94 70 90H130L160 72H280L320 90Q360 94 368 110V136H40Z','#2b4fa0','Body'],
+  ['seat','M100 76H128V90H100Z','#7a4a2b','Rear seat'],
+  ['seat','M150 76H178V90H150Z','#7a4a2b','Front seat'],
+  ['hood','M320 84Q340 68 360 78V96H320Z','#d9d3c0','Folded hood'],
+  ['lamp','M360 74a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#c9a24a','Acetylene lamp'],
+  ['trim','M40 104H52V120H40Z','#7a4a2b','Rear panel'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#d9d3c0'),...wheel(310,138,30,'#2b2f35','#d9d3c0')],
+ deco:[spokes(110,138,30,12),spokes(310,138,30,12),'M160 78H280','M200 72V90','M240 72V90'],
+ notes:{what:'A carriage-shaped motor car with a rear-mounted engine, a long bonnet, wooden spoke wheels and a lamp. It is drawn from the general form of the earliest Central European cars, not from a single surviving vehicle.',
+  who:'The Nesselsdorfer Wagenbaufabrik, later renamed Tatra, built its first car, the Präsident, in 1898. It made a long-distance journey to Vienna the same year. Laurin & Klement, which became Škoda, started building cars in 1905.',
+  why:'The Czech lands were among the first places in the world where car production developed from the very beginning. Tatra went on to make major contributions to automotive technology in the 1920s and 1930s, and Škoda became the country\'s dominant car brand.'},
+ src:[['Czech Ministry of Foreign Affairs: 105 years of car production','https://edit.mzv.gov.cz/file/166823/focus2004_1.pdf'],['VisitCzechia: Czech cars','https://www.visitczechia.com/'],['Hemmings: Czech car museums','https://www.hemmings.com/']]},
+
+{id:'es-people-car',country:'Spain',cat:'Classic',name:'People\'s car',era:'1950s–1970s',dy:12,
+ sum:'A simple, rounded two-door saloon that motorised Spain after the austerity years.',
+ colors:['#e4572e','#d9d3c0','#2b2f35','#bcd4e0','#c9ced4'],
+ regions:[
+  ['body','M50 136C50 112 68 102 100 98C140 86 190 80 240 80C290 80 330 92 358 104C376 112 382 122 382 136V142H50Z','#e4572e','Body'],
+  ['trim','M54 116H378V122H54Z','#d9d3c0','Side trim'],
+  ['glass','M150 96C170 84 200 80 230 80L240 94H150Z','#bcd4e0','Rear window'],
+  ['glass','M246 82C268 84 288 92 300 98H246Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 106H62V118H50Z','#c9ced4','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M240 80V94','M160 108H180','M250 108H270'],
+ notes:{what:'A small, rounded saloon with two doors, simple trim and a modest roofline. The drawing shows the general type of the Spanish people\'s car that turned car ownership from a luxury into a normal thing.',
+  who:'SEAT was founded on 9 May 1950 with Fiat as a technical partner. Its first car, the SEAT 1400, left the Zona Franca factory in Barcelona in 1953. The SEAT 600 arrived in 1957 and became a symbol of freedom and mobility in Spain.',
+  why:'The 600 put motoring within reach of working families for the first time and helped Spain move from isolation and austerity towards mass car ownership. SEAT has built more than 19 million vehicles across 67 models since 1950.'},
+ src:[['SEAT: 70 years since the company was founded','https://www.seat.co.uk/about-seat/news-events/corporate/70-years-of-history.seatIdLogin'],['SEAT: 70 years of iconic cars','https://www.seat.com/'],['Volkswagen Group: the history of SEAT','https://www.volkswagen-group.com/']]},
+
+{id:'br-people-car',country:'Brazil',cat:'Classic',name:'People\'s car',era:'1950s–1980s',dy:12,
+ sum:'An air-cooled, rear-engine saloon that became the car that motorised Brazilian families.',
+ colors:['#f3e7b4','#7a4a2b','#2b2f35','#d9d3c0','#6f8aa3'],
+ regions:[
+  ['body','M60 136C60 110 80 100 110 96C150 84 200 78 250 78C300 78 340 90 370 104C384 112 388 122 388 136V142H60Z','#f3e7b4','Body'],
+  ['trim','M64 116H384V122H64Z','#7a4a2b','Side trim'],
+  ['glass','M160 94C180 82 210 78 240 78L250 92H160Z','#bcd4e0','Rear window'],
+  ['glass','M256 80C278 82 298 90 310 96H256Z','#bcd4e0','Front window'],
+  ['lamp','M370 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M60 104H72V116H60Z','#b3202a','Tail lamp'],
+  ['trim','M48 138H74V146H48Z','#8a929b','Rear bumper'],
+  ['trim','M368 138H394V146H368Z','#8a929b','Front bumper'],
+  ['arch',ARCH(120,138,30),'#7e8893','Wheel arch'],['arch',ARCH(320,138,30),'#7e8893','Wheel arch'],
+  ...wheel(120,138,30,'#2b2f35','#d9d3c0'),...wheel(320,138,30,'#2b2f35','#d9d3c0')],
+ deco:[spokes(120,138,30,5),spokes(320,138,30,5),'M250 78V92','M170 106H190','M260 106H280'],
+ notes:{what:'A rounded two-door saloon with an air-cooled engine at the back, simple trim and a sloping nose. It is drawn as the general type that became the first car for many Brazilian families.',
+  who:'The Volkswagen Sedan, known in Brazil as the Fusca, began local assembly in 1953 and full national production on 3 January 1959. It led Brazil\'s passenger car market for 24 consecutive years, from 1959 to 1982, and stayed in production until 1986.',
+  why:'The Fusca was cheap, charismatic and virtually indestructible, and it motorised Brazilian families through the 1960s and 1970s. It played a key role in building Brazil\'s national car industry. More than 3 million Brazilian Beetles were sold.'},
+ src:[['BBC Witness History: the Fusca','https://www.bbc.co.uk/programmes/p020d8nh'],['Estadão: Fusca brasileiro faz 55 anos','https://www.estadao.com.br/'],['Diário do Grande ABC: 50 anos do Fusca no Brasil','https://www.dgabc.com.br/']]},
+
+{id:'kr-people-car',country:'South Korea',cat:'Classic',name:'People\'s car',era:'1970s–1980s',dy:12,
+ sum:'A small rear-wheel-drive saloon, the first car designed and built in Korea.',
+ colors:['#2b4fa0','#c9ced4','#2b2f35','#e8edf1','#6f8aa3'],
+ regions:[
+  ['body','M50 136C50 114 68 104 98 100C138 88 188 82 238 82C288 82 328 94 356 106C374 114 380 124 380 136V142H50Z','#2b4fa0','Body'],
+  ['trim','M54 118H378V124H54Z','#c9ced4','Side trim'],
+  ['glass','M148 98C168 86 198 82 228 82L238 96H148Z','#bcd4e0','Rear window'],
+  ['glass','M244 84C266 86 288 94 300 100H244Z','#bcd4e0','Front window'],
+  ['lamp','M364 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 106H62V118H50Z','#e8edf1','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M238 82V96','M158 110H178','M250 110H270'],
+ notes:{what:'A small, upright saloon with two doors, a simple grille and modest trim. The drawing shows the general type of Korea\'s first independently developed car, not any particular surviving example.',
+  who:'Hyundai introduced the Pony in December 1975 as a four-door sedan, with a pickup following in 1976, a wagon in 1977 and a three-door hatchback in 1980. It was designed with styling input from Italy and used engine and transmission technology from Mitsubishi.',
+  why:'The Pony was South Korea\'s first mass-produced car and the first “my car” for many Korean households. It was also the first Korean car sold in the UK, from January 1976. Its success helped Korea join the ranks of automaking nations.'},
+ src:[['Hyundai Heritage: the iconic Pony','https://www.hyundai.com/worldwide/en/brand-journal/heritage/hyundai-heritage-retracing-hyundais-iconic-pony'],['Reuters: Hyundai Pony leaves its mark','https://www.reuters.com/'],['Korean Heritage Service: Pony 1','https://english.khs.go.kr/']]},
+
+{id:'au-people-car',country:'Australia',cat:'Classic',name:'People\'s car',era:'1948–1950s',dy:12,
+ sum:'A sturdy family saloon designed for Australian conditions, the first car wholly built in Australia.',
+ colors:['#1f5a3a','#d9d3c0','#2b2f35','#b8bec6','#7a4a2b'],
+ regions:[
+  ['body','M40 136C40 114 58 104 90 100C130 88 180 82 230 82C280 82 320 94 350 106C372 114 382 124 382 136V142H40Z','#1f5a3a','Body'],
+  ['trim','M46 118H376V124H46Z','#d9d3c0','Side trim'],
+  ['glass','M140 98C160 86 190 82 220 82L230 96H140Z','#bcd4e0','Rear window'],
+  ['glass','M236 84C260 86 284 94 296 100H236Z','#bcd4e0','Front window'],
+  ['lamp','M362 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M40 106H52V118H40Z','#b3202a','Tail lamp'],
+  ['trim','M30 138H56V146H30Z','#b8bec6','Rear bumper'],
+  ['trim','M360 138H386V146H360Z','#b8bec6','Front bumper'],
+  ['arch',ARCH(100,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(100,138,30,'#2b2f35','#b8bec6'),...wheel(310,138,30,'#2b2f35','#b8bec6')],
+ deco:[spokes(100,138,30,5),spokes(310,138,30,5),'M230 82V96','M150 110H170','M250 110H270'],
+ notes:{what:'A robust, economical family saloon with a simple three-box shape, modest trim and sturdy wheels. The drawing shows the general type of the first car made in Australia, not a specific restored example.',
+  who:'The Holden 48-215, later known as the FX, rolled off the line at Fishermans Bend in Melbourne on 29 November 1948. It was the first car wholly manufactured in Australia. Holden had begun as an Adelaide saddlery in 1856 and became part of General Motors in the 1920s.',
+  why:'The FX was economical, sturdy and stylish and was immediately popular. It was seen as “Australia\'s Own Car”, a symbol of the new post-war era of increasing prosperity. Holden dominated the Australian market for decades, and the brand ended local manufacturing in October 2017.'},
+ src:[['National Museum of Australia: Holden launch','https://www.nma.gov.au/'],['ABC News: first Australian-made car','https://newsapp.abc.net.au/'],['Special: The untold story of Australia\'s Holden','https://books.google.com.sg/books?id=5fnXbl3hP_AC']]},
+
+{id:'ru-people-car',country:'Russia',cat:'Classic',name:'People\'s car',era:'1970s–1980s',dy:12,
+ sum:'A simple, robust saloon based on an Italian design, built in huge numbers for Soviet families.',
+ colors:['#2b4fa0','#c9ced4','#2b2f35','#e8edf1','#6f8aa3'],
+ regions:[
+  ['body','M50 136C50 114 68 104 98 100C138 88 188 82 238 82C288 82 328 94 356 106C374 114 380 124 380 136V142H50Z','#2b4fa0','Body'],
+  ['trim','M54 118H378V124H54Z','#c9ced4','Side trim'],
+  ['glass','M148 98C168 86 198 82 228 82L238 96H148Z','#bcd4e0','Rear window'],
+  ['glass','M244 84C266 86 288 94 300 100H244Z','#bcd4e0','Front window'],
+  ['lamp','M364 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 106H62V118H50Z','#e8edf1','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M238 82V96','M158 110H178','M250 110H270'],
+ notes:{what:'A four-door saloon of simple, square-rigged design, with modest trim and a plain radiator grille. The drawing shows the general type of the car that motorised the Soviet Union in the 1970s, not any specific surviving model.',
+  who:'The VAZ-2101, nicknamed Kopeika, rolled off the new Volga Automotive Plant in Tolyatti on 19 April 1970. It was based on the Italian Fiat 124, which had been European Car of the Year in 1967, with more than 800 changes made for Soviet conditions. Production ran to 1988, with about 4.8 million built.',
+  why:'The Kopeika was the most numerous and most popular car in Soviet history and became the foundation of the Lada brand. More than 400,000 are still registered on Russian roads today.'},
+ src:[['Rossiyskaya Gazeta: 50 years of the Kopeika','https://www.rg.ru/2020/04/19/legendarnoj-kopejke-ispolnilos-50-let-prazdnik-perenesli.html'],['Rostec: VAZ-2101 history','https://rostec.ru/'],['Lada history (Wikipedia)','https://en.wikipedia.org/wiki/Lada]]},
+
+{id:'cn-people-car',country:'China',cat:'Modern',name:'People\'s car',era:'2000s–2010s',dy:12,
+ sum:'A small, brightly coloured hatchback that put car ownership within reach of millions of Chinese families.',
+ colors:['#f08a24','#bcd4e0','#2b2f35','#e8edf1','#6f8aa3'],
+ regions:[
+  ['body','M50 136C50 110 68 98 100 94C140 82 190 76 240 76C290 76 330 88 358 100C376 108 382 120 382 136V142H50Z','#f08a24','Body'],
+  ['trim','M54 116H378V122H54Z','#2b2f35','Side trim'],
+  ['glass','M150 94C170 82 200 78 230 78L240 92H150Z','#bcd4e0','Rear window'],
+  ['glass','M246 80C268 82 288 90 300 96H246Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 104H62V116H50Z','#e8edf1','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M240 78V92','M160 106H180','M250 106H270'],
+ notes:{what:'A small, rounded hatchback with a friendly face-like front, bright colours and simple trim. The drawing shows the general type of China\'s first mass-market car, not any particular model.',
+  who:'The Chery QQ went on sale in 2003 at a price of 30,000–40,000 yuan, when the market was dominated by expensive joint-venture models like the Jetta, Citroën ZX and Santana. It sold more than 50,000 units in its first year and went on to sell over 1.5 million before the petrol version ended in 2014.',
+  why:'The QQ turned the car from a luxury into something ordinary Chinese families could afford. At its peak it held more than half the small-car market and became the first Chinese model to pass one million sales. It helped establish Chery as a major independent brand and paved the way for the electric vehicle boom of the 2020s.'},
+ src:[['Observer: the return of the Chery QQ','https://www.163.com/dy/article/KL8MEGJN051481US.html'],['People\'s Daily: Chery QQ pioneer','https://paper.people.com.cn/'],['CCTV: one millionth Chery QQ','https://big5.cctv.com/']]},
+
+{id:'in-people-car',country:'India',cat:'Classic',name:'People\'s car',era:'1950s–1980s',dy:12,
+ sum:'A sturdy, upright saloon based on a British design, the only luxury car on Indian roads for decades.',
+ colors:['#c9ced4','#7a4a2b','#2b2f35','#d9d3c0','#1f5a3a'],
+ regions:[
+  ['body','M50 136C50 112 68 102 100 98C140 86 190 80 240 80C290 80 330 92 358 104C376 112 382 122 382 136V142H50Z','#c9ced4','Body'],
+  ['trim','M54 116H378V122H54Z','#7a4a2b','Side trim'],
+  ['glass','M148 96C168 84 198 80 228 80L238 94H148Z','#bcd4e0','Rear window'],
+  ['glass','M244 82C266 84 288 92 300 98H244Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 104H62V116H50Z','#d9d3c0','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#d9d3c0'),...wheel(310,138,30,'#2b2f35','#d9d3c0')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M238 80V94','M158 108H178','M250 108H270'],
+ notes:{what:'A solid, upright saloon with a bulbous bonnet, generous interior space and a high seating position that gave it a touch of old-world luxury. The drawing shows the general type of India\'s long-serving people\'s car, not a particular surviving example.',
+  who:'Hindustan Motors was set up in 1942 by the Birla family and Lord Nuffield, with Morris cars imported and rebranded. The Ambassador, based on the 1956 Morris Oxford, went into production in 1957 at a new factory outside Kolkata. It stayed in production until 2014.',
+  why:'For three decades, from the 1960s to the mid-1980s, the Ambassador was the only mass-produced luxury car in India. It was the official transport of politicians and government officials and became a symbol of authority, bureaucracy and the Indian state itself. Its upright shape and visible boot hinges remained essentially unchanged for over fifty years.'},
+ src:[['ABC: icons of heritage – Hindustan Ambassador','https://www.abc.net.au/listen/programs/blueprintforliving/icons-of-heritage:-hindustan-ambassador/10815260'],['BBC: India\'s iconic Ambassador sold to Peugeot','https://www.bbc.com/'],['BBC: production of the Ambassador suspended','https://www.bbc.com/']]},
+
+{id:'de-people-car',country:'Germany',cat:'Historical',name:'People\'s car',era:'1930s–2000s',dy:12,
+ sum:'A rounded, air-cooled, rear-engine car that became a global icon of simple, durable transport.',
+ colors:['#c9a24a','#d9d3c0','#2b2f35','#bcd4e0','#6f8aa3'],
+ regions:[
+  ['body','M50 136C50 108 68 96 100 92C140 80 190 74 240 74C290 74 330 86 358 98C376 106 382 118 382 136V142H50Z','#c9a24a','Body'],
+  ['trim','M54 116H378V122H54Z','#d9d3c0','Side trim'],
+  ['glass','M150 92C170 80 200 76 230 76L240 90H150Z','#bcd4e0','Rear window'],
+  ['glass','M246 78C268 80 288 88 300 94H246Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 104H62V116H50Z','#d9d3c0','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#d9d3c0'),...wheel(310,138,30,'#2b2f35','#d9d3c0')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M240 76V90','M160 104H180','M250 104H270'],
+ notes:{what:'A rounded two-door saloon with a sloping nose, an air-cooled engine at the back and simple, sturdy trim. The drawing shows the general type of the car that became a global symbol of affordable motoring, not any specific restored example.',
+  who:'Ferdinand Porsche drew the original design at Hitler\'s request in the 1930s. The car entered production after the Second World War under British military supervision; by 1955 the millionth had been built in Wolfsburg. Production continued until 2003 in Mexico.',
+  why:'The Beetle, officially the Volkswagen Type 1, became the best-selling car of its era. In West Germany it stood for the post-war economic miracle, and in the United States it was embraced by the counterculture. It was the first car to surpass the Ford Model T\'s production record, and its story shows how a failed prestige project can become a global commodity.'},
+ src:[['US Holocaust Memorial Museum: The People\'s Car','https://collections.ushmm.org/search/catalog/bib231348'],['VW: a history of the Beetle','https://www.vw.com/'],['BBC: forgotten father of the VW Beetle','https://news.bbc.co.uk/']]},
+
+{id:'fr-people-car',country:'France',cat:'Classic',name:'People\'s car',era:'1948–1990',dy:12,
+ sum:'An “umbrella on wheels” designed to carry four people and a basket of eggs across a ploughed field.',
+ colors:['#6f8aa3','#d9d3c0','#2b2f35','#bcd4e0','#c9ced4'],
+ regions:[
+  ['body','M50 136C50 110 68 98 100 94C140 82 190 76 240 76C290 76 330 88 358 100C376 108 382 120 382 136V142H50Z','#6f8aa3','Body'],
+  ['trim','M54 116H378V122H54Z','#d9d3c0','Side trim'],
+  ['glass','M150 94C170 82 200 78 230 78L240 92H150Z','#bcd4e0','Rear window'],
+  ['glass','M246 80C268 82 288 90 300 96H246Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 104H62V116H50Z','#c9ced4','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M240 78V92','M160 106H180','M250 106H270'],
+ notes:{what:'A small, light two-door saloon with a high roofline, soft suspension and very simple trim. The drawing shows the general type of the car that mobilised rural and working-class France, not any particular surviving model.',
+  who:'Citroën presented the 2CV at the Paris motor show in 1948. Its designer, Pierre-Jules Boulanger, admitted it looked like an umbrella on wheels. Production ran from 1949 to 1990, with more than 5 million built in France alone.',
+  why:'The 2CV was cheap to buy, cheap to run and almost indestructible, with an air-cooled engine and a suspension soft enough to carry eggs across a field without breaking them. It was originally intended for farmers but was soon bought by workers, priests and students. In 2002 it was voted “car of the 20th century” in France.'},
+ src:[['BBC: Citroen 2CV – France\'s iconic car','http://news.bbc.co.uk/2/hi/europe/7564980.stm'],['NYT: At 60, a French classic stays of age','https://archive.nytimes.com/'],['ABC: how the Citroën 2CV became a design icon','https://www.abc.net.au/']]},
+
+{id:'it-people-car',country:'Italy',cat:'Classic',name:'People\'s car',era:'1957–1975',dy:12,
+ sum:'A tiny, rounded two-door saloon with a rear engine, designed as one of the first purpose-built city cars.',
+ colors:['#e8edf1','#bcd4e0','#2b2f35','#f08a24','#c9ced4'],
+ regions:[
+  ['body','M60 136C60 112 78 102 110 98C150 88 200 82 250 82C300 82 340 94 368 106C384 114 390 124 390 136V142H60Z','#e8edf1','Body'],
+  ['trim','M64 116H384V122H64Z','#bcd4e0','Side trim'],
+  ['glass','M160 98C180 86 210 82 240 82L250 96H160Z','#bcd4e0','Rear window'],
+  ['glass','M256 84C278 86 298 94 310 100H256Z','#bcd4e0','Front window'],
+  ['lamp','M372 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M60 106H72V118H60Z','#f08a24','Tail lamp'],
+  ['trim','M48 138H74V146H48Z','#8a929b','Rear bumper'],
+  ['trim','M368 138H394V146H368Z','#8a929b','Front bumper'],
+  ['arch',ARCH(120,138,30),'#7e8893','Wheel arch'],['arch',ARCH(320,138,30),'#7e8893','Wheel arch'],
+  ...wheel(120,138,30,'#2b2f35','#c9ced4'),...wheel(320,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(120,138,30,5),spokes(320,138,30,5),'M250 82V96','M170 108H190','M260 108H280'],
+ notes:{what:'A very small two-door saloon with a rounded body, a rear-mounted engine and a fold-back soft top. The drawing shows the general type of the car that brought individual mobility to millions of Italians, not any particular model.',
+  who:'Designed by Dante Giacosa, the Fiat 500 was launched on 4 July 1957 in Turin. It went through several series, including the Lusso with a more luxurious interior, and stayed in production until 1975. About four million were sold.',
+  why:'The 500 was part of a wave of cheap, practical compact cars developed after the war, alongside the Volkswagen Beetle and the BMC Mini. It helped Italians and other Europeans satisfy a growing desire for personal mobility and became an emblem of mass car ownership in Italy.'},
+ src:[['Science Museum: Fiat 500','https://collection.sciencemuseumgroup.org.uk/objects/co523090'],['MoMA: Dante Giacosa, Fiat 500','https://www.moma.org/'],['Stellantis Media: Fiat 500 60th anniversary','https://www.media.stellantis.com/']]},
+
+{id:'gb-people-car',country:'United Kingdom',cat:'Classic',name:'People\'s car',era:'1959–2000',dy:12,
+ sum:'A tiny, revolutionary two-door car with a transverse engine and front-wheel drive.',
+ colors:['#b3202a','#d9d3c0','#2b2f35','#bcd4e0','#c9ced4'],
+ regions:[
+  ['body','M60 136C60 112 78 102 110 98C150 88 200 82 250 82C300 82 340 94 368 106C384 114 390 124 390 136V142H60Z','#b3202a','Body'],
+  ['trim','M64 116H384V122H64Z','#d9d3c0','Side trim'],
+  ['glass','M160 98C180 86 210 82 240 82L250 96H160Z','#bcd4e0','Rear window'],
+  ['glass','M256 84C278 86 298 94 310 100H256Z','#bcd4e0','Front window'],
+  ['lamp','M372 108a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M60 106H72V118H60Z','#c9ced4','Tail lamp'],
+  ['trim','M48 138H74V146H48Z','#8a929b','Rear bumper'],
+  ['trim','M368 138H394V146H368Z','#8a929b','Front bumper'],
+  ['arch',ARCH(120,138,30),'#7e8893','Wheel arch'],['arch',ARCH(320,138,30),'#7e8893','Wheel arch'],
+  ...wheel(120,138,30,'#2b2f35','#c9ced4'),...wheel(320,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(120,138,30,5),spokes(320,138,30,5),'M250 82V96','M170 108H190','M260 108H280'],
+ notes:{what:'A very small two-door saloon with a boxy body, sliding windows and minimal trim. The drawing shows the general type of the car that became a symbol of 1960s Britain, not any particular surviving example.',
+  who:'Designed by Sir Alec Issigonis for the British Motor Corporation, the Mini went into production in 1959 at Longbridge in Birmingham. It stayed in production for 41 years. A performance version developed by John Cooper won the Monte Carlo Rally three times and the European Car Championship.',
+  why:'The Mini was born in an age of fuel shortage and austerity, intended to make motoring more affordable for the average family. Instead it became a classless car that appealed across social boundaries. In 1999 it was voted the second most influential car of the 20th century, behind the Ford Model T.'},
+ src:[['A Mini Adventure: 50 years of the iconic small car','https://books.google.com.sg/books/about/A_Mini_Adventure.html'],['BBC: 50 years of Birmingham\'s iconic Mini','https://news.bbc.co.uk/'],['BBC: A History of the World – the Mini','https://www.bbc.co.uk/']]},
+
+{id:'dd-people-car',country:'East Germany',cat:'Historical',name:'People\'s car',era:'1957–1991',dy:12,
+ sum:'A boxy, smoky two-stroke saloon that became the symbol of East German motoring.',
+ colors:['#6f8aa3','#c9ced4','#2b2f35','#d9d3c0','#1a1a1a'],
+ regions:[
+  ['body','M50 136C50 112 68 102 100 98C140 86 190 80 240 80C290 80 330 92 358 104C376 112 382 122 382 136V142H50Z','#6f8aa3','Body'],
+  ['trim','M54 116H378V122H54Z','#c9ced4','Side trim'],
+  ['glass','M148 96C168 84 198 80 228 80L238 94H148Z','#bcd4e0','Rear window'],
+  ['glass','M244 82C266 84 288 92 300 98H244Z','#bcd4e0','Front window'],
+  ['lamp','M364 106a8 8 0 1 0 16 0a8 8 0 1 0-16 0Z','#f3e7b4','Headlamp'],
+  ['lamp','M50 104H62V116H50Z','#d9d3c0','Tail lamp'],
+  ['trim','M38 138H64V146H38Z','#8a929b','Rear bumper'],
+  ['trim','M358 138H384V146H358Z','#8a929b','Front bumper'],
+  ['arch',ARCH(110,138,30),'#7e8893','Wheel arch'],['arch',ARCH(310,138,30),'#7e8893','Wheel arch'],
+  ...wheel(110,138,30,'#2b2f35','#c9ced4'),...wheel(310,138,30,'#2b2f35','#c9ced4')],
+ deco:[spokes(110,138,30,5),spokes(310,138,30,5),'M238 80V94','M158 108H178','M250 108H270'],
+ notes:{what:'A boxy two-door saloon with a simple, upright body, minimal trim and a small two-stroke engine. The drawing shows the general type of the car that was East Germany\'s answer to the Volkswagen Beetle, not any particular surviving example.',
+  who:'The first Trabant, the P50, went into production at the Sachsenring works in Zwickau on 7 November 1957. It used a 500cc two-stroke engine producing 18 horsepower and a body made of Duroplast, a plastic-like material. Production continued until 1991, with more than three million built.',
+  why:'The Trabant was cheap to buy and simple to maintain, but performance was weak and buyers often waited up to 15 years for a new one. It became a symbol of the shortages and limitations of the East German economy. After reunification it gained a cult following as a nostalgic curiosity.'},
+ src:[['NYT: a people\'s car as flawed as the people\'s paradise','https://www.nytimes.com/2008/11/30/automobiles/collectibles/30REDCAR.html'],['BBC: old Trabants still chugging along','https://news.bbc.co.uk/'],['Deutschland.de: from a laughing stock to cult status','https://www.deutschland.de/']]}
 ];
 
 const COUNTRIES={
@@ -293,8 +593,19 @@ const COUNTRIES={
  'Italy':{color:'#c0262d',center:[12.5,42.8]},
  'United Kingdom':{color:'#1f5a3a',center:[-2.5,54.2]},
  'Sweden':{color:'#e4b534',center:[16,62.5]},
- 'Norway':{color:'#2fa6a0',center:[10,63]}};
-const NAMES={'Germany':'Germany','France':'France','Italy':'Italy','United Kingdom':'United Kingdom','Sweden':'Sweden','Norway':'Norway'};
+ 'Norway':{color:'#2fa6a0',center:[10,63]},
+ 'Japan':{color:'#c9ced4',center:[138.0,37.0]},
+ 'United States of America':{color:'#1a1a1a',center:[-98.0,39.0]},
+ 'Czech Republic':{color:'#2b4fa0',center:[15.0,49.8]},
+ 'Spain':{color:'#e4572e',center:[-3.7,40.4]},
+ 'Brazil':{color:'#f3e7b4',center:[-52.0,-10.0]},
+ 'South Korea':{color:'#2b4fa0',center:[127.5,36.0]},
+ 'Australia':{color:'#1f5a3a',center:[134.0,-25.0]},
+ 'Russia':{color:'#2b4fa0',center:[100.0,60.0]},
+ 'China':{color:'#f08a24',center:[105.0,35.0]},
+ 'India':{color:'#c9ced4',center:[78.0,22.0]},
+ 'East Germany':{color:'#6f8aa3',center:[12.5,51.2]}};
+const NAMES={'Germany':'Germany','France':'France','Italy':'Italy','United Kingdom':'United Kingdom','Sweden':'Sweden','Norway':'Norway','Japan':'Japan','United States of America':'United States','Czech Republic':'Czech Republic','Spain':'Spain','Brazil':'Brazil','South Korea':'South Korea','Australia':'Australia','Russia':'Russia','China':'China','India':'India','East Germany':'East Germany'};
 
 const PALETTE=['#c0262d','#e4572e','#f08a24','#e4b534','#8fb339','#1f5a3a','#2fa6a0','#2b4fa0','#6f8aa3','#6a3fa0','#c2578f','#7a4a2b',
  '#f3e7b4','#e8edf1','#c9ced4','#8a929b','#5a626b','#2b2f35','#111111','#ffffff','#bcd4e0','#b98550'];
@@ -318,11 +629,11 @@ function openCountry(name){
   selected=name;
   const cars=CARS.filter(c=>c.country===name);
   $('stage').classList.add('mini');
-  $('cName').textContent=name;
+  $('cName').textContent=NAMES[name]||name;
   $('cSub').textContent=cars.length?`${cars.length} car${cars.length>1?'s':''} in the pilot`:'No cars in the pilot yet';
   $('chips').hidden=true;$('homeHint').hidden=true;
   const L=$('list');L.innerHTML='';
-  if(!cars.length){L.innerHTML='<div class="empty">No cars for this country yet. The pilot covers Germany, France, Italy, the United Kingdom, Sweden and Norway.</div>';return}
+  if(!cars.length){L.innerHTML='<div class="empty">No cars for this country yet. The pilot covers Germany, France, Italy, the United Kingdom, Sweden, Norway, Japan, the United States, the Czech Republic, Spain, Brazil, South Korea, Australia, Russia, China, India and East Germany.</div>';return}
   cars.forEach(car=>{
     const b=document.createElement('button');b.type='button';b.className='card';
     b.innerHTML=`<div class="pic"><svg viewBox="0 0 400 200" aria-hidden="true">${svgOf(car,loadFills(car),false)}</svg></div><div class="txt"><span class="meta">${car.cat} · ${car.era}</span><h3>${car.name}</h3><p class="sum">${car.sum}</p></div>`;
@@ -384,7 +695,7 @@ $('closeOv').onclick=()=>{$('overlay').hidden=true};
 /* ---------- chips ---------- */
 Object.keys(COUNTRIES).forEach(n=>{
   const b=document.createElement('button');b.type='button';b.className='chip';
-  b.innerHTML=`<span class="dot" style="background:${COUNTRIES[n].color}"></span>${n}`;
+  b.innerHTML=`<span class="dot" style="background:${COUNTRIES[n].color}"></span>${NAMES[n]||n}`;
   b.onclick=()=>pick(n);$('chips').appendChild(b);
 });
 
