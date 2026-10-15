@@ -95,7 +95,6 @@ button{font:inherit;color:inherit}
 .hd{display:flex;justify-content:space-between;align-items:center;gap:.6em;font-size:.72em;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
 .hd .cat{display:flex;align-items:center;gap:.6em;min-width:0}
 .hd [lang="bn"]{letter-spacing:0;font-size:1.12em}
-.plant .hd .cat>[lang="bn"]{display:none} /* the plant name is already in both languages; the header needs the room for its buttons */
 .hd .fol{font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:.4em;flex:none}
 .src{font-weight:600;font-size:.74em;letter-spacing:.04em;text-transform:none;padding:.12em .6em;border-radius:1em;border:1px solid var(--rule);color:var(--ink-2);white-space:nowrap}
 .hd .src{font-size:1em}
@@ -206,22 +205,6 @@ button{font:inherit;color:inherit}
 .info{position:fixed;z-index:22;left:50%;bottom:0;transform:translateX(-50%);width:min(560px,100%);max-height:82%;overflow-y:auto;box-sizing:border-box;background:var(--chrome);
   border-radius:18px 18px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -12px 40px rgb(0 0 0/.28);border-top:4px solid var(--c,var(--accent))}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(72px + env(safe-area-inset-bottom));z-index:40;margin:0;max-width:min(30em,88vw);padding:.7em 1.1em;border-radius:1.4em;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.4;text-align:center;box-shadow:0 6px 22px var(--shadow)}
-.colouring .art svg{background:var(--pp)}
-.art .phimg.pl{background:#fff}
-.art .mk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.62em;padding:.35em .9em;border-radius:1em;background:rgba(0,0,0,.6);color:#fff;white-space:nowrap;animation:pulse 1.2s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.55}}
-#printArea img{width:100%;height:auto;display:block}
-#printArea{display:none}
-@media print{
-  body{background:#fff;color:#000}
-  body.canprint>*{display:none!important}
-  body.canprint #printArea{display:block!important}
-  #printArea figure{margin:0 0 6mm;break-inside:avoid;page-break-inside:avoid}
-  #printArea svg{width:100%;height:auto;display:block}
-  #printArea figcaption{margin-top:2mm;font:15px/1.4 var(--f-body);color:#000;text-align:center}
-  #printArea figcaption i{font-style:italic;color:#444}
-  .w{animation:none}
-}
 .info header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .info h2{font:400 24px/1.15 var(--f-display);margin:0}
 .info .isub{margin:4px 0 10px;color:var(--ink-2);font-size:12.5px}
@@ -292,7 +275,6 @@ button{font:inherit;color:inherit}
   <symbol id="i-bug" viewBox="0 0 16 16" class="ico"><ellipse cx="8" cy="9" rx="3.2" ry="4"/><path d="M8 5V3.2M5 7.4L2.6 6M11 7.4L13.4 6M4.8 10.4H2.4M11.2 10.4h2.4M5.6 12.4l-1.8 1.4M10.4 12.4l1.8 1.4"/></symbol>
   <symbol id="i-pin" viewBox="0 0 16 16" class="ico"><path d="M8 14s4.4-4.2 4.4-7.4a4.4 4.4 0 0 0-8.8 0C3.6 9.8 8 14 8 14z"/><circle cx="8" cy="6.6" r="1.6"/></symbol>
   <symbol id="i-heart" viewBox="0 0 16 16" class="ico"><path d="M8 13.6S2.2 10 2.2 6.2A3 3 0 0 1 8 5a3 3 0 0 1 5.8 1.2C13.8 10 8 13.6 8 13.6z"/></symbol>
-  <symbol id="i-brush" viewBox="0 0 16 16" class="ico"><path d="M3.4 12.6h2.2l7-7a1.55 1.55 0 0 0-2.2-2.2l-7 7z"/><path d="M9.7 4.5l1.8 1.8M3.4 12.6l-.8 1.8 1.9-.7"/></symbol>
   <symbol id="i-cam" viewBox="0 0 16 16" class="ico"><path d="M2 5.2h2.4l1-1.6h5.2l1 1.6H14v7.2H2z"/><circle cx="8" cy="8.6" r="2.4"/></symbol>
 </svg>
 
@@ -331,7 +313,6 @@ button{font:inherit;color:inherit}
 </aside>
 
 <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
-<div id="printArea" aria-hidden="true"></div>
 <aside class="info" id="info" hidden aria-label="Care notes">
   <header><h2 id="infoT"></h2><button class="btn" id="iClose" type="button" aria-label="Close"><svg><use href="#i-x"/></svg></button></header>
   <p class="isub" id="infoS"></p>
@@ -2739,69 +2720,6 @@ function wreath(){ // cover art
   return`<svg class="sun" viewBox="0 0 260 260" aria-hidden="true"><defs>${K.defs}</defs>${s}</svg>`;
 }
 
-/* ---------- photo to colouring page ----------
-   A photograph becomes outlines in the browser: smooth it, reduce it to a few flat colour regions,
-   fold away specks, then ink the borders between regions plus the strongest detail edges. */
-function photoLine(img,o){
-  o=Object.assign({size:640,k:6,blur:2.4,minArea:.002,detail:.93,line:2,lw:.45,cw:1.6,thin:2.6},o);
-  const s=Math.min(1,o.size/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.max(2,Math.round(img.naturalWidth*s)),h=Math.max(2,Math.round(img.naturalHeight*s)),n=w*h;
-  const cv=document.createElement('canvas');cv.width=w;cv.height=h;const cx=cv.getContext('2d',{willReadFrequently:true});
-  cx.drawImage(img,0,0,w,h);const px=cx.getImageData(0,0,w,h).data; // throws if the image is not CORS-clean
-  // colour planes, weighted so lightness counts more than hue
-  const R=new Float32Array(n),G=new Float32Array(n),B=new Float32Array(n);
-  for(let i=0;i<n;i++){const r=px[i*4],g=px[i*4+1],b=px[i*4+2];R[i]=.299*r+.587*g+.114*b;G[i]=(r-g)*.5*o.cw;B[i]=(r+g-2*b)*.25*o.cw}
-  const blur=(a,sg)=>{ // separable gaussian
-    const rad=Math.ceil(sg*2.5),k=new Float32Array(rad*2+1);let sum=0;for(let i=-rad;i<=rad;i++){k[i+rad]=Math.exp(-i*i/(2*sg*sg));sum+=k[i+rad]}for(let i=0;i<k.length;i++)k[i]/=sum;
-    const t=new Float32Array(n),out=new Float32Array(n);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){let v=0;for(let i=-rad;i<=rad;i++){const xx=x+i<0?0:x+i>=w?w-1:x+i;v+=a[y*w+xx]*k[i+rad]}t[y*w+x]=v}
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){let v=0;for(let i=-rad;i<=rad;i++){const yy=y+i<0?0:y+i>=h?h-1:y+i;v+=t[yy*w+x]*k[i+rad]}out[y*w+x]=v}
-    return out};
-  const sg=o.blur*Math.max(w,h)/640,L=blur(R,sg).map(v=>v*o.lw),A=blur(G,sg),Bb=blur(B,sg);
-  // k-means on a sample
-  const K=o.k,C=[];const rnd=(()=>{let a=7;return()=>(a=(a*1103515245+12345)&0x7fffffff)/0x7fffffff})();
-  const idx=[];for(let i=0;i<n;i+=7)idx.push(i);
-  idx.sort((p,q)=>L[p]-L[q]);for(let j=0;j<K;j++){const i=idx[Math.floor((j+.5)/K*idx.length)];C.push([L[i],A[i],Bb[i]])} // seed across the lightness range
-  const lab=new Uint8Array(n);
-  const near=i=>{let b=0,bd=1e18;for(let j=0;j<K;j++){const c=C[j],d=(L[i]-c[0])**2+(A[i]-c[1])**2+(Bb[i]-c[2])**2;if(d<bd){bd=d;b=j}}return b};
-  for(let it=0;it<9;it++){const S=C.map(()=>[0,0,0,0]);for(const i of idx){const j=near(i),z=S[j];z[0]+=L[i];z[1]+=A[i];z[2]+=Bb[i];z[3]++}S.forEach((z,j)=>{if(z[3])C[j]=[z[0]/z[3],z[1]/z[3],z[2]/z[3]]})}
-  for(let i=0;i<n;i++)lab[i]=near(i);
-  // majority filter
-  const maj=()=>{const out=new Uint8Array(lab),cnt=new Uint8Array(K);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){cnt.fill(0);let best=lab[y*w+x],bc=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const v=lab[(y+dy)*w+x+dx];if(++cnt[v]>bc){bc=cnt[v];best=v}}out[y*w+x]=bc>=5?best:lab[y*w+x]}lab.set(out)};
-  maj();maj();
-  const maj5=()=>{const out=new Uint8Array(lab),cnt=new Uint8Array(K);for(let y=2;y<h-2;y++)for(let x=2;x<w-2;x++){cnt.fill(0);let best=lab[y*w+x],bc=0;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const v=lab[(y+dy)*w+x+dx];if(++cnt[v]>bc){bc=cnt[v];best=v}}out[y*w+x]=bc>=13?best:lab[y*w+x]}lab.set(out)};
-  maj5();maj5();
-  // fold small regions into their largest neighbour
-  const minA=Math.max(12,o.minArea*n),reg=new Int32Array(n),st=new Int32Array(n);
-  for(let pass=0;pass<3;pass++){reg.fill(-1);let nr=0;const sizes=[],nb=[];
-    const per=[];
-    for(let i=0;i<n;i++){if(reg[i]>=0)continue;let sp=0,sz=0,pe=0;st[sp++]=i;reg[i]=nr;const L0=lab[i],cn={};
-      while(sp){const p=st[--sp];sz++;const x=p%w,y=(p-x)/w;let edge=0;
-        for(const q of[x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1]){if(q<0)continue;if(lab[q]===L0){if(reg[q]<0){reg[q]=nr;st[sp++]=q}}else{edge=1;cn[lab[q]]=(cn[lab[q]]||0)+1}}pe+=edge}
-      sizes.push(sz);per.push(pe);nb.push(cn);nr++}
-    let changed=0;const to=new Int16Array(nr).fill(-1);
-    for(let r=0;r<nr;r++)if(sizes[r]<minA||(sizes[r]<n*.06&&sizes[r]<per[r]*o.thin)){let b=-1,bc=0;for(const k in nb[r])if(nb[r][k]>bc){bc=nb[r][k];b=+k}if(b>=0){to[r]=b;changed++}}
-    if(!changed)break;for(let i=0;i<n;i++){const t=to[reg[i]];if(t>=0)lab[i]=t}}
-  // ink: region borders
-  const ink=new Uint8Array(n);
-  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;if((x<w-1&&lab[i]!==lab[i+1])||(y<h-1&&lab[i]!==lab[i+w]))ink[i]=1}
-  // plus strong detail edges inside regions (petals, segments), from a difference of gaussians
-  if(o.detail<1){const g1=blur(R,sg*.6),g2=blur(R,sg*1.5),D=new Float32Array(n);for(let i=0;i<n;i++)D[i]=g2[i]-g1[i];
-    const sm=[];for(let i=0;i<n;i+=5)sm.push(D[i]);sm.sort((a,b)=>a-b);const th=Math.max(2.5,sm[Math.floor(o.detail*sm.length)]);
-    const near=new Uint8Array(n),rr=3;for(let y=0;y<h;y++)for(let x=0;x<w;x++){if(!ink[y*w+x])continue;for(let dy=-rr;dy<=rr;dy++)for(let dx=-rr;dx<=rr;dx++){const xx=x+dx,yy=y+dy;if(xx>=0&&yy>=0&&xx<w&&yy<h)near[yy*w+xx]=1}}
-    const e=new Uint8Array(n);for(let i=0;i<n;i++)if(D[i]>th&&!near[i])e[i]=1;
-    // drop short scraps of edge
-    const seen=new Uint8Array(n),minE=Math.max(14,n*.0003);
-    for(let i=0;i<n;i++){if(!e[i]||seen[i])continue;let sp=0;const comp=[];st[sp++]=i;seen[i]=1;
-      while(sp){const p=st[--sp];comp.push(p);const x=p%w,y=(p-x)/w;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=w||yy>=h)continue;const q=yy*w+xx;if(e[q]&&!seen[q]){seen[q]=1;st[sp++]=q}}}
-      if(comp.length>=minE)for(const p of comp){const x=p%w,y=(p-x)/w;if(x===0||y===0||x===w-1||y===h-1||!e[p-1]||!e[p+1]||!e[p-w]||!e[p+w])ink[p]=1}}}
-  // draw, thickening the lines
-  const out=cx.createImageData(w,h),od=out.data,r=o.line>1?1:0;
-  for(let i=0;i<n*4;i+=4){od[i]=od[i+1]=od[i+2]=255;od[i+3]=255}
-  for(let y=0;y<h;y++)for(let x=0;x<w;x++){if(!ink[y*w+x])continue;for(let dy=0;dy<=r;dy++)for(let dx=0;dx<=r;dx++){const xx=x+dx,yy=y+dy;if(xx<w&&yy<h){const j=(yy*w+xx)*4;od[j]=od[j+1]=od[j+2]=40}}}
-  cx.putImageData(out,0,0);
-  return cv.toDataURL('image/png');
-}
-
 /* ================= LANGUAGE ================= */
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 let LANG=store.get('bgb.lang')==='bn'?'bn':'en';
@@ -2823,11 +2741,11 @@ en:{brand:'Bangladesh Garden Book',find:'Find a plant',contents:'Contents',wind:
   nplants:n=>`${n} plants`,dae:'DAE ✓',bari:'BARI ✓',bd:'BD ✓',fob:'Flora ✓',fobT:'Months checked against Flora of Bangladesh',nSrc:'What this page rests on',sDae:'Sowing, planting and variety details were compared with the DAE crop page.',sBari:'The season is as reported by BARI researchers.',sFob:'Flowering and fruiting months were compared with the Flora of Bangladesh field notes. Care notes are general practice.',sBd:'Listed by a Bangladeshi nursery, so it is sold here. Care notes are general practice.',sMango:'Harvest dates follow Rajshahi’s 2026 mango calendar and shift a little each year.',sNone:'General horticultural practice. No Bangladeshi source was found to check this page against.',sOpen:'Open the source',bdT:'Listed in a Bangladeshi nursery catalogue',daeT:'Checked against the DAE crop page',bariT:'Season as reported by BARI researchers',
   eyebrow:'A flip book of garden plants',sub:'The Bangladesh Garden Book',foot:(n,g)=>`${n} plants in ${g} groups: light, water, soil and season`,open:'Open',
   backEyebrow:'Bangladesh Garden Book',backP:'Care values in this book are guidance for the plains of Bangladesh. Your nursery and your nearest Upazila agriculture office know your local soil and water best.',backBtn:'Back to the cover',
-  fAll:'All plants',fBloom:m=>'In flower in '+MNS.en[m],fShade:'Fine without full sun',fDry:'Low water',fDae:'DAE-checked',fBd:'In BD nurseries',fFav:'My plants',fFruit:m=>'Fruit in season in '+MNS.en[m],favEmpty:'Nothing saved yet. Tap the heart on a plant page.',fav:'Save to My plants',photo:'Photo or drawing',colour:'Colouring page',colourOn:'Outlines to colour in. Tap the camera to trace the real photo instead. Printing gives just the outline.',noNet:'Photos can’t load here. They work in the installed app with an internet connection.',noLine:'This photo can’t be traced here, so the drawing is shown instead.',tracing:'Tracing the photo…',more:'Feeding, pests and region',flip:'Page turn',nFeed:'Feeding',nPest:'Pests and problems',nWhere:'Where it grows',nNote:g=>`General guidance for ${g}; it is not specific to this variety.`,credit:'Photo: Wikipedia',noPhoto:'No photo found',secs:{all:'Everything',fl:'Flowers',fr:'Fruits',kg:'Kitchen garden',hp:'Houseplants'},count:n=>`${n} plant${n===1?'':'s'}`,empty:'No plant matches. Try a shorter name, or clear the filter.',
+  fAll:'All plants',fBloom:m=>'In flower in '+MNS.en[m],fShade:'Fine without full sun',fDry:'Low water',fDae:'DAE-checked',fBd:'In BD nurseries',fFav:'My plants',fFruit:m=>'Fruit in season in '+MNS.en[m],favEmpty:'Nothing saved yet. Tap the heart on a plant page.',fav:'Save to My plants',photo:'Photo or drawing',noNet:'Photos can’t load here. They work in the installed app with an internet connection.',more:'Feeding, pests and region',flip:'Page turn',nFeed:'Feeding',nPest:'Pests and problems',nWhere:'Where it grows',nNote:g=>`General guidance for ${g}; it is not specific to this variety.`,credit:'Photo: Wikipedia',noPhoto:'No photo found',secs:{all:'Everything',fl:'Flowers',fr:'Fruits',kg:'Kitchen garden',hp:'Houseplants'},count:n=>`${n} plant${n===1?'':'s'}`,empty:'No plant matches. Try a shorter name, or clear the filter.',
   guide:{hd:'Guide',small:'Before you start',title:'How to read a page',p1:'One plant to a page. Three meters show how demanding it is.',
     light:['Shade or indirect light','Part sun, 3–4 hours','Full sun, 6 hours or more'],hum:['Dry air is fine','Ordinary room or roof air','Needs moist air; mist or group pots'],wat:['Let the pot dry out first','Water when the topsoil dries','Keep the soil moist'],
     sample:'Filled months are in season',p2:m=>`The thin dark bar marks the months to sow or plant. The band below shows the six Bengali seasons. The dot marks ${MNS.en[m]}.`,
-    p3:'<b class="src">DAE ✓</b> marks a page checked against a government crop page. <b>Amounts are starting points</b>: water when the top 2–3 cm is dry. The pencil gives an outline to colour in.'},
+    p3:'<b class="src">DAE ✓</b> marks a page checked against a government crop page. <b>Amounts are starting points</b>: water when the top 2–3 cm is dry.'},
   year:{hd:'The garden year',title:'Six seasons, six jobs',rows:[
     ['গ্রীষ্ম','Grishmo<br>mid-Apr–mid-Jun','Heat and Kalboishakhi storms. Water morning and evening, mulch pots, tie in climbers. Sow okra and gourds.'],
     ['বর্ষা','Borsha<br>mid-Jun–mid-Aug','Heavy rain. Clear drainage holes and empty saucers. The best time to plant saplings and root cuttings.'],
@@ -2857,11 +2775,11 @@ bn:{brand:'বাংলাদেশের বাগান বই',find:'গা�
   nplants:n=>`${num(n)}টি গাছ`,dae:'ডিএই ✓',bari:'বারি ✓',bd:'বিডি ✓',fob:'ফ্লোরা ✓',fobT:'মাসগুলো ফ্লোরা অব বাংলাদেশের সঙ্গে মিলিয়ে দেখা',nSrc:'এই পৃষ্ঠার ভিত্তি',sDae:'বপন, রোপণ ও জাতের তথ্য ডিএই-র ফসল-তথ্যের সঙ্গে মিলিয়ে দেখা হয়েছে।',sBari:'মৌসুমটি বারির গবেষকদের দেওয়া তথ্য অনুযায়ী।',sFob:'ফুল ও ফলের মাস ফ্লোরা অব বাংলাদেশের মাঠ-বিবরণের সঙ্গে মিলিয়ে দেখা হয়েছে। পরিচর্যার তথ্য প্রচলিত চর্চা অনুযায়ী।',sBd:'বাংলাদেশি নার্সারির তালিকায় আছে, অর্থাৎ দেশে কিনতে পাওয়া যায়। পরিচর্যার তথ্য প্রচলিত চর্চা অনুযায়ী।',sMango:'আম পাড়ার তারিখ রাজশাহীর ২০২৬ সালের ক্যালেন্ডার অনুযায়ী; প্রতি বছর কিছুটা বদলায়।',sNone:'প্রচলিত উদ্যানচর্চার ভিত্তিতে লেখা। এই পৃষ্ঠা মিলিয়ে দেখার মতো বাংলাদেশি সূত্র পাওয়া যায়নি।',sOpen:'সূত্র খুলুন',bdT:'বাংলাদেশি নার্সারির তালিকায় আছে',daeT:'ডিএই-র ফসল-তথ্যের সঙ্গে মিলিয়ে দেখা',bariT:'বারির গবেষকদের দেওয়া মৌসুম',
   eyebrow:'বাগানের গাছের ফ্লিপ বই',sub:'বাংলাদেশের বাগান বই',foot:(n,g)=>`${num(n)}টি গাছ, ${num(g)}টি দল: আলো, পানি, মাটি ও মৌসুম`,open:'খুলুন',
   backEyebrow:'বাংলাদেশের বাগান বই',backP:'এই বইয়ের পরিচর্যার তথ্য বাংলাদেশের সমতল অঞ্চলের জন্য সাধারণ নির্দেশনা। আপনার এলাকার মাটি ও পানি সবচেয়ে ভালো জানে আপনার নার্সারি ও নিকটস্থ উপজেলা কৃষি অফিস।',backBtn:'প্রচ্ছদে ফিরুন',
-  fAll:'সব গাছ',fBloom:m=>MNLOC[m]+' ফুল ফোটে',fShade:'পূর্ণ রোদ ছাড়াও চলে',fDry:'কম পানি লাগে',fDae:'ডিএই যাচাইকৃত',fBd:'দেশি নার্সারিতে আছে',fFav:'আমার গাছ',fFruit:m=>MNLOC[m]+' যে ফল মেলে',favEmpty:'এখনো কিছু রাখা হয়নি। গাছের পৃষ্ঠার হৃদয় চিহ্নে চাপ দিন।',fav:'আমার গাছে রাখুন',photo:'আলোকচিত্র বা আঁকা ছবি',colour:'রং করার পাতা',colourOn:'রং করার জন্য শুধু রেখা। আসল আলোকচিত্র থেকে রেখা পেতে ক্যামেরায় চাপ দিন। ছাপলে শুধু রেখাচিত্রটি ছাপা হয়।',noNet:'এখানে আলোকচিত্র আনা যাচ্ছে না। ইন্টারনেট সংযোগসহ ইনস্টল করা অ্যাপে আলোকচিত্র দেখা যায়।',noLine:'এই আলোকচিত্রটি এখানে রেখায় রূপান্তর করা গেল না, তাই আঁকা ছবিটি দেখানো হলো।',tracing:'আলোকচিত্র থেকে রেখা টানা হচ্ছে…',more:'সার, পোকা ও অঞ্চল',flip:'পৃষ্ঠা ওল্টানো',nFeed:'সার',nPest:'পোকা ও সমস্যা',nWhere:'কোথায় ভালো হয়',nNote:g=>`“${g}” দলের জন্য সাধারণ পরামর্শ; নির্দিষ্ট এই জাতের জন্য নয়।`,credit:'ছবি: উইকিপিডিয়া',noPhoto:'ছবি পাওয়া যায়নি',secs:{all:'সব',fl:'ফুল',fr:'ফল',kg:'সবজি ও বাগান',hp:'ঘরের গাছ'},count:n=>`${num(n)}টি গাছ`,empty:'কোনো গাছ মেলেনি। ছোট করে নাম লিখুন, অথবা ফিল্টার সরিয়ে দিন।',
+  fAll:'সব গাছ',fBloom:m=>MNLOC[m]+' ফুল ফোটে',fShade:'পূর্ণ রোদ ছাড়াও চলে',fDry:'কম পানি লাগে',fDae:'ডিএই যাচাইকৃত',fBd:'দেশি নার্সারিতে আছে',fFav:'আমার গাছ',fFruit:m=>MNLOC[m]+' যে ফল মেলে',favEmpty:'এখনো কিছু রাখা হয়নি। গাছের পৃষ্ঠার হৃদয় চিহ্নে চাপ দিন।',fav:'আমার গাছে রাখুন',photo:'আলোকচিত্র বা আঁকা ছবি',noNet:'এখানে আলোকচিত্র আনা যাচ্ছে না। ইন্টারনেট সংযোগসহ ইনস্টল করা অ্যাপে আলোকচিত্র দেখা যায়।',more:'সার, পোকা ও অঞ্চল',flip:'পৃষ্ঠা ওল্টানো',nFeed:'সার',nPest:'পোকা ও সমস্যা',nWhere:'কোথায় ভালো হয়',nNote:g=>`“${g}” দলের জন্য সাধারণ পরামর্শ; নির্দিষ্ট এই জাতের জন্য নয়।`,credit:'ছবি: উইকিপিডিয়া',noPhoto:'ছবি পাওয়া যায়নি',secs:{all:'সব',fl:'ফুল',fr:'ফল',kg:'সবজি ও বাগান',hp:'ঘরের গাছ'},count:n=>`${num(n)}টি গাছ`,empty:'কোনো গাছ মেলেনি। ছোট করে নাম লিখুন, অথবা ফিল্টার সরিয়ে দিন।',
   guide:{hd:'নির্দেশিকা',small:'শুরুর আগে',title:'পৃষ্ঠা কীভাবে পড়বেন',p1:'প্রতি পৃষ্ঠায় একটি গাছ। তিনটি মিটার দেখায় গাছটির চাহিদা কতটা।',
     light:['ছায়া বা পরোক্ষ আলো','আংশিক রোদ, ৩–৪ ঘণ্টা','পূর্ণ রোদ, ৬ ঘণ্টা বা বেশি'],hum:['শুষ্ক বাতাসেও চলে','সাধারণ ঘর বা ছাদের বাতাস','ভেজা বাতাস দরকার; স্প্রে করুন'],wat:['আগে টব শুকাতে দিন','ওপরের মাটি শুকালে পানি দিন','মাটি ভেজা রাখুন'],
     sample:'রঙিন মাসগুলোই মৌসুম',p2:m=>`চিকন কালো দাগ বপন বা রোপণের মাস দেখায়। নিচের সারিতে বাংলার ছয় ঋতু। বিন্দুটি চলতি মাস, ${MNS.bn[m]}।`,
-    p3:'<b class="src">ডিএই ✓</b> মানে পৃষ্ঠাটি সরকারি ফসল-তথ্যের সঙ্গে মিলিয়ে দেখা। <b>পানির পরিমাণ প্রাথমিক ধারণা</b>: ওপরের ২–৩ সেমি মাটি শুকালে পানি দিন। পেনসিল বোতামে পৃষ্ঠাটি রং করার রেখাচিত্র হয়ে যায়।'},
+    p3:'<b class="src">ডিএই ✓</b> মানে পৃষ্ঠাটি সরকারি ফসল-তথ্যের সঙ্গে মিলিয়ে দেখা। <b>পানির পরিমাণ প্রাথমিক ধারণা</b>: ওপরের ২–৩ সেমি মাটি শুকালে পানি দিন।'},
   year:{hd:'বাগানের বছর',title:'ছয় ঋতু, ছয় কাজ',rows:[
     ['গ্রীষ্ম','মধ্য এপ্রিল–মধ্য জুন','গরম আর কালবৈশাখী। সকাল-সন্ধ্যা পানি দিন, টবে মালচ দিন, লতা বেঁধে দিন। ঢেঁড়স ও কুমড়াজাতীয় সবজি বুনুন।'],
     ['বর্ষা','মধ্য জুন–মধ্য আগস্ট','ভারী বৃষ্টি। টবের ছিদ্র পরিষ্কার রাখুন, নিচের থালার পানি ফেলে দিন। চারা লাগানো ও কাটিং করার সেরা সময়।'],
@@ -2920,7 +2838,6 @@ const saveFav=()=>store.set('bgb.fav',JSON.stringify([...FAV]));
 const canPhoto=P=>/^[A-Z][a-z]+ [a-z-]+$/.test(P.sci)&&P.cat.id!=='mangoes'&&P.cat.id!=='fruitvars';
 const WIKI='https://en.wikipedia.org/api/rest_v1/page/summary/',PH={},PHON=new Set();
 let autoPhoto=store.get('bgb.photo')!=='0'; // where Wikipedia is reachable, a species page opens on its photograph
-let LINE=store.get('bgb.line')==='1'; // colouring mode: every plant page is drawn as outlines to colour in
 
 /* ================= PAGES ================= */
 const meter=(v,what)=>`<span class="m" data-v="${v}" role="img" aria-label="${what} ${v}/3"><i></i><i></i><i></i></span>`;
@@ -2937,7 +2854,7 @@ function calendar(ms,kind,season,sow){
 }
 function plantPage(P){const c=P.cat,fob=FOB.has(P.id)&&typeof P.src!=='number',sk=fob?'fob':typeof P.src==='number'?'dae':P.src==='bd'?'bd':'bari',badge=P.src||fob?`<b class="src" title="${t(sk+'T')}">${t(sk)}</b>`:'';
   return `<div class="sheet plant" style="--c:${c.c};--k:${c.k};--n:${CATS.length}"><i class="tab"></i>
-  ${hd(`<i class="dot"></i>${esc(cName(c))}${BN()?'':` <span lang="bn">${c.bn}</span>`}`,P.page,badge+`<button type="button" class="ib" data-line="${P.id}" aria-pressed="${LINE}" aria-label="${t('colour')}" title="${t('colour')}">${ico('brush')}</button>`+(canPhoto(P)?`<button type="button" class="ib pho" data-photo="${P.id}" aria-pressed="${PHON.has(P.id)}" aria-label="${t('photo')}" title="${t('photo')}">${ico('cam')}</button>`:'')+`<button type="button" class="ib" data-info="${P.id}" aria-label="${t('more')}" title="${t('more')}">${ico('info')}</button><button type="button" class="ib fav" data-fav="${P.id}" aria-pressed="${FAV.has(P.id)}" aria-label="${t('fav')}" title="${t('fav')}">${ico('heart')}</button>`)}
+  ${hd(`<i class="dot"></i>${esc(cName(c))}${BN()?'':` <span lang="bn">${c.bn}</span>`}`,P.page,badge+(canPhoto(P)?`<button type="button" class="ib pho" data-photo="${P.id}" aria-pressed="${PHON.has(P.id)}" aria-label="${t('photo')}" title="${t('photo')}">${ico('cam')}</button>`:'')+`<button type="button" class="ib" data-info="${P.id}" aria-label="${t('more')}" title="${t('more')}">${ico('info')}</button><button type="button" class="ib fav" data-fav="${P.id}" aria-pressed="${FAV.has(P.id)}" aria-label="${t('fav')}" title="${t('fav')}">${ico('heart')}</button>`)}
   <div class="art" data-pid="${P.id}"></div>
   <div class="nm"><h2>${esc(pName(P))}</h2><span class="alt" lang="${altLang()}">${esc(pAlt(P))}</span></div>
   <p class="sci" lang="en">${P.common&&P.common!==P.en?esc(P.common)+' · ':''}<i>${esc(P.sci)}</i></p>
@@ -2999,27 +2916,7 @@ document.querySelector('.strip').innerHTML=CATS.map(c=>`<i style="--c:${c.c}"></
 
 /* drawings are built only for pages near the open spread */
 const photoHTML=id=>`<img class="phimg" src="${esc(PH[id].src)}" alt="${esc(BYID[id].en)}" data-ph="${id}"><a class="cred" href="${esc(PH[id].page)}" target="_blank" rel="noopener">${t('credit')}</a>`;
-const PHL={}; // id -> outline traced from the photograph (data URL), null if it could not be traced
-const lineHTML=id=>`<img class="phimg pl" src="${PHL[id]}" alt="${esc(BYID[id].en)}"><a class="cred" href="${esc(PH[id].page)}" target="_blank" rel="noopener">${t('credit')}</a>`;
-function drawArt(el){const id=el.dataset.pid,plant=el.closest('.plant'),ph=plant&&PHON.has(id)&&PH[id];
-  if(plant&&LINE){if(ph&&typeof PHL[id]==='string')el.innerHTML=lineHTML(id);
-    else{el.innerHTML=plate(BYID[id],1);if(ph&&PHL[id]!==null){el.insertAdjacentHTML('beforeend',`<span class="mk">${t('tracing')}</span>`);traceLine(id)}}return}
-  el.innerHTML=ph?photoHTML(id):plate(BYID[id])}
-function traceLine(id){if(PHL[id]!==undefined)return;PHL[id]=0;
-  const done=v=>{PHL[id]=v;if(v===null)say(t('noLine'));book.querySelectorAll(`.art[data-pid="${id}"]`).forEach(el=>{if(el.firstChild)drawArt(el)})};
-  const load=(src,next)=>{const im=new Image();im.crossOrigin='anonymous';im.onload=()=>setTimeout(()=>{try{done(photoLine(im))}catch(e){done(null)}},30);im.onerror=next;im.src=src};
-  load(PH[id].big||PH[id].src,()=>PH[id].big?load(PH[id].src,()=>done(null)):done(null))}
-function fillPrint(){
-  const i=pf.getCurrentPageIndex(),two=pf.getOrientation()==='landscape'&&i>0&&i<N-1;
-  const ids=(two?[i,i+1]:[i]).map(k=>META[k]&&META[k].id).filter(Boolean);
-  printArea.innerHTML=ids.map(id=>{const P=BYID[id];return`<figure>${PHON.has(id)&&typeof PHL[id]==='string'?`<img src="${PHL[id]}" alt="">`:plate(P,1)}<figcaption>${esc(pName(P))} · <i>${esc(P.sci)}</i></figcaption></figure>`}).join('');
-  document.body.classList.toggle('canprint',!!ids.length); // printing a plant page gives the outline drawing, nothing else
-}
-function redrawArt(){book.querySelectorAll('.art[data-pid]').forEach(el=>{if(el.firstChild)drawArt(el)})}
-function toggleLine(){LINE=!LINE;store.set('bgb.line',LINE?'1':'0');
-  document.body.classList.toggle('colouring',LINE);
-  book.querySelectorAll('[data-line]').forEach(b=>b.setAttribute('aria-pressed',LINE));
-  redrawArt();if(LINE)say(t('colourOn'))}
+function drawArt(el){const id=el.dataset.pid;el.innerHTML=(el.closest('.plant')&&PHON.has(id)&&PH[id])?photoHTML(id):plate(BYID[id])}
 function fillArt(i){const pg=PG[i];if(!pg||!META[i].art)return;pg.querySelectorAll('.art[data-pid]').forEach(el=>{if(!el.firstChild)drawArt(el)})}
 function photoOff(id,btn,dead){PHON.delete(id);if(dead){PH[id]=null;btn.disabled=true;btn.title=t('noPhoto')}btn.setAttribute('aria-pressed','false');const el=btn.closest('.sheet').querySelector('.art');if(el)drawArt(el)}
 function togglePhoto(btn,auto){const id=btn.dataset.photo,P=BYID[id],el=btn.closest('.sheet').querySelector('.art');
@@ -3135,10 +3032,9 @@ function start(saved){
 chrome();
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){goTo(+b.dataset.go);return}
   const fv=e.target.closest('[data-fav]');if(fv){const id=fv.dataset.fav,on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);saveFav();fv.setAttribute('aria-pressed',on);if(!drawer.hidden)render();return}
-  const ln=e.target.closest('[data-line]');if(ln){toggleLine();return}
   const ph=e.target.closest('[data-photo]');if(ph){togglePhoto(ph);return}
   const nf=e.target.closest('[data-info]');if(nf)openInfo(nf.dataset.info)});
-const info=$('#info'),toastEl=$('#toast'),printArea=$('#printArea');let toastT=0;
+const info=$('#info'),toastEl=$('#toast');let toastT=0;
 function say(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{toastEl.hidden=true},5000)}
 function srcNote(P){const L=[],a=(u,k)=>` <a href="${u}" target="_blank" rel="noopener">${t(k||'sOpen')}</a>`;
   if(typeof P.src==='number')L.push(t('sDae')+a(U.daec+P.src));
@@ -3154,7 +3050,6 @@ function openInfo(id){const P=BYID[id],c=P.cat,n=(BN()&&BNN[c.id])||NOTES[c.id];
   info.style.setProperty('--c',c.c);info.hidden=false;scrim.hidden=false}
 function closeInfo(){info.hidden=true;if(drawer.hidden)scrim.hidden=true}
 $('#iClose').onclick=closeInfo;
-window.addEventListener('beforeprint',fillPrint);
 book.addEventListener('error',e=>{const im=e.target;if(im&&im.dataset&&im.dataset.ph){const b=book.querySelector('[data-photo="'+im.dataset.ph+'"]');if(b)photoOff(im.dataset.ph,b,true)}},true);
 /* photo buttons appear only if this page is allowed to reach Wikipedia */
 try{fetch(WIKI+'Mangifera_indica').then(r=>{if(r.ok){document.body.classList.add('photos');if(ready)sync()}}).catch(()=>{})}catch(e){}
