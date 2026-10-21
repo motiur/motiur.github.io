@@ -130,6 +130,20 @@ dialog img{display:block;width:100%;height:auto;border:1px solid var(--rule);mar
 .compare-pane h4{font-size:.8rem;font-weight:700;text-align:center;color:var(--fg)}
 .compare-pane .class-tag{font-size:.65rem;text-align:center;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
 @media(max-width:600px){.compare-grid{grid-template-columns:1fr}}
+
+/* Reference photographs: real, attributed examples of textile traditions */
+.photo-card .photo-frame{display:block;position:relative;overflow:hidden;border:1px solid var(--rule);border-radius:9px;background:var(--surface);cursor:zoom-in}
+.photo-card .photo-frame img{display:block;width:100%;max-height:230px;object-fit:cover;transition:transform .18s}
+.photo-card .photo-frame:hover img{transform:scale(1.025)}
+.photo-card .photo-caption{font-size:.72rem;color:var(--muted);margin-top:7px;line-height:1.45}
+.photo-card .photo-credit{font-size:.69rem;color:var(--subtle);margin-top:4px;line-height:1.4}
+.photo-card .photo-credit a,.photo-card .photo-fallback a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+.photo-card .photo-fallback{font-size:.8rem;color:var(--muted);padding:12px;border:1px dashed var(--rule);border-radius:8px;background:var(--surface)}
+#photoDlg{width:min(94vw,900px);max-height:92vh;margin:auto;border:1px solid var(--rule);border-radius:12px;padding:16px;background:var(--surface-raised);color:var(--fg);box-shadow:0 20px 70px rgba(0,0,0,.3)}
+#photoDlg::backdrop{background:rgba(15,13,11,.72)}
+#photoDlg img{display:block;max-width:100%;max-height:72vh;object-fit:contain;margin:0 auto;border-radius:7px}
+#photoDlg .photo-credit{font-size:.76rem;color:var(--muted);margin:9px 0}
+@media(max-width:700px){.photo-card .photo-frame img{max-height:190px}}
 </style>
 </head>
 <body>
@@ -251,6 +265,16 @@ dialog img{display:block;width:100%;height:auto;border:1px solid var(--rule);mar
       <div class="sw-grid" id="masterSwatches"></div>
       <button class="btn compare-btn" id="compareBtn" type="button" style="display:none">⊞ Compare variants</button>
     </section>
+
+    <section class="card photo-card" id="photoCard" aria-label="Reference photograph">
+      <span class="sec-label" style="margin-top:0">Reference Photograph</span>
+      <a class="photo-frame" id="photoLink" href="#" target="_blank" rel="noopener" style="display:none">
+        <img id="photoImg" alt="" loading="lazy">
+      </a>
+      <div class="photo-fallback" id="photoFallback" style="display:none"></div>
+      <p class="photo-caption" id="photoCaption"></p>
+      <p class="photo-credit" id="photoCredit"></p>
+    </section>
     <section class="card" aria-label="Parts">
       <span class="sec-label" style="margin-top:0">Anatomy (Tap to Fill Part)</span>
       <div class="parts-grid" id="parts"></div>
@@ -294,6 +318,13 @@ dialog img{display:block;width:100%;height:auto;border:1px solid var(--rule);mar
   <p style="font-size:.82rem;color:var(--muted);margin-top:4px" id="compareName"></p>
   <div class="compare-grid" id="compareGrid"></div>
   <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn" id="compareClose" type="button">Close</button></div>
+</dialog>
+
+<dialog id="photoDlg" aria-label="Reference photograph enlarged">
+  <h3 id="photoDlgTitle" style="font-family:var(--display);font-size:1.1rem;margin-bottom:10px">Reference Photograph</h3>
+  <img id="photoDlgImg" alt="">
+  <p class="photo-credit" id="photoDlgCredit"></p>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px"><a class="btn" id="photoDlgSource" href="#" target="_blank" rel="noopener" style="text-decoration:none">Open source page ↗</a><button class="btn" id="photoDlgClose" type="button">Close</button></div>
 </dialog>
 
 <script>
@@ -430,30 +461,6 @@ function mot(b,k,g,gc,cx,cy,s,fx=1,g3){
     case 'fan':[-146,-118,-90,-62,-34].forEach(a=>b.leaf(g,cx,cy+s*.5,s*1.3,s*.2,a));b.rect(gc,cx-s*.1,cy+s*.5,s*.2,s*.5);break;
     case 'boat':b.poly(g,[[cx-s,cy+s*.1],[cx+s,cy+s*.1],[cx+s*.6,cy+s*.6],[cx-s*.6,cy+s*.6]]);b.poly(gc,[[cx-s*.05,cy-s*.9],[cx+s*.65,cy-s*.05],[cx-s*.05,cy-s*.05]]);break;
     case 'axe':b.rect(g,cx-s*.09,cy-s*.9,s*.18,s*1.8);b.poly(gc,[[cx+s*.09,cy-s*.85],[cx+s*.8,cy-s],[cx+s*.8,cy-s*.1],[cx+s*.09,cy-s*.3]]);break;
-    case 'peacock':{
-      // pitems currently stores peacock as ['peacock', x, y, fx], so fx lands in s.
-      const realFx = Math.abs(s) <= 2 ? (Math.sign(s) || 1) : f;
-      const size = Math.abs(s) <= 2 ? 28 : s;
-      const A = d => realFx === 1 ? d : 180 - d;
-      const R = d => A(d) * Math.PI / 180;
-      for (let j = 0; j < 5; j++) {
-        const d = -155 + j * 18;
-        b.leaf(g, cx - size * .22 * realFx, cy + size * .22, size * .82, size * .14, A(d));
-        b.circ(gc, cx - size * .22 * realFx + Math.cos(R(d)) * size * .68,
-                  cy + size * .22 + Math.sin(R(d)) * size * .68, r1(Math.max(1.5, size * .08)));
-      }
-      b.ellipse(g, cx + size * .16 * realFx, cy + size * .2, r1(size * .38), r1(size * .24));
-      b.leaf(g, cx + size * .35 * realFx, cy + size * .12, size * .58, size * .13, A(-55));
-      const hx = cx + size * .35 * realFx + Math.cos(R(-55)) * size * .58;
-      const hy = cy + size * .12 + Math.sin(R(-55)) * size * .58;
-      b.circ(g, hx, hy, r1(size * .16));
-      b.poly(g3, [[hx + size * .18 * realFx, hy - size * .05],
-                  [hx + size * .4 * realFx, hy + size * .02],
-                  [hx + size * .18 * realFx, hy + size * .07]]);
-      for (let j = -1; j <= 1; j++)
-        b.circ(gc, hx + j * size * .07 - size * .03 * realFx, hy - size * .2, r1(Math.max(1.2, size * .045)));
-      break;
-    }
   }
 }
 
@@ -2591,40 +2598,57 @@ CATALOG_DATA.push(
 
 );
 
-/* Register every catalogue entry independently. A malformed/unsupported motif in one
-   palette must not abort registration of the remaining sarees. */
-const catalogueRegistrationErrors=[];
-CATALOG_DATA.forEach((row,index)=>{
-  try {
-    addSaree(...row);
-  } catch (err) {
-    catalogueRegistrationErrors.push({index, id:row&&row[0], error:String(err)});
-    console.warn('Could not initialize saree entry:', row&&row[0], err);
-    // Keep the entry visible in the catalogue/picker even if its initial preview
-    // palette fails; use a safe generic drawable as a fallback.
-    try {
-      const [id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg]=row;
-      const safeCfg=cfg||{body:{k:'plain'},p:[],col:{b:'#f3efe6',bd:'#c9972b',be:'#c9972b',bl:'#c9972b',pg:'#f3efe6',pb:'#c9972b',pl:'#c9972b'}};
-      const obj={id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg:safeCfg};
-      obj.build=()=>{
-        try { return gen(obj.cfg); }
-        catch(_) { const bb = B(); bb.rect('Body', 0, 0, W, H); return bb.R; }
-      };
-      obj.typical=Object.assign({},safeCfg.col||{});
-      SAREES.push(obj);
-    } catch (fallbackErr) {
-      console.error('Could not add saree entry:', row&&row[0], fallbackErr);
-    }
-  }
-});
+/* Register CATALOG_DATA entries */
+CATALOG_DATA.forEach(row=>addSaree(...row));
 
-/* The base array's 'paithani2' entry duplicates the more carefully-authored
-   'yeola' entry in the appended block. Drop the duplicate so each saree is
-   counted once. */
-{
-  const idx = SAREES.findIndex(s => s.id === 'paithani2');
-  if (idx >= 0) SAREES.splice(idx, 1);
-}
+/* Curated Wikimedia Commons photographs. These are references to the tradition,
+   not claims that the pictured garment is the exact catalogue specimen. The image
+   and source-page URLs are kept together so attribution remains visible. */
+const REFERENCE_PHOTOS={
+  katan:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Banarasi_Silk_Saree.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:Banarasi_Silk_Saree.jpg',
+    photoCredit:'Photo: Gurupoo · Wikimedia Commons · CC BY-SA 4.0',
+    photoNote:'Banarasi silk brocade reference. This illustrates the broader Banarasi brocade tradition; it is not verified as the exact Mirpur Katan specimen.'
+  },
+  shalu:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Banarasi_Silk_Saree.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:Banarasi_Silk_Saree.jpg',
+    photoCredit:'Photo: Gurupoo · Wikimedia Commons · CC BY-SA 4.0',
+    photoNote:'Representative Banarasi brocade reference, not a verified photograph of this exact Shalu variant.'
+  },
+  yeola:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Sarvaangi.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:Sarvaangi.jpg',
+    photoCredit:'Photo: Sarvaangi · Wikimedia Commons · CC BY-SA 4.0',
+    photoNote:'Paithani tradition reference. The file describes a Paithani collection and is not a verified image of this exact Yeola Muniya design.'
+  },
+  paithani2:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Sarvaangi.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:Sarvaangi.jpg',
+    photoCredit:'Photo: Sarvaangi · Wikimedia Commons · CC BY-SA 4.0',
+    photoNote:'Paithani tradition reference; not a verified photograph of this exact catalogue variant.'
+  },
+  rupshijd:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/%E0%A6%9C%E0%A6%BE%E0%A6%AE%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A7%80_%E0%A6%B6%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:%E0%A6%9C%E0%A6%BE%E0%A6%AE%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A7%80_%E0%A6%B6%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80.jpg',
+    photoCredit:'Photo: Salim Khandoker · Wikimedia Commons · CC0 1.0',
+    photoNote:'Photograph of Jamdani saris displayed at Sonargaon Crafts Centre, Bangladesh. It illustrates the Jamdani tradition, not this exact Tersa design.'
+  },
+  uppada:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/%E0%A6%9C%E0%A6%BE%E0%A6%AE%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A7%80_%E0%A6%B6%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80.jpg?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:%E0%A6%9C%E0%A6%BE%E0%A6%AE%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A7%80_%E0%A6%B6%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80.jpg',
+    photoCredit:'Photo: Salim Khandoker · Wikimedia Commons · CC0 1.0',
+    photoNote:'Jamdani-style figured-weave reference from Bangladesh. It is a related textile reference, not a photograph of an Uppada saree.'
+  },
+  arni:{
+    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Kanchipuram_silk_sareer.JPG?width=900',
+    photoPage:'https://commons.wikimedia.org/wiki/File:Kanchipuram_silk_sareer.JPG',
+    photoCredit:'Photo: రహ్మానుద్దీన్ · Wikimedia Commons · CC BY-SA 3.0',
+    photoNote:'Photograph of silk saris for sale at Kanchipuram. This is a regional silk-sari reference, not a verified photograph of an Arni Silk sari.'
+  }
+};
+SAREES.forEach(s=>{if(REFERENCE_PHOTOS[s.id])Object.assign(s,REFERENCE_PHOTOS[s.id]);});
 
 /* ── Variant data (documented colourways, aliases, border variants) ── */
 (function patchSareeVariants(){
@@ -2795,6 +2819,7 @@ function renderSaree(saree){
   buildAliases(saree);
   buildSareeSwatches(saree);
   buildDossier(saree);
+  buildPhotoCard(saree);
   updatePartCounter();
   updateStatus('Tap any shape to color it.');
   resetView();
@@ -2942,6 +2967,28 @@ function setActiveColor(name,hex,element){
   if(element)element.setAttribute('aria-pressed','true');
 }
 
+function buildPhotoCard(saree){
+  const card=$('photoCard'),frame=$('photoLink'),img=$('photoImg'),fallback=$('photoFallback');
+  const caption=$('photoCaption'),credit=$('photoCredit');
+  frame.style.display='none';fallback.style.display='none';caption.textContent='';credit.textContent='';credit.replaceChildren();
+  if(saree.photo){
+    img.src=saree.photo;img.alt=`Reference photograph for ${saree.name}`;
+    frame.href=saree.photoPage||saree.photo;frame.style.display='block';
+    caption.textContent=saree.photoNote||`Photographic reference for the ${saree.name} tradition; not necessarily this exact catalogue variant.`;
+    const parts=(saree.photoCredit||'').split(' · ');
+    credit.textContent=parts.join(' · ');
+    card.dataset.hasPhoto='true';
+  }else{
+    fallback.style.display='block';
+    fallback.textContent='No verified reference photograph has been added for this entry yet.';
+    const search=document.createElement('a');search.href='https://commons.wikimedia.org/w/index.php?search='+encodeURIComponent(saree.name+' '+saree.state+' saree');search.target='_blank';search.rel='noopener';search.textContent='Search Wikimedia Commons ↗';
+    search.style.display='inline-block';search.style.marginTop='7px';fallback.appendChild(document.createElement('br'));fallback.appendChild(search);
+    caption.textContent='The illustrated coloring pattern above is an original drawing, not a photograph.';
+    card.dataset.hasPhoto='false';
+  }
+}
+
+
 function buildDossier(saree){
   $('aboutTitle').textContent=`About ${saree.name}`;
   $('drawn').textContent=saree.drawn||'';
@@ -3042,6 +3089,22 @@ function openCompare(){
 }
 $('compareBtn').addEventListener('click',openCompare);
 $('compareClose').addEventListener('click',()=>$('compareDlg').close());
+$('photoLink').addEventListener('click',e=>{
+  const saree=state.currentSaree;if(!saree||!saree.photo)return;
+  e.preventDefault();$('photoDlgTitle').textContent=saree.name+' · Reference Photograph';
+  $('photoDlgImg').src=saree.photo;$('photoDlgImg').alt=`Reference photograph for ${saree.name}`;
+  $('photoDlgCredit').textContent=(saree.photoCredit||'')+' — '+(saree.photoNote||'Tradition reference; exact variant not verified.');
+  $('photoDlgSource').href=saree.photoPage||saree.photo;
+  if(typeof $('photoDlg').showModal==='function')$('photoDlg').showModal();else window.open(saree.photoPage||saree.photo,'_blank','noopener');
+});
+$('photoDlgClose').addEventListener('click',()=>$('photoDlg').close());
+$('photoDlg').addEventListener('click',e=>{if(e.target===$('photoDlg'))$('photoDlg').close();});
+$('photoImg').addEventListener('error',()=>{
+  const s=state.currentSaree;if(!s||!s.photo)return;
+  $('photoLink').style.display='none';$('photoFallback').style.display='block';
+  $('photoFallback').textContent='The source image could not be loaded. Open the Commons file page instead.';
+  const a=document.createElement('a');a.href=s.photoPage||s.photo;a.target='_blank';a.rel='noopener';a.textContent='Open source image page ↗';a.style.display='inline-block';a.style.marginTop='7px';$('photoFallback').appendChild(document.createElement('br'));$('photoFallback').appendChild(a);
+});
 
 function buildLandTabs(){
   const counts={};SAREES.forEach(s=>{counts[s.country]=(counts[s.country]||0)+1;});
