@@ -2567,8 +2567,29 @@ CATALOG_DATA.push(
 
 );
 
-/* Register CATALOG_DATA entries */
-CATALOG_DATA.forEach(row=>addSaree(...row));
+/* Register every catalogue entry independently. A malformed/unsupported motif in one
+   palette must not abort registration of the remaining sarees. */
+const catalogueRegistrationErrors=[];
+CATALOG_DATA.forEach((row,index)=>{
+  try {
+    addSaree(...row);
+  } catch (err) {
+    catalogueRegistrationErrors.push({index, id:row&&row[0], error:String(err)});
+    console.warn('Could not initialize saree entry:', row&&row[0], err);
+    // Keep the entry visible in the catalogue/picker even if its initial preview
+    // palette fails; use a safe generic drawable as a fallback.
+    try {
+      const [id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg]=row;
+      const safeCfg=cfg||{body:{k:'plain'},p:[],col:{b:'#f3efe6',bd:'#c9972b',be:'#c9972b',bl:'#c9972b',pg:'#f3efe6',pb:'#c9972b',pl:'#c9972b'}};
+      const obj={id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg:safeCfg};
+      obj.build=()=>{try{return gen(obj.cfg)}catch(_){return B().rect('Body',0,0,W,H).R}};
+      obj.typical=Object.assign({},safeCfg.col||{});
+      SAREES.push(obj);
+    } catch (fallbackErr) {
+      console.error('Could not add saree entry:', row&&row[0], fallbackErr);
+    }
+  }
+});
 
 /* ── Variant data (documented colourways, aliases, border variants) ── */
 (function patchSareeVariants(){
