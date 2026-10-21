@@ -430,6 +430,30 @@ function mot(b,k,g,gc,cx,cy,s,fx=1,g3){
     case 'fan':[-146,-118,-90,-62,-34].forEach(a=>b.leaf(g,cx,cy+s*.5,s*1.3,s*.2,a));b.rect(gc,cx-s*.1,cy+s*.5,s*.2,s*.5);break;
     case 'boat':b.poly(g,[[cx-s,cy+s*.1],[cx+s,cy+s*.1],[cx+s*.6,cy+s*.6],[cx-s*.6,cy+s*.6]]);b.poly(gc,[[cx-s*.05,cy-s*.9],[cx+s*.65,cy-s*.05],[cx-s*.05,cy-s*.05]]);break;
     case 'axe':b.rect(g,cx-s*.09,cy-s*.9,s*.18,s*1.8);b.poly(gc,[[cx+s*.09,cy-s*.85],[cx+s*.8,cy-s],[cx+s*.8,cy-s*.1],[cx+s*.09,cy-s*.3]]);break;
+    case 'peacock':{
+      // pitems currently stores peacock as ['peacock', x, y, fx], so fx lands in s.
+      const realFx = Math.abs(s) <= 2 ? (Math.sign(s) || 1) : f;
+      const size = Math.abs(s) <= 2 ? 28 : s;
+      const A = d => realFx === 1 ? d : 180 - d;
+      const R = d => A(d) * Math.PI / 180;
+      for (let j = 0; j < 5; j++) {
+        const d = -155 + j * 18;
+        b.leaf(g, cx - size * .22 * realFx, cy + size * .22, size * .82, size * .14, A(d));
+        b.circ(gc, cx - size * .22 * realFx + Math.cos(R(d)) * size * .68,
+                  cy + size * .22 + Math.sin(R(d)) * size * .68, r1(Math.max(1.5, size * .08)));
+      }
+      b.ellipse(g, cx + size * .16 * realFx, cy + size * .2, r1(size * .38), r1(size * .24));
+      b.leaf(g, cx + size * .35 * realFx, cy + size * .12, size * .58, size * .13, A(-55));
+      const hx = cx + size * .35 * realFx + Math.cos(R(-55)) * size * .58;
+      const hy = cy + size * .12 + Math.sin(R(-55)) * size * .58;
+      b.circ(g, hx, hy, r1(size * .16));
+      b.poly(g3, [[hx + size * .18 * realFx, hy - size * .05],
+                  [hx + size * .4 * realFx, hy + size * .02],
+                  [hx + size * .18 * realFx, hy + size * .07]]);
+      for (let j = -1; j <= 1; j++)
+        b.circ(gc, hx + j * size * .07 - size * .03 * realFx, hy - size * .2, r1(Math.max(1.2, size * .045)));
+      break;
+    }
   }
 }
 
@@ -2582,7 +2606,10 @@ CATALOG_DATA.forEach((row,index)=>{
       const [id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg]=row;
       const safeCfg=cfg||{body:{k:'plain'},p:[],col:{b:'#f3efe6',bd:'#c9972b',be:'#c9972b',bl:'#c9972b',pg:'#f3efe6',pb:'#c9972b',pl:'#c9972b'}};
       const obj={id,country,name,native,lang,state,craft,gi,place,facts,drawn,history,sources,pal,cfg:safeCfg};
-      obj.build=()=>{try{return gen(obj.cfg)}catch(_){return B().rect('Body',0,0,W,H).R}};
+      obj.build=()=>{
+        try { return gen(obj.cfg); }
+        catch(_) { const bb = B(); bb.rect('Body', 0, 0, W, H); return bb.R; }
+      };
       obj.typical=Object.assign({},safeCfg.col||{});
       SAREES.push(obj);
     } catch (fallbackErr) {
@@ -2590,6 +2617,14 @@ CATALOG_DATA.forEach((row,index)=>{
     }
   }
 });
+
+/* The base array's 'paithani2' entry duplicates the more carefully-authored
+   'yeola' entry in the appended block. Drop the duplicate so each saree is
+   counted once. */
+{
+  const idx = SAREES.findIndex(s => s.id === 'paithani2');
+  if (idx >= 0) SAREES.splice(idx, 1);
+}
 
 /* ── Variant data (documented colourways, aliases, border variants) ── */
 (function patchSareeVariants(){
