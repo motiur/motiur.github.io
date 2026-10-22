@@ -1,1 +1,648 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Research Prep Tracker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow column. Sticky header with a 12-week strip, tabbed views below, tasks as 44px touch rows. */
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --fg:#16202B; --muted:#5B6877; --line:#D9DFE6;
+  --accent:#1D5FD1; --accent-soft:#E3ECFB; --done:#1E7F55; --done-soft:#E0F2E9; --on-done:#FFFFFF; --warn:#A8530B;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E141B; --surface:#161E28; --fg:#E6EBF1; --muted:#93A0AF; --line:#263241;
+    --accent:#7AA7F5; --accent-soft:#1B2B45; --done:#4CC38A; --done-soft:#14301F; --on-done:#0E141B; --warn:#E3A25B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E141B; --surface:#161E28; --fg:#E6EBF1; --muted:#93A0AF; --line:#263241;
+  --accent:#7AA7F5; --accent-soft:#1B2B45; --done:#4CC38A; --done-soft:#14301F; --on-done:#0E141B; --warn:#E3A25B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.45 var(--sans);
+  padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:640px;margin:0 auto;padding-bottom:48px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible+.box,input[type=number]:focus-visible,input[type=date]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
 
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:14px 0 10px;border-bottom:1px solid var(--line)}
+.eyebrow{font:500 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:4px}
+h1{font:600 20px/1.2 var(--sans);margin:0;text-wrap:balance}
+.pct{font:500 20px/1 var(--mono);font-variant-numeric:tabular-nums}
+.pct small{font-size:12px;color:var(--muted);margin-left:4px}
+.strip{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:10px}
+.seg{position:relative;height:30px;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden;padding:0;
+  font:500 10px/1 var(--mono);color:var(--muted)}
+.seg i{position:absolute;left:0;right:0;bottom:0;background:var(--done-soft);border-top:2px solid var(--done)}
+.seg span{position:relative}
+.seg.cur{outline:2px solid var(--accent);outline-offset:1px;color:var(--fg)}
+.status{margin-top:8px;font:400 11px/1.2 var(--mono);color:var(--muted)}
+
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:12px 0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+nav button{border:0;background:none;padding:10px 4px;font:500 13px/1 var(--sans);color:var(--muted);min-height:44px}
+nav button+button{border-left:1px solid var(--line)}
+nav button[aria-selected=true]{background:var(--accent-soft);color:var(--accent)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.panel>h2{margin:0;padding:12px 14px 4px;font:600 14px/1.3 var(--sans)}
+.panel .sub{padding:0 14px 8px;color:var(--muted);font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.card-h{width:100%;display:grid;grid-template-columns:1fr auto 16px;gap:10px;align-items:center;border:0;background:none;text-align:left;padding:12px 14px;min-height:56px}
+.card-h .nm{font-weight:600;font-size:14.5px}
+.card-h .nt{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px}
+.card-h .ct{font:500 12px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+.card-h .ct.full{color:var(--done)}
+.chev{width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .15s}
+.card.open .chev{transform:rotate(-135deg)}
+.bar{height:3px;background:var(--line)}
+.bar i{display:block;height:100%;background:var(--done)}
+.tasks{display:none;border-top:1px solid var(--line)}
+.card.open .tasks{display:block}
+.info{padding:10px 14px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--bg)}
+.info b{color:var(--fg);font-weight:500}
+
+.task{position:relative;display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:11px 14px;min-height:44px;cursor:pointer}
+.panel .task:first-of-type{border-top:0}
+.task+.task{border-top:1px solid var(--line)}
+.task input{position:absolute;left:0;top:0;width:48px;height:100%;opacity:0;margin:0;cursor:pointer}
+.box{width:22px;height:22px;border:1.5px solid var(--muted);border-radius:5px;margin-top:1px;position:relative;background:var(--surface)}
+.task input:checked+.box{background:var(--done);border-color:var(--done)}
+.task input:checked+.box::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid var(--on-done);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.task input:checked~.tx{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.tx{font-size:14.5px;min-width:0;overflow-wrap:anywhere}
+.tx a{text-decoration:none;font-size:13px;margin-left:2px}
+.tag{font:500 10.5px/1 var(--mono);letter-spacing:.03em;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:4px 5px;white-space:nowrap;margin-top:2px}
+.tag.late{color:var(--warn);border-color:var(--warn)}
+.tag.g{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+.tools{display:flex;justify-content:flex-end;margin:0 0 8px}
+.link{background:none;border:0;color:var(--accent);font-size:13px;padding:8px 2px;min-height:36px}
+.empty{padding:6px 14px 14px;color:var(--muted);font-size:13.5px}
+
+.wk-h .dt{font:400 12px/1 var(--mono);color:var(--muted)}
+.cur-badge{font:500 10px/1 var(--mono);color:var(--accent);background:var(--accent-soft);padding:3px 5px;border-radius:3px;margin-left:6px;vertical-align:1px}
+
+.field{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-top:1px solid var(--line)}
+.field label{font-size:14px}
+input[type=date],input[type=number]{font:400 14px var(--mono);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:8px;min-height:40px;color-scheme:inherit}
+input[type=number]{width:76px;text-align:right}
+.hrow{display:grid;grid-template-columns:52px 1fr 76px;gap:10px;align-items:center;padding:8px 14px;border-top:1px solid var(--line)}
+.hrow .w{font:500 12px/1.2 var(--mono)}
+.hrow .w small{display:block;color:var(--muted);font-weight:400;font-size:10.5px}
+.hbar{position:relative;height:8px;background:var(--bg);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.hbar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent)}
+.hbar i.ok{background:var(--done)}
+.hbar::after{content:"";position:absolute;left:66.6%;top:0;bottom:0;width:1px;background:var(--muted);opacity:.6}
+.total{font:500 13px/1 var(--mono);padding:12px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.btns{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
+.btn{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:10px 14px;min-height:44px;font-size:14px}
+.btn.danger{color:var(--warn);border-color:var(--warn)}
+textarea.out{width:calc(100% - 28px);margin:0 14px 14px;height:150px;font:12px/1.4 var(--mono);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
+.note{padding:10px 14px 14px;font-size:12.5px;color:var(--muted)}
+.rowbar{display:grid;grid-template-columns:78px 1fr 92px;gap:10px;align-items:center;padding:8px 14px;border-top:1px solid var(--line)}
+.rowbar .n{font-size:13px}
+.rb{position:relative;height:10px;background:var(--bg);border:1px solid var(--line);border-radius:5px}
+.rb i{position:absolute;top:-1px;bottom:-1px;background:var(--accent);border-radius:5px;min-width:6px}
+.rowbar .v{font:500 12px/1.2 var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.kv{padding:10px 14px;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv b{display:block;font:500 11px/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.srcs a{margin-right:12px;font-size:13px;display:inline-block;padding:4px 0}
+.task .sp{width:1px}
+.steprow{width:100%;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;text-align:left;border:0;border-top:1px solid var(--line);background:none;padding:11px 14px;min-height:44px}
+.steprow .tx b{font-weight:500}
+.steprow .ct{font:500 12px/1 var(--mono);color:var(--muted)}
+.steprow .ct.full{color:var(--done)}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow" id="eyebrow"></div>
+    <div class="top"><h1>Research Prep Tracker</h1><div class="pct" id="pct"></div></div>
+    <div class="strip" id="strip" role="group" aria-label="Weekly progress"></div>
+    <div class="status" id="status"></div>
+  </header>
+  <nav role="tablist" id="tabs">
+    <button role="tab" data-tab="goals" aria-selected="true">Goals</button>
+    <button role="tab" data-tab="weeks" aria-selected="false">Weeks</button>
+    <button role="tab" data-tab="companies" aria-selected="false">Companies</button>
+    <button role="tab" data-tab="log" aria-selected="false">Log</button>
+  </nav>
+  <main id="view"></main>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Data ---------- */
+var GOALS=[
+ {id:'g0',n:'Setup and routine',s:'Setup',note:'Before you start. This group is not one of the original ten.'},
+ {id:'g1',n:'Choose a research specialization',s:'Specialty',note:'Deadline: end of Week 2. Use the Apple research library to filter by area and venue.'},
+ {id:'g2',n:'Read and critique at least 5 papers',s:'Papers',note:'Read the first three for shared foundations, then one specialization paper. Critique means assumptions, baselines and confounders, not a summary.'},
+ {id:'g3',n:'Reproduce one published result',s:'Reproduce',note:'Evidence of mastery: comparable results and documented deviations.'},
+ {id:'g4',n:'Complete a controlled experiment with baselines',s:'Experiment',note:'Question: which pretrained representation or adaptation strategy degrades least under distribution shift, and why? Scope: one dataset, two methods, a few corruption families, one hypothesis.'},
+ {id:'g5',n:'Run ablations and analyze failure cases',s:'Ablations',note:'Add complexity only after the baseline works.'},
+ {id:'g6',n:'Publish a clean, reproducible repository',s:'Repo',note:'Clear install instructions, fixed evaluation protocols, reproducible results.'},
+ {id:'g7',n:'Write a technical research report',s:'Report',note:'Roughly 5 to 8 pages: question, related work, method, results, limitations, future experiments.'},
+ {id:'g8',n:'Deliver two mock research presentations',s:'Talks',note:'Each one 15 to 20 minutes.'},
+ {id:'g9',n:'Practice ML theory and coding interviews',s:'Interview',note:'Aim for 8 to 12 focused hours per week. Spend extra time on experiments, not more reading.'},
+ {id:'g10',n:'Choose roles and finish application materials',s:'Apply',note:'Company by company work lives in the Companies tab and runs as six batches. This goal holds the shared pieces: project write-ups, role choice, recommenders and the final audit.'}
+];
+var APPLE='https://machinelearning.apple.com/research/';
+var T=[
+ ['g0',1,'Block 8 to 12 focused hours per week on your calendar'],
+ ['g0',1,'Pick a weekly review day and log your hours in the Log tab'],
+ ['g0',1,'Set up notes: one file per paper and one experiment log'],
+ ['g0',1,'Create the PyTorch environment and a Git repo with seed utilities'],
+ ['g0',2,'Confirm GPU access for the CIFAR-10-C experiments'],
+
+ ['g1',1,'Browse Apple ML Research and filter papers by research area and venue',APPLE],
+ ['g1',1,'Shortlist 2 or 3 candidate areas'],
+ ['g1',2,'Read 2 recent papers in each shortlisted area'],
+ ['g1',2,'Compare each area with your existing academic work and interests'],
+ ['g1',2,'Write a one-page rationale for your pick'],
+ ['g1',2,'Commit to one specialization (deadline: end of Week 2)'],
+ ['g1',2,'Draft the literature review on your area and on distribution shift'],
+ ['g1',2,'Write a precise research question and one clear hypothesis'],
+ ['g1',2,'Fix the scope: one dataset, two methods, a few corruption families'],
+
+ ['g2',1,'Read "Attention Is All You Need" (Vaswani, 2017): self-attention, positional encoding, multi-head attention, trade-offs','https://arxiv.org/abs/1706.03762'],
+ ['g2',2,'Critique the Attention paper: assumptions, baselines, confounders'],
+ ['g2',2,'Read "Deep Residual Learning for Image Recognition" (He, 2015): residual connections and controlled architecture comparisons','https://arxiv.org/abs/1512.03385'],
+ ['g2',2,'Read "Adam" (Kingma and Ba, 2014): adaptive rates, moment estimates, limitations','https://arxiv.org/abs/1412.6980'],
+ ['g2',3,'Critique the ResNet paper'],
+ ['g2',3,'Read one specialization paper: DINOv2 for vision (arxiv 2304.07193) or InstructGPT for NLP (arxiv 2203.02155)','https://arxiv.org/abs/2304.07193'],
+ ['g2',4,'Critique the Adam paper'],
+ ['g2',5,'Critique the specialization paper'],
+ ['g2',5,'Read a fifth paper from your chosen area'],
+ ['g2',6,'Critique the fifth paper'],
+ ['g2',11,'Polish your best 2 or 3 critiques into portfolio pieces'],
+
+ ['g3',3,'Choose one small published experiment to reproduce (ideally your specialization paper)'],
+ ['g3',3,'Record the paper\'s target numbers, data, hyperparameters and seeds'],
+ ['g3',3,'Implement and run the reproduction (Week 3 challenge)'],
+ ['g3',4,'Compare your results with the published ones and list every deviation'],
+ ['g3',4,'Write a short reproduction note: what matched, what did not, why'],
+
+ ['g4',3,'Download CIFAR-10-C and confirm all corruption types and severities load','https://github.com/hendrycks/robustness'],
+ ['g4',3,'Pick a pretrained vision encoder and fix dataset splits and random seeds'],
+ ['g4',3,'Establish the clean validation baseline'],
+ ['g4',3,'Establish the corrupted test baseline'],
+ ['g4',4,'Build a reproducible train and eval pipeline driven by config files (Week 4 challenge)'],
+ ['g4',4,'Run frozen pretrained features with a linear probe'],
+ ['g4',5,'Run a small fine-tuning experiment'],
+ ['g4',5,'Evaluate several corruption families at several severities'],
+ ['g4',5,'Record accuracy, degradation relative to clean, runtime and run-to-run variation'],
+
+ ['g5',5,'Implement an ablation study (Week 5 challenge)'],
+ ['g5',6,'Compare the two methods across multiple random seeds (Week 6 challenge)'],
+ ['g5',6,'Add paired comparisons with confidence intervals'],
+ ['g5',6,'Analyze which conditions cause the largest failures'],
+ ['g5',6,'Check whether conclusions hold on a second model or setting'],
+ ['g5',7,'Profile runtime and memory consumption (Week 7 challenge)'],
+ ['g5',8,'Diagnose failure cases and distribution shifts (Week 8 challenge)'],
+ ['g5',9,'Improve one experimental weakness you identified (Week 9 challenge)'],
+
+ ['g6',8,'Draft the README: question, install steps, run commands'],
+ ['g6',8,'Pin dependencies and add an environment file'],
+ ['g6',8,'Fix the evaluation protocol and seeds in a config'],
+ ['g6',10,'Run everything from a clean environment (Week 10 challenge)'],
+ ['g6',10,'Add a results table and a script that regenerates every figure'],
+ ['g6',10,'Add license, citations and a limitations section'],
+ ['g6',10,'Publish the repository publicly'],
+
+ ['g7',7,'Build results tables'],
+ ['g7',7,'Make plots'],
+ ['g7',7,'Write the interpretation of the results'],
+ ['g7',7,'Outline the report sections'],
+ ['g7',8,'Draft every section'],
+ ['g7',8,'State exactly what you replicated, what you investigated independently and what new evidence you found'],
+ ['g7',8,'Finish the 5 to 8 page report'],
+ ['g7',10,'Revise the report using mock presentation feedback'],
+ ['g7',11,'Check every claim against evidence and remove overclaiming'],
+
+ ['g8',8,'Outline a 15 to 20 minute talk'],
+ ['g8',8,'Build the slides'],
+ ['g8',9,'Give mock presentation 1 and collect written feedback'],
+ ['g8',10,'Revise the talk from the feedback'],
+ ['g8',11,'Give mock presentation 2, timed'],
+ ['g8',11,'Prepare answers to the 5 hardest likely questions'],
+
+ ['g9',1,'Derive gradients for linear regression and softmax cross-entropy, then verify numerically'],
+ ['g9',1,'Implement gradient descent for linear regression without a tutorial (Week 1 challenge)'],
+ ['g9',2,'Implement a simple neural network and verify backprop with a gradient check (Week 2 challenge)'],
+ ['g9',2,'Implement SGD and Adam on a toy problem and explain convergence and hyperparameter effects'],
+ ['g9',3,'Write a PyTorch training loop with validation and checkpointing'],
+ ['g9',4,'Build a paired model-comparison pipeline with confidence intervals and error analysis'],
+ ['g9',7,'Critique a paper\'s assumptions and baselines, name confounders, propose stronger tests'],
+ ['g9',10,'Review core ML theory you may be asked to derive'],
+ ['g9',11,'Solve ML implementation questions under time pressure (Week 11 challenge)'],
+ ['g9',12,'Defend your design choices in a mock research interview (Week 12 challenge)'],
+ ['g9',12,'Debrief the mock interview and fix your top 3 weaknesses'],
+
+  ['g10',9,'Browse the Apple ML Research library for groups in your area',APPLE],
+ ['g10',9,'Rewrite existing project 1 to show your personal contribution, judgment and rigor'],
+   ['g10',10,'Decide whether to target applied or research-heavy roles at each company'],
+ ['g10',10,'Rewrite existing project 2 the same way'],
+  ['g10',11,'Ask recommenders once for letters you can reuse at every company'],
+  ['g10',12,'Final audit: no claim in your portfolio goes beyond the evidence']
+];
+var WEEKS=[null,
+ {f:'Explore areas, build foundations',d:'Literature review and a precise research question',c:'Derive and implement gradient descent for linear regression'},
+ {f:'Commit to one area',d:'Literature review and a precise research question',c:'Implement a simple neural network and verify backpropagation'},
+ {f:'Baseline and pipeline',d:'Reproducible baseline and evaluation pipeline',c:'Reproduce a small published experiment'},
+ {f:'Main experiments',d:'Main experiments and controlled comparisons',c:'Build a reproducible training and evaluation pipeline'},
+ {f:'Main experiments',d:'Main experiments and controlled comparisons',c:'Implement an ablation study'},
+ {f:'Ablations and error analysis',d:'Ablations, robustness checks and error analysis',c:'Compare two methods across multiple random seeds'},
+ {f:'Results and interpretation',d:'Results tables, plots and written interpretation',c:'Profile runtime and memory consumption'},
+ {f:'Report, code and talk',d:'Research report, public code and presentation',c:'Diagnose failure cases and distribution shifts'},
+ {f:'Fix a weakness, first mock talk',d:'Improve one experimental weakness',c:'Improve one experimental weakness you identified'},
+ {f:'Clean release and openings',d:'Repository runs from a clean environment',c:'Make the project runnable from a clean environment'},
+ {f:'Interview drills, application prep',d:'Second mock talk and tailored applications',c:'Solve ML implementation questions under time pressure'},
+ {f:'Mock interview and applying',d:'Applications submitted',c:'Defend your design choices in a mock research interview'}
+];
+
+var tasks=[],cnt={};
+T.forEach(function(r){cnt[r[0]]=(cnt[r[0]]||0)+1;tasks.push({id:r[0]+'.'+cnt[r[0]],g:r[0],w:r[1],t:r[2],l:r[3]||null});});
+var gById={};GOALS.forEach(function(g){gById[g.id]=g;});
+
+/* ---------- Companies ---------- */
+var LV='https://www.levels.fyi/companies/';
+var CO=[
+ {k:'google',n:'Google DeepMind and Google Research',s:'Google',lo:410,hi:539,
+  role:'Research Scientist (Gemini, vision, multimodal, AI for science)',
+  base:'$147,000 to $211,000 base, plus bonus and equity',
+  tot:'Reported total: L4 $410K, L5 $539K, L6 $729K. Median $480K.',
+  elig:'PhD or equivalent practical experience. No publication count stated; publishing is part of the job.',
+  careers:'https://deepmind.google/about/careers/',
+  src:[['Gemini Vision posting, May 2026 (closed)','https://jobs.anitab.org/companies/google-24698/jobs/79917546-research-scientist-gemini-vision-deepmind'],['levels.fyi pay',LV+'google/salaries/software-engineer/title/research-scientist']]},
+ {k:'microsoft',n:'Microsoft Research',s:'Microsoft',lo:190,hi:282,
+  role:'Senior Researcher, Deep Learning (Redmond)',
+  base:'$119,800 to $234,700 base. Bay Area and New York: $160,200 to $261,000.',
+  tot:'Reported total: level 60 $190K, 61 $212K, 62 $213K. Overall median $282K. Senior levels were not visible, so the bar is a floor.',
+  elig:'Doctorate, or master’s plus 3+ years of related research, or bachelor’s plus 4+ years. Strong publication record preferred.',
+  careers:'https://www.microsoft.com/en-us/research/careers/open-positions/',
+  src:[['Senior Researcher posting (closed)','https://jobs.khoslaventures.com/companies/yammer/jobs/87894952-senior-researcher-deep-learning-microsoft-research'],['levels.fyi pay',LV+'microsoft/salaries/software-engineer/title/research-scientist']]},
+ {k:'meta',n:'Meta (FAIR)',s:'Meta',lo:312,hi:490,
+  role:'Research Scientist, FAIR (speech, audio, vision, language)',
+  base:'$117,000 to $173,000 base in one New York FAIR posting. Reported E4 base is higher, about $184K.',
+  tot:'Reported total: E3 $233K, E4 $312K, E5 $490K, E6 $629K. Median $408K.',
+  elig:'PhD or equivalent practical experience. Publications at ICML, NeurIPS or ICLR preferred. Degrees must be finished before joining.',
+  careers:'https://www.metacareers.com/jobs',
+  src:[['FAIR Speech and Audio posting','https://jobs.therundown.ai/jobs/126048991/apply'],['levels.fyi pay',LV+'meta/salaries/software-engineer/title/research-scientist']]},
+ {k:'openai',n:'OpenAI',s:'OpenAI',lo:818,hi:1470,
+  role:'Research Scientist (San Francisco, hybrid)',
+  base:'$250,000 to $380,000 base, plus equity',
+  tot:'Reported total: L4 $818K (base $306K), L5 $1.47M (base $390K). Median $800K. Most of it is private-company equity, so its value is uncertain.',
+  elig:'Pursuing or recently finished a PhD. First-author papers, open-source work or significant technical contributions.',
+  careers:'https://openai.com/careers/',
+  src:[['Research Scientist, PhD posting (closed)','https://jobs.khoslaventures.com/companies/openai/jobs/68788482-research-scientist-phd'],['levels.fyi pay',LV+'openai/salaries/software-engineer/title/research-scientist']]},
+ {k:'anthropic',n:'Anthropic',s:'Anthropic',lo:336,hi:602,
+  role:'Research Scientist (teams vary)',
+  base:'Aggregated from 15 postings with pay: $336K to $602K a year on average. The source does not say whether that is base or total.',
+  tot:'levels.fyi lists no breakdown. Highest reported total: $892K.',
+  elig:'Not checked. I did not read an individual Anthropic research scientist posting, so read the team posting before applying.',
+  careers:'https://www.anthropic.com/careers',
+  src:[['Pay aggregate from postings','https://inferencejobs.com/companies/anthropic/salaries/research-scientist'],['levels.fyi pay',LV+'anthropic/salaries/software-engineer/title/research-scientist']]},
+ {k:'nvidia',n:'NVIDIA',s:'NVIDIA',lo:377,hi:474,
+  role:'Senior Research Scientist, Efficient Deep Learning (Santa Clara)',
+  base:'Level 4: $184,000 to $299,000. Level 5: $224,000 to $356,500. Plus equity.',
+  tot:'Reported total: IC2 $377K, IC3 $414K, IC4 $474K. Median $445K.',
+  elig:'PhD in CS, EE or similar, or equivalent industry research lab experience. Outstanding research track record.',
+  careers:'https://www.nvidia.com/en-us/about-nvidia/careers/',
+  src:[['Senior Research Scientist posting (closed)','https://jobs.anitab.org/companies/nvidia/jobs/63420833-senior-research-scientist-efficient-deep-learning'],['levels.fyi pay',LV+'nvidia/salaries/software-engineer/title/research-scientist']]},
+ {k:'amazon',n:'Amazon (AGI)',s:'Amazon',lo:352,hi:476,
+  role:'Applied Scientist, Artificial General Intelligence',
+  base:'$136,000 to $222,200 base depending on market',
+  tot:'Reported total: L5 $352K, L6 $476K, L7 $776K. Median $330K. Stock vests later in the grant.',
+  elig:'PhD, or master’s plus 4+ years of related experience. Top-venue publications or patents preferred. Amazon titles these roles Applied Scientist.',
+  careers:'https://www.amazon.jobs/',
+  src:[['Applied Scientist, AGI posting','https://amazon.jobs/en/jobs/2602913/applied-scientist-artificial-general-intelligence'],['levels.fyi pay',LV+'amazon/salaries/software-engineer/title/research-scientist']]},
+ {k:'apple',n:'Apple (AIML)',s:'Apple',lo:329,hi:422,
+  role:'ML Researcher, Foundation Models (Seattle)',
+  base:'$171,600 to $302,200 base, plus equity',
+  tot:'Reported total: ICT3 $329K, ICT4 $422K, ICT5 $647K. Median $390K.',
+  elig:'PhD or equivalent practical experience. Publication record at NeurIPS, ICML, ICLR, ACL, CVPR or similar, or a record of applying deep learning in products.',
+  careers:'https://jobs.apple.com/',
+  src:[['ML Researcher, AFM posting (closed)','https://jobs.anitab.org/companies/apple/jobs/65361962-aiml-ml-researcher-afm'],['levels.fyi pay',LV+'apple/salaries/software-engineer/title/research-scientist']]},
+ {k:'xai',n:'xAI',s:'xAI',lo:191,hi:449,
+  role:'AI Engineer and Researcher (multimodal, post-training, inference)',
+  base:'$180,000 to $440,000 in one Bay Area multimodal posting tagged entry level.',
+  tot:'Aggregated from 13 postings with pay: $191K to $449K a year on average, base or total not stated. levels.fyi has no breakdown. Highest reported total: $860K.',
+  elig:'The posting I read states no degree or publication requirement. It asks for distributed training on large clusters, JAX/XLA, Python and Rust.',
+  careers:'https://x.ai/careers',
+  src:[['Multimodal posting','https://builtin.com/job/ai-engineer-researcher-multimodal/2701812'],['Pay aggregate from postings','https://inferencejobs.com/companies/xai/salaries/ai-research'],['levels.fyi pay',LV+'xai/salaries/software-engineer/title/research-scientist']]},
+ {k:'adobe',n:'Adobe Research',s:'Adobe',lo:332,hi:432,
+  role:'Senior Research Scientist / Engineer (reinforcement learning, LLMs, multimodal)',
+  base:'$162,000 to $301,200 base, varies by US market',
+  tot:'Reported total: level 3 $332K, level 4 $432K. Median $350K. Higher levels were not visible.',
+  elig:'PhD in computer science, AI or ML is required. Strong publication record in reinforcement learning, LLMs and multimodal models.',
+  careers:'https://careers.adobe.com/',
+  src:[['Senior Research Scientist posting','https://jobs.anitab.org/companies/adobe-software-2/jobs/56091660-senior-research-scientist-engineer'],['levels.fyi pay',LV+'adobe/salaries/software-engineer/title/research-scientist']]},
+ {k:'ibm',n:'IBM Research',s:'IBM',lo:183,hi:296,
+  role:'AI Foundations Research Scientist (Cambridge, MA and Tokyo)',
+  base:'Not listed in the posting. Reported base runs from $175K at Band 6 to $261K at Band 9.',
+  tot:'Reported total: Band 6 $183K, Band 7 $238K, Band 8 $233K, Band 9 $296K. Median $241K. Stock is a small share.',
+  elig:'Master’s degree required, doctorate preferred. Publications at top venues such as NeurIPS, CVPR, ICML or ICLR are required.',
+  careers:'https://www.ibm.com/careers',
+  src:[['AI Foundations posting, June 2026 (closed)','https://jobs.chicagoquantum.org/companies/ibm-2-ac1a9733-081a-4a8e-80d2-933d126d8ce3/jobs/81620022-ai-foundations-research-scientist'],['levels.fyi pay',LV+'ibm/salaries/software-engineer/title/research-scientist']]},
+ {k:'salesforce',n:'Salesforce AI Research',s:'Salesforce',lo:337,hi:425,
+  role:'Research Scientist (Palo Alto)',
+  base:'$137,100 to $334,600 base in a California posting from early 2025, the oldest source here.',
+  tot:'Reported total: MTS $337K, Senior MTS $425K, Lead MTS $391K. Median $489K. Level names follow the engineering ladder.',
+  elig:'PhD or master’s in CS, AI or ML. Strong publication record at NeurIPS, ICML, ICLR, ACL, EMNLP, CVPR, ECCV or ICCV.',
+  careers:'https://careers.salesforce.com/',
+  src:[['Research Scientist posting (removed Feb 2025)','https://builtin.com/job/research-scientist-salesforce-ai-research/3237720'],['levels.fyi pay',LV+'salesforce/salaries/software-engineer/title/research-scientist']]},
+ {k:'samsung',n:'Samsung Research America',s:'Samsung',lo:180,hi:230,
+  role:'Staff Researcher, Machine Learning and AI Research (Irvine and Mountain View)',
+  base:'$180,000 to $230,000 base',
+  tot:'levels.fyi has no data for this title, so the bar shows posted base only. Bonus and equity are not stated.',
+  elig:'PhD in computer science with an ML focus, or an equivalent mix of education and experience. Strong publication record at top ML venues.',
+  careers:'https://job-boards.greenhouse.io/samsungresearchamerica',
+  src:[['Staff Researcher posting','https://swooped.co/job-postings/staff-researcher-machine-learning-artificial-intelligence-research-18500-von-karman-avenue-samsung-research-america-71d74']]}
+];
+var CS=[
+ {t:'Scan all careers pages and build one requirements table',w:2,d:'One pass over every careers page. Record degree, publications, frameworks and team names in a single table, and let it steer the 12-week plan.'},
+ {t:'Pick 2 or 3 target teams and read their last 3 papers',w:6,d:'Overlaps with your paper reading. One paper can serve several companies.'},
+ {t:'Map your skills to each role and list the gaps',w:9,d:'Compare your repo, report and projects with the requirements table. Fix the gaps that show up at the most companies first.'},
+ {t:'Write a master CV and tailor it per company',w:11,d:'Write one CV and one research statement. Change only the team-specific paragraph for each company.'},
+ {t:'Line up referrals and recruiter contacts',w:10,d:'Start conversations early. Contacts take weeks to answer, so begin around Week 6 and finish by Week 10.'},
+ {t:'Submit applications',w:12,d:'Send them in batches across Week 12 so interview prep for early replies overlaps with later applications.'}
+];
+var CT=CS.map(function(x){return x.t;});
+GOALS.push({id:'g11',n:'Prepare for all 13 companies in parallel',s:'Companies',note:'Shared work is done once and covers every company. Company work runs as six batches, each covering all of them in the same week. Tick them in the Companies tab.'});
+gById.g11=GOALS[GOALS.length-1];
+CO.forEach(function(c){CS.forEach(function(x,i){tasks.push({id:'c.'+c.k+'.'+i,g:'g11',w:x.w,t:x.t+': '+c.s,l:null});});});
+
+/* ---------- State ---------- */
+var KEY='research-prep-tracker-v1';
+function today0(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+function iso(d){var m=d.getMonth()+1,x=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(x<10?'0':'')+x;}
+var state={start:iso(today0()),done:{},hours:{}};
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object'){state.start=p.start||state.start;state.done=p.done||{};state.hours=p.hours||{};}}}catch(e){}
+
+var tab='goals',openS={},openC={},openG={},openW={},allG=false,copyText='',resetArmed=false;
+var db=null,ref=null,syncMode='local',dirty=false,writing=false,timer=null;
+
+function startDate(){var a=state.start.split('-');return new Date(+a[0],+a[1]-1,+a[2]);}
+function weekStart(n){var d=startDate();d.setDate(d.getDate()+7*(n-1));return d;}
+function fmt(d){return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function range(n){var a=weekStart(n),b=new Date(a);b.setDate(b.getDate()+6);return fmt(a)+' to '+fmt(b);}
+function curWeek(){var diff=Math.floor((today0()-startDate())/864e5);if(diff<0)return 0;var w=Math.floor(diff/7)+1;return w>12?13:w;}
+function clampW(w){return Math.min(12,Math.max(1,w));}
+function stats(fn){var d=0,t=0;tasks.forEach(function(k){if(fn(k)){t++;if(state.done[k.id])d++;}});return{d:d,t:t};}
+
+/* ---------- Persistence ---------- */
+function setStatus(){
+  var el=document.getElementById('status');
+  var s=syncMode==='synced'?(dirty||writing?'Saving...':'Saved. Syncs across your devices.'):'Saved on this device only.';
+  el.textContent=s;
+}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+function save(){
+  saveLocal();
+  if(!ref){setStatus();return;}
+  dirty=true;setStatus();
+  clearTimeout(timer);timer=setTimeout(flush,600);
+}
+async function flush(){
+  if(!ref||writing){if(writing){timer=setTimeout(flush,300);}return;}
+  writing=true;dirty=false;
+  try{await ref.set(JSON.parse(JSON.stringify(state)));}
+  catch(e){syncMode='local';ref=null;}
+  writing=false;setStatus();
+}
+function adopt(d){
+  if(!d||typeof d!=='object')return;
+  state={start:d.start||state.start,done:d.done||{},hours:d.hours||{}};
+  saveLocal();render();
+}
+async function initDb(){
+  try{
+    if(!window.claude||!window.claude.use)return;
+    var d=await window.claude.use('db');
+    if(!d)return;
+    var r=d.doc('tracker/state');
+    var snap=await r.get();
+    db=d;ref=r;syncMode='synced';
+    if(snap.exists){adopt(snap.data());}
+    else if(Object.keys(state.done).length||Object.keys(state.hours).length){save();}
+    r.onSnapshot(function(s){
+      if(!s.exists||s.metadata.hasPendingWrites||dirty||writing)return;
+      var data=s.data();
+      if(JSON.stringify(data)!==JSON.stringify(state))adopt(data);
+    },function(){syncMode='local';ref=null;setStatus();});
+    setStatus();
+  }catch(e){syncMode='local';ref=null;setStatus();}
+}
+
+/* ---------- Rendering ---------- */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function taskRow(k,opts){
+  opts=opts||{};
+  var c=state.done[k.id]?' checked':'';
+  var link=k.l?' <a href="'+k.l+'" target="_blank" rel="noopener" aria-label="Open source">&#8599;</a>':'';
+  var tag='';
+  if(opts.goalTag)tag='<span class="tag g">'+esc(gById[k.g].s)+'</span>';
+  else if(opts.late)tag='<span class="tag late">W'+k.w+' late</span>';
+  else tag='<span class="tag">W'+k.w+'</span>';
+  return '<label class="task"><input type="checkbox" data-t="'+k.id+'"'+c+'><span class="box"></span><span class="tx">'+esc(k.t)+link+'</span>'+tag+'</label>';
+}
+
+function renderHeader(){
+  var all=stats(function(){return true;});
+  var p=all.t?Math.round(100*all.d/all.t):0;
+  document.getElementById('pct').innerHTML=p+'%<small>'+all.d+'/'+all.t+'</small>';
+  var cw=curWeek(),eb;
+  if(cw===0)eb='Starts '+fmt(startDate())+' · 12 weeks';
+  else if(cw===13)eb='12-week window ended';
+  else eb='Week '+cw+' of 12 · '+range(cw);
+  document.getElementById('eyebrow').textContent=eb;
+  var h='';
+  for(var n=1;n<=12;n++){
+    var s=stats(function(k){return k.w===n;});
+    var f=s.t?Math.round(100*s.d/s.t):0;
+    h+='<button class="seg'+(n===cw?' cur':'')+'" data-wk="'+n+'" aria-label="Week '+n+', '+f+' percent done"><i style="height:'+f+'%"></i><span>'+n+'</span></button>';
+  }
+  document.getElementById('strip').innerHTML=h;
+  setStatus();
+}
+
+function viewGoals(){
+  var cw=curWeek(),base=clampW(cw||1);
+  var up=tasks.filter(function(k){return k.w<=base&&k.g!=='g11'&&!state.done[k.id];}).sort(function(a,b){return a.w-b.w;}).slice(0,5);
+  var h='<section class="panel"><h2>Up next</h2><div class="sub">'+(cw===0?'Before your start date. Showing Week 1.':'Open tasks through Week '+base+', oldest first.')+'</div>';
+  var sr=stepRows(function(i){return CS[i].w<=base;},true);
+  if(!up.length&&!sr)h+='<div class="empty">Everything through Week '+base+' is done.</div>';
+  up.forEach(function(k){h+=taskRow(k,{goalTag:true});});
+  h+=sr;
+  h+='</section><div class="tools"><button class="link" data-act="toggleAll">'+(allG?'Collapse all':'Expand all')+'</button></div>';
+  GOALS.forEach(function(g){
+    var s=stats(function(k){return k.g===g.id;});
+    var p=s.t?Math.round(100*s.d/s.t):0;
+    var open=allG||openG[g.id];
+    h+='<section class="card'+(open?' open':'')+'"><button class="card-h" data-g="'+g.id+'" aria-expanded="'+(!!open)+'"><span class="nm">'+esc(g.n)+'</span><span class="ct'+(s.d===s.t?' full':'')+'">'+s.d+'/'+s.t+'</span><span class="chev"></span></button><div class="bar"><i style="width:'+p+'%"></i></div><div class="tasks"><div class="info">'+esc(g.note)+'</div>';
+    (g.id==='g11'?(h+=stepRows(function(){return true;},false),[]):tasks.filter(function(k){return k.g===g.id;}).sort(function(a,b){return a.w-b.w;})).forEach(function(k){
+      h+=taskRow(k,{late:cw>=1&&cw<=12&&k.w<cw&&!state.done[k.id]});
+    });
+    h+='</div></section>';
+  });
+  return h;
+}
+
+function viewWeeks(){
+  var cw=curWeek(),h='';
+  for(var n=1;n<=12;n++){
+    var s=stats(function(k){return k.w===n;});
+    var p=s.t?Math.round(100*s.d/s.t):0;
+    var open=openW[n]!==undefined?openW[n]:(n===clampW(cw||1));
+    var W=WEEKS[n];
+    h+='<section class="card'+(open?' open':'')+'"><button class="card-h wk-h" data-w="'+n+'" aria-expanded="'+open+'"><span class="nm">Week '+n+(n===cw?'<span class="cur-badge">NOW</span>':'')+'<span class="nt">'+esc(W.f)+'</span><span class="nt dt">'+range(n)+'</span></span><span class="ct'+(s.d===s.t?' full':'')+'">'+s.d+'/'+s.t+'</span><span class="chev"></span></button><div class="bar"><i style="width:'+p+'%"></i></div><div class="tasks"><div class="info"><b>Deliverable:</b> '+esc(W.d)+'<br><b>Challenge:</b> '+esc(W.c)+'<br><b>Time:</b> 8 to 12 focused hours</div>';
+    tasks.filter(function(k){return k.w===n&&k.g!=='g11';}).sort(function(a,b){return a.g<b.g?-1:1;}).forEach(function(k){h+=taskRow(k,{goalTag:true});});
+    h+=stepRows(function(i){return CS[i].w===n;},false);
+    if(!s.t)h+='<div class="empty">No tasks scheduled.</div>';
+    h+='</div></section>';
+  }
+  return h;
+}
+
+function cDone(c){var d=0;for(var i=0;i<CS.length;i++){if(state.done['c.'+c.k+'.'+i])d++;}return d;}
+function cStepDone(i){var d=0;CO.forEach(function(c){if(state.done['c.'+c.k+'.'+i])d++;});return d;}
+function stepRows(fn,onlyOpen){
+  var h='';
+  CS.forEach(function(x,i){
+    if(!fn(i))return;
+    var d=cStepDone(i);
+    if(onlyOpen&&d>=CO.length)return;
+    h+='<button class="steprow" data-go="companies" data-open="s'+i+'"><span class="tx"><b>'+esc(x.t)+'</b> for all '+CO.length+' companies</span><span class="tag g">Companies</span><span class="ct'+(d===CO.length?' full':'')+'">'+d+'/'+CO.length+'</span></button>';
+  });
+  return h;
+}
+function viewCompanies(){
+  var total=CO.length*CS.length,td=0;CO.forEach(function(c){td+=cDone(c);});
+  var h='<section class="panel"><h2>Yearly pay at a glance</h2><div class="sub">US, USD per year. Bars show reported total pay (base, stock and bonus) across the entry-to-mid levels listed in each card. Anthropic and xAI bars are averages of posted pay. Samsung shows posted base only. Checked Oct 20, 2026.</div>';
+  CO.forEach(function(c){
+    var l=100*c.lo/1500,w=Math.max(1.5,100*(c.hi-c.lo)/1500);
+    var lab=c.hi>=1000?'$'+c.lo+'K to $'+(c.hi/1000).toFixed(2)+'M':'$'+c.lo+' to '+c.hi+'K';
+    h+='<div class="rowbar"><span class="n">'+esc(c.s)+'</span><div class="rb" role="img" aria-label="'+esc(c.s)+' '+lab+'"><i style="left:'+l+'%;width:'+w+'%"></i></div><span class="v">'+lab+'</span></div>';
+  });
+  h+='<div class="note">Estimates, not offers. Posted ranges are base only, from single postings that have since closed. Totals are self-reported on levels.fyi and move with level, location and stock price. OpenAI, Anthropic and xAI equity is private, so its real value is uncertain.</div></section>';
+  h+='<section class="panel"><h2>One plan for all '+CO.length+'</h2><div class="sub">Most roles ask for the same things: a PhD or equivalent (IBM asks for a master’s, Microsoft, Amazon and Salesforce accept one with experience), publications at venues like NeurIPS, ICML and ICLR, and hands-on deep learning in PyTorch or JAX. The 12-week plan covers that once for every company. Company-specific work runs as six batches below, each handled for all '+CO.length+' companies in the same week. Batch steps done: '+td+' of '+total+'.</div></section>';
+  CS.forEach(function(x,i){
+    var d=cStepDone(i),p=Math.round(100*d/CO.length),open=!!openS[i];
+    h+='<section class="card'+(open?' open':'')+'"><button class="card-h" data-s="'+i+'" aria-expanded="'+open+'"><span class="nm">'+esc(x.t)+'<span class="nt">Due Week '+x.w+', '+range(x.w)+'</span></span><span class="ct'+(d===CO.length?' full':'')+'">'+d+'/'+CO.length+'</span><span class="chev"></span></button><div class="bar"><i style="width:'+p+'%"></i></div><div class="tasks"><div class="info">'+esc(x.d)+'</div><div class="btns" style="padding:8px 14px;border-top:0"><button class="btn" data-act="stepall" data-i="'+i+'">'+(d===CO.length?'Clear all':'Mark all done')+'</button></div>';
+    CO.forEach(function(c){
+      var id='c.'+c.k+'.'+i;
+      h+='<label class="task"><input type="checkbox" data-t="'+id+'"'+(state.done[id]?' checked':'')+'><span class="box"></span><span class="tx">'+esc(c.n)+'</span><span class="sp"></span></label>';
+    });
+    h+='</div></section>';
+  });
+  h+='<div class="tools"><span class="eyebrow" style="padding:10px 2px 0">Company details</span></div>';
+  CO.forEach(function(c){
+    var d=cDone(c),open=!!openC[c.k];
+    h+='<section class="card'+(open?' open':'')+'"><button class="card-h" data-c="'+c.k+'" aria-expanded="'+open+'"><span class="nm">'+esc(c.n)+'<span class="nt">'+esc(c.role)+'</span></span><span class="ct'+(d===CS.length?' full':'')+'">'+d+'/'+CS.length+' steps</span><span class="chev"></span></button><div class="tasks">';
+    h+='<div class="kv"><b>Posted base pay</b>'+esc(c.base)+'</div><div class="kv"><b>Reported total pay</b>'+esc(c.tot)+'</div><div class="kv"><b>Who they ask for</b>'+esc(c.elig)+'</div>';
+    h+='<div class="kv srcs"><b>Links</b><a href="'+c.careers+'" target="_blank" rel="noopener">Careers page &#8599;</a>';
+    c.src.forEach(function(x){h+='<a href="'+x[1]+'" target="_blank" rel="noopener">'+esc(x[0])+' &#8599;</a>';});
+    h+='</div></div></section>';
+  });
+  return h;
+}
+function hoursTotal(){var t=0;for(var n=1;n<=12;n++){t+=parseFloat(state.hours[n])||0;}return t;}
+function viewLog(){
+  var h='<section class="panel"><h2>Schedule</h2><div class="sub">Week 1 starts on this date. All week dates and the current-week marker follow it.</div>';
+  h+='<div class="field"><label for="startDate">Start date</label><input type="date" id="startDate" value="'+state.start+'"></div></section>';
+  h+='<section class="panel"><h2>Hours per week</h2><div class="sub">Target is 8 to 12 focused hours. The tick on each bar marks 8.</div>';
+  for(var n=1;n<=12;n++){
+    var v=state.hours[n]!==undefined&&state.hours[n]!==''?state.hours[n]:'';
+    var f=Math.min(100,100*(parseFloat(v)||0)/12);
+    h+='<div class="hrow"><div class="w">W'+n+'<small>'+fmt(weekStart(n))+'</small></div><div class="hbar"><i id="hb'+n+'" class="'+((parseFloat(v)||0)>=8?'ok':'')+'" style="width:'+f+'%"></i></div><input type="number" inputmode="decimal" min="0" max="80" step="0.5" id="h'+n+'" data-h="'+n+'" value="'+v+'" aria-label="Hours in week '+n+'"></div>';
+  }
+  h+='<div class="total"><span>Total</span><span id="htotal">'+hoursTotal()+' h</span></div></section>';
+  h+='<section class="panel"><h2>Export and reset</h2><div class="btns"><button class="btn" data-act="copy">Copy checklist</button><button class="btn danger" data-act="reset">'+(resetArmed?'Tap again to clear everything':'Clear all progress')+'</button></div>';
+  if(copyText)h+='<textarea class="out" id="out" readonly aria-label="Checklist text">'+esc(copyText)+'</textarea>';
+  h+='<div class="note">Tasks come from your plan. The weekly challenges and milestones are as written there. The sub-steps, and the schedule for Weeks 9 to 12, are a breakdown added here.</div></section>';
+  return h;
+}
+
+function render(){
+  renderHeader();
+  var v=document.getElementById('view');
+  v.innerHTML=tab==='goals'?viewGoals():tab==='weeks'?viewWeeks():tab==='companies'?viewCompanies():viewLog();
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(b){b.setAttribute('aria-selected',String(b.dataset.tab===tab));});
+  if(copyText&&tab==='log'){var o=document.getElementById('out');if(o){o.focus();o.select();}}
+}
+
+function buildCopy(){
+  var out=['Research Prep Tracker — '+stats(function(){return true;}).d+' of '+tasks.length+' done',''];
+  GOALS.forEach(function(g){
+    var s=stats(function(k){return k.g===g.id;});
+    out.push(g.n+' ('+s.d+'/'+s.t+')');
+    tasks.filter(function(k){return k.g===g.id;}).forEach(function(k){out.push((state.done[k.id]?'[x] ':'[ ] ')+'W'+k.w+' '+k.t);});
+    out.push('');
+  });
+  return out.join('\n');
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset&&t.dataset.t){
+    if(t.checked)state.done[t.dataset.t]=1;else delete state.done[t.dataset.t];
+    save();render();return;
+  }
+  if(t.id==='startDate'&&t.value){state.start=t.value;save();render();return;}
+  if(t.dataset&&t.dataset.h){render();}
+});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset&&t.dataset.h){
+    var n=t.dataset.h,v=parseFloat(t.value);
+    if(t.value===''||isNaN(v))delete state.hours[n];else state.hours[n]=Math.max(0,Math.min(80,v));
+    var b=document.getElementById('hb'+n);
+    if(b){b.style.width=Math.min(100,100*(parseFloat(state.hours[n])||0)/12)+'%';b.className=(parseFloat(state.hours[n])||0)>=8?'ok':'';}
+    var tt=document.getElementById('htotal');if(tt)tt.textContent=hoursTotal()+' h';
+    save();
+  }
+});
+document.addEventListener('click',function(e){
+  var el=e.target.closest('button');if(!el)return;
+  if(el.dataset.tab){tab=el.dataset.tab;copyText='';render();window.scrollTo(0,0);return;}
+  if(el.dataset.wk){tab='weeks';var n=+el.dataset.wk;openW[n]=true;render();var c=document.querySelector('[data-w="'+n+'"]');if(c)c.scrollIntoView({block:'start'});return;}
+  if(el.dataset.g){openG[el.dataset.g]=!openG[el.dataset.g];render();return;}
+  if(el.dataset.w){var k=+el.dataset.w;var cur=openW[k]!==undefined?openW[k]:(k===clampW(curWeek()||1));openW[k]=!cur;render();return;}
+  if(el.dataset.go){tab=el.dataset.go;if(el.dataset.open)openS[el.dataset.open.slice(1)]=true;copyText='';render();window.scrollTo(0,0);return;}
+  if(el.dataset.s){openS[el.dataset.s]=!openS[el.dataset.s];render();return;}
+  if(el.dataset.c){openC[el.dataset.c]=!openC[el.dataset.c];render();return;}
+  var a=el.dataset.act;
+  if(a==='stepall'){var si=+el.dataset.i,allDone=cStepDone(si)===CO.length;CO.forEach(function(c){var id='c.'+c.k+'.'+si;if(allDone)delete state.done[id];else state.done[id]=1;});save();render();return;}
+  if(a==='toggleAll'){allG=!allG;if(!allG)openG={};render();return;}
+  if(a==='copy'){
+    copyText=buildCopy();
+    var done=function(){render();};
+    try{navigator.clipboard.writeText(copyText).then(done,done);}catch(x){done();}
+    return;
+  }
+  if(a==='reset'){
+    if(!resetArmed){resetArmed=true;render();setTimeout(function(){if(resetArmed){resetArmed=false;if(tab==='log')render();}},4000);return;}
+    resetArmed=false;state.done={};state.hours={};copyText='';save();render();return;
+  }
+});
+
+render();
+initDb();
+})();
+</script>
+
+</body></html>
