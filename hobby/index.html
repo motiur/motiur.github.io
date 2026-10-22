@@ -1,131 +1,747 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hobby</title>
-<meta name="description" content="Hobby projects by Mohammad Motiur Rahman.">
-<!-- HOBBY. Place at hobby/index.html, NO front matter. Delete hobby/index.md. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Plot Ownership Map</title>
 <style>
-  :root{--paper:#f1f0f4;--ink:#1a1720;--muted:#726c7a;--line:#dad6e0;--accent:#5e2b54}
-  *{box-sizing:border-box;margin:0}
-  html{color-scheme:light}
-  body{background:var(--paper);color:var(--ink);
-    font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.55;
-    -webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;
-    padding:clamp(24px,5vw,44px) clamp(22px,7vw,60px) clamp(40px,8vw,72px)}
-  a{color:inherit;text-decoration:none}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
-
-  .wrap{width:100%;max-width:640px;margin:0 auto;flex:1}
-
-  .title{font-family:"Fraunces",Georgia,serif;font-weight:500;
-    font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.02;letter-spacing:-.015em;
-    font-optical-sizing:auto;margin:clamp(20px,6vw,52px) 0 clamp(6px,2vw,12px)}
-  .sub{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.05rem);margin-bottom:clamp(20px,4vw,32px)}
-
-  nav{display:flex;flex-direction:column;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .dest{display:flex;align-items:center;gap:16px;padding:clamp(18px,3.4vw,26px) 0}
-  .dest + .dest{border-top:1px solid var(--line)}
-  .dest .body{flex:1;min-width:0}
-  .dest .label{position:relative;display:inline-block;
-    font-size:clamp(1.4rem,5.2vw,1.95rem);font-weight:500;
-    letter-spacing:-.01em;line-height:1.15;transition:color .2s ease}
-  .dest .label::after{content:"";position:absolute;left:0;bottom:-4px;
-    height:2px;width:100%;max-width:var(--uw,0);background:var(--accent);
-    transition:max-width .26s cubic-bezier(.2,.7,.3,1)}
-  .dest .desc{display:block;color:var(--muted);font-size:.9rem;margin-top:7px;transition:color .2s ease}
-  .dest .arrow{color:var(--accent);flex-shrink:0;
-    transition:transform .22s cubic-bezier(.2,.7,.3,1)}
-  .dest .arrow svg{width:22px;height:22px;display:block}
-  @media (hover:hover){
-    .dest:hover .label,.dest:focus-visible .label{color:var(--accent);--uw:2.2em}
-    .dest:hover .desc{color:var(--ink)}
-    .dest:hover .arrow,.dest:focus-visible .arrow{transform:translateX(6px)}
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --line:#1f2b45;
+    --text:#e6edf7; --muted:#8fa0bd; --accent:#38bdf8;
   }
-  @media (hover:none){ .dest .arrow{transform:translateX(2px)} }
-
-  @media (prefers-reduced-motion:no-preference){
-    .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
-    .title{animation-delay:.04s}.sub{animation-delay:.10s}
-    .r1{animation-delay:.18s}.r2{animation-delay:.25s}.r3{animation-delay:.32s}
-    @keyframes rise{to{opacity:1;transform:none}}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--bg);color:var(--text);display:flex;flex-direction:column;
   }
+
+  /* ---------- Toolbar ---------- */
+  #toolbar{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line);
+  }
+  #toolbar .brand{font-weight:700;letter-spacing:.4px;margin-right:8px}
+  #toolbar .brand span{color:var(--accent)}
+  button{
+    padding:8px 12px;border-radius:8px;border:1px solid var(--line);
+    background:#1a2540;color:var(--text);font:inherit;font-size:13px;cursor:pointer;
+    transition:background .15s,border-color .15s;
+  }
+  button:hover:not(:disabled){background:#243356}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  button.primary{background:#0e7490;border-color:#0891b2}
+  button.primary:hover:not(:disabled){background:#0891b2}
+  button.active{background:#b45309;border-color:#f59e0b}
+  .spacer{flex:1}
+  .badge{font-size:12px;color:var(--muted)}
+
+  /* ---------- Layout ---------- */
+  #app{flex:1;display:flex;min-height:0}
+  #stage{
+    flex:1;min-width:0;padding:14px;display:flex;
+    background:
+      radial-gradient(circle at 20% 10%,#152039 0%,transparent 55%),
+      radial-gradient(circle at 80% 90%,#132033 0%,transparent 55%);
+  }
+  svg#map{width:100%;height:100%;border-radius:14px;background:#0e1626;
+          border:1px solid var(--line);display:block;touch-action:none}
+
+  /* ---------- Plots ---------- */
+  .plot-group{cursor:pointer;transition:transform .16s ease}
+  .plot-group:hover{transform:translate(-4px,-4px)}
+  .plot-top{stroke:rgba(0,0,0,.45);stroke-width:1.5}
+  .plot-group.selected .plot-top{stroke:#fbbf24;stroke-width:3}
+  .plot-label{
+    fill:#fff;font-weight:700;pointer-events:none;user-select:none;
+    paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:3px;stroke-linejoin:round;
+  }
+  .plot-sub{
+    fill:rgba(255,255,255,.85);font-weight:500;pointer-events:none;user-select:none;
+    paint-order:stroke;stroke:rgba(0,0,0,.5);stroke-width:2.5px;stroke-linejoin:round;
+  }
+
+  /* ---------- Side panel ---------- */
+  #panel{
+    width:352px;flex:0 0 352px;background:var(--panel);border-left:1px solid var(--line);
+    padding:16px;overflow-y:auto;
+  }
+  #panel h2{margin:0 0 4px;font-size:16px}
+  #panel .hint{font-size:12.5px;color:var(--muted);line-height:1.55;margin:0 0 16px}
+  label{display:block;margin-bottom:12px;font-size:12.5px;color:var(--muted)}
+  input[type=text],textarea{
+    width:100%;margin-top:5px;padding:9px 10px;border-radius:8px;
+    border:1px solid var(--line);background:#0b1424;color:var(--text);
+    font:inherit;font-size:14px;
+  }
+  input[type=text]:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:70px}
+  .swatches{display:flex;gap:7px;margin-top:6px;flex-wrap:wrap}
+  .sw{width:26px;height:26px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+  .sw.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+  #preview{width:100%;border-radius:10px;margin-top:8px;display:block;border:1px solid var(--line)}
+  .row{display:flex;gap:8px}
+  .row button{flex:1}
+  hr{border:none;border-top:1px solid var(--line);margin:16px 0}
+  #empty{font-size:13px;color:var(--muted);text-align:center;padding:40px 10px;line-height:1.6}
+  .file-label{
+    display:block;padding:9px 12px;border:1px dashed var(--line);border-radius:8px;
+    text-align:center;font-size:13px;cursor:pointer;color:var(--muted);margin-top:5px;
+  }
+  .file-label:hover{border-color:var(--accent);color:var(--text)}
+  input[type=file]{display:none}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1 class="title reveal">Hobby</h1>
-    <p class="sub reveal">Engineering ideas that I think need to exist.</p>
 
-    <nav aria-label="Hobby projects">
-      <a class="dest reveal r1" href="https://motiur.github.io/hobby/landMap/">
-        <span class="body">
-          <span class="label">Land tracker</span>
-          <span class="desc">Land tracker map</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r1" href="https://motiur.github.io/hobby/researchTracker/">
-        <span class="body">
-          <span class="label">12 weeks research tracker</span>
-          <span class="desc">how to be a prepare for research position</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r1" href="https://motiur.github.io/hobby/banglaLetterTracing/">
-        <span class="body">
-          <span class="label">Bangla Letter Tracing</span>
-          <span class="desc">handwriting practice for kids</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r2" href="https://motiur.github.io/hobby/darziStudio/">
-        <span class="body">
-          <span class="label">Darzi Studio</span>
-          <span class="desc">design your own salwar kameez</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r3" href="https://motiur.github.io/hobby/sareeColoring/">
-        <span class="body">
-          <span class="label">Saree Coloring</span>
-          <span class="desc">a coloring book of sarees</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r3" href="https://motiur.github.io/hobby/globalClothColoring">
-        <span class="body">
-          <span class="label">Global Cloth Coloring</span>
-          <span class="desc">a coloring book of clothes</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r2" href="https://motiur.github.io/hobby/gardeningStudio/">
-        <span class="body">
-          <span class="label">Gardening Studio</span>
-          <span class="desc">Take care of your garden</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r2" href="https://motiur.github.io/hobby/globalFoodRecipe/">
-        <span class="body">
-          <span class="label">Global Food Recipe</span>
-          <span class="desc">Find your favorite recipe</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="dest reveal r2" href="https://motiur.github.io/hobby/globalCarHistory/">
-        <span class="body">
-          <span class="label">Global Car History</span>
-          <span class="desc">Spot your favorite car</span>
-        </span>
-        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </nav>
+<div id="toolbar">
+  <div class="brand">Plot<span>3D</span></div>
+  <label class="file-label" style="margin:0;padding:8px 12px;border-style:solid">
+    📁 Load map image
+    <input type="file" id="mapFile" accept="image/*">
+  </label>
+  <button id="btnDraw">✏️ Draw plot</button>
+  <button id="btnUndo" title="Delete last drawn plot">↶ Undo last</button>
+  <div class="spacer"></div>
+  <span class="badge" id="count">0 plots</span>
+  <button id="btnExport">Export</button>
+  <button id="btnImport">Import</button>
+  <input type="file" id="importFile" accept=".json,application/json" hidden>
+  <button id="btnReset" title="Erase everything">Reset</button>
+</div>
+
+<div id="app">
+  <div id="stage">
+    <svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
+
+  <aside id="panel">
+    <div id="empty">
+      <strong>No plot selected</strong><br>
+      Click a 3D block on the map,<br>or use “Draw plot” to add one.
+    </div>
+
+    <div id="form" hidden>
+      <h2 id="title">Plot</h2>
+      <p class="hint">Everything is saved automatically in this browser.</p>
+
+      <label>Owner / occupant
+        <input type="text" id="fOwner" placeholder="e.g. Rahim Uddin">
+      </label>
+      <label>Plot number / ID
+        <input type="text" id="fPlotNo" placeholder="e.g. 42/A">
+      </label>
+      <label>Area
+        <input type="text" id="fArea" placeholder="e.g. 240 m² · 3.5 katha">
+      </label>
+      <label>Land use
+        <input type="text" id="fUse" placeholder="e.g. Residential / Commercial">
+      </label>
+      <label>Notes
+        <textarea id="fNotes" placeholder="Deed info, boundaries, remarks…"></textarea>
+      </label>
+
+      <label>Colour</label>
+      <div class="swatches" id="swatches"></div>
+
+      <hr>
+
+      <label>Photo of plot / owner</label>
+      <label class="file-label" for="fPhoto">📷 Choose image…</label>
+      <input type="file" id="fPhoto" accept="image/*">
+      <img id="preview" hidden alt="">
+      <button id="btnRemovePhoto" hidden style="width:100%;margin-top:8px">Remove photo</button>
+
+      <hr>
+      <div class="row">
+        <button id="btnDelete">🗑 Delete plot</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const KEY = 'plot3d-v1';
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let state = {
+  imgSrc: null,
+  imgW: 1200,
+  imgH: 800,
+  plots: [],       // {id,no,x,y,w,h,owner,area,use,notes,photo,color}
+  seq: 0
+};
+
+let currentId = null;
+let drawMode  = false;
+let drawing   = null;   // live drag rectangle
+
+const PALETTE = ['#0e7490','#15803d','#b45309','#7c3aed','#be123c','#0369a1','#a16207','#4d7c0f'];
+
+const $ = id => document.getElementById(id);
+const svg = $('map');
+
+/* =========================================================
+   PERSISTENCE
+   ========================================================= */
+function save(){
+  try{
+    localStorage.setItem(KEY, JSON.stringify(state));
+  }catch(e){
+    alert('Browser storage is full — large photos add up quickly.\nExport your data to back it up.');
+  }
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return;
+    const d = JSON.parse(raw);
+    if(d && Array.isArray(d.plots)) state = Object.assign(state, d);
+  }catch(e){ /* ignore corrupt data */ }
+}
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+function el(tag, attrs){
+  const n = document.createElementNS(NS, tag);
+  for(const k in attrs) n.setAttribute(k, attrs[k]);
+  return n;
+}
+
+/* lighten / darken a hex colour by factor (1 = unchanged) */
+function shade(hex, f){
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.min(255, Math.round(((n >> 16) & 255) * f));
+  const g = Math.min(255, Math.round(((n >> 8)  & 255) * f));
+  const b = Math.min(255, Math.round(( n        & 255) * f));
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+/* client coords → SVG user coords */
+function toSVG(evt){
+  const pt = svg.createSVGPoint();
+  pt.x = evt.clientX;
+  pt.y = evt.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
+
+/* extrusion depth, scaled to map size so it always looks right */
+function depth(){
+  return Math.max(10, Math.min(state.imgW, state.imgH) * 0.02);
+}
+
+/* =========================================================
+   RENDER THE WHOLE MAP
+   ========================================================= */
+function renderAll(){
+  svg.innerHTML = '';
+  svg.setAttribute('viewBox', `0 0 ${state.imgW} ${state.imgH}`);
+
+  /* --- defs: shadow filter + photo clips --- */
+  const defs = el('defs');
+  defs.innerHTML = `
+    <filter id="boxShadow" x="-30%" y="-30%" width="180%" height="180%">
+      <feDropShadow dx="6" dy="10" stdDeviation="7"
+                    flood-color="#000" flood-opacity="0.45"/>
+    </filter>`;
+  svg.appendChild(defs);
+
+  /* --- background map image --- */
+  const bg = el('g');
+  if(state.imgSrc){
+    bg.appendChild(el('image', {
+      href: state.imgSrc, x:0, y:0,
+      width: state.imgW, height: state.imgH,
+      preserveAspectRatio: 'none'
+    }));
+    /* faint dark veil so the 3D blocks pop */
+    bg.appendChild(el('rect', {
+      x:0, y:0, width: state.imgW, height: state.imgH,
+      fill:'#0b1220', opacity:0.28
+    }));
+  }else{
+    bg.appendChild(el('rect', {
+      x:0, y:0, width: state.imgW, height: state.imgH, fill:'#0e1626'
+    }));
+    /* grid hint */
+    for(let x=0; x<=state.imgW; x+=60)
+      bg.appendChild(el('line',{x1:x,y1:0,x2:x,y2:state.imgH,stroke:'#16223a','stroke-width':1}));
+    for(let y=0; y<=state.imgH; y+=60)
+      bg.appendChild(el('line',{x1:0,y1:y,x2:state.imgW,y2:y,stroke:'#16223a','stroke-width':1}));
+    const t = el('text',{x:state.imgW/2, y:state.imgH/2, fill:'#2b3b5c',
+                         'text-anchor':'middle','font-size':26,'font-weight':700});
+    t.textContent = 'Load a scanned map, then draw your plots';
+    bg.appendChild(t);
+  }
+  svg.appendChild(bg);
+
+  /* --- photo clip paths --- */
+  const clipDefs = el('defs');
+  state.plots.forEach(p=>{
+    const cp = el('clipPath', {id:'clip-'+p.id});
+    const r  = Math.min(p.w, p.h) * 0.16;
+    cp.appendChild(el('circle', {
+      cx: p.x + r*1.35, cy: p.y + r*1.35, r: r
+    }));
+    clipDefs.appendChild(cp);
+  });
+  svg.appendChild(clipDefs);
+
+  /* --- the 3D plots --- */
+  const layer = el('g', {id:'plotLayer'});
+  state.plots.forEach(p => layer.appendChild(buildPlot(p)));
+  svg.appendChild(layer);
+
+  /* --- drawing overlay (captures drag when in draw mode) --- */
+  const ov = el('rect', {
+    id:'overlay', x:0, y:0, width:state.imgW, height:state.imgH,
+    fill:'transparent', style: drawMode ? 'cursor:crosshair' : 'pointer-events:none'
+  });
+  svg.appendChild(ov);
+
+  const ghost = el('rect', {
+    id:'ghost', fill:'#38bdf8', opacity:0.25,
+    stroke:'#38bdf8', 'stroke-width':2,
+    'stroke-dasharray':'8 6', rx:4, visibility:'hidden'
+  });
+  svg.appendChild(ghost);
+
+  bindOverlay();
+  updateCount();
+}
+
+/* ---------- build one 3D block ---------- */
+function buildPlot(p){
+  const d  = depth();
+  const dx = d * 0.62;
+  const dy = d * 0.78;
+
+  const g = el('g', {'class':'plot-group', 'data-id':p.id});
+  g.setAttribute('filter','url(#boxShadow)');
+
+  const base  = p.color || PALETTE[0];
+  const cTop  = shade(base, 1.28);
+  const cSide = shade(base, 0.78);
+  const cFace = shade(base, 0.52);
+
+  const {x, y, w, h} = p;
+
+  /* right face */
+  g.appendChild(el('polygon',{
+    points:`${x+w},${y} ${x+w+dx},${y+dy} ${x+w+dx},${y+h+dy} ${x+w},${y+h}`,
+    fill:cSide, stroke:'rgba(0,0,0,.35)','stroke-width':1
+  }));
+
+  /* front face */
+  g.appendChild(el('polygon',{
+    points:`${x},${y+h} ${x+w},${y+h} ${x+w+dx},${y+h+dy} ${x+dx},${y+h+dy}`,
+    fill:cFace, stroke:'rgba(0,0,0,.35)','stroke-width':1
+  }));
+
+  /* top face */
+  g.appendChild(el('rect',{
+    x, y, width:w, height:h, rx:4,
+    fill:cTop, 'class':'plot-top'
+  }));
+
+  /* photo thumbnail */
+  if(p.photo){
+    const r = Math.min(w,h) * 0.16;
+    g.appendChild(el('image',{
+      href:p.photo,
+      x: x + r*1.35 - r, y: y + r*1.35 - r,
+      width: r*2, height: r*2,
+      'clip-path':`url(#clip-${p.id})`,
+      preserveAspectRatio:'xMidYMid slice',
+      'pointer-events':'none'
+    }));
+    g.appendChild(el('circle',{
+      cx:x + r*1.35, cy:y + r*1.35, r:r,
+      fill:'none', stroke:'#fff','stroke-width':2,
+      'stroke-opacity':0.85, 'pointer-events':'none'
+    }));
+  }
+
+  /* labels */
+  const fs  = Math.max(11, Math.min(h * 0.20, 26));
+  const fs2 = fs * 0.62;
+  const cx  = x + w/2;
+  const cy  = y + h/2;
+
+  const label = (p.owner || p.no || 'Plot').toString();
+  const t1 = el('text',{
+    x:cx, y: cy - (p.area||p.use ? fs*0.42 : -fs*0.34),
+    'text-anchor':'middle','dominant-baseline':'central',
+    'font-size':fs, 'class':'plot-label'
+  });
+  t1.textContent = label.length > 22 ? label.slice(0,21)+'…' : label;
+  g.appendChild(t1);
+
+  const sub = [p.no && p.owner ? '#'+p.no : '', p.area, p.use]
+                .filter(Boolean).join(' · ');
+  if(sub){
+    const t2 = el('text',{
+      x:cx, y: cy + fs*0.62,
+      'text-anchor':'middle','dominant-baseline':'central',
+      'font-size':fs2, 'class':'plot-sub'
+    });
+    t2.textContent = sub.length > 30 ? sub.slice(0,29)+'…' : sub;
+    g.appendChild(t2);
+  }
+
+  /* tooltip */
+  const tip = el('title');
+  tip.textContent = [
+    'Plot ' + (p.no || p.id),
+    p.owner && 'Owner: ' + p.owner,
+    p.area  && 'Area: '  + p.area,
+    p.use   && 'Use: '   + p.use,
+    p.notes && 'Notes: ' + p.notes
+  ].filter(Boolean).join('\n');
+  g.appendChild(tip);
+
+  if(p.id === currentId) g.classList.add('selected');
+
+  g.addEventListener('click', ev => {
+    if(drawMode) return;
+    ev.stopPropagation();
+    selectPlot(p.id);
+  });
+
+  return g;
+}
+
+/* =========================================================
+   DRAWING NEW PLOTS
+   ========================================================= */
+function bindOverlay(){
+  const ov    = svg.querySelector('#overlay');
+  const ghost = svg.querySelector('#ghost');
+  if(!ov) return;
+
+  ov.addEventListener('pointerdown', e => {
+    if(!drawMode) return;
+    const p = toSVG(e);
+    drawing = {x0:p.x, y0:p.y, x1:p.x, y1:p.y};
+    ov.setPointerCapture(e.pointerId);
+  });
+
+  ov.addEventListener('pointermove', e => {
+    if(!drawing) return;
+    const p = toSVG(e);
+    drawing.x1 = p.x;
+    drawing.y1 = p.y;
+    const r = normRect(drawing);
+    ghost.setAttribute('x', r.x);
+    ghost.setAttribute('y', r.y);
+    ghost.setAttribute('width',  r.w);
+    ghost.setAttribute('height', r.h);
+    ghost.setAttribute('visibility','visible');
+  });
+
+  const finish = () => {
+    if(!drawing) return;
+    const r = normRect(drawing);
+    drawing = null;
+    ghost.setAttribute('visibility','hidden');
+
+    const minSize = Math.max(12, Math.min(state.imgW, state.imgH) * 0.02);
+    if(r.w < minSize || r.h < minSize) return;
+
+    addPlot(r);
+  };
+
+  ov.addEventListener('pointerup', finish);
+  ov.addEventListener('pointercancel', finish);
+}
+
+function normRect(d){
+  return {
+    x: Math.min(d.x0, d.x1),
+    y: Math.min(d.y0, d.y1),
+    w: Math.abs(d.x1 - d.x0),
+    h: Math.abs(d.y1 - d.y0)
+  };
+}
+
+function addPlot(r){
+  state.seq++;
+  const p = {
+    id: 'p' + Date.now() + '_' + state.seq,
+    no: String(state.seq),
+    x: Math.round(r.x), y: Math.round(r.y),
+    w: Math.round(r.w), h: Math.round(r.h),
+    owner:'', area:'', use:'', notes:'', photo:null,
+    color: PALETTE[(state.seq - 1) % PALETTE.length]
+  };
+  state.plots.push(p);
+  save();
+
+  setDrawMode(false);
+  currentId = p.id;
+  renderAll();
+  syncPanel();
+}
+
+/* =========================================================
+   SELECTION + PANEL
+   ========================================================= */
+function selectPlot(id){
+  currentId = id;
+  renderAll();
+  syncPanel();
+}
+
+function getCurrent(){
+  return state.plots.find(p => p.id === currentId) || null;
+}
+
+function syncPanel(){
+  const p = getCurrent();
+  const form  = $('form');
+  const empty = $('empty');
+
+  if(!p){
+    form.hidden  = true;
+    empty.hidden = false;
+    return;
+  }
+  empty.hidden = true;
+  form.hidden  = false;
+
+  $('title').textContent = 'Plot ' + (p.no || '');
+  $('fOwner').value = p.owner || '';
+  $('fPlotNo').value = p.no   || '';
+  $('fArea').value  = p.area  || '';
+  $('fUse').value   = p.use   || '';
+  $('fNotes').value = p.notes || '';
+
+  /* colour swatches */
+  const wrap = $('swatches');
+  wrap.innerHTML = '';
+  PALETTE.forEach(c => {
+    const b = document.createElement('div');
+    b.className = 'sw' + (c === p.color ? ' on' : '');
+    b.style.background = c;
+    b.onclick = () => {
+      p.color = c;
+      save(); renderAll(); syncPanel();
+    };
+    wrap.appendChild(b);
+  });
+
+  /* photo */
+  const prev = $('preview'), rm = $('btnRemovePhoto');
+  if(p.photo){
+    prev.src = p.photo;
+    prev.hidden = false;
+    rm.hidden = false;
+  }else{
+    prev.removeAttribute('src');
+    prev.hidden = true;
+    rm.hidden = true;
+  }
+}
+
+/* live text edits */
+function bindField(inputId, key, isNumber){
+  $(inputId).addEventListener('input', e => {
+    const p = getCurrent();
+    if(!p) return;
+    p[key] = e.target.value.trim();
+    save();
+    softRefresh();
+  });
+}
+
+/* re-render blocks without losing focus in the panel */
+let refreshTimer = null;
+function softRefresh(){
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(() => {
+    const active = document.activeElement;
+    const selStart = active && active.selectionStart;
+    renderAll();
+    const p = getCurrent();
+    if(p){
+      const g = svg.querySelector(`[data-id="${p.id}"]`);
+      if(g) g.classList.add('selected');
+    }
+    if(active && active.id && document.getElementById(active.id)){
+      const again = document.getElementById(active.id);
+      again.focus();
+      try{ again.setSelectionRange(selStart, selStart); }catch(e){}
+    }
+  }, 420);
+}
+
+/* =========================================================
+   TOOLBAR ACTIONS
+   ========================================================= */
+function setDrawMode(on){
+  drawMode = on;
+  $('btnDraw').classList.toggle('active', on);
+  $('btnDraw').textContent = on ? '✏️ Drawing… (click map)' : '✏️ Draw plot';
+  const ov = svg.querySelector('#overlay');
+  if(ov) ov.style.pointerEvents = on ? 'all' : 'none';
+  if(ov) ov.style.cursor = on ? 'crosshair' : 'default';
+  svg.style.cursor = on ? 'crosshair' : 'default';
+}
+
+$('btnDraw').onclick = () => {
+  setDrawMode(!drawMode);
+  if(drawMode){ currentId = null; syncPanel(); renderAll(); }
+};
+
+$('btnUndo').onclick = () => {
+  if(!state.plots.length) return;
+  const last = state.plots[state.plots.length - 1];
+  if(!confirm('Delete the most recently drawn plot?')) return;
+  state.plots.pop();
+  if(currentId === last.id) currentId = null;
+  save(); renderAll(); syncPanel();
+};
+
+$('btnDelete').onclick = () => {
+  const p = getCurrent();
+  if(!p) return;
+  if(!confirm('Delete this plot and all its information?')) return;
+  state.plots = state.plots.filter(x => x.id !== p.id);
+  currentId = null;
+  save(); renderAll(); syncPanel();
+};
+
+$('btnReset').onclick = () => {
+  if(!confirm('Erase the map image and ALL plots? This cannot be undone.')) return;
+  state = {imgSrc:null, imgW:1200, imgH:800, plots:[], seq:0};
+  currentId = null;
+  localStorage.removeItem(KEY);
+  renderAll(); syncPanel();
+};
+
+/* ---------- map image ---------- */
+$('mapFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      state.imgSrc = reader.result;
+      state.imgW = img.naturalWidth;
+      state.imgH = img.naturalHeight;
+      save();
+      renderAll();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+/* ---------- photo per plot ---------- */
+$('fPhoto').addEventListener('change', e => {
+  const file = e.target.files[0];
+  const p = getCurrent();
+  if(!file || !p) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    /* downscale to keep localStorage happy */
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 520;
+      let {naturalWidth:w, naturalHeight:h} = img;
+      const scale = Math.min(1, MAX / Math.max(w, h));
+      const c = document.createElement('canvas');
+      c.width  = Math.round(w * scale);
+      c.height = Math.round(h * scale);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      p.photo = c.toDataURL('image/jpeg', 0.78);
+      save(); renderAll(); syncPanel();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+$('btnRemovePhoto').onclick = () => {
+  const p = getCurrent();
+  if(!p) return;
+  p.photo = null;
+  save(); renderAll(); syncPanel();
+};
+
+/* ---------- export / import ---------- */
+$('btnExport').onclick = () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'plot-map-data.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+$('btnImport').onclick = () => $('importFile').click();
+
+$('importFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const d = JSON.parse(reader.result);
+      if(!d || !Array.isArray(d.plots)) throw new Error('bad file');
+      state = Object.assign({imgSrc:null,imgW:1200,imgH:800,plots:[],seq:0}, d);
+      currentId = null;
+      save(); renderAll(); syncPanel();
+    }catch(err){
+      alert('That file could not be read as plot-map data.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function updateCount(){
+  const n = state.plots.length;
+  const filled = state.plots.filter(p => p.owner || p.photo).length;
+  $('count').textContent = n
+    ? `${n} plot${n>1?'s':''} · ${filled} with owner info`
+    : 'No plots yet';
+}
+
+/* =========================================================
+   BOOT
+   ========================================================= */
+load();
+bindField('fOwner','owner');
+bindField('fPlotNo','no');
+bindField('fArea','area');
+bindField('fUse','use');
+bindField('fNotes','notes');
+
+renderAll();
+syncPanel();
+
+/* keyboard: Esc cancels draw mode */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && drawMode) setDrawMode(false);
+});
+
+/* clicking empty map area deselects */
+svg.addEventListener('click', e => {
+  if(drawMode) return;
+  if(e.target === svg || e.target.id === 'overlay'){
+    currentId = null;
+    renderAll(); syncPanel();
+  }
+});
+</script>
 </body>
 </html>
