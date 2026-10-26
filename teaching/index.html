@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Teaching — Mohammad Motiur Rahman</title>
-<meta name="description" content="Courses taught by Mohammad Motiur Rahman at Independent University, Bangladesh, since 2018.">
+<title>Past semesters — Mohammad Motiur Rahman</title>
+<meta name="description" content="Teaching record of Mohammad Motiur Rahman at Independent University, Bangladesh, since 2018: terms, sections and course materials.">
 <!-- Standalone landing page. Place as index.html with NO Jekyll front matter. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,99 +102,12 @@ details.nbg>summary:hover .nbh{color:var(--accent)}
 .bookrow:hover .go{transform:translateX(4px)}
 .bookrow .go svg{width:20px;height:20px;display:block}
 
+.back{display:inline-block;color:var(--muted);font-size:.86rem;margin-bottom:22px;transition:color .15s}
+.back:hover{color:var(--accent)}
 footer{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:clamp(44px,7vw,66px);
   padding-top:clamp(22px,4vw,30px);border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
 footer a{border-bottom:1px solid transparent;padding-bottom:2px;transition:color .18s,border-color .18s}
 footer a:hover{color:var(--accent);border-color:var(--accent)}
-
-/* ============================ */
-/* FLIPBOOK                     */
-/* ============================ */
-.flipbook-section{margin-top:clamp(40px,7vw,66px)}
-.fb-shell{position:relative;margin-top:18px;padding:0 22px}
-.fb-spread{
-  display:grid;grid-template-columns:1fr 1fr;
-  position:relative;background:#fff;
-  border:1px solid var(--line);border-radius:14px;
-  box-shadow:0 24px 55px -34px rgba(30,20,40,.4),0 1px 0 rgba(255,255,255,.6) inset;
-  overflow:hidden;min-height:440px;
-  transition:opacity .17s ease,transform .17s ease;
-}
-.fb-spread.turning{opacity:0;transform:translateY(6px)}
-.fb-spread::before{
-  content:"";position:absolute;top:0;bottom:0;left:50%;
-  width:70px;transform:translateX(-50%);
-  background:linear-gradient(to right,
-    rgba(30,20,40,0) 0%,
-    rgba(30,20,40,.06) 42%,
-    rgba(30,20,40,.16) 50%,
-    rgba(30,20,40,.06) 58%,
-    rgba(30,20,40,0) 100%);
-  pointer-events:none;z-index:2;
-}
-.fb-page{position:relative;padding:clamp(20px,3vw,32px);background:#fff;min-width:0}
-.fb-page.fb-left{border-right:1px solid var(--line)}
-.fb-page.fb-left::after{content:"";position:absolute;top:0;right:0;bottom:0;width:34px;
-  background:linear-gradient(to left,rgba(30,20,40,.055),transparent);pointer-events:none}
-.fb-page.fb-right::after{content:"";position:absolute;top:0;left:0;bottom:0;width:34px;
-  background:linear-gradient(to right,rgba(30,20,40,.055),transparent);pointer-events:none}
-.fb-page-inner{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
-
-.fb-term-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fb-term{font-family:"Fraunces",Georgia,serif;font-weight:500;
-  font-size:clamp(1.4rem,3.8vw,1.95rem);letter-spacing:-.015em;line-height:1.08}
-.fb-badge{display:inline-block;font-size:.66rem;font-weight:600;
-  color:var(--accent);border:1px solid var(--accent);border-radius:999px;
-  padding:2px 9px;letter-spacing:.07em;text-transform:uppercase}
-.fb-badge-past{color:var(--muted);border-color:var(--line)}
-.fb-term-meta{color:var(--muted);font-size:.78rem;margin-top:5px;font-variant-numeric:tabular-nums}
-.fb-note{color:var(--muted);font-size:.78rem;margin-top:8px;line-height:1.45;
-  padding:8px 10px;background:#faf7fb;border-left:2px solid var(--accent);border-radius:0 6px 6px 0}
-
-.fb-courses{margin-top:16px}
-.fb-course{padding:12px 0;border-top:1px solid var(--line)}
-.fb-course:first-child{border-top:0;padding-top:2px}
-.fb-course:last-child{border-bottom:1px solid var(--line)}
-.fc-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.fc-code{color:var(--accent);font-size:.78rem;font-variant-numeric:tabular-nums;font-weight:600;letter-spacing:.02em}
-.fc-name{font-weight:500;font-size:.98rem}
-.fc-secs{color:var(--muted);font-size:.82rem;margin-left:auto;text-align:right}
-.fc-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.fc-links a{font-size:.76rem;border:1px solid var(--line);border-radius:999px;
-  padding:3px 10px;color:var(--muted);background:#fff;transition:color .15s,border-color .15s}
-.fc-links a:hover{color:var(--accent);border-color:var(--accent)}
-.fc-section{margin-top:9px;padding-left:11px;border-left:2px solid var(--line)}
-.fc-sec-head{font-size:.74rem;color:var(--muted);font-weight:500;letter-spacing:.03em;margin-bottom:4px}
-.fc-section .fc-links{margin-top:0}
-.fc-section .fc-links a{font-size:.72rem;padding:2px 9px}
-
-.fb-nav{position:absolute;top:50%;transform:translateY(-50%);
-  width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;z-index:4;
-  transition:background .15s,border-color .15s,color .15s,transform .15s;
-  box-shadow:0 4px 12px -6px rgba(30,20,40,.3)}
-.fb-nav:hover:not(:disabled){background:var(--accent);border-color:var(--accent);color:#fff}
-.fb-nav:active:not(:disabled){transform:translateY(-50%) scale(.94)}
-.fb-nav:disabled{opacity:.3;cursor:default}
-.fb-prev{left:0}
-.fb-next{right:0}
-.fb-nav svg{width:18px;height:18px}
-
-.fb-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap}
-.fb-dot{width:6px;height:6px;border-radius:50%;background:var(--line);
-  transition:background .15s,transform .15s;padding:0}
-.fb-dot:hover{background:var(--muted)}
-.fb-dot.active{background:var(--accent);transform:scale(1.5)}
-
-@media (max-width:640px){
-  .fb-shell{padding:0}
-  .fb-spread{grid-template-columns:1fr;min-height:0}
-  .fb-page.fb-left{border-right:0;border-bottom:1px solid var(--line)}
-  .fb-page.fb-left::after,.fb-page.fb-right::after{display:none}
-  .fb-spread::before{display:none}
-  .fb-prev{left:8px}
-  .fb-next{right:8px}
-}
 
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0;transform:translateY(9px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
@@ -205,8 +118,9 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
 </head>
 <body>
 <div class="wrap">
-  <p class="greet reveal">Guten Tag</p>
-  <h1 class="title reveal">Teaching</h1>
+  <a class="back" href="index.html">← Current semester</a>
+  <p class="greet reveal">Archive</p>
+  <h1 class="title reveal">Past semesters</h1>
   <p class="role reveal">Computer science instructor at Independent University, Bangladesh, since 2018. Sustained teaching across the core undergraduate curriculum: introductory programming, data structures, algorithms, numerical methods and discrete mathematics.</p>
   
 <div class="stats reveal">
@@ -231,32 +145,26 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
 
   <section class="timeline"><p class="label">By term</p><details class="year"><summary><span class="yr">2026</span><span class="ymeta">3 terms, 12 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2026</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 5, 6, 8, 10</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2026</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 5, 6, 8, 10</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2026</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 8, 9</span></div><div class="crow" data-c="CSE211"><span class="ct">Algorithms</span><span class="cc">CSE 211</span><span class="cs">Sec 1, 4</span></div></div></div></details><details class="year"><summary><span class="yr">2025</span><span class="ymeta">3 terms, 12 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2025</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 7, 9, 10, 11</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2025</span><span class="n">3 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 3</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 7, 9</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2025</span><span class="n">5 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 3, 4, 6</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 6</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 4</span></div></div></div></details><details class="year"><summary><span class="yr">2024</span><span class="ymeta">3 terms, 12 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2024</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE200"><span class="ct">Computer Programming II</span><span class="cc">CSE 200</span><span class="cs">Sec 7</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 3, 4</span></div><div class="crow" data-c="CSE201"><span class="ct">Discrete Mathematics</span><span class="cc">CSE 201</span><span class="cs">Sec 5</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2024</span><span class="n">3 sections</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 3</span></div><div class="crow" data-c="CSE201"><span class="ct">Discrete Mathematics</span><span class="cc">CSE 201</span><span class="cs">Sec 2, 7</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2024</span><span class="n">5 sections</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 3, 4</span></div><div class="crow" data-c="CSE201"><span class="ct">Discrete Mathematics</span><span class="cc">CSE 201</span><span class="cs">Sec 8, 9</span></div><div class="crow" data-c="MAT203"><span class="ct">Linear Algebra</span><span class="cc">MAT 203</span><span class="cs">Sec 2</span></div></div></div></details><details class="year"><summary><span class="yr">2023</span><span class="ymeta">3 terms, 11 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2023</span><span class="n">3 sections</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 2, 3</span></div><div class="crow" data-c="MAT203"><span class="ct">Linear Algebra</span><span class="cc">MAT 203</span><span class="cs">Sec 2</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2023</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 3, 18</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 4</span></div><div class="crow" data-c="CSE433"><span class="ct">Introduction to Parallel Programming</span><span class="cc">CSE 433</span><span class="cs">Sec 1</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2023</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 5, 12</span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 3</span></div><div class="crow" data-c="CIS101"><span class="ct">Fundamentals of Computer System</span><span class="cc">CIS 101</span><span class="cs">Sec 11</span></div></div></div></details><details class="year"><summary><span class="yr">2022</span><span class="ymeta">3 terms, 22 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2022</span><span class="n">7 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 13, 16 <span class="lab">+ lab 8, 13, 16</span></span></div><div class="crow" data-c="CSE211"><span class="ct">Algorithms</span><span class="cc">CSE 211</span><span class="cs">Sec 2</span></div><div class="crow" data-c="CSE426"><span class="ct">Introduction to Robotics</span><span class="cc">CSE 426</span><span class="cs">Sec 1</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2022</span><span class="n">6 sections</span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 6, 14, 15 <span class="lab">+ lab 6, 14, 15</span></span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2022</span><span class="n">9 sections</span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 1, 8, 17 <span class="lab">+ lab 1, 8, 17</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 8</span></div><div class="crow" data-c="CIS101"><span class="ct">Fundamentals of Computer System</span><span class="cc">CIS 101</span><span class="cs">Sec 14 <span class="lab">+ lab 14</span></span></div></div></div></details><details class="year"><summary><span class="yr">2021</span><span class="ymeta">3 terms, 16 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2021</span><span class="n">8 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 5, 6 <span class="lab">+ lab 5, 6</span></span></div><div class="crow" data-c="CSE317"><span class="ct">Numerical Methods</span><span class="cc">CSE 317</span><span class="cs">Sec 2 <span class="lab">+ lab 2</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 6</span></div><div class="crow" data-c="LFE201"><span class="ct">Live-in-Field Experience</span><span class="cc">LFE 201</span><span class="cs">Sec 1</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2021</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 1, 4 <span class="lab">+ lab 1, 4</span></span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2021</span><span class="n">4 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 2 <span class="lab">+ lab 2</span></span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 1 <span class="lab">+ lab 1</span></span></div></div></div></details><details class="year"><summary><span class="yr">2020</span><span class="ymeta">2 terms, 14 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Summer 2020</span><span class="n">7 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 2, 3, 4 <span class="lab">+ lab 2, 3, 4</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 5</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2020</span><span class="n">7 sections</span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 1, 2 <span class="lab">+ lab 1, 2</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 5</span></div><div class="crow" data-c="CSE211"><span class="ct">Algorithms</span><span class="cc">CSE 211</span><span class="cs">Sec 4 <span class="lab">+ lab 4</span></span></div></div></div></details><details class="year"><summary><span class="yr">2019</span><span class="ymeta">3 terms, 20 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2019</span><span class="n">7 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 3 <span class="lab">+ lab 3</span></span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 1, 3 <span class="lab">+ lab 1, 3</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 7</span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2019</span><span class="n">7 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 4, 5 <span class="lab">+ lab 4, 5</span></span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 2 <span class="lab">+ lab 2</span></span></div><div class="crow" data-c="CSE499"><span class="ct">Internship Program</span><span class="cc">CSE 499</span><span class="cs">Sec 7</span></div></div><div class="tblock"><div class="th"><span class="s">Spring 2019</span><span class="n">6 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 2 <span class="lab">+ lab 2</span></span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 1, 4 <span class="lab">+ lab 1, 4</span></span></div></div></div></details><details class="year"><summary><span class="yr">2018</span><span class="ymeta">2 terms, 10 sections</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="terms-in"><div class="tblock"><div class="th"><span class="s">Autumn 2018</span><span class="n">6 sections</span></div><div class="crow" data-c="CSE203"><span class="ct">Data Structure</span><span class="cc">CSE 203</span><span class="cs">Sec 2 <span class="lab">+ lab 2</span></span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 2, 6 <span class="lab">+ lab 2, 6</span></span></div></div><div class="tblock"><div class="th"><span class="s">Summer 2018</span><span class="n">4 sections</span></div><div class="crow" data-c="CSC101"><span class="ct">Introduction to Computer Science</span><span class="cc">CSC 101</span><span class="cs">Sec 7 <span class="lab">+ lab 7</span></span></div><div class="crow" data-c="CIS101"><span class="ct">Fundamentals of Computer System</span><span class="cc">CIS 101</span><span class="cs">Sec 10 <span class="lab">+ lab 10</span></span></div></div></div></details></section>
 
-  <!-- ============================================================ -->
-  <!-- FLIPBOOK : past semester (left)  |  current semester (right)  -->
-  <!-- ============================================================ -->
-  <section class="flipbook-section">
-    <p class="label">Semester flipbook</p>
-    <p class="hint">Past semester on the left, current on the right. Use the arrows, the dots, or &larr; / &rarr; to travel through the teaching record.</p>
-    <div class="fb-shell">
-      <button class="fb-nav fb-prev" id="fbPrev" aria-label="Previous semester">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="fb-spread" id="fbSpread" aria-live="polite"></div>
-      <button class="fb-nav fb-next" id="fbNext" aria-label="Next semester">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-    </div>
-    <div class="fb-dots" id="fbDots" aria-label="Semester pairs"></div>
-  </section>
-
   <section class="nb"><p class="label">Course materials</p><a class="bookrow" href="https://heyzine.com/flip-book/96b758eb85.html"><svg class="bi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="bt"><span class="h">Online book</span><span class="d"> a compiled flip-book</span></span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a><details class="nbg" open><summary><span class="mhead"><span class="nbh">Data structures &mdash; CSE 203</span><span class="nbsrc"> lecture decks, notebooks and a Python series</span></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="nbwrap"><div class="nbchips"><a class="nbchip" href="https://github.com/mohammadmotiurrahman/mohammadmotiurrahman.github.io/tree/main/cse203slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Lecture slides &times;12</a><a class="nbchip" href="https://github.com/mohammadmotiurrahman/mohammadmotiurrahman.github.io/tree/main/cse203/code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Lecture notebooks &times;9</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter1.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Python 1. Intro</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter2.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>2. Built-in DS</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter3.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>3. Linked list</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter4.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>4. Stack &amp; queue</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter5.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>5. Binary search tree</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/cse203py/PythonCSE203Chapter6.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>6. Graphs</a></div></div></details><details class="nbg"><summary><span class="mhead"><span class="nbh">Numerical methods &mdash; CSE 317</span><span class="nbsrc"> lecture slides and notebooks</span></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="nbwrap"><div class="nbchips"><a class="nbchip" href="https://github.com/mohammadmotiurrahman/mohammadmotiurrahman.github.io/tree/main/autumn2021/cse317_2/slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Lecture slides &times;23</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/autumn2021/cse317_2/linear_algebra.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Linear algebra</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/autumn2021/cse317_2/monday.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Class notebook</a></div></div></details><details class="nbg"><summary><span class="mhead"><span class="nbh">Python workshop</span><span class="nbsrc"> seven chapters, open in Google Colab</span></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><div class="nbwrap"><div class="nbchips"><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter1.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 1</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter2.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 2</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter3.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 3</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter4.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 4</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter5.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 5</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter6.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 6</a><a class="nbchip" href="https://colab.research.google.com/github/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/spring2021/python/code/Chapter7.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Chapter 7</a></div></div></details></section>
 
-  <!-- ============================================================ -->
-  <!-- PAST QUESTIONS (aggregate)                                    -->
-  <!-- ============================================================ -->
-  <section class="nb">
-    <p class="label">Past questions</p>
-    <p class="hint">Midterm papers for CSE 200 &middot; also linked inside the flipbook on the relevant term pages.</p>
-    <div class="nbchips" style="margin-top:14px">
-      <a class="nbchip" href="https://github.com/mohammadmotiurrahman/mohammadmotiurrahman.github.io/blob/main/pastquestion/cse200/Aut_200_2024_Mid%20(1)%20(1).pdf" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h
+  <footer>
+    <a href="index.html">Current semester ↗</a>
+    <a href="https://github.com/mohammadmotiurrahman/mohammadmotiurrahman.github.io" target="_blank" rel="noopener">GitHub repository ↗</a>
+    <a href="#">Back to top ↑</a>
+  </footer>
+</div>
+<script>
+/* Click a course in "By course" to highlight its rows in the term list; click again to clear. */
+(() => {
+  const legs=[...document.querySelectorAll('.leg')], rows=[...document.querySelectorAll('.crow')];
+  let on=null;
+  legs.forEach(b=>b.addEventListener('click',()=>{
+    on = on===b.dataset.c ? null : b.dataset.c;
+    legs.forEach(l=>{l.classList.toggle('active',l.dataset.c===on);l.classList.toggle('muted',!!on&&l.dataset.c!==on)});
+    rows.forEach(r=>r.classList.toggle('dim',!!on&&r.dataset.c!==on));
+    if(on) document.querySelectorAll('details.year').forEach(d=>{d.open=!!d.querySelector('.crow[data-c="'+on+'"]')});
+  }));
+})();
+</script>
+</body>
+</html>
