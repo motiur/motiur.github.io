@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Category theory for deep learning I — Course 4 · AI Courses</title>
+<meta name="description" content="Build a small category whose objects are tensor shapes and whose arrows are layers, and check the laws with tests.">
+<meta property="og:title" content="Category theory for deep learning I — Course 4 · AI Courses">
+<meta property="og:description" content="Build a small category whose objects are tensor shapes and whose arrows are layers, and check the laws with tests.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 4: Mathematics and AI</a><span>/</span><span>Session 5</span></nav>
+    <p class="eyebrow">Session 05 of 12</p>
+    <h1>Category theory for deep learning I</h1>
+    <p class="lead"><strong>Goal:</strong> Build a small category whose objects are tensor shapes and whose arrows are layers, and check the laws with tests.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s05_categories_of_layers.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s05_categories_of_layers.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_4_Mathematics_and_AI/notebooks/s05_categories_of_layers.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s05_categories_of_layers.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 4</a></p>
+      <ol><li><a href="session-01.html"><span>01</span>Groups and their actions</a></li><li><a href="session-02.html"><span>02</span>Representations and irreducibles</a></li><li><a href="session-03.html"><span>03</span>Steerable kernels</a></li><li><a href="session-04.html"><span>04</span>Mechanistic interpretability with mathematics: grokking</a></li><li class=current><a href="session-05.html"><span>05</span>Category theory for deep learning I</a></li><li><a href="session-06.html"><span>06</span>Category theory for deep learning II: lenses and backprop</a></li><li><a href="session-07.html"><span>07</span>Architectures from structure</a></li><li><a href="session-08.html"><span>08</span>Sheaves on graphs</a></li><li><a href="session-09.html"><span>09</span>Proof assistants: first proofs in Lean 4</a></li><li><a href="session-10.html"><span>10</span>AI for theorem proving</a></li><li><a href="session-11.html"><span>11</span>Autoformalization</a></li><li><a href="session-12.html"><span>12</span>AI for mathematical discovery</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> every Python cell without a NOT RUN label was run once on a CPU (November 2026). Cells labelled NOT RUN need a library, a GPU or a Lean installation. Lean code in this course was written carefully but was NOT compiled here: check it in Lean before you teach it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Objects-and-arrows">1. Objects and arrows<a class="anchor-link" href="#1.-Objects-and-arrows">¶</a></h3><p>A category has objects, arrows between them, a way to compose arrows whose ends match, and an identity arrow on every object. Here:</p>
+<ul>
+<li>objects are types such as <code>R^3</code>,</li>
+<li>an arrow <code>f: R^3 -&gt; R^2</code> is a layer,</li>
+<li>composition is 'run one after the other', allowed only when the types match.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Arrow</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">cod</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cod</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">dom</span><span class="p">,</span> <span class="n">cod</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">name</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">,),</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> expects R^</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="k">assert</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cod</span><span class="p">,);</span> <span class="k">return</span> <span class="n">y</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>                                  <span class="c1"># f &gt;&gt; g means 'f then g'</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cod</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">dom</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cannot compose </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: R^</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="si">}</span><span class="s2">-&gt;R^</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cod</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: R^</span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">dom</span><span class="si">}</span><span class="s2">-&gt;R^</span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">cod</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">cod</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> &gt;&gt; </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: R^</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dom</span><span class="si">}</span><span class="s2"> -&gt; R^</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cod</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">identity</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"id_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">linear</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">);</span> <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">W</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"relu_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">),</span> <span class="n">relu</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">)</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">g</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span> <span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">h</span> <span class="o">&gt;&gt;</span> <span class="n">g</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"type error caught:"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-The-laws">2. The laws<a class="anchor-link" href="#2.-The-laws">¶</a></h3><ul>
+<li>Identity: <code>id &gt;&gt; f = f = f &gt;&gt; id</code>.</li>
+<li>Associativity: <code>(f &gt;&gt; g) &gt;&gt; h = f &gt;&gt; (g &gt;&gt; h)</code>.</li>
+</ul>
+<p>Two arrows are equal when they give the same output on every input. A test on random inputs cannot prove that, but it catches mistakes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">same</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">dom</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">cod</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">cod</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">trials</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">dom</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"left identity :"</span><span class="p">,</span> <span class="n">same</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"right identity:"</span><span class="p">,</span> <span class="n">same</span><span class="p">(</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"associativity :"</span><span class="p">,</span> <span class="n">same</span><span class="p">((</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">,</span> <span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">g</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">)))</span>
+<span class="k">assert</span> <span class="n">same</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="n">same</span><span class="p">(</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="n">same</span><span class="p">((</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">,</span> <span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">g</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-A-functor:-forget-the-numbers,-keep-the-shapes">3. A functor: forget the numbers, keep the shapes<a class="anchor-link" href="#3.-A-functor:-forget-the-numbers,-keep-the-shapes">¶</a></h3><p>A functor maps objects to objects and arrows to arrows, and it must respect composition and identities. 'Shape inference' is a functor from layers to a tiny category where an arrow is just a pair (input size, output size).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">shape</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dom</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">cod</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compose_shapes</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="k">return</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"F(f &gt;&gt; g) ="</span><span class="p">,</span> <span class="n">shape</span><span class="p">(</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">),</span> <span class="s2">"| F(f) then F(g) ="</span><span class="p">,</span> <span class="n">compose_shapes</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">shape</span><span class="p">(</span><span class="n">g</span><span class="p">)))</span>
+<span class="k">assert</span> <span class="n">shape</span><span class="p">(</span><span class="n">f</span> <span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="n">compose_shapes</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">shape</span><span class="p">(</span><span class="n">g</span><span class="p">))</span> <span class="ow">and</span> <span class="n">shape</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is why a framework can check a model's shapes without running it: the check is the image of your network under a functor.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-A-second-way-to-combine:-side-by-side">4. A second way to combine: side by side<a class="anchor-link" href="#4.-A-second-way-to-combine:-side-by-side">¶</a></h3><p>Networks also run in parallel. <code>f ⊗ g</code> takes a pair of inputs (concatenated) and applies f to the first part and g to the second. With this the category becomes monoidal, and the two ways of combining must agree:</p>
+<p><code>(f1 &gt;&gt; f2) ⊗ (g1 &gt;&gt; g2) = (f1 ⊗ g1) &gt;&gt; (f2 ⊗ g2)</code></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">par</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dom</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">dom</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">cod</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">cod</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="n">a</span><span class="o">.</span><span class="n">dom</span><span class="p">]),</span> <span class="n">b</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">dom</span><span class="p">:])]),</span> <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> ⊗ </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"f1"</span><span class="p">),</span> <span class="n">linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"f2"</span><span class="p">),</span> <span class="n">linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"g1"</span><span class="p">),</span> <span class="n">linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"g2"</span><span class="p">)</span>
+<span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">par</span><span class="p">(</span><span class="n">f1</span> <span class="o">&gt;&gt;</span> <span class="n">f2</span><span class="p">,</span> <span class="n">g1</span> <span class="o">&gt;&gt;</span> <span class="n">g2</span><span class="p">),</span> <span class="n">par</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">g1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">par</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lhs</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"interchange law holds:"</span><span class="p">,</span> <span class="n">same</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">));</span> <span class="k">assert</span> <span class="n">same</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Copy-and-add:-residual-connections-as-a-diagram">5. Copy and add: residual connections as a diagram<a class="anchor-link" href="#5.-Copy-and-add:-residual-connections-as-a-diagram">¶</a></h3><p>With two more arrows, <code>copy: R^n -&gt; R^n ⊗ R^n</code> and <code>add: R^n ⊗ R^n -&gt; R^n</code>, a residual block is <code>copy &gt;&gt; (f ⊗ id) &gt;&gt; add</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">copy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">]),</span> <span class="sa">f</span><span class="s2">"copy_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">Arrow</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:],</span> <span class="sa">f</span><span class="s2">"add_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">block</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">par</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">residual</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"equals f(x) + x:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">residual</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">residual</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Something-that-is-not-a-category">6. Something that is not a category<a class="anchor-link" href="#6.-Something-that-is-not-a-category">¶</a></h3><p>If 'composition' silently broadcasts or reshapes when types do not match, associativity or the identity law can fail. Design APIs so that the laws hold; then refactoring a model cannot change what it computes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sloppy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>                                                <span class="c1"># 'helpfully' truncates or pads when the sizes differ</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">b</span><span class="o">.</span><span class="n">dom</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="o">.</span><span class="n">dom</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">dom</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dom</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">cod</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"sloppy(</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"u"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"with sloppy composition, is id_3 a right identity for u: R^3 -&gt; R^5?"</span><span class="p">,</span> <span class="n">same</span><span class="p">(</span><span class="n">sloppy</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">cod</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="s2">"no: the result has type R^3 -&gt; R^3, information was dropped"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Add a <code>Dropout</code> arrow. In what sense does it break 'equal on every input'? What would the arrows have to be for the laws to hold again?</li>
+<li>Write the functor that sends each arrow to its parameter count, with addition as composition. Check the two functor laws.</li>
+<li>Draw the string diagram for a two-layer residual network and for a network with a skip connection across both layers. Are they the same arrow?</li>
+</ol>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-04.html"><span>Previous session</span>04 · Mechanistic interpretability with mathematics: grokking</a><a class="next" href="session-06.html"><span>Next session</span>06 · Category theory for deep learning II: lenses and backprop</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NLP and LLM competitions: predicting preferences — Course 5 · AI Courses</title>
+<meta name="description" content="Predict which of two answers a person prefers, fix the position problem with swap augmentation and swap TTA, and use soft pseudo-labels.">
+<meta property="og:title" content="NLP and LLM competitions: predicting preferences — Course 5 · AI Courses">
+<meta property="og:description" content="Predict which of two answers a person prefers, fix the position problem with swap augmentation and swap TTA, and use soft pseudo-labels.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 5: Winning Online AI Competitions</a><span>/</span><span>Session 8</span></nav>
+    <p class="eyebrow">Session 08 of 12</p>
+    <h1>NLP and LLM competitions: predicting preferences</h1>
+    <p class="lead"><strong>Goal:</strong> Predict which of two answers a person prefers, fix the position problem with swap augmentation and swap TTA, and use soft pseudo-labels.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s08_llm_preference_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s08_llm_preference_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_5_Winning_Online_AI_Competitions/notebooks/s08_llm_preference_competitions.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s08_llm_preference_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 5</a></p>
+      <ol><li><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li class=current><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-The-task">1. The task<a class="anchor-link" href="#1.-The-task">¶</a></h3><p>As in the Chatbot Arena competitions: each row has a prompt, answer A and answer B, and the label says which one the person preferred, or a tie. The metric is log loss over the three classes. This notebook builds a synthetic version with a hidden quality rule so that everything runs on a CPU; the real version fine-tunes an LLM (last cell).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">hstack</span><span class="p">,</span> <span class="n">csr_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">log_loss</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">GOOD</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"because"</span><span class="p">,</span> <span class="s2">"therefore"</span><span class="p">,</span> <span class="s2">"for example"</span><span class="p">,</span> <span class="s2">"step by step"</span><span class="p">,</span> <span class="s2">"in summary"</span><span class="p">,</span> <span class="s2">"specifically"</span><span class="p">,</span> <span class="s2">"the evidence shows"</span><span class="p">]</span>
+<span class="n">FILL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"the"</span><span class="p">,</span> <span class="s2">"thing"</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"that"</span><span class="p">,</span> <span class="s2">"it"</span><span class="p">,</span> <span class="s2">"really"</span><span class="p">,</span> <span class="s2">"very"</span><span class="p">,</span> <span class="s2">"quite"</span><span class="p">,</span> <span class="s2">"maybe"</span><span class="p">,</span> <span class="s2">"stuff"</span><span class="p">,</span> <span class="s2">"like"</span><span class="p">,</span> <span class="s2">"you know"</span><span class="p">,</span> <span class="s2">"and so on"</span><span class="p">,</span> <span class="s2">"basically"</span><span class="p">]</span>
+<span class="n">BAD</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"i am not sure"</span><span class="p">,</span> <span class="s2">"as an ai"</span><span class="p">,</span> <span class="s2">"cannot help"</span><span class="p">,</span> <span class="s2">"sorry"</span><span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_answer</span><span class="p">(</span><span class="n">quality</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span> <span class="o">+</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">quality</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">FILL</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">quality</span><span class="p">))))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">BAD</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">quality</span><span class="p">)))))</span>
+    <span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">words</span><span class="p">);</span> <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_data</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">qa</span><span class="p">,</span> <span class="n">qb</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">();</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">qa</span> <span class="o">-</span> <span class="n">qb</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.12</span> <span class="k">else</span> <span class="p">(</span><span class="mi">0</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>                  <span class="c1"># 0: A wins, 1: B wins, 2: tie</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s2">"prompt"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"question </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"response_a"</span><span class="p">:</span> <span class="n">make_answer</span><span class="p">(</span><span class="n">qa</span><span class="p">),</span> <span class="s2">"response_b"</span><span class="p">:</span> <span class="n">make_answer</span><span class="p">(</span><span class="n">qb</span><span class="p">),</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">label</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">unlabeled</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">1500</span><span class="p">),</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">1500</span><span class="p">),</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">());</span> <span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">response_a</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">90</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-A-simple-model">2. A simple model<a class="anchor-link" href="#2.-A-simple-model">¶</a></h3><p>TF-IDF of each answer, placed side by side, plus the two lengths. The classifier has separate weights for the A slot and the B slot.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">vec</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="o">.</span><span class="n">response_a</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">response_b</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">featurize</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">response_b</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">response_a</span><span class="p">)</span> <span class="k">if</span> <span class="n">swap</span> <span class="k">else</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">response_a</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">response_b</span><span class="p">)</span>
+    <span class="n">lens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()]</span> <span class="o">/</span> <span class="mf">50.0</span>
+    <span class="k">return</span> <span class="n">hstack</span><span class="p">([</span><span class="n">vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">lens</span><span class="p">)])</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+<span class="n">SWAP_LABEL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>                                                   <span class="c1"># after swapping, 'A wins' becomes 'B wins'</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="k">return</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">featurize</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+<span class="n">p_base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">featurize</span><span class="p">(</span><span class="n">test</span><span class="p">));</span> <span class="n">ll_base</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">p_base</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">uniform</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"predicting 1/3 each: log loss </span><span class="si">{</span><span class="n">uniform</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | baseline model: </span><span class="si">{</span><span class="n">ll_base</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-The-position-problem">3. The position problem<a class="anchor-link" href="#3.-The-position-problem">¶</a></h3><p>Nothing about the task depends on which answer is called A. A model should give mirrored predictions when the two answers are swapped. Check whether ours does.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">p_swapped</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">featurize</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="kc">True</span><span class="p">))[:,</span> <span class="n">SWAP_LABEL</span><span class="p">]</span>             <span class="c1"># predict on swapped inputs, then swap the classes back</span>
+<span class="n">inconsistency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_base</span> <span class="o">-</span> <span class="n">p_swapped</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mean absolute difference between the two predictions for the same pair: </span><span class="si">{</span><span class="n">inconsistency</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (0 would be perfectly consistent)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Two-fixes">4. Two fixes<a class="anchor-link" href="#4.-Two-fixes">¶</a></h3><ul>
+<li><strong>Swap augmentation (training):</strong> add every training pair again with A and B exchanged and the label mirrored. Twice the data for free.</li>
+<li><strong>Swap TTA (prediction):</strong> predict both orders and average. The result is exactly consistent.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">vstack</span>
+<span class="n">X_aug</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">featurize</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="n">featurize</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="kc">True</span><span class="p">)]);</span> <span class="n">y_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">SWAP_LABEL</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span>
+<span class="n">aug</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">tta</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">featurize</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">featurize</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="kc">True</span><span class="p">))[:,</span> <span class="n">SWAP_LABEL</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">tta</span> <span class="k">else</span> <span class="n">p</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"baseline"</span><span class="p">:</span> <span class="n">ll_base</span><span class="p">,</span> <span class="s2">"baseline + swap TTA"</span><span class="p">:</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+        <span class="s2">"swap augmentation"</span><span class="p">:</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+        <span class="s2">"swap augmentation + swap TTA"</span><span class="p">:</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])}</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rows</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">30s</span><span class="si">}</span><span class="s2"> log loss </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"swap augmentation + swap TTA"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"baseline"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"baseline + swap TTA"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"baseline"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Soft-pseudo-labels">5. Soft pseudo-labels<a class="anchor-link" href="#5.-Soft-pseudo-labels">¶</a></h3><p>You often have many unlabeled pairs (the test set itself in some competitions, or extra data). Predict them with your best model, and train again with those predictions as <em>soft</em> labels: the full probability vector, not the top class. Hard pseudo-labels throw away the model's uncertainty and make it overconfident.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_soft</span><span class="p">(</span><span class="n">X_lab</span><span class="p">,</span> <span class="n">y_lab</span><span class="p">,</span> <span class="n">X_unl</span><span class="p">,</span> <span class="n">P_unl</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Train on labeled rows plus unlabeled rows repeated once per class, weighted by the predicted probability of that class."""</span>
+    <span class="n">Xs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">X_lab</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">X_unl</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">y_lab</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">X_unl</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X_lab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">P_unl</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">P_unl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">P_unl</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">fit</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">ws</span><span class="p">)</span>
+<span class="n">P_unl</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span> <span class="n">unlabeled</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">X_unl</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">featurize</span><span class="p">(</span><span class="n">unlabeled</span><span class="p">),</span> <span class="n">featurize</span><span class="p">(</span><span class="n">unlabeled</span><span class="p">,</span> <span class="n">swap</span><span class="o">=</span><span class="kc">True</span><span class="p">)]);</span> <span class="n">P_unl2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">P_unl</span><span class="p">,</span> <span class="n">P_unl</span><span class="p">[:,</span> <span class="n">SWAP_LABEL</span><span class="p">]])</span>
+<span class="n">soft</span> <span class="o">=</span> <span class="n">fit_soft</span><span class="p">(</span><span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span><span class="p">,</span> <span class="n">X_unl</span><span class="p">,</span> <span class="n">P_unl2</span><span class="p">)</span>
+<span class="n">hard_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="n">P_unl2</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)];</span> <span class="n">hard</span> <span class="o">=</span> <span class="n">fit_soft</span><span class="p">(</span><span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span><span class="p">,</span> <span class="n">X_unl</span><span class="p">,</span> <span class="n">hard_labels</span><span class="p">)</span>
+<span class="n">rows</span><span class="p">[</span><span class="s2">"+ soft pseudo-labels"</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="n">soft</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">rows</span><span class="p">[</span><span class="s2">"+ hard pseudo-labels"</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="n">hard</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"swap augmentation + swap TTA"</span><span class="p">,</span> <span class="s2">"+ soft pseudo-labels"</span><span class="p">,</span> <span class="s2">"+ hard pseudo-labels"</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">30s</span><span class="si">}</span><span class="s2"> log loss </span><span class="si">{</span><span class="n">rows</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Report these two lines as they come out. Pseudo-labels help most when the unlabeled set is large and the teacher is much stronger than the student; with a simple model teaching itself, the gain can be small or absent, and hard labels usually do worse than soft ones under log loss. In the real competitions the big gain came from a large teacher model labelling extra data for a smaller student.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Calibration-for-log-loss">6. Calibration for log loss<a class="anchor-link" href="#6.-Calibration-for-log-loss">¶</a></h3><p>A last cheap step: fit one temperature on out-of-fold predictions.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_predict</span>
+<span class="n">oof</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">),</span> <span class="n">featurize</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"predict_proba"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">with_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span> <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="n">L</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">));</span> <span class="k">return</span> <span class="n">E</span> <span class="o">/</span> <span class="n">E</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">T_best</span> <span class="o">=</span> <span class="n">minimize_scalar</span><span class="p">(</span><span class="k">lambda</span> <span class="n">T</span><span class="p">:</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">with_temperature</span><span class="p">(</span><span class="n">oof</span><span class="p">,</span> <span class="n">T</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"bounded"</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"best temperature on OOF predictions: </span><span class="si">{</span><span class="n">T_best</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | test log loss </span><span class="si">{</span><span class="n">ll_base</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">log_loss</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">with_temperature</span><span class="p">(</span><span class="n">p_base</span><span class="p">,</span><span class="w"> </span><span class="n">T_best</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7.-The-real-approach:-QLoRA-on-an-LLM-(NOT-RUN-here)">7. The real approach: QLoRA on an LLM (NOT RUN here)<a class="anchor-link" href="#7.-The-real-approach:-QLoRA-on-an-LLM-(NOT-RUN-here)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs GPUs and `pip install transformers peft bitsandbytes`. Winning solutions used models of several billion parameters.</span>
+<span class="c1"># 1. Input text: "&lt;prompt&gt; ... &lt;response_a&gt; ... &lt;response_b&gt; ...", truncated so that both answers keep their beginning and end.</span>
+<span class="c1"># 2. Model: AutoModelForSequenceClassification with num_labels=3 on a 4-bit base model, plus LoRA adapters (r 16 to 64) on the attention layers.</span>
+<span class="c1"># 3. Training: 1-2 epochs, learning rate about 1e-4 for the adapters, with swap augmentation.</span>
+<span class="c1"># 4. Inference: sort by length to batch efficiently (session 9), predict both orders, average (swap TTA).</span>
+<span class="c1"># 5. Distillation: label extra conversations with the large model and train a smaller one on the soft labels.</span>
+<span class="c1"># Validate with grouped folds by prompt: the same prompt must not appear on both sides.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Replace the model with one that is consistent by construction: features <code>f(A) - f(B)</code> and a classifier with no intercept for the two win classes. Compare with swap TTA.</li>
+<li>Add a length-only baseline. How much of the score is 'longer answers win'? What does that say about the data?</li>
+<li>Vary the pseudo-label weight over 0.1, 0.5, 1.0 and the unlabeled set size. When does it help?</li>
+</ol>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-07.html"><span>Previous session</span>07 · Image competitions: resolution and test-time augmentation</a><a class="next" href="session-09.html"><span>Next session</span>09 · Code competitions: inference under a time limit</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

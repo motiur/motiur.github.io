@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code competitions: inference under a time limit — Course 5 · AI Courses</title>
+<meta name="description" content="Build the parts of an offline inference notebook: a time budget, length-sorted batching, a fallback, and a dry run on fake data.">
+<meta property="og:title" content="Code competitions: inference under a time limit — Course 5 · AI Courses">
+<meta property="og:description" content="Build the parts of an offline inference notebook: a time budget, length-sorted batching, a fallback, and a dry run on fake data.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 5: Winning Online AI Competitions</a><span>/</span><span>Session 9</span></nav>
+    <p class="eyebrow">Session 09 of 12</p>
+    <h1>Code competitions: inference under a time limit</h1>
+    <p class="lead"><strong>Goal:</strong> Build the parts of an offline inference notebook: a time budget, length-sorted batching, a fallback, and a dry run on fake data.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s09_code_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s09_code_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_5_Winning_Online_AI_Competitions/notebooks/s09_code_competitions.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s09_code_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 5</a></p>
+      <ol><li><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li class=current><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-What-changes-in-a-code-competition">1. What changes in a code competition<a class="anchor-link" href="#1.-What-changes-in-a-code-competition">¶</a></h3><p>You submit a notebook, not a file. It runs on hidden test data with no internet, on fixed hardware, within a time limit (often 9 hours). If it crashes or times out near the end, you get no score and you have used a submission. So the engineering goal is: <strong>always produce a valid submission in time</strong>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-A-stand-in-model-with-realistic-costs">2. A stand-in model with realistic costs<a class="anchor-link" href="#2.-A-stand-in-model-with-realistic-costs">¶</a></h3><p>Time per batch grows with the longest item in the batch, as it does for a transformer.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="s2">"length"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)})</span>     <span class="c1"># token counts: many short, a few very long</span>
+<span class="n">SECONDS_PER_TOKEN</span> <span class="o">=</span> <span class="mf">2e-6</span>                                           <span class="c1"># pretend cost; a real model is thousands of times slower</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">model_predict</span><span class="p">(</span><span class="n">batch_lengths</span><span class="p">,</span> <span class="n">simulate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Cost is (batch size) x (longest item): padding makes every row as long as the longest."""</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_lengths</span><span class="p">)</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">batch_lengths</span><span class="p">)</span> <span class="o">*</span> <span class="n">SECONDS_PER_TOKEN</span>
+    <span class="k">if</span> <span class="n">simulate</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch_lengths</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Length-sorted-batching">3. Length-sorted batching<a class="anchor-link" href="#3.-Length-sorted-batching">¶</a></h3><p>Batches of random rows are padded to their longest row. Sort by length first and each batch pads very little.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_cost</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">):</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">)))</span> <span class="o">*</span> <span class="n">SECONDS_PER_TOKEN</span>
+<span class="n">random_order</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">);</span> <span class="n">sorted_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>                  <span class="c1"># longest first: fail early if memory is short</span>
+<span class="n">c_rand</span><span class="p">,</span> <span class="n">c_sort</span> <span class="o">=</span> <span class="n">total_cost</span><span class="p">(</span><span class="n">random_order</span><span class="p">),</span> <span class="n">total_cost</span><span class="p">(</span><span class="n">sorted_order</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"padded tokens processed: random order </span><span class="si">{</span><span class="n">c_rand</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">SECONDS_PER_TOKEN</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> | sorted by length </span><span class="si">{</span><span class="n">c_sort</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">SECONDS_PER_TOKEN</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> | saving </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c_sort</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">c_rand</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">c_sort</span> <span class="o">&lt;</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">c_rand</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sort longest first. If a batch is going to run out of memory, it will be the first one, in the first minute, not the last one in hour eight. Remember to put predictions back in the original order.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-A-time-budget-with-a-fallback">4. A time budget with a fallback<a class="anchor-link" href="#4.-A-time-budget-with-a-fallback">¶</a></h3><p>Measure as you go. If the projected finish is past the deadline, switch to a cheaper path for the remaining rows (a smaller model, shorter truncation, or a constant) and still write a complete file.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Budget</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">reserve</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">t0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">(),</span> <span class="n">seconds</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reserve</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">t0</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">elapsed</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_inference</span><span class="p">(</span><span class="n">time_limit</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">budget</span> <span class="o">=</span> <span class="n">Budget</span><span class="p">(</span><span class="n">time_limit</span><span class="p">);</span> <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">);</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">);</span> <span class="n">used_fallback</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">done_tokens</span><span class="p">,</span> <span class="n">spent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">];</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">max_len</span><span class="p">:</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+        <span class="n">est</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">*</span> <span class="n">lengths</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">spent</span> <span class="o">/</span> <span class="n">done_tokens</span> <span class="k">if</span> <span class="n">done_tokens</span> <span class="k">else</span> <span class="n">SECONDS_PER_TOKEN</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">)</span>        <span class="c1"># estimated cost of this batch</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">])</span> <span class="o">*</span> <span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">))</span>
+        <span class="n">projected</span> <span class="o">=</span> <span class="n">est</span> <span class="o">+</span> <span class="n">rest</span> <span class="o">*</span> <span class="p">(</span><span class="n">spent</span> <span class="o">/</span> <span class="n">done_tokens</span> <span class="k">if</span> <span class="n">done_tokens</span> <span class="k">else</span> <span class="n">SECONDS_PER_TOKEN</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">projected</span> <span class="o">&gt;</span> <span class="n">budget</span><span class="o">.</span><span class="n">remaining</span><span class="p">():</span>
+            <span class="n">preds</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span> <span class="n">used_fallback</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span> <span class="k">continue</span>                           <span class="c1"># cheap fallback for this batch; later batches are shorter and may fit</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">model_predict</span><span class="p">(</span><span class="n">lengths</span><span class="p">);</span> <span class="n">preds</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span> <span class="n">spent</span> <span class="o">+=</span> <span class="n">cost</span><span class="p">;</span> <span class="n">done_tokens</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">*</span> <span class="n">lengths</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">test</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">"prediction"</span><span class="p">:</span> <span class="n">preds</span><span class="p">})</span>
+    <span class="k">assert</span> <span class="n">sub</span><span class="o">.</span><span class="n">prediction</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span> <span class="o">==</span> <span class="n">N</span>                                   <span class="c1"># a complete, valid file, whatever happened</span>
+    <span class="k">return</span> <span class="n">sub</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">elapsed</span><span class="p">(),</span> <span class="n">used_fallback</span>
+
+<span class="n">full_cost</span> <span class="o">=</span> <span class="n">total_cost</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">limit</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"generous limit"</span><span class="p">,</span> <span class="n">full_cost</span> <span class="o">*</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"tight limit"</span><span class="p">,</span> <span class="n">full_cost</span> <span class="o">*</span> <span class="mf">0.6</span><span class="p">)]:</span>
+    <span class="n">sub</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">run_inference</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2"> limit </span><span class="si">{</span><span class="n">limit</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s | finished in </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s | rows answered by the fallback: </span><span class="si">{</span><span class="n">fb</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">limit</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Under the tight limit the longest rows fall back to the cheap answer and the rest are served by the model. A partial fallback costs a little score. A timeout costs all of it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Truncation-as-a-speed-knob">5. Truncation as a speed knob<a class="anchor-link" href="#5.-Truncation-as-a-speed-knob">¶</a></h3><p>Cutting very long inputs is often the best trade: a few rows lose some text, and total time drops a lot.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">for</span> <span class="n">max_len</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">]:</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">max_len</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">lengths</span><span class="p">);</span> <span class="n">cost</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">lengths</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">16</span><span class="p">)))</span> <span class="o">*</span> <span class="n">SECONDS_PER_TOKEN</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"max length </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">max_len</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5s</span><span class="si">}</span><span class="s2">: relative time </span><span class="si">{</span><span class="n">cost</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">full_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | rows truncated </span><span class="si">{</span><span class="mi">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">max_len</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_len</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-The-dry-run">6. The dry run<a class="anchor-link" href="#6.-The-dry-run">¶</a></h3><p>The hidden test set is larger than the public sample, and sometimes has cases the sample lacks. Before submitting, run the whole notebook on a fake test set of the real size, with awkward rows added.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dry_run_cases</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">fake</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="s2">"text"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"word "</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)]})</span>
+    <span class="n">fake</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>                                      <span class="c1"># an empty input</span>
+    <span class="n">fake</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"অ"</span> <span class="o">*</span> <span class="mi">5000</span>                              <span class="c1"># a very long input in another script</span>
+    <span class="n">fake</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>                                    <span class="c1"># a missing value</span>
+    <span class="k">return</span> <span class="n">fake</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_length</span><span class="p">(</span><span class="n">t</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">fake</span> <span class="o">=</span> <span class="n">dry_run_cases</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">safe_length</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"rows:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fake</span><span class="p">),</span> <span class="s2">"| empty or missing inputs given a safe length:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">lengths</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"| longest:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">lengths</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="k">assert</span> <span class="n">lengths</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7.-Checklist-for-the-real-notebook">7. Checklist for the real notebook<a class="anchor-link" href="#7.-Checklist-for-the-real-notebook">¶</a></h3><ol>
+<li>Internet off. Every model, tokenizer and wheel comes from an attached dataset.</li>
+<li>One cell at the top prints the time limit, the row count and the planned seconds per row.</li>
+<li>Write a valid fallback submission <strong>first</strong>, then overwrite it when the real predictions are ready.</li>
+<li>Inputs sorted by length; predictions restored to the original order by id.</li>
+<li><code>try / except</code> around each batch, with the fallback value on failure and a counter you print at the end.</li>
+<li>A dry run on a full-size fake test set finishes within 80% of the limit.</li>
+<li>Seeds fixed; library versions printed.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="8.-Faster-LLM-inference:-4-bit-weights-and-vLLM-(NOT-RUN-here)">8. Faster LLM inference: 4-bit weights and vLLM (NOT RUN here)<a class="anchor-link" href="#8.-Faster-LLM-inference:-4-bit-weights-and-vLLM-(NOT-RUN-here)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs GPUs. In a Kaggle code competition, install from wheels you attached as a dataset (no internet).</span>
+<span class="c1"># Option A: transformers + bitsandbytes 4-bit. Small memory use, simple, moderate speed.</span>
+<span class="c1">#   model = AutoModelForCausalLM.from_pretrained(path, quantization_config=BitsAndBytesConfig(load_in_4bit=True), device_map="auto")</span>
+<span class="c1"># Option B: vLLM. Continuous batching gives much higher throughput for generation; it accepts AWQ or GPTQ quantized weights.</span>
+<span class="c1">#   from vllm import LLM, SamplingParams</span>
+<span class="c1">#   llm = LLM(model=path, quantization="awq", dtype="half", gpu_memory_utilization=0.95, max_model_len=4096)</span>
+<span class="c1">#   outs = llm.generate(prompts, SamplingParams(temperature=0.0, max_tokens=64))</span>
+<span class="c1"># Measure both on 200 real-length prompts on the competition's hardware, in tokens per second, before choosing. Check the current docs for each argument.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Make the notebook for your competition write a fallback submission in its first cell.</li>
+<li>Add resume support: save predictions every 50 batches and skip finished ids on restart.</li>
+<li>Measure real seconds per row for your model at three truncation lengths and fill in the budget table.</li>
+</ol>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-08.html"><span>Previous session</span>08 · NLP and LLM competitions: predicting preferences</a><a class="next" href="session-10.html"><span>Next session</span>10 · Ensembling</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

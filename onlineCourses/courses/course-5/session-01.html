@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How competitions work, and a first submission — Course 5 · AI Courses</title>
+<meta name="description" content="Go from the data files to a valid submission twice: a constant baseline, then a simple model.">
+<meta property="og:title" content="How competitions work, and a first submission — Course 5 · AI Courses">
+<meta property="og:description" content="Go from the data files to a valid submission twice: a constant baseline, then a simple model.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 5: Winning Online AI Competitions</a><span>/</span><span>Session 1</span></nav>
+    <p class="eyebrow">Session 01 of 12</p>
+    <h1>How competitions work, and a first submission</h1>
+    <p class="lead"><strong>Goal:</strong> Go from the data files to a valid submission twice: a constant baseline, then a simple model.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s01_first_submission.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s01_first_submission.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_5_Winning_Online_AI_Competitions/notebooks/s01_first_submission.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s01_first_submission.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 5</a></p>
+      <ol><li class=current><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-The-three-files-every-tabular-competition-gives-you">1. The three files every tabular competition gives you<a class="anchor-link" href="#1.-The-three-files-every-tabular-competition-gives-you">¶</a></h3><p><code>train.csv</code> has features and the target. <code>test.csv</code> has features only. <code>sample_submission.csv</code> shows the exact format expected. This cell writes small synthetic versions so the rest of the notebook runs anywhere.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_tabular</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""A synthetic binary task with numeric columns, one high-cardinality category, groups and a date."""</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)})</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span> <span class="n">df</span><span class="p">[</span><span class="sa">f</span><span class="s2">"num</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">n_shops</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">shop_effect</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_shops</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"shop"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">zipf</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="n">n_shops</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>                         <span class="c1"># a few big shops, many small ones</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"customer"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>                                 <span class="c1"># about 8 rows per customer</span>
+    <span class="n">cust_effect</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"day"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">logit</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">num0</span> <span class="o">-</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">num1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">num2</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">num3</span> <span class="o">+</span> <span class="n">shop_effect</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"shop"</span><span class="p">]]</span> <span class="o">+</span> <span class="n">cust_effect</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">customer</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.004</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">day</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"target"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logit</span><span class="p">)))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+<span class="n">NUM</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"num</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">make_tabular</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2000</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">hidden</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"target"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>                           <span class="c1"># on Kaggle you never see this</span>
+<span class="n">train</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data/train.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"target"</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data/test.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">test</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">"target"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data/sample_submission.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/train.csv"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/test.csv"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/sample_submission.csv"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">sample</span><span class="o">.</span><span class="n">shape</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Look-before-you-model">2. Look before you model<a class="anchor-link" href="#2.-Look-before-you-model">¶</a></h3><p>Five checks that take one minute and prevent most first-day mistakes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"1. target mean:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"2. missing values:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"3. columns in train but not in test:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"4. ids overlap between train and test:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">id</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"5. test ids match the sample submission, in order:"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">((</span><span class="n">test</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">sample</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Submission-one:-a-constant">3. Submission one: a constant<a class="anchor-link" href="#3.-Submission-one:-a-constant">¶</a></h3><p>Predict the training mean for every row. It sets the floor: any model must beat it, and it proves your file format is right before you spend time on features.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">log_loss</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_submission</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="s2">"wrong columns"</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">sample</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="s2">"ids differ from the sample submission"</span>
+    <span class="k">assert</span> <span class="n">sub</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">sub</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="s2">"predictions must be probabilities with no missing values"</span>
+    <span class="k">return</span> <span class="kc">True</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">score</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span> <span class="k">return</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">hidden</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">target</span><span class="p">),</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">hidden</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>     <span class="c1"># the organisers do this, not you</span>
+
+<span class="n">sub0</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">sub0</span><span class="p">[</span><span class="s2">"target"</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">validate_submission</span><span class="p">(</span><span class="n">sub0</span><span class="p">,</span> <span class="n">sample</span><span class="p">);</span> <span class="n">sub0</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"submission_constant.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"constant baseline: log loss </span><span class="si">%.4f</span><span class="s2">  AUC </span><span class="si">%.3f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">score</span><span class="p">(</span><span class="n">sub0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Submission-two:-a-simple-model-with-a-local-validation-score">4. Submission two: a simple model with a local validation score<a class="anchor-link" href="#4.-Submission-two:-a-simple-model-with-a-local-validation-score">¶</a></h3><p>Hold out part of the training data, check the score there, and only then predict the test set. Write down both numbers: the gap between your local score and the leaderboard is the most useful number in a competition.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">tr</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">NUM</span><span class="p">],</span> <span class="n">tr</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">local</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">va</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">va</span><span class="p">[</span><span class="n">NUM</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">sub1</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">sub1</span><span class="p">[</span><span class="s2">"target"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">NUM</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">validate_submission</span><span class="p">(</span><span class="n">sub1</span><span class="p">,</span> <span class="n">sample</span><span class="p">);</span> <span class="n">sub1</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"submission_logreg.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="n">score</span><span class="p">(</span><span class="n">sub1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"logistic regression: local log loss </span><span class="si">{</span><span class="n">local</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | 'leaderboard' log loss </span><span class="si">{</span><span class="n">lb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | AUC </span><span class="si">{</span><span class="n">lb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">lb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">score</span><span class="p">(</span><span class="n">sub0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-An-experiment-log-from-day-one">5. An experiment log from day one<a class="anchor-link" href="#5.-An-experiment-log-from-day-one">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"n"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"what"</span><span class="p">:</span> <span class="s2">"constant = train mean"</span><span class="p">,</span> <span class="s2">"local"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"leaderboard"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">(</span><span class="n">sub0</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"file"</span><span class="p">:</span> <span class="s2">"submission_constant.csv"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"n"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"what"</span><span class="p">:</span> <span class="s2">"logistic regression on 6 numeric columns"</span><span class="p">,</span> <span class="s2">"local"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">local</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"leaderboard"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">lb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"file"</span><span class="p">:</span> <span class="s2">"submission_logreg.csv"</span><span class="p">}])</span>
+<span class="n">log</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"experiments.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-The-Kaggle-API-(NOT-RUN-here)">6. The Kaggle API (NOT RUN here)<a class="anchor-link" href="#6.-The-Kaggle-API-(NOT-RUN-here)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs a Kaggle account, an API token, and the competition rules accepted on the website.</span>
+<span class="c1"># Setup once: create a token on your Kaggle account page and follow the kaggle package's README for where to put it.</span>
+<span class="c1">#   pip install kaggle</span>
+<span class="c1">#   kaggle competitions list</span>
+<span class="c1">#   kaggle competitions download -c playground-series-sXeY -p data         # pick a current Playground competition</span>
+<span class="c1">#   unzip -o data/*.zip -d data</span>
+<span class="c1">#   kaggle competitions submit -c playground-series-sXeY -f submission_constant.csv -m "constant baseline"</span>
+<span class="c1">#   kaggle competitions submissions -c playground-series-sXeY</span>
+<span class="c1"># Rules to read before anything else: the daily submission limit, team size, external data, and whether it is a code competition.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Join a Getting Started or Playground competition and submit a constant, then a simple model. Record local and leaderboard scores.</li>
+<li>Break your submission on purpose in three ways (shuffled ids, a missing row, a value of 1.2) and confirm <code>validate_submission</code> catches each one.</li>
+<li>Read the competition's evaluation page and write the metric as a formula.</li>
+</ol>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="index.html"><span>Back to</span>Course 5 overview</a><a class="next" href="session-02.html"><span>Next session</span>02 · Metrics and leaderboards</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

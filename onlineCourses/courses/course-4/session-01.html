@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Groups and their actions — Course 4 · AI Courses</title>
+<meta name="description" content="Build C4, D4 and Sn as concrete objects, check the group axioms by computer, and test which models respect which symmetries.">
+<meta property="og:title" content="Groups and their actions — Course 4 · AI Courses">
+<meta property="og:description" content="Build C4, D4 and Sn as concrete objects, check the group axioms by computer, and test which models respect which symmetries.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 4: Mathematics and AI</a><span>/</span><span>Session 1</span></nav>
+    <p class="eyebrow">Session 01 of 12</p>
+    <h1>Groups and their actions</h1>
+    <p class="lead"><strong>Goal:</strong> Build C4, D4 and Sn as concrete objects, check the group axioms by computer, and test which models respect which symmetries.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s01_groups_and_actions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s01_groups_and_actions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_4_Mathematics_and_AI/notebooks/s01_groups_and_actions.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_4_Mathematics_and_AI/notebooks/s01_groups_and_actions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 4</a></p>
+      <ol><li class=current><a href="session-01.html"><span>01</span>Groups and their actions</a></li><li><a href="session-02.html"><span>02</span>Representations and irreducibles</a></li><li><a href="session-03.html"><span>03</span>Steerable kernels</a></li><li><a href="session-04.html"><span>04</span>Mechanistic interpretability with mathematics: grokking</a></li><li><a href="session-05.html"><span>05</span>Category theory for deep learning I</a></li><li><a href="session-06.html"><span>06</span>Category theory for deep learning II: lenses and backprop</a></li><li><a href="session-07.html"><span>07</span>Architectures from structure</a></li><li><a href="session-08.html"><span>08</span>Sheaves on graphs</a></li><li><a href="session-09.html"><span>09</span>Proof assistants: first proofs in Lean 4</a></li><li><a href="session-10.html"><span>10</span>AI for theorem proving</a></li><li><a href="session-11.html"><span>11</span>Autoformalization</a></li><li><a href="session-12.html"><span>12</span>AI for mathematical discovery</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> every Python cell without a NOT RUN label was run once on a CPU (November 2026). Cells labelled NOT RUN need a library, a GPU or a Lean installation. Lean code in this course was written carefully but was NOT compiled here: check it in Lean before you teach it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Three-groups-as-matrices">1. Three groups as matrices<a class="anchor-link" href="#1.-Three-groups-as-matrices">¶</a></h3><ul>
+<li>C4: the four rotations of a square.</li>
+<li>D4: the four rotations and four reflections.</li>
+<li>Sn: all orderings of n things, as permutation matrices.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]);</span> <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>               <span class="c1"># quarter turn, and a reflection</span>
+<span class="n">C4</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">D4</span> <span class="o">=</span> <span class="n">C4</span> <span class="o">+</span> <span class="p">[</span><span class="n">g</span> <span class="o">@</span> <span class="n">F</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">C4</span><span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">S</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sizes: C4"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">C4</span><span class="p">),</span> <span class="s2">"| D4"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">D4</span><span class="p">),</span> <span class="s2">"| S3"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="s2">"| S4"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Check-the-axioms">2. Check the axioms<a class="anchor-link" href="#2.-Check-the-axioms">¶</a></h3><p>A group needs closure, an identity, inverses and associativity. For a finite set of matrices the computer can check every case.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_group</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">closure</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">G</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+    <span class="n">identity</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+    <span class="n">inverses</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">closure</span> <span class="ow">and</span> <span class="n">identity</span> <span class="ow">and</span> <span class="n">inverses</span>           <span class="c1"># associativity is inherited from matrix multiplication</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_abelian</span><span class="p">(</span><span class="n">G</span><span class="p">):</span> <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span> <span class="o">@</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">G</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">G</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"C4"</span><span class="p">,</span> <span class="n">C4</span><span class="p">),</span> <span class="p">(</span><span class="s2">"D4"</span><span class="p">,</span> <span class="n">D4</span><span class="p">),</span> <span class="p">(</span><span class="s2">"S3"</span><span class="p">,</span> <span class="n">S</span><span class="p">(</span><span class="mi">3</span><span class="p">))]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: group </span><span class="si">{</span><span class="n">is_group</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="si">}</span><span class="s2"> | commutative </span><span class="si">{</span><span class="n">is_abelian</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">not_a_group</span> <span class="o">=</span> <span class="p">[</span><span class="n">C4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">C4</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>                             <span class="c1"># identity and one quarter turn: not closed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"identity with one quarter turn:"</span><span class="p">,</span> <span class="n">is_group</span><span class="p">(</span><span class="n">not_a_group</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">is_group</span><span class="p">(</span><span class="n">D4</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_abelian</span><span class="p">(</span><span class="n">D4</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_group</span><span class="p">(</span><span class="n">not_a_group</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-The-multiplication-table-of-D4">3. The multiplication table of D4<a class="anchor-link" href="#3.-The-multiplication-table-of-D4">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"e"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="s2">"r2"</span><span class="p">,</span> <span class="s2">"r3"</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">,</span> <span class="s2">"rf"</span><span class="p">,</span> <span class="s2">"r2f"</span><span class="p">,</span> <span class="s2">"r3f"</span><span class="p">]</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">(</span><span class="n">D4</span><span class="p">,</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">)]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">D4</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">D4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"     "</span> <span class="o">+</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2"> "</span> <span class="o">+</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">))</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">row</span><span class="p">))</span> <span class="o">==</span> <span class="mi">8</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">)</span>          <span class="c1"># every row is a rearrangement of the group (Latin square)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-A-group-action-on-images">4. A group action on images<a class="anchor-link" href="#4.-A-group-action-on-images">¶</a></h3><p>An action lets each group element move a data point. It must satisfy <code>e · x = x</code> and <code>g · (h · x) = (g h) · x</code>. Here D4 acts on square images by rotating and flipping.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">act</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">flip</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>                                    <span class="c1"># the element r^k f^flip</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">if</span> <span class="n">flip</span> <span class="k">else</span> <span class="n">img</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">elems</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>        <span class="c1"># same order as D4 above</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="n">i</span> <span class="o">=</span> <span class="n">index</span><span class="p">(</span><span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">[</span><span class="n">elems</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span> <span class="o">@</span> <span class="n">D4</span><span class="p">[</span><span class="n">elems</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">b</span><span class="p">)]);</span> <span class="k">return</span> <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">img</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ok</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">img</span><span class="p">)),</span> <span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">mul</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">img</span><span class="p">))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">elems</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"g · (h · x) = (gh) · x for all 64 pairs:"</span><span class="p">,</span> <span class="n">ok</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">ok</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">act</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="p">),</span> <span class="n">img</span><span class="p">)</span>
+<span class="n">orbit</span> <span class="o">=</span> <span class="p">{</span><span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">}</span>
+<span class="n">sym</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"orbit size of a random image:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">),</span> <span class="s2">"| of a blank image:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">({</span><span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Invariant-and-equivariant-functions">5. Invariant and equivariant functions<a class="anchor-link" href="#5.-Invariant-and-equivariant-functions">¶</a></h3><ul>
+<li>Invariant: <code>f(g · x) = f(x)</code>. Example: the total brightness.</li>
+<li>Equivariant: <code>f(g · x) = g · f(x)</code>. Example: blurring with a symmetric kernel.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">blur</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"wrap"</span><span class="p">);</span> <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">5</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">shift_right</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">kind</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"total brightness"</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="s2">"invariant"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"symmetric blur"</span><span class="p">,</span> <span class="n">blur</span><span class="p">,</span> <span class="s2">"equivariant"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"shift right by one"</span><span class="p">,</span> <span class="n">shift_right</span><span class="p">,</span> <span class="s2">"equivariant"</span><span class="p">)]:</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"invariant"</span><span class="p">:</span> <span class="n">ok</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">img</span><span class="p">)),</span> <span class="n">f</span><span class="p">(</span><span class="n">img</span><span class="p">))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">ok</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">img</span><span class="p">)),</span> <span class="n">act</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">img</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> is D4-</span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ok</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Shifting right is equivariant to translations, but not to rotations: rotate first and 'right' points somewhere else.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Does-a-trained-model-respect-the-symmetry?">6. Does a trained model respect the symmetry?<a class="anchor-link" href="#6.-Does-a-trained-model-respect-the-symmetry?">¶</a></h3><p>A plain classifier trained on upright digits has no reason to. Measure the drop.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">();</span> <span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">images</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xtr</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">ytr</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Xte</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">yte</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"test digits rotated by </span><span class="si">{</span><span class="mi">90</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> degrees: accuracy </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># One fix that needs no new architecture: average the model over the group (this makes any model invariant).</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">invariant_predict</span><span class="p">(</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">invariant_predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="n">invariant_predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Xte</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"group-averaged model gives the same answer for rotated inputs:"</span><span class="p">,</span> <span class="n">same</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">same</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Averaging over the group makes the model invariant, but it does not make it accurate: it averages predictions on images the model was never trained to read. Building the symmetry into the layers (Course 1, session 6) does both.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7.-Permutations-and-graphs">7. Permutations and graphs<a class="anchor-link" href="#7.-Permutations-and-graphs">¶</a></h3><p>A GCN layer commutes with the action of Sn on node labels (Course 1, session 1). Check it here for every element of S4.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">);</span> <span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="n">W</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gcn</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="n">Ah</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="n">dg</span> <span class="o">=</span> <span class="n">Ah</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">((</span><span class="n">Ah</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">dg</span><span class="p">,</span> <span class="n">dg</span><span class="p">)))</span> <span class="o">@</span> <span class="n">X</span> <span class="o">@</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">ok</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gcn</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span> <span class="o">@</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">P</span> <span class="o">@</span> <span class="n">gcn</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span> <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">S</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"GCN layer is equivariant to all 24 permutations:"</span><span class="p">,</span> <span class="n">ok</span><span class="p">);</span> <span class="k">assert</span> <span class="n">ok</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Find all subgroups of D4 by brute force (subsets that pass <code>is_group</code>). How many are there?</li>
+<li>Show that the map D4 -&gt; {+1, -1} given by the determinant is a homomorphism. What is its kernel?</li>
+<li>Which of these are C4-invariant, C4-equivariant, or neither: the maximum pixel, the transpose of the image, the top-left pixel?</li>
+</ol>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="index.html"><span>Back to</span>Course 4 overview</a><a class="next" href="session-02.html"><span>Next session</span>02 · Representations and irreducibles</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

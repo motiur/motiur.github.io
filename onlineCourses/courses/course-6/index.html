@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Beginner to an AI Research Lab · AI Courses</title>
+<meta name="description" content="The entry course: how research labs work, the math and code you actually use, ML and deep learning from scratch, transformers, reading and reproducing papers, experiments that convince, writing, and getting in through applications, cold emails and interviews.">
+<meta property="og:title" content="From Beginner to an AI Research Lab · AI Courses">
+<meta property="og:description" content="The entry course: how research labs work, the math and code you actually use, ML and deep learning from scratch, transformers, reading and reproducing papers, experiments that convince, writing, and getting in through applications, cold emails and interviews.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="course-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span><span>Course 6</span></nav>
+    <div class="ch-meta"><span class="course-num">Course 6</span><span class="badge badge-beginner">Beginner</span><span class="track">Start here</span></div>
+    <h1>From Beginner to an AI Research Lab</h1>
+    <p class="lead">The entry course: how research labs work, the math and code you actually use, ML and deep learning from scratch, transformers, reading and reproducing papers, experiments that convince, writing, and getting in through applications, cold emails and interviews.</p>
+    <ul class="chips"><li>Foundations</li><li>Reproducing papers</li><li>Experiments</li><li>Research writing</li><li>Applications</li></ul>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m0 0-4.5-4.5M15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Start session 1</a>
+      <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/Course_6_From_Beginner_to_an_AI_Research_Lab_course_document.pdf"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5zM11.5 2.5V6H15M7.5 10h5M7.5 13h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Course document (PDF)</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/tree/main/Course_6_From_Beginner_to_an_AI_Research_Lab" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Folder on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap course-layout">
+    <div>
+      <h2 class="list-title">Sessions</h2>
+      <ol class="sessions">
+      <li class="session">
+        <div class="s-num">01</div>
+        <div class="s-body">
+          <h3><a href="session-01.html">Inside AI research labs</a></h3>
+          <p>Survey five labs, collect what two real postings ask for, and turn that into a skills-gap table and a first plan.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">02</div>
+        <div class="s-body">
+          <h3><a href="session-02.html">The math you actually use</a></h3>
+          <p>Fit a line with gradient descent in NumPy, check the gradient numerically, and connect the loss to maximum likelihood.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-02.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s02_the_math_you_actually_use.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s02_the_math_you_actually_use.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s02_the_math_you_actually_use.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">03</div>
+        <div class="s-body">
+          <h3><a href="session-03.html">Code like a researcher</a></h3>
+          <p>Turn the session 2 code into a small reproducible repository: a config, a fixed seed, one logged row per run, and a README.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-03.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">04</div>
+        <div class="s-body">
+          <h3><a href="session-04.html">Machine learning foundations</a></h3>
+          <p>Write logistic regression from scratch, use the three data splits correctly, and read under- and overfitting from learning curves.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-04.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s04_machine_learning_foundations.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s04_machine_learning_foundations.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s04_machine_learning_foundations.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">05</div>
+        <div class="s-body">
+          <h3><a href="session-05.html">Deep learning from scratch</a></h3>
+          <p>Build a tiny automatic differentiation engine, train a network with it, then run the two checks that catch most training bugs.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-05.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s05_deep_learning_from_scratch.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s05_deep_learning_from_scratch.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s05_deep_learning_from_scratch.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">06</div>
+        <div class="s-body">
+          <h3><a href="session-06.html">Transformers and modern models</a></h3>
+          <p>Write attention and check it, then run a controlled ablation over three seeds on a small GPT.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-06.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s06_transformers_and_modern_models.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s06_transformers_and_modern_models.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s06_transformers_and_modern_models.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">07</div>
+        <div class="s-body">
+          <h3><a href="session-07.html">Reading papers and following the field</a></h3>
+          <p>Read one paper in three passes, tie each claim to its evidence, list what a reproduction would need, and map the papers around it.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-07.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s07_reading_papers.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s07_reading_papers.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s07_reading_papers.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">08</div>
+        <div class="s-body">
+          <h3><a href="session-08.html">Reproducing a paper</a></h3>
+          <p>Plan a reproduction that fits your compute, run the sanity checks before the real run, and keep an honest deviations log.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-08.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s08_reproducing_a_paper.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s08_reproducing_a_paper.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s08_reproducing_a_paper.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">09</div>
+        <div class="s-body">
+          <h3><a href="session-09.html">Experiments that convince</a></h3>
+          <p>Measure noise across seeds, report honest intervals, and see why a baseline must get the same tuning budget as your method.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-09.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s09_experiments_that_convince.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s09_experiments_that_convince.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s09_experiments_that_convince.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">10</div>
+        <div class="s-body">
+          <h3><a href="session-10.html">From question to project</a></h3>
+          <p>Generate five candidate questions, score them, write a one-page proposal for the best one, and plan twelve weeks with a checkpoint.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-10.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s10_from_question_to_project.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s10_from_question_to_project.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s10_from_question_to_project.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">11</div>
+        <div class="s-body">
+          <h3><a href="session-11.html">Writing and sharing research</a></h3>
+          <p>Write the contributions first, make a figure that shows every run, and keep a four-page draft to its page budget.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-11.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s11_writing_and_sharing_research.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s11_writing_and_sharing_research.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s11_writing_and_sharing_research.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">12</div>
+        <div class="s-body">
+          <h3><a href="session-12.html">Getting in</a></h3>
+          <p>Build an application tracker across several routes, check a cold email against three tests, and run a timed mock interview.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-12.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s12_getting_in.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s12_getting_in.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s12_getting_in.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      </ol>
+    </div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>At a glance</h3>
+        <dl>
+          <dt>Sessions</dt><dd>12</dd>
+          <dt>Level</dt><dd>Beginner</dd>
+          <dt>Prerequisites</dt><dd>None beyond school mathematics and willingness to code.</dd>
+          <dt>Each session</dt><dd>3 video segments, a lab, a quiz and an assignment</dd>
+        </dl>
+      </div>
+      <div class="side-card prose small">
+        <h3>Before you start</h3>
+        <p>One notebook per session. Open them in Kaggle Notebooks or Google Colab.</p>
+<ul>
+<li>Every cell without a NOT RUN label was run once on a CPU on 17 November 2026 (Python 3, NumPy 2.5, SciPy 1.18, pandas, scikit-learn 1.9, PyTorch 2.15).</li>
+<li>Sessions 2 to 6 and 9 contain the lab code from the course document, with the expected values checked by assertions (for example w = 2.97 and b = 1.96 in session 2, validation accuracy 0.974 in session 4, and the interval 70.0 to 72.4 in session 9).</li>
+<li>Sessions 1, 7, 8, 10, 11 and 12 are worksheets: tables and templates with example rows, plus small helpers that check your entries (a compute budget, a claims table, a page budget, an email check). Replace the example rows with your own.</li>
+<li>Session 5 uses scikit-learn's 8x8 digits for the runnable checks. The MNIST cell and the nanoGPT lab in session 6 are labelled NOT RUN: they need a download or a GPU.</li>
+<li>Session 6 runs its ablation on a toy Bangla language with a 30,000-parameter GPT so that three seeds finish in under a minute. In the recorded run the ablation made no measurable difference, and the notebook asks students to say so.</li>
+<li>Session 3 writes a small project folder called <code>my-project</code> next to the notebook.</li>
+<li>Hour estimates in session 1 are planning figures, not measurements. Deadlines in session 12 are placeholders.</li>
+</ul>
+
+      </div>
+    </aside>
+  </div>
+  <div class="wrap"><nav class="pager" aria-label="Other courses"><a class="prev" href="../course-5/index.html"><span>Previous course</span>Winning Online AI Competitions</a><a class="next" href="../course-7/index.html"><span>Next course</span>Building a Small Bangla Language Model</a></nav></div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

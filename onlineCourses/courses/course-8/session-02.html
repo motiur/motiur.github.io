@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coding I, Python fluency — Course 8 · AI Courses</title>
+<meta name="description" content="Solve six medium problems in 25 minutes each, aloud, with the five-step routine.">
+<meta property="og:title" content="Coding I, Python fluency — Course 8 · AI Courses">
+<meta property="og:description" content="Solve six medium problems in 25 minutes each, aloud, with the five-step routine.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 8: Research Engineering Interviews</a><span>/</span><span>Session 2</span></nav>
+    <p class="eyebrow">Session 02 of 12</p>
+    <h1>Coding I, Python fluency</h1>
+    <p class="lead"><strong>Goal:</strong> Solve six medium problems in 25 minutes each, aloud, with the five-step routine.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_8_Research_Engineering_Interviews/notebooks/s02_coding_python_fluency.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_8_Research_Engineering_Interviews/notebooks/s02_coding_python_fluency.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_8_Research_Engineering_Interviews/notebooks/s02_coding_python_fluency.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_8_Research_Engineering_Interviews/notebooks/s02_coding_python_fluency.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 8</a></p>
+      <ol><li><a href="session-01.html"><span>01</span>The interview loop</a></li><li class=current><a href="session-02.html"><span>02</span>Coding I, Python fluency</a></li><li><a href="session-03.html"><span>03</span>Coding II, tensors</a></li><li><a href="session-04.html"><span>04</span>ML from scratch I</a></li><li><a href="session-05.html"><span>05</span>ML from scratch II</a></li><li><a href="session-06.html"><span>06</span>Debugging rounds</a></li><li><a href="session-07.html"><span>07</span>ML fundamentals out loud</a></li><li><a href="session-08.html"><span>08</span>Deep learning and LLM fundamentals</a></li><li><a href="session-09.html"><span>09</span>ML system design</a></li><li><a href="session-10.html"><span>10</span>The research discussion</a></li><li><a href="session-11.html"><span>11</span>Behavioral rounds, take-homes and work tests</a></li><li><a href="session-12.html"><span>12</span>The mock loop</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> the tests and reference solutions here were run once on a CPU (November 2026). Cells marked TODO are stubs for you; try them under a timer before opening the reference solutions at the bottom.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Routine:</strong> restate, example, plan with cost, code, test.</p>
+<h3 id="Cost-of-membership-tests">Cost of membership tests<a class="anchor-link" href="#Cost-of-membership-tests">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">random</span>
+<span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20000</span><span class="p">));</span> <span class="n">as_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">items</span><span class="p">);</span> <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">40000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">)]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">();</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">);</span> <span class="n">t_list</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">();</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span> <span class="ow">in</span> <span class="n">as_set</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">);</span> <span class="n">t_set</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"list: </span><span class="si">{</span><span class="n">t_list</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s | set: </span><span class="si">{</span><span class="n">t_set</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-six-problems">The six problems<a class="anchor-link" href="#The-six-problems">¶</a></h3><ol>
+<li><code>two_sum(nums, target)</code>: indices of two numbers that add to target, or None.</li>
+<li><code>group_anagrams(words)</code>: list of groups, each sorted, groups sorted.</li>
+<li><code>valid_brackets(s)</code>: are <code>()[]{}</code> balanced and properly nested?</li>
+<li><code>merge_intervals(intervals)</code>: merge overlapping <code>[start, end]</code> pairs.</li>
+<li><code>shortest_path(grid)</code>: fewest steps from top-left to bottom-right through 0 cells (4 directions), or -1.</li>
+<li><code>top_k_frequent(words, k)</code>: the k most frequent words, ties broken by larger word first.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_tests</span><span class="p">(</span><span class="n">two_sum</span><span class="p">,</span> <span class="n">group_anagrams</span><span class="p">,</span> <span class="n">valid_brackets</span><span class="p">,</span> <span class="n">merge_intervals</span><span class="p">,</span> <span class="n">shortest_path</span><span class="p">,</span> <span class="n">top_k_frequent</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">two_sum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="mi">9</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">two_sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">group_anagrams</span><span class="p">([</span><span class="s2">"eat"</span><span class="p">,</span> <span class="s2">"tea"</span><span class="p">,</span> <span class="s2">"tan"</span><span class="p">,</span> <span class="s2">"ate"</span><span class="p">,</span> <span class="s2">"nat"</span><span class="p">,</span> <span class="s2">"bat"</span><span class="p">])</span> <span class="o">==</span> <span class="p">[[</span><span class="s2">"ate"</span><span class="p">,</span> <span class="s2">"eat"</span><span class="p">,</span> <span class="s2">"tea"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"bat"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"nat"</span><span class="p">,</span> <span class="s2">"tan"</span><span class="p">]]</span>
+    <span class="k">assert</span> <span class="n">valid_brackets</span><span class="p">(</span><span class="s2">"{[()]}"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">valid_brackets</span><span class="p">(</span><span class="s2">"([)]"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">valid_brackets</span><span class="p">(</span><span class="s2">"("</span><span class="p">)</span> <span class="ow">and</span> <span class="n">valid_brackets</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">merge_intervals</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">]]</span>
+    <span class="k">assert</span> <span class="n">merge_intervals</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span> <span class="ow">and</span> <span class="n">merge_intervals</span><span class="p">([])</span> <span class="o">==</span> <span class="p">[]</span>
+    <span class="k">assert</span> <span class="n">shortest_path</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">shortest_path</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">top_k_frequent</span><span class="p">(</span><span class="s2">"a b a c b a d"</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"all six pass"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">two_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>            <span class="c1"># TODO</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">group_anagrams</span><span class="p">(</span><span class="n">words</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>            <span class="c1"># TODO</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">valid_brackets</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>                <span class="c1"># TODO</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>       <span class="c1"># TODO</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">shortest_path</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>              <span class="c1"># TODO</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">top_k_frequent</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>         <span class="c1"># TODO</span>
+
+<span class="c1"># run_tests(two_sum, group_anagrams, valid_brackets, merge_intervals, shortest_path, top_k_frequent)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Feedback-checklist-for-the-interviewer">Feedback checklist for the interviewer<a class="anchor-link" href="#Feedback-checklist-for-the-interviewer">¶</a></h3><p>Restated the problem | worked an example | stated plan and cost | talked throughout | tested an edge case</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr/>
+<h2 id="Reference-solutions">Reference solutions<a class="anchor-link" href="#Reference-solutions">¶</a></h2><p>Try every problem under the timer first. Then run this section: it defines working versions and runs the same tests.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">two_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>                       <span class="c1"># O(n) time, O(n) space</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">target</span> <span class="o">-</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">seen</span><span class="p">[</span><span class="n">target</span> <span class="o">-</span> <span class="n">x</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">seen</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">group_anagrams</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>                       <span class="c1"># O(n k log k)</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">groups</span><span class="p">[</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">w</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">valid_brackets</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>                           <span class="c1"># O(n)</span>
+    <span class="n">pairs</span><span class="p">,</span> <span class="n">stack</span> <span class="o">=</span> <span class="p">{</span><span class="s2">")"</span><span class="p">:</span> <span class="s2">"("</span><span class="p">,</span> <span class="s2">"]"</span><span class="p">:</span> <span class="s2">"["</span><span class="p">,</span> <span class="s2">"}"</span><span class="p">:</span> <span class="s2">"{"</span><span class="p">},</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span> <span class="ow">or</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">!=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">ch</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">stack</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>                  <span class="c1"># O(n log n)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">and</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">shortest_path</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>                         <span class="c1"># BFS, O(rows * cols)</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">queue</span><span class="p">,</span> <span class="n">seen</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]),</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">d</span>
+        <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="p">((</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">rows</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">cols</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">));</span> <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">top_k_frequent</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>                    <span class="c1"># O(n log k)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">w</span><span class="p">))</span>
+
+<span class="n">run_tests</span><span class="p">(</span><span class="n">two_sum</span><span class="p">,</span> <span class="n">group_anagrams</span><span class="p">,</span> <span class="n">valid_brackets</span><span class="p">,</span> <span class="n">merge_intervals</span><span class="p">,</span> <span class="n">shortest_path</span><span class="p">,</span> <span class="n">top_k_frequent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-01.html"><span>Previous session</span>01 · The interview loop</a><a class="next" href="session-03.html"><span>Next session</span>03 · Coding II, tensors</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. Eight free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
