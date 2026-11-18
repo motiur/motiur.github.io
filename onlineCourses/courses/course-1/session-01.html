@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The geometric blueprint — Course 1 · AI Courses</title>
-<meta name="description" content="Show with numbers that sum pooling is permutation-invariant and a GCN layer is permutation-equivariant.">
-<meta property="og:title" content="The geometric blueprint — Course 1 · AI Courses">
-<meta property="og:description" content="Show with numbers that sum pooling is permutation-invariant and a GCN layer is permutation-equivariant.">
+<title>Inside AI research labs — Course 1 · AI Courses</title>
+<meta name="description" content="Survey five labs, collect what two real postings ask for, and turn that into a skills-gap table and a first plan.">
+<meta property="og:title" content="Inside AI research labs — Course 1 · AI Courses">
+<meta property="og:description" content="Survey five labs, collect what two real postings ask for, and turn that into a skills-gap table and a first plan.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 1: Geometric Deep Learning and Graphs</a><span>/</span><span>Session 1</span></nav>
+      <a href="index.html">Course 1: From Beginner to an AI Research Lab</a><span>/</span><span>Session 1</span></nav>
     <p class="eyebrow">Session 01 of 12</p>
-    <h1>The geometric blueprint</h1>
-    <p class="lead"><strong>Goal:</strong> Show with numbers that sum pooling is permutation-invariant and a GCN layer is permutation-equivariant.</p>
+    <h1>Inside AI research labs</h1>
+    <p class="lead"><strong>Goal:</strong> Survey five labs, collect what two real postings ask for, and turn that into a skills-gap table and a first plan.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_1_Geometric_Deep_Learning_and_Graphs/notebooks/s01_geometric_blueprint.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_1_Geometric_Deep_Learning_and_Graphs/notebooks/s01_geometric_blueprint.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_1_Geometric_Deep_Learning_and_Graphs/notebooks/s01_geometric_blueprint.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_1_Geometric_Deep_Learning_and_Graphs/notebooks/s01_geometric_blueprint.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_1_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_1_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_1_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_1_From_Beginner_to_an_AI_Research_Lab/notebooks/s01_inside_ai_research_labs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,19 +52,19 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 1</a></p>
-      <ol><li class=current><a href="session-01.html"><span>01</span>The geometric blueprint</a></li><li><a href="session-02.html"><span>02</span>Message passing</a></li><li><a href="session-03.html"><span>03</span>How expressive GNNs are</a></li><li><a href="session-04.html"><span>04</span>When depth hurts</a></li><li><a href="session-05.html"><span>05</span>Graph transformers</a></li><li><a href="session-06.html"><span>06</span>Group-equivariant networks</a></li><li><a href="session-07.html"><span>07</span>E(3)-equivariant models for atoms</a></li><li><a href="session-08.html"><span>08</span>Curved spaces</a></li><li><a href="session-09.html"><span>09</span>Generative models on graphs and manifolds</a></li><li><a href="session-10.html"><span>10</span>Graphs meet LLMs</a></li><li><a href="session-11.html"><span>11</span>Spatio-temporal graphs</a></li><li><a href="session-12.html"><span>12</span>Graph learning in medicine and the capstone</a></li></ol>
+      <ol><li class=current><a href="session-01.html"><span>01</span>Inside AI research labs</a></li><li><a href="session-02.html"><span>02</span>The math you actually use</a></li><li><a href="session-03.html"><span>03</span>Code like a researcher</a></li><li><a href="session-04.html"><span>04</span>Machine learning foundations</a></li><li><a href="session-05.html"><span>05</span>Deep learning from scratch</a></li><li><a href="session-06.html"><span>06</span>Transformers and modern models</a></li><li><a href="session-07.html"><span>07</span>Reading papers and following the field</a></li><li><a href="session-08.html"><span>08</span>Reproducing a paper</a></li><li><a href="session-09.html"><span>09</span>Experiments that convince</a></li><li><a href="session-10.html"><span>10</span>From question to project</a></li><li><a href="session-11.html"><span>11</span>Writing and sharing research</a></li><li><a href="session-12.html"><span>12</span>Getting in</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on small built-in or synthetic data. Cells labelled NOT RUN need a library, a dataset download or a GPU; run them on Kaggle or Colab.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026). Cells labelled NOT RUN need a GPU, a download or an account. Cells that are worksheets hold example rows for you to replace with your own.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-A-small-graph-and-a-random-relabelling">1. A small graph and a random relabelling<a class="anchor-link" href="#1.-A-small-graph-and-a-random-relabelling">¶</a></h3><p>A permutation matrix <code>P</code> relabels the nodes: features become <code>P X</code> and the adjacency becomes <code>P A Pᵀ</code>.</p>
+<h3 id="1.-Five-labs-(worksheet)">1. Five labs (worksheet)<a class="anchor-link" href="#1.-Five-labs-(worksheet)">¶</a></h3><p>Start from a paper or tool you have heard of, find its authors, and open their lab page. Include at least one university lab, one industry lab and one open community. Replace the example rows.</p>
 </div>
 </div>
 </div>
@@ -72,14 +72,19 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">|</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
-<span class="n">perm</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="n">perm</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"permutation:"</span><span class="p">,</span> <span class="n">perm</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">labs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"lab"</span><span class="p">:</span> <span class="s2">"&lt;university lab&gt;"</span><span class="p">,</span> <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"university"</span><span class="p">,</span> <span class="s2">"works_on"</span><span class="p">:</span> <span class="s2">"&lt;one line from its three newest abstracts&gt;"</span><span class="p">,</span> <span class="s2">"skills_shown"</span><span class="p">:</span> <span class="s2">"&lt;e.g. PyTorch, statistics, a domain&gt;"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lab"</span><span class="p">:</span> <span class="s2">"&lt;industry lab&gt;"</span><span class="p">,</span> <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"industry"</span><span class="p">,</span> <span class="s2">"works_on"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"skills_shown"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lab"</span><span class="p">:</span> <span class="s2">"&lt;open community&gt;"</span><span class="p">,</span> <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"open community"</span><span class="p">,</span> <span class="s2">"works_on"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"skills_shown"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lab"</span><span class="p">:</span> <span class="s2">"&lt;lab 4&gt;"</span><span class="p">,</span> <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"works_on"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"skills_shown"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lab"</span><span class="p">:</span> <span class="s2">"&lt;lab 5&gt;"</span><span class="p">,</span> <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"works_on"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"skills_shown"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_labs</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">kinds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kind</span><span class="p">)</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"university"</span><span class="p">,</span> <span class="s2">"industry"</span><span class="p">,</span> <span class="s2">"open community"</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kinds</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">"ok"</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">missing</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"still needed: </span><span class="si">{</span><span class="n">missing</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">'five labs'</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labs</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="n">check_labs</span><span class="p">(</span><span class="n">labs</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -87,7 +92,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Sum-pooling-is-invariant">2. Sum pooling is invariant<a class="anchor-link" href="#2.-Sum-pooling-is-invariant">¶</a></h3><p>Invariant means: relabel the input and the output does not change.</p>
+<h3 id="2.-Two-postings-(worksheet)">2. Two postings (worksheet)<a class="anchor-link" href="#2.-Two-postings-(worksheet)">¶</a></h3><p>Copy every requirement from two real postings (a lab's 'join us' page, a careers page, or a fellowship such as a predoctoral or scholars program). One requirement per line.</p>
 </div>
 </div>
 </div>
@@ -95,10 +100,16 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">pool</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"pool(X)   ="</span><span class="p">,</span> <span class="n">pool</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"pool(P X) ="</span><span class="p">,</span> <span class="n">pool</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">pool</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">pool</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">))</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">posting_1</span> <span class="o">=</span> <span class="s2">"""PyTorch experience</span>
+<span class="s2">Research experience</span>
+<span class="s2">Publications or reports</span>
+<span class="s2">Strong letters of recommendation"""</span>
+<span class="n">posting_2</span> <span class="o">=</span> <span class="s2">"""Python and PyTorch</span>
+<span class="s2">Experience running ML experiments</span>
+<span class="s2">A degree in a quantitative field</span>
+<span class="s2">Clear written communication"""</span>
+<span class="n">requirements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">posting_1</span><span class="p">,</span> <span class="n">posting_2</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()})</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">requirements</span><span class="p">),</span> <span class="s2">"distinct requirements"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -106,7 +117,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-A-GCN-layer-is-equivariant">3. A GCN layer is equivariant<a class="anchor-link" href="#3.-A-GCN-layer-is-equivariant">¶</a></h3><p>Equivariant means: relabel the input and the output is relabelled the same way, <code>f(PX, PAPᵀ) = P f(X, A)</code>.</p>
+<h3 id="3.-The-skills-gap-table">3. The skills-gap table<a class="anchor-link" href="#3.-The-skills-gap-table">¶</a></h3><p>For each requirement: what evidence do you have today, and which part of this course closes the gap? The helper suggests sessions from keywords; correct it by hand.</p>
 </div>
 </div>
 </div>
@@ -114,17 +125,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gcn_layer</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
-    <span class="n">A_hat</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">A_hat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">A_hat</span> <span class="o">=</span> <span class="n">A_hat</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">A_hat</span> <span class="o">@</span> <span class="n">X</span> <span class="o">@</span> <span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="n">W</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">lhs</span> <span class="o">=</span> <span class="n">gcn_layer</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span> <span class="o">@</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
-<span class="n">rhs</span> <span class="o">=</span> <span class="n">P</span> <span class="o">@</span> <span class="n">gcn_layer</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"largest difference:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">SESSIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"math"</span><span class="p">:</span> <span class="s2">"Session 2"</span><span class="p">,</span> <span class="s2">"python"</span><span class="p">:</span> <span class="s2">"Session 3"</span><span class="p">,</span> <span class="s2">"pytorch"</span><span class="p">:</span> <span class="s2">"Sessions 3, 5, 6"</span><span class="p">,</span> <span class="s2">"experiment"</span><span class="p">:</span> <span class="s2">"Sessions 8, 9"</span><span class="p">,</span> <span class="s2">"research experience"</span><span class="p">:</span> <span class="s2">"Sessions 8-11 capstone"</span><span class="p">,</span>
+            <span class="s2">"publication"</span><span class="p">:</span> <span class="s2">"Session 11 paper"</span><span class="p">,</span> <span class="s2">"report"</span><span class="p">:</span> <span class="s2">"Session 11 paper"</span><span class="p">,</span> <span class="s2">"letter"</span><span class="p">:</span> <span class="s2">"Mentor by session 8"</span><span class="p">,</span> <span class="s2">"written"</span><span class="p">:</span> <span class="s2">"Sessions 7, 11"</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">:</span> <span class="s2">"Sessions 7, 11, 12"</span><span class="p">,</span>
+            <span class="s2">"paper"</span><span class="p">:</span> <span class="s2">"Session 7"</span><span class="p">,</span> <span class="s2">"statistic"</span><span class="p">:</span> <span class="s2">"Session 9"</span><span class="p">,</span> <span class="s2">"degree"</span><span class="p">:</span> <span class="s2">"outside this course"</span><span class="p">}</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">closed_by</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">SESSIONS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">req</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">hits</span><span class="p">))</span> <span class="ow">or</span> <span class="s2">"TODO: decide"</span>
+<span class="n">gap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"requirement"</span><span class="p">:</span> <span class="n">requirements</span><span class="p">,</span> <span class="s2">"my_evidence_today"</span><span class="p">:</span> <span class="s2">"none"</span><span class="p">,</span> <span class="s2">"closed_by"</span><span class="p">:</span> <span class="p">[</span><span class="n">closed_by</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">requirements</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gap</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">gap</span><span class="o">.</span><span class="n">closed_by</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -132,7 +141,13 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Equivariant-layers-followed-by-invariant-pooling-give-an-invariant-graph-model">4. Equivariant layers followed by invariant pooling give an invariant graph model<a class="anchor-link" href="#4.-Equivariant-layers-followed-by-invariant-pooling-give-an-invariant-graph-model">¶</a></h3>
+<p>Most first-week tables show 'none' in the evidence column. That is the starting point, and the course exists to fill it. Come back to this table after sessions 6, 9 and 12 and update the middle column.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Roles-and-what-each-is-judged-on">4. Roles and what each is judged on<a class="anchor-link" href="#4.-Roles-and-what-each-is-judged-on">¶</a></h3><p>Fill in the last column from the postings you read, not from memory.</p>
 </div>
 </div>
 </div>
@@ -140,10 +155,14 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">graph_embed</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="n">pool</span><span class="p">(</span><span class="n">gcn_layer</span><span class="p">(</span><span class="n">gcn_layer</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="n">A</span><span class="p">,</span> <span class="n">rng_W2</span><span class="p">))</span>
-<span class="n">rng_W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">graph_embed</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">),</span> <span class="n">graph_embed</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span> <span class="o">@</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"graph embedding is the same for both labellings"</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">roles</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"PhD student"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">:</span> <span class="s2">"papers, and growth into an independent researcher"</span><span class="p">,</span> <span class="s2">"what_postings_asked_for"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"research engineer"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">:</span> <span class="s2">"experiments and systems that work and that others can build on"</span><span class="p">,</span> <span class="s2">"what_postings_asked_for"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"research scientist"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">:</span> <span class="s2">"research direction and results"</span><span class="p">,</span> <span class="s2">"what_postings_asked_for"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"predoctoral or resident"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">:</span> <span class="s2">"contribution to a project within about a year"</span><span class="p">,</span> <span class="s2">"what_postings_asked_for"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"open-community contributor"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">:</span> <span class="s2">"useful, visible contributions"</span><span class="p">,</span> <span class="s2">"what_postings_asked_for"</span><span class="p">:</span> <span class="s2">""</span><span class="p">},</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roles</span><span class="p">[[</span><span class="s2">"role"</span><span class="p">,</span> <span class="s2">"judged_on"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -151,7 +170,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-A-layer-that-breaks-the-symmetry">5. A layer that breaks the symmetry<a class="anchor-link" href="#5.-A-layer-that-breaks-the-symmetry">¶</a></h3><p>Flattening the node features and using an ordinary dense layer is not equivariant. This is why we do not feed graphs to an MLP.</p>
+<h3 id="5.-A-first-plan">5. A first plan<a class="anchor-link" href="#5.-A-first-plan">¶</a></h3><p>Hours per week decide how long the roadmap takes. Be honest with the number.</p>
 </div>
 </div>
 </div>
@@ -159,11 +178,12 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">W_flat</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">mlp</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">W_flat</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"MLP(X)   ="</span><span class="p">,</span> <span class="n">mlp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"MLP(P X) ="</span><span class="p">,</span> <span class="n">mlp</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="s2">"  &lt;- different"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">mlp</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">mlp</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">X</span><span class="p">))</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">HOURS_PER_WEEK</span> <span class="o">=</span> <span class="mi">8</span>                         <span class="c1"># TODO: your real number</span>
+<span class="n">COURSE_HOURS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"foundations (sessions 1-6)"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">"reading and reproduction (7-8)"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s2">"experiments and project (9-10)"</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s2">"paper and applications (11-12)"</span><span class="p">:</span> <span class="mi">35</span><span class="p">}</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">part</span><span class="p">,</span> <span class="n">hours</span> <span class="ow">in</span> <span class="n">COURSE_HOURS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">hours</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">part</span><span class="si">:</span><span class="s2">36s</span><span class="si">}</span><span class="s2"> about </span><span class="si">{</span><span class="n">hours</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> hours -&gt; done by week </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">HOURS_PER_WEEK</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"whole course: about </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> hours, </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">HOURS_PER_WEEK</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> weeks at </span><span class="si">{</span><span class="n">HOURS_PER_WEEK</span><span class="si">}</span><span class="s2"> hours a week"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -171,16 +191,17 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>The hour figures are planning estimates, not measurements. Adjust them after session 3, when you know your own pace.</p>
 <h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Replace sum pooling with mean and max. Are they invariant? Check.</li>
-<li>Is concatenating the first two rows of <code>X</code> invariant? Predict, then check.</li>
-<li>Show that a 1-D convolution is equivariant to circular shifts (<code>np.roll</code>).</li>
+<li>Fill in all three worksheets with real labs and real postings.</li>
+<li>Join one open community, read its newcomer guide, and post a two-line introduction.</li>
+<li>Hand in the skills-gap table and a 150-word plan.</li>
 </ol>
 </div>
 </div>
 </div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="index.html"><span>Back to</span>Course 1 overview</a><a class="next" href="session-02.html"><span>Next session</span>02 · Message passing</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="index.html"><span>Back to</span>Course 1 overview</a><a class="next" href="session-02.html"><span>Next session</span>02 · The math you actually use</a></nav>
     </article>
   </div>
 </section>

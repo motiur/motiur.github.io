@@ -151,7 +151,7 @@ svg { width: 1em; height: 1em; flex: none; }
 .course-num { font-size: 13px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; }
 
 /* Learning paths */
-.paths { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 20px; }
+.paths { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .path-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; }
 .path-col h3 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .step { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 700; }
@@ -282,7 +282,7 @@ svg { width: 1em; height: 1em; flex: none; }
 
 /* Responsive */
 @media (max-width: 1000px) {
-  .paths { grid-template-columns: 1fr; }
+  .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .course-layout { grid-template-columns: 1fr; }
   .side { position: static; }
   .nb-layout { grid-template-columns: 1fr; gap: 24px; }
@@ -297,6 +297,7 @@ svg { width: 1em; height: 1em; flex: none; }
   .stats div:nth-child(3) { border-left: 0; }
   .stats div:nth-child(n+3) { border-top: 1px solid var(--border); }
   .course-grid { grid-template-columns: 1fr; }
+  .paths { grid-template-columns: 1fr; }
   .session { grid-template-columns: 1fr; gap: 12px; padding: 16px; }
   .s-num { width: 44px; height: 40px; font-size: 17px; }
   .flag { margin-left: 0; }

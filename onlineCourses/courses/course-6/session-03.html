@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Code like a researcher — Course 6 · AI Courses</title>
-<meta name="description" content="Turn the session 2 code into a small reproducible repository: a config, a fixed seed, one logged row per run, and a README.">
-<meta property="og:title" content="Code like a researcher — Course 6 · AI Courses">
-<meta property="og:description" content="Turn the session 2 code into a small reproducible repository: a config, a fixed seed, one logged row per run, and a README.">
+<title>How expressive GNNs are — Course 6 · AI Courses</title>
+<meta name="description" content="Build two different graphs that message passing cannot tell apart, and see which aggregators lose information.">
+<meta property="og:title" content="How expressive GNNs are — Course 6 · AI Courses">
+<meta property="og:description" content="Build two different graphs that message passing cannot tell apart, and see which aggregators lose information.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 6: From Beginner to an AI Research Lab</a><span>/</span><span>Session 3</span></nav>
+      <a href="index.html">Course 6: Geometric Deep Learning and Graphs</a><span>/</span><span>Session 3</span></nav>
     <p class="eyebrow">Session 03 of 12</p>
-    <h1>Code like a researcher</h1>
-    <p class="lead"><strong>Goal:</strong> Turn the session 2 code into a small reproducible repository: a config, a fixed seed, one logged row per run, and a README.</p>
+    <h1>How expressive GNNs are</h1>
+    <p class="lead"><strong>Goal:</strong> Build two different graphs that message passing cannot tell apart, and see which aggregators lose information.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_6_From_Beginner_to_an_AI_Research_Lab/notebooks/s03_code_like_a_researcher.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s03_expressive_power.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s03_expressive_power.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s03_expressive_power.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s03_expressive_power.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,28 +52,19 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 6</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>Inside AI research labs</a></li><li><a href="session-02.html"><span>02</span>The math you actually use</a></li><li class=current><a href="session-03.html"><span>03</span>Code like a researcher</a></li><li><a href="session-04.html"><span>04</span>Machine learning foundations</a></li><li><a href="session-05.html"><span>05</span>Deep learning from scratch</a></li><li><a href="session-06.html"><span>06</span>Transformers and modern models</a></li><li><a href="session-07.html"><span>07</span>Reading papers and following the field</a></li><li><a href="session-08.html"><span>08</span>Reproducing a paper</a></li><li><a href="session-09.html"><span>09</span>Experiments that convince</a></li><li><a href="session-10.html"><span>10</span>From question to project</a></li><li><a href="session-11.html"><span>11</span>Writing and sharing research</a></li><li><a href="session-12.html"><span>12</span>Getting in</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>The geometric blueprint</a></li><li><a href="session-02.html"><span>02</span>Message passing</a></li><li class=current><a href="session-03.html"><span>03</span>How expressive GNNs are</a></li><li><a href="session-04.html"><span>04</span>When depth hurts</a></li><li><a href="session-05.html"><span>05</span>Graph transformers</a></li><li><a href="session-06.html"><span>06</span>Group-equivariant networks</a></li><li><a href="session-07.html"><span>07</span>E(3)-equivariant models for atoms</a></li><li><a href="session-08.html"><span>08</span>Curved spaces</a></li><li><a href="session-09.html"><span>09</span>Generative models on graphs and manifolds</a></li><li><a href="session-10.html"><span>10</span>Graphs meet LLMs</a></li><li><a href="session-11.html"><span>11</span>Spatio-temporal graphs</a></li><li><a href="session-12.html"><span>12</span>Graph learning in medicine and the capstone</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026). Cells labelled NOT RUN need a GPU, a download or an account. Cells that are worksheets hold example rows for you to replace with your own.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on small built-in or synthetic data. Cells labelled NOT RUN need a library, a dataset download or a GPU; run them on Kaggle or Colab.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-The-layout">1. The layout<a class="anchor-link" href="#1.-The-layout">¶</a></h3><pre><code>my-project/
-  README.md
-  requirements.txt
-  configs/base.json      {"lr": 0.1, "steps": 200, "seed": 0}
-  src/model.py           loss and grad functions
-  train.py               reads a config, trains, logs one row
-  scripts/plot.py        reads results/, saves the figure
-  results/runs.csv
-</code></pre>
-<p>This notebook writes that repository to disk so you can see every file. In real work you create it by hand and commit as you go.</p>
+<h3 id="1.-Two-graphs:-one-hexagon,-and-two-triangles">1. Two graphs: one hexagon, and two triangles<a class="anchor-link" href="#1.-Two-graphs:-one-hexagon,-and-two-triangles">¶</a></h3><p>Both have 6 nodes and every node has degree 2, but one is connected and the other is not.</p>
 </div>
 </div>
 </div>
@@ -81,92 +72,18 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">textwrap</span>
-<span class="n">ROOT</span> <span class="o">=</span> <span class="s2">"my-project"</span>
-<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"configs"</span><span class="p">,</span> <span class="s2">"src"</span><span class="p">,</span> <span class="s2">"scripts"</span><span class="p">,</span> <span class="s2">"results"</span><span class="p">]:</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">path</span><span class="p">),</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">))</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="n">write</span><span class="p">(</span><span class="s2">"configs/base.json"</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"lr"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">"steps"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"src/__init__.py"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"src/model.py"</span><span class="p">,</span> <span class="s2">"""</span>
-<span class="s2">    import numpy as np</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cycle</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">A</span>
 
-<span class="s2">    def make_data(seed, n=200):</span>
-<span class="s2">        rng = np.random.default_rng(seed)          # the seed comes from the config, never from a hidden default</span>
-<span class="s2">        x = rng.uniform(-2, 2, n)</span>
-<span class="s2">        return x, 3 * x + 2 + rng.normal(0, 0.5, n)</span>
-
-<span class="s2">    def loss(w, b, x, y):</span>
-<span class="s2">        return float(np.mean((w * x + b - y) ** 2))</span>
-
-<span class="s2">    def grad(w, b, x, y):</span>
-<span class="s2">        r = w * x + b - y</span>
-<span class="s2">        return 2 * np.mean(r * x), 2 * np.mean(r)</span>
-<span class="s2">"""</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"src/utils.py"</span><span class="p">,</span> <span class="s2">"""</span>
-<span class="s2">    import random, subprocess</span>
-<span class="s2">    import numpy as np</span>
-
-<span class="s2">    def set_seed(seed):</span>
-<span class="s2">        random.seed(seed)</span>
-<span class="s2">        np.random.seed(seed)</span>
-<span class="s2">        try:</span>
-<span class="s2">            import torch</span>
-<span class="s2">            torch.manual_seed(seed)</span>
-<span class="s2">            torch.cuda.manual_seed_all(seed)</span>
-<span class="s2">        except ImportError:</span>
-<span class="s2">            pass</span>
-
-<span class="s2">    def git_hash():</span>
-<span class="s2">        try:</span>
-<span class="s2">            out = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL)</span>
-<span class="s2">            return out.decode().strip()</span>
-<span class="s2">        except Exception:</span>
-<span class="s2">            return "no-git"</span>
-<span class="s2">"""</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"train.py"</span><span class="p">,</span> <span class="s2">"""</span>
-<span class="s2">    import argparse, csv, json, os, time</span>
-<span class="s2">    from src.model import make_data, loss, grad</span>
-<span class="s2">    from src.utils import set_seed, git_hash</span>
-
-<span class="s2">    def main():</span>
-<span class="s2">        ap = argparse.ArgumentParser(); ap.add_argument("--config", required=True); args = ap.parse_args()</span>
-<span class="s2">        cfg = json.load(open(args.config))</span>
-<span class="s2">        set_seed(cfg["seed"])                      # first thing</span>
-<span class="s2">        x, y = make_data(cfg["seed"])</span>
-<span class="s2">        t0 = time.time(); w, b = 0.0, 0.0</span>
-<span class="s2">        for _ in range(cfg["steps"]):</span>
-<span class="s2">            gw, gb = grad(w, b, x, y)</span>
-<span class="s2">            w, b = w - cfg["lr"] * gw, b - cfg["lr"] * gb</span>
-<span class="s2">        row = {"time": time.strftime("%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"), "commit": git_hash(), **cfg,</span>
-<span class="s2">               "final_loss": round(loss(w, b, x, y), 10), "runtime_s": round(time.time() - t0, 4)}</span>
-<span class="s2">        os.makedirs("results", exist_ok=True); path = "results/runs.csv"; new = not os.path.exists(path)</span>
-<span class="s2">        with open(path, "a", newline="") as f:</span>
-<span class="s2">            wr = csv.DictWriter(f, fieldnames=list(row)); new and wr.writeheader(); wr.writerow(row)</span>
-<span class="s2">        print(row)</span>
-
-<span class="s2">    if __name__ == "__main__":</span>
-<span class="s2">        main()</span>
-<span class="s2">"""</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"scripts/plot.py"</span><span class="p">,</span> <span class="s2">"""</span>
-<span class="s2">    import pandas as pd, matplotlib</span>
-<span class="s2">    matplotlib.use("Agg")</span>
-<span class="s2">    import matplotlib.pyplot as plt</span>
-<span class="s2">    df = pd.read_csv("results/runs.csv")</span>
-<span class="s2">    df.plot.scatter(x="seed", y="final_loss"); plt.savefig("results/final_loss_by_seed.png")</span>
-<span class="s2">    print("saved results/final_loss_by_seed.png from", len(df), "runs")</span>
-<span class="s2">"""</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"requirements.txt"</span><span class="p">,</span> <span class="s2">"numpy</span><span class="se">\n</span><span class="s2">pandas</span><span class="se">\n</span><span class="s2">matplotlib</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">write</span><span class="p">(</span><span class="s2">"README.md"</span><span class="p">,</span> <span class="s2">"""</span>
-<span class="s2">    # my-project</span>
-<span class="s2">    Fits a line with gradient descent (course 6, session 3).</span>
-
-<span class="s2">    Install: `pip install -r requirements.txt`</span>
-<span class="s2">    Reproduce the figure: `python train.py --config configs/base.json &amp;&amp; python scripts/plot.py`</span>
-<span class="s2">"""</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="s2">"results"</span><span class="p">,</span> <span class="s2">"runs.csv"</span><span class="p">)):</span> <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="s2">"results"</span><span class="p">,</span> <span class="s2">"runs.csv"</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">dp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">fs</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span> <span class="k">if</span> <span class="s2">"__pycache__"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dp</span><span class="p">))</span>
+<span class="n">hexagon</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">two_triangles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">cycle</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">cycle</span><span class="p">(</span><span class="mi">3</span><span class="p">)]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"triangles in hexagon:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">hexagon</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="mi">6</span><span class="p">),</span>
+      <span class="s2">"| in two triangles:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">two_triangles</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="mi">6</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -174,7 +91,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-One-command-runs-one-experiment">2. One command runs one experiment<a class="anchor-link" href="#2.-One-command-runs-one-experiment">¶</a></h3><p>Run it twice with the same config, then once with another seed.</p>
+<h3 id="2.-The-Weisfeiler-Leman-colour-refinement-test">2. The Weisfeiler-Leman colour refinement test<a class="anchor-link" href="#2.-The-Weisfeiler-Leman-colour-refinement-test">¶</a></h3><p>Each round, a node's new colour is its old colour together with the multiset of its neighbours' colours. If the colour histograms differ, the graphs are different. If they match, the test cannot tell.</p>
 </div>
 </div>
 </div>
@@ -182,10 +99,18 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">config</span><span class="p">):</span> <span class="k">return</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"train.py"</span><span class="p">,</span> <span class="s2">"--config"</span><span class="p">,</span> <span class="n">config</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="s2">"configs/base.json"</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="s2">"configs/base.json"</span><span class="p">))</span>
-<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s2">"lr"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">"steps"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="s2">"configs"</span><span class="p">,</span> <span class="s2">"seed1.json"</span><span class="p">),</span> <span class="s2">"w"</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="s2">"configs/seed1.json"</span><span class="p">))</span>
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wl_histogram</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">rounds</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rounds</span><span class="p">):</span>
+        <span class="n">sigs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">colours</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))]</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sigs</span><span class="p">)))}</span>
+        <span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sigs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">colours</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"hexagon      :"</span><span class="p">,</span> <span class="n">wl_histogram</span><span class="p">(</span><span class="n">hexagon</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"two triangles:"</span><span class="p">,</span> <span class="n">wl_histogram</span><span class="p">(</span><span class="n">two_triangles</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">wl_histogram</span><span class="p">(</span><span class="n">hexagon</span><span class="p">)</span> <span class="o">==</span> <span class="n">wl_histogram</span><span class="p">(</span><span class="n">two_triangles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"WL cannot tell them apart"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -193,7 +118,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-The-reproducibility-test">3. The reproducibility test<a class="anchor-link" href="#3.-The-reproducibility-test">¶</a></h3><p>Same config, same result. Different seed, different result.</p>
+<h3 id="3.-So-a-GCN-cannot-either">3. So a GCN cannot either<a class="anchor-link" href="#3.-So-a-GCN-cannot-either">¶</a></h3><p>With the same starting feature on every node, any message-passing network gives both graphs the same embedding, whatever the weights.</p>
 </div>
 </div>
 </div>
@@ -201,12 +126,17 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">runs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span> <span class="s2">"results"</span><span class="p">,</span> <span class="s2">"runs.csv"</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="n">runs</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="n">same</span> <span class="o">=</span> <span class="n">runs</span><span class="o">.</span><span class="n">final_loss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">runs</span><span class="o">.</span><span class="n">final_loss</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">different</span> <span class="o">=</span> <span class="n">runs</span><span class="o">.</span><span class="n">final_loss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">runs</span><span class="o">.</span><span class="n">final_loss</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"two runs with the same config agree exactly:"</span><span class="p">,</span> <span class="n">same</span><span class="p">,</span> <span class="s2">"| a different seed gives a different loss:"</span><span class="p">,</span> <span class="n">different</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">same</span> <span class="ow">and</span> <span class="n">different</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"scripts/plot.py"</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gcn_embed</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Ws</span><span class="p">):</span>
+    <span class="n">A_hat</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">));</span> <span class="n">d</span> <span class="o">=</span> <span class="n">A_hat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">A_hat</span> <span class="o">=</span> <span class="n">A_hat</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">Ws</span><span class="p">:</span> <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">A_hat</span> <span class="o">@</span> <span class="n">H</span> <span class="o">@</span> <span class="n">W</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))]</span>
+<span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">gcn_embed</span><span class="p">(</span><span class="n">hexagon</span><span class="p">,</span> <span class="n">Ws</span><span class="p">),</span> <span class="n">gcn_embed</span><span class="p">(</span><span class="n">two_triangles</span><span class="p">,</span> <span class="n">Ws</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -214,13 +144,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A trap from session 2: that code called <code>np.random.default_rng(0)</code> directly. A generator created that way ignores <code>np.random.seed</code>, so <code>set_seed</code> alone would not have changed the data. Here the config's seed is passed into <code>make_data</code>. Know where every random number in your project comes from.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Version-control-(NOT-RUN-here)">4. Version control (NOT RUN here)<a class="anchor-link" href="#4.-Version-control-(NOT-RUN-here)">¶</a></h3><p>Run these in a terminal inside the project folder. The <code>commit</code> column in <code>runs.csv</code> shows <code>no-git</code> until you do.</p>
+<h3 id="4.-Where-sum-beats-mean-and-max-(the-GIN-argument)">4. Where sum beats mean and max (the GIN argument)<a class="anchor-link" href="#4.-Where-sum-beats-mean-and-max-(the-GIN-argument)">¶</a></h3><p>A centre node with two identical neighbours and a centre with three. Mean and max see the same thing; sum does not.</p>
 </div>
 </div>
 </div>
@@ -228,14 +152,10 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs git configured with your name and email, and a GitHub account for the last two lines.</span>
-<span class="c1">#   git init</span>
-<span class="c1">#   printf "__pycache__/\n*.png\n" &gt; .gitignore</span>
-<span class="c1">#   git add . &amp;&amp; git commit -m "Line fit: config, seed, logged runs"</span>
-<span class="c1">#   python train.py --config configs/base.json        # the commit column now holds a hash</span>
-<span class="c1">#   git remote add origin https://github.com/&lt;you&gt;/my-project.git</span>
-<span class="c1">#   git push -u origin main</span>
-<span class="c1"># Rule: commit before you run. A result whose code was never committed cannot be traced back to the code that made it.</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">neigh_a</span><span class="p">,</span> <span class="n">neigh_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">agg</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">H</span><span class="p">:</span> <span class="n">H</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="p">(</span><span class="s2">"max"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">H</span><span class="p">:</span> <span class="n">H</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="p">(</span><span class="s2">"sum"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">H</span><span class="p">:</span> <span class="n">H</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">))]:</span>
+    <span class="n">same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">agg</span><span class="p">(</span><span class="n">neigh_a</span><span class="p">),</span> <span class="n">agg</span><span class="p">(</span><span class="n">neigh_b</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">4s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">'cannot'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'can'</span><span class="si">}</span><span class="s2"> tell 2 neighbours from 3"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -243,17 +163,34 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-The-clone-test">5. The clone test<a class="anchor-link" href="#5.-The-clone-test">¶</a></h3><p>Ask a classmate to clone the repository and run the README's one command with no help. Every question they ask is a gap in the README.</p>
+<h3 id="5.-One-way-out:-give-the-nodes-structural-features">5. One way out: give the nodes structural features<a class="anchor-link" href="#5.-One-way-out:-give-the-nodes-structural-features">¶</a></h3><p>Counting the triangles each node belongs to, <code>diag(A³)/2</code>, separates the two graphs at once.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">tri</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"hexagon      :"</span><span class="p">,</span> <span class="n">tri</span><span class="p">(</span><span class="n">hexagon</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"two triangles:"</span><span class="p">,</span> <span class="n">tri</span><span class="p">(</span><span class="n">two_triangles</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Create this repository by hand, commit, and push it.</li>
-<li>Add a <code>--seed</code> override on the command line and log it.</li>
-<li>Pin exact versions in <code>requirements.txt</code> with <code>pip freeze</code>, and note your Python version in the README.</li>
+<li>Find another pair that WL cannot separate (hint: an 8-cycle and two 4-cycles; then try the 4x4 rook's graph and the Shrikhande graph).</li>
+<li>Write <code>gin_embed</code> with update <code>MLP((1 + eps) * h + sum of neighbours)</code> and confirm it also fails on this pair.</li>
+<li>Which of the fixes from the session (structural features, positional encodings, higher-order WL) would you use for molecules, and why?</li>
 </ol>
 </div>
 </div>
 </div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-02.html"><span>Previous session</span>02 · The math you actually use</a><a class="next" href="session-04.html"><span>Next session</span>04 · Machine learning foundations</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-02.html"><span>Previous session</span>02 · Message passing</a><a class="next" href="session-04.html"><span>Next session</span>04 · When depth hurts</a></nav>
     </article>
   </div>
 </section>
