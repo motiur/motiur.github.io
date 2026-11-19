@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Image competitions: resolution and test-time augmentation — Course 5 · AI Courses</title>
-<meta name="description" content="Train a small CNN at two resolutions, then find which test-time augmentations help and which ones hurt.">
-<meta property="og:title" content="Image competitions: resolution and test-time augmentation — Course 5 · AI Courses">
-<meta property="og:description" content="Train a small CNN at two resolutions, then find which test-time augmentations help and which ones hurt.">
+<title>Evaluation I, the model itself — Course 5 · AI Courses</title>
+<meta name="description" content="Compute perplexity and bits per character, control sampling, and set up a blind rating.">
+<meta property="og:title" content="Evaluation I, the model itself — Course 5 · AI Courses">
+<meta property="og:description" content="Compute perplexity and bits per character, control sampling, and set up a blind rating.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 5: Winning Online AI Competitions</a><span>/</span><span>Session 7</span></nav>
+      <a href="index.html">Course 5: Building a Small Bangla Language Model</a><span>/</span><span>Session 7</span></nav>
     <p class="eyebrow">Session 07 of 12</p>
-    <h1>Image competitions: resolution and test-time augmentation</h1>
-    <p class="lead"><strong>Goal:</strong> Train a small CNN at two resolutions, then find which test-time augmentations help and which ones hurt.</p>
+    <h1>Evaluation I, the model itself</h1>
+    <p class="lead"><strong>Goal:</strong> Compute perplexity and bits per character, control sampling, and set up a blind rating.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s07_images_and_tta.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s07_images_and_tta.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_5_Winning_Online_AI_Competitions/notebooks/s07_images_and_tta.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s07_images_and_tta.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s07_evaluation_perplexity_sampling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s07_evaluation_perplexity_sampling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s07_evaluation_perplexity_sampling.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s07_evaluation_perplexity_sampling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,19 +52,13 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 5</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li class=current><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>Why small, and why Bangla</a></li><li><a href="session-02.html"><span>02</span>Bangla text and Unicode</a></li><li><a href="session-03.html"><span>03</span>Building the corpus</a></li><li><a href="session-04.html"><span>04</span>Tokenizers for Bangla</a></li><li><a href="session-05.html"><span>05</span>Designing the model</a></li><li><a href="session-06.html"><span>06</span>Training on free GPUs</a></li><li class=current><a href="session-07.html"><span>07</span>Evaluation I, the model itself</a></li><li><a href="session-08.html"><span>08</span>Evaluation II, tasks and benchmarks</a></li><li><a href="session-09.html"><span>09</span>Following instructions</a></li><li><a href="session-10.html"><span>10</span>Smaller and faster</a></li><li><a href="session-11.html"><span>11</span>Responsible release</a></li><li><a href="session-12.html"><span>12</span>Release and write-up</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Data">1. Data<a class="anchor-link" href="#1.-Data">¶</a></h3><p>The 8x8 digits from scikit-learn stand in for a handwritten-character competition such as Bengali.AI graphemes. The lessons about resolution and augmentation carry over; the numbers do not.</p>
+<p><strong>Testing note:</strong> every code cell here was run once on a CPU (November 2026) using the small built-in sample. Cells marked TODO or NOT RUN need your data, a GPU or the network.</p>
 </div>
 </div>
 </div>
@@ -72,161 +66,169 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">();</span> <span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">images</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">];</span> <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
-<span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"train"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s2">"test"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">Xte</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">SAMPLE_LINES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"আমি বাংলায় গান গাই।"</span><span class="p">,</span>
+    <span class="s2">"আমার সোনার বাংলা, আমি তোমায় ভালোবাসি।"</span><span class="p">,</span>
+    <span class="s2">"বাংলা আমার মাতৃভাষা।"</span><span class="p">,</span>
+    <span class="s2">"আজ আকাশ খুব পরিষ্কার।"</span><span class="p">,</span>
+    <span class="s2">"ছোট মেয়েটি নদীর ধারে খেলছিল।"</span><span class="p">,</span>
+    <span class="s2">"বাবা বাজার থেকে মাছ কিনে আনলেন।"</span><span class="p">,</span>
+    <span class="s2">"মা রান্নাঘরে ভাত রান্না করছেন।"</span><span class="p">,</span>
+    <span class="s2">"আমরা সবাই মিলে স্কুলে যাই।"</span><span class="p">,</span>
+    <span class="s2">"বৃষ্টি হলে মাঠে পানি জমে।"</span><span class="p">,</span>
+    <span class="s2">"পাখিরা সকালে গান গায়।"</span><span class="p">,</span>
+    <span class="s2">"দাদু প্রতিদিন সন্ধ্যায় গল্প বলেন।"</span><span class="p">,</span>
+    <span class="s2">"ছেলেটি বই পড়তে খুব ভালোবাসে।"</span><span class="p">,</span>
+    <span class="s2">"নদীতে অনেক নৌকা চলছে।"</span><span class="p">,</span>
+    <span class="s2">"শীতকালে আমরা পিঠা খাই।"</span><span class="p">,</span>
+    <span class="s2">"ঢাকা বাংলাদেশের রাজধানী।"</span><span class="p">,</span>
+    <span class="s2">"আমার বন্ধু ভালো ফুটবল খেলে।"</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-The-same-network-at-two-resolutions">2. The same network at two resolutions<a class="anchor-link" href="#2.-The-same-network-at-two-resolutions">¶</a></h3><p>Resolution is usually the first knob to turn in an image competition: more pixels, more detail, more compute. Here the 'low' setting is 4x4 (downsampled) and the 'high' one is the original 8x8.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SmallCNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">();</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span><span class="o">.</span><span class="n">amax</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">train_model</span><span class="p">(</span><span class="n">Xa</span><span class="p">,</span> <span class="n">ya</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">augment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="n">SmallCNN</span><span class="p">();</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xa</span><span class="p">))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="mi">64</span><span class="p">):</span>
-            <span class="n">xb</span> <span class="o">=</span> <span class="n">Xa</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">if</span> <span class="n">augment</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">augment</span><span class="p">(</span><span class="n">Xa</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-            <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">m</span><span class="p">(</span><span class="n">xb</span><span class="p">),</span> <span class="n">ya</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span> <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">();</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-<span class="n">acc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">Xa</span><span class="p">:</span> <span class="p">(</span><span class="n">m</span><span class="p">(</span><span class="n">Xa</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-<span class="n">low</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">F</span><span class="o">.</span><span class="n">avg_pool2d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">m_low</span><span class="p">,</span> <span class="n">m_high</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">low</span><span class="p">(</span><span class="n">Xtr</span><span class="p">),</span> <span class="n">ytr</span><span class="p">),</span> <span class="n">train_model</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span> <span class="n">a_low</span><span class="p">,</span> <span class="n">a_high</span> <span class="o">=</span> <span class="n">acc</span><span class="p">(</span><span class="n">m_low</span><span class="p">,</span> <span class="n">low</span><span class="p">(</span><span class="n">Xte</span><span class="p">)),</span> <span class="n">acc</span><span class="p">(</span><span class="n">m_high</span><span class="p">,</span> <span class="n">Xte</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"4x4 input: test accuracy </span><span class="si">{</span><span class="n">a_low</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | 8x8 input: test accuracy </span><span class="si">{</span><span class="n">a_high</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">a_high</span> <span class="o">&gt;</span> <span class="n">a_low</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Training-time-augmentation">3. Training-time augmentation<a class="anchor-link" href="#3.-Training-time-augmentation">¶</a></h3><p>Small random shifts create new plausible digits. The model sees more variety without new labels.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">random_shift</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">out</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">m_aug</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">augment</span><span class="o">=</span><span class="n">random_shift</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span> <span class="n">a_aug</span> <span class="o">=</span> <span class="n">acc</span><span class="p">(</span><span class="n">m_aug</span><span class="p">,</span> <span class="n">Xte</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"8x8 with shift augmentation in training: test accuracy </span><span class="si">{</span><span class="n">a_aug</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (without: </span><span class="si">{</span><span class="n">a_high</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Check the two numbers. On these tiny centred images a one-pixel shift can push a stroke off the edge, so augmentation may not help here, and it can cost a little. On larger images with a margin it usually helps. Augmentation is a hypothesis about the data and has to be measured like any other.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Test-time-augmentation:-average-predictions-over-several-views">4. Test-time augmentation: average predictions over several views<a class="anchor-link" href="#4.-Test-time-augmentation:-average-predictions-over-several-views">¶</a></h3><p>A TTA is safe when the transformed image still has the same label and looks like something the model saw in training.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">tta_accuracy</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
-    <span class="n">probs</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">Xte</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">views</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+    <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span>
+    <span class="n">block_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="n">n_layer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">n_head</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">d_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-<span class="n">identity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span>
-<span class="n">shifts</span> <span class="o">=</span> <span class="p">[</span><span class="n">identity</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]]</span>
-<span class="n">flip_h</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,));</span> <span class="n">rot180</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"no TTA"</span><span class="p">:</span> <span class="n">tta_accuracy</span><span class="p">(</span><span class="n">m_aug</span><span class="p">,</span> <span class="p">[</span><span class="n">identity</span><span class="p">]),</span> <span class="s2">"5 small shifts (safe)"</span><span class="p">:</span> <span class="n">tta_accuracy</span><span class="p">(</span><span class="n">m_aug</span><span class="p">,</span> <span class="n">shifts</span><span class="p">),</span>
-        <span class="s2">"+ horizontal flip (harmful)"</span><span class="p">:</span> <span class="n">tta_accuracy</span><span class="p">(</span><span class="n">m_aug</span><span class="p">,</span> <span class="p">[</span><span class="n">identity</span><span class="p">,</span> <span class="n">flip_h</span><span class="p">]),</span> <span class="s2">"+ rotation by 180 (harmful)"</span><span class="p">:</span> <span class="n">tta_accuracy</span><span class="p">(</span><span class="n">m_aug</span><span class="p">,</span> <span class="p">[</span><span class="n">identity</span><span class="p">,</span> <span class="n">rot180</span><span class="p">])}</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rows</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">30s</span><span class="si">}</span><span class="s2"> test accuracy </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"+ rotation by 180 (harmful)"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"no TTA"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"5 small shifts (safe)"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">rows</span><span class="p">[</span><span class="s2">"no TTA"</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.01</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Flips and half-turns are standard for photographs of cats. For characters they are wrong: a flipped digit is not a digit, and a 6 turned upside down is a 9. Bengali graphemes are the same. Choose augmentations by asking whether the label survives.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Check-which-classes-a-TTA-damages">5. Check which classes a TTA damages<a class="anchor-link" href="#5.-Check-which-classes-a-TTA-damages">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">p0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">m_aug</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">((</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">m_aug</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">m_aug</span><span class="p">(</span><span class="n">rot180</span><span class="p">(</span><span class="n">Xte</span><span class="p">)),</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">per_class</span> <span class="o">=</span> <span class="p">[(</span><span class="n">c</span><span class="p">,</span> <span class="p">((</span><span class="n">p0</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yte</span> <span class="o">==</span> <span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">yte</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="p">((</span><span class="n">p1</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yte</span> <span class="o">==</span> <span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">yte</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
-<span class="n">worst</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">per_class</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">worst</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"digit </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">: accuracy </span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> with the 180-degree view"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-The-real-pipeline-with-timm-(NOT-RUN-here)">6. The real pipeline with timm (NOT RUN here)<a class="anchor-link" href="#6.-The-real-pipeline-with-timm-(NOT-RUN-here)">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs a GPU, `pip install timm albumentations`, and the Bengali.AI Handwritten Grapheme Classification data from Kaggle.</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">timm</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span>
-<span class="c1"># The task has three targets per image: grapheme root (168 classes), vowel diacritic (11) and consonant diacritic (7).</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">GraphemeNet</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"resnet34"</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Block</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">timm</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">in_chans</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>       <span class="c1"># check the model name with timm.list_models()</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">num_features</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vowel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cons</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">168</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">n_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qkv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">dropout</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">attn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qkv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">,</span> <span class="n">D</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">scaled_dot_product_attention</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">q</span><span class="p">),</span> <span class="n">split</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">split</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">is_causal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">vowel</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">cons</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="c1"># Plan:</span>
-<span class="c1"># 1. Group folds so that validation contains grapheme combinations not seen in training (the test set did).</span>
-<span class="c1"># 2. Train at 128x128 and at 224x224 with the same recipe; report the competition metric (weighted macro recall) for both.</span>
-<span class="c1"># 3. Augment with small shifts, scale, slight rotation and cutout. No flips.</span>
-<span class="c1"># 4. TTA with 3 slightly shifted or scaled views. Measure it on the validation folds before using it.</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln1</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">gelu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln2</span><span class="p">(</span><span class="n">x</span><span class="p">)))))</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GPT</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tok</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">block_size</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">Block</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">n_layer</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tok</span><span class="o">.</span><span class="n">weight</span>          <span class="c1"># weight tying</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">)):</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_hidden</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tok</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">idx</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">return_hidden</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">h</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">targets</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+                                   <span class="n">targets</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">ignore_index</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span><span class="p">,</span> <span class="n">loss</span>
+
+    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">top_p</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_new_tokens</span><span class="p">):</span>
+            <span class="n">logits</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">idx</span><span class="p">[:,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">block_size</span><span class="p">:])</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">sp</span><span class="p">,</span> <span class="n">si</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">keep</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sp</span> <span class="o">&lt;</span> <span class="n">top_p</span>
+            <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">*</span> <span class="n">keep</span>
+            <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">nxt</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">idx</span><span class="p">,</span> <span class="n">nxt</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">idx</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tokenizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">trainers</span><span class="p">,</span> <span class="n">pre_tokenizers</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span> <span class="n">normalizers</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train_bpe</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">specials</span><span class="o">=</span><span class="p">(</span><span class="s2">"[UNK]"</span><span class="p">,</span> <span class="s2">"&lt;|endoftext|&gt;"</span><span class="p">)):</span>
+    <span class="n">tok</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">BPE</span><span class="p">(</span><span class="n">unk_token</span><span class="o">=</span><span class="s2">"[UNK]"</span><span class="p">))</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">normalizer</span> <span class="o">=</span> <span class="n">normalizers</span><span class="o">.</span><span class="n">NFC</span><span class="p">()</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">pre_tokenizer</span> <span class="o">=</span> <span class="n">pre_tokenizers</span><span class="o">.</span><span class="n">Metaspace</span><span class="p">()</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">decoders</span><span class="o">.</span><span class="n">Metaspace</span><span class="p">()</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">trainers</span><span class="o">.</span><span class="n">BpeTrainer</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">special_tokens</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">specials</span><span class="p">))</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">train_from_iterator</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">trainer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tok</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># A tiny model and tokenizer trained on the built-in sample, so this notebook runs anywhere.</span>
+<span class="c1"># Replace with your own tokenizer file and checkpoint from sessions 4 and 6.</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tok</span> <span class="o">=</span> <span class="n">train_bpe</span><span class="p">(</span><span class="n">SAMPLE_LINES</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">EOT</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">token_to_id</span><span class="p">(</span><span class="s2">"&lt;|endoftext|&gt;"</span><span class="p">)</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">SAMPLE_LINES</span> <span class="o">*</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">ids</span> <span class="o">+=</span> <span class="n">tok</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span> <span class="o">+</span> <span class="p">[</span><span class="n">EOT</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">tok</span><span class="o">.</span><span class="n">get_vocab_size</span><span class="p">(),</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d_model</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPT</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_batch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">block_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">block_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ix</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">block_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ix</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_batch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">block_size</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">();</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tiny model trained, final loss"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -234,16 +236,130 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Train at 16x16 (upsample the digits). Does more resolution than the data contains help?</li>
-<li>Add rotation by ±10 degrees to training augmentation and to TTA. Measure each separately.</li>
-<li>In the grapheme task, why do random row-wise folds overestimate the score? What should the groups be?</li>
-</ol>
+<h3 id="1.-Loss,-perplexity-and-bits-per-character-on-held-out-text">1. Loss, perplexity and bits per character on held-out text<a class="anchor-link" href="#1.-Loss,-perplexity-and-bits-per-character-on-held-out-text">¶</a></h3><p>Replace <code>test_lines</code> with the lines of your <code>test.txt</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">test_lines</span> <span class="o">=</span> <span class="n">SAMPLE_LINES</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>            <span class="c1"># TODO: lines of test.txt (here: seen text, so the score is flattering)</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tok</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">total_nll</span><span class="p">,</span> <span class="n">n_tokens</span><span class="p">,</span> <span class="n">n_chars</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">EOT</span><span class="p">]</span> <span class="o">+</span> <span class="n">tok</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span> <span class="o">+</span> <span class="p">[</span><span class="n">EOT</span><span class="p">]</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="n">ids</span><span class="p">[:</span><span class="n">model</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">block_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">ids</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]);</span> <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+        <span class="n">logits</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">nll</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"sum"</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">total_nll</span> <span class="o">+=</span> <span class="n">nll</span><span class="p">;</span> <span class="n">n_tokens</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">n_chars</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">mean_nll</span> <span class="o">=</span> <span class="n">total_nll</span> <span class="o">/</span> <span class="n">n_tokens</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"loss"</span><span class="p">:</span> <span class="n">mean_nll</span><span class="p">,</span> <span class="s2">"perplexity"</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mean_nll</span><span class="p">),</span>
+            <span class="s2">"bits_per_char"</span><span class="p">:</span> <span class="n">total_nll</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_chars</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tok</span><span class="p">,</span> <span class="n">test_lines</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"check: loss 2.075 -&gt;"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.075</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"perplexity,"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="mf">2.075</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"bits per token"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Top-p-sampling">2. Top-p sampling<a class="anchor-link" href="#2.-Top-p-sampling">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_top_p</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span> <span class="o">/</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sorted_probs</span><span class="p">,</span> <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cum</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sorted_probs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="n">cum</span> <span class="o">-</span> <span class="n">sorted_probs</span> <span class="o">&lt;</span> <span class="n">p</span>
+    <span class="n">sorted_probs</span> <span class="o">=</span> <span class="n">sorted_probs</span> <span class="o">*</span> <span class="n">keep</span>
+    <span class="n">sorted_probs</span> <span class="o">=</span> <span class="n">sorted_probs</span> <span class="o">/</span> <span class="n">sorted_probs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sorted_idx</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">sorted_probs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="n">logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"p=0.9:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">sample_top_p</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"p=0.7:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">sample_top_p</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Generate-at-three-settings">3. Generate at three settings<a class="anchor-link" href="#3.-Generate-at-three-settings">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"আমি"</span><span class="p">,</span> <span class="s2">"বাংলা"</span><span class="p">,</span> <span class="s2">"মা"</span><span class="p">]</span>          <span class="c1"># TODO: your 20 fixed prompts</span>
+<span class="k">for</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">top_p</span> <span class="ow">in</span> <span class="p">[(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"--- temperature </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">, top_p </span><span class="si">{</span><span class="n">top_p</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tok</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span><span class="p">])</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">top_p</span><span class="o">=</span><span class="n">top_p</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"  "</span><span class="p">,</span> <span class="n">tok</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Blind-rating-sheet">4. Blind rating sheet<a class="anchor-link" href="#4.-Blind-rating-sheet">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span><span class="o">,</span><span class="w"> </span><span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"model_A"</span><span class="p">,</span> <span class="s2">"model_B"</span><span class="p">]:</span>          <span class="c1"># TODO: generate from your two models</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tok</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span><span class="p">]),</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"model"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">"prompt"</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">"output"</span><span class="p">:</span> <span class="n">tok</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())})</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"rating_sheet.csv"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">);</span> <span class="n">w</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"prompt"</span><span class="p">,</span> <span class="s2">"output"</span><span class="p">,</span> <span class="s2">"grammar_1to5"</span><span class="p">,</span> <span class="s2">"coherence_1to5"</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">"prompt"</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s2">"output"</span><span class="p">],</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">""</span><span class="p">])</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"rating_key.csv"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">);</span> <span class="n">w</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">"model"</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"wrote rating_sheet.csv (give to readers) and rating_key.csv (keep hidden)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ul>
+<li>Have two readers fill in the sheet, then join it with the key and compute mean scores per model and how often the readers agree within one point.</li>
+<li>Collect five typical errors with examples.</li>
+</ul>
 </div>
 </div>
 </div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-06.html"><span>Previous session</span>06 · Time series and small data</a><a class="next" href="session-08.html"><span>Next session</span>08 · NLP and LLM competitions: predicting preferences</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-06.html"><span>Previous session</span>06 · Training on free GPUs</a><a class="next" href="session-08.html"><span>Next session</span>08 · Evaluation II, tasks and benchmarks</a></nav>
     </article>
   </div>
 </section>
@@ -253,7 +369,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap footer-inner">
     <div>
       <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
-      <p>From first principles to current research. 11 free courses with hands-on notebooks.</p>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>

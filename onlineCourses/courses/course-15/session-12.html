@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The mock loop — Course 15 · AI Courses</title>
+<meta name="description" content="Run four rounds back to back in a group of four, score independently, and rebuild the plan from the feedback.">
+<meta property="og:title" content="The mock loop — Course 15 · AI Courses">
+<meta property="og:description" content="Run four rounds back to back in a group of four, score independently, and rebuild the plan from the feedback.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true},
+  options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="nb-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
+      <a href="index.html">Course 15: Research Engineering Interviews</a><span>/</span><span>Session 12</span></nav>
+    <p class="eyebrow">Session 12 of 12</p>
+    <h1>The mock loop</h1>
+    <p class="lead"><strong>Goal:</strong> Run four rounds back to back in a group of four, score independently, and rebuild the plan from the feedback.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_15_Research_Engineering_Interviews/notebooks/s12_the_mock_loop.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_15_Research_Engineering_Interviews/notebooks/s12_the_mock_loop.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_15_Research_Engineering_Interviews/notebooks/s12_the_mock_loop.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_15_Research_Engineering_Interviews/notebooks/s12_the_mock_loop.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap nb-layout">
+    <aside class="nb-toc" aria-label="Sessions in this course">
+      <p class="toc-title"><a href="index.html">Course 15</a></p>
+      <ol><li><a href="session-01.html"><span>01</span>The interview loop</a></li><li><a href="session-02.html"><span>02</span>Coding I, Python fluency</a></li><li><a href="session-03.html"><span>03</span>Coding II, tensors</a></li><li><a href="session-04.html"><span>04</span>ML from scratch I</a></li><li><a href="session-05.html"><span>05</span>ML from scratch II</a></li><li><a href="session-06.html"><span>06</span>Debugging rounds</a></li><li><a href="session-07.html"><span>07</span>ML fundamentals out loud</a></li><li><a href="session-08.html"><span>08</span>Deep learning and LLM fundamentals</a></li><li><a href="session-09.html"><span>09</span>ML system design</a></li><li><a href="session-10.html"><span>10</span>The research discussion</a></li><li><a href="session-11.html"><span>11</span>Behavioral rounds, take-homes and work tests</a></li><li class=current><a href="session-12.html"><span>12</span>The mock loop</a></li></ol>
+    </aside>
+    <article class="notebook prose">
+      <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
+<p><strong>Testing note:</strong> the tests and reference solutions here were run once on a CPU (November 2026). Cells marked TODO are stubs for you; try them under a timer before opening the reference solutions at the bottom.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Schedule-for-a-group-of-four">1. Schedule for a group of four<a class="anchor-link" href="#1.-Schedule-for-a-group-of-four">¶</a></h3><p>Each person is a candidate for rounds A-D and interviews the others in between. Rounds are 40 minutes with 10-minute breaks.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"P1"</span><span class="p">,</span> <span class="s2">"P2"</span><span class="p">,</span> <span class="s2">"P3"</span><span class="p">,</span> <span class="s2">"P4"</span><span class="p">]</span>                     <span class="c1"># TODO: your names</span>
+<span class="n">rounds</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A coding"</span><span class="p">,</span> <span class="s2">"B ML coding"</span><span class="p">,</span> <span class="s2">"C fundamentals"</span><span class="p">,</span> <span class="s2">"D research"</span><span class="p">]</span>
+<span class="n">slot</span><span class="p">,</span> <span class="n">seen</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">rnd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rounds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">interviewers</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">people</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">people</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span> <span class="p">(</span><span class="n">people</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">people</span><span class="p">[:</span><span class="mi">2</span><span class="p">])]:</span>
+        <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">c</span><span class="p">,</span> <span class="n">interviewers</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidates</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"slot </span><span class="si">{</span><span class="n">slot</span><span class="si">}</span><span class="s2">: "</span> <span class="o">+</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> is interviewed by </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">rnd</span><span class="si">}</span><span class="s2">)"</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">))</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">rnd</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">)</span>
+        <span class="n">slot</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"every person sits every round:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each slot has two interviews running in parallel: two people are candidates and the other two interview them. Over eight slots, everyone sits all four rounds and interviews four times.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Score-sheet">2. Score sheet<a class="anchor-link" href="#2.-Score-sheet">¶</a></h3><p>Fill in straight after each round, before discussing it with anyone.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">CRITERIA</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"correctness"</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">,</span> <span class="s2">"verification"</span><span class="p">,</span> <span class="s2">"hints_and_gaps"</span><span class="p">,</span> <span class="s2">"overall"</span><span class="p">]</span>
+<span class="n">sheets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="c1"># TODO: replace with the real sheets from your loop</span>
+    <span class="p">{</span><span class="s2">"round"</span><span class="p">:</span> <span class="s2">"A coding"</span><span class="p">,</span> <span class="s2">"correctness"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"verification"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"hints_and_gaps"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"overall"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"change"</span><span class="p">:</span> <span class="s2">"test the code"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"round"</span><span class="p">:</span> <span class="s2">"B ML coding"</span><span class="p">,</span> <span class="s2">"correctness"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"verification"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"hints_and_gaps"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"overall"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"change"</span><span class="p">:</span> <span class="s2">"did not test causality"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"round"</span><span class="p">:</span> <span class="s2">"C fundamentals"</span><span class="p">,</span> <span class="s2">"correctness"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"verification"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"hints_and_gaps"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"overall"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"change"</span><span class="p">:</span> <span class="s2">"answers too long"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"round"</span><span class="p">:</span> <span class="s2">"D research"</span><span class="p">,</span> <span class="s2">"correctness"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"communication"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"verification"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"hints_and_gaps"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"overall"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"change"</span><span class="p">:</span> <span class="s2">"no uncertainty on main result"</span><span class="p">},</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheets</span><span class="p">[[</span><span class="s2">"round"</span><span class="p">]</span> <span class="o">+</span> <span class="n">CRITERIA</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Patterns-across-rounds">3. Patterns across rounds<a class="anchor-link" href="#3.-Patterns-across-rounds">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">sheets</span><span class="p">[</span><span class="n">CRITERIA</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"weakest criterion across rounds:"</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"score by round order:"</span><span class="p">,</span> <span class="n">sheets</span><span class="p">[</span><span class="s2">"overall"</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">"(a dip in rounds 3-4 means stamina needs work)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Rebuild-the-plan">4. Rebuild the plan<a class="anchor-link" href="#4.-Rebuild-the-plan">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">practice</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"verification"</span><span class="p">:</span> <span class="s2">"every practice problem ends with two traced test cases, aloud"</span><span class="p">,</span>
+    <span class="s2">"communication"</span><span class="p">:</span> <span class="s2">"two think-aloud problems a week, recorded"</span><span class="p">,</span>
+    <span class="s2">"correctness"</span><span class="p">:</span> <span class="s2">"three timed problems a week in the weakest round"</span><span class="p">,</span>
+    <span class="s2">"hints_and_gaps"</span><span class="p">:</span> <span class="s2">"one mock a week where the partner interrupts with hints"</span><span class="p">,</span>
+    <span class="s2">"overall"</span><span class="p">:</span> <span class="s2">"one full mock loop every four weeks"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">criterion</span> <span class="ow">in</span> <span class="n">means</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">criterion</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">practice</span><span class="p">[</span><span class="n">criterion</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ul>
+<li>Question bank: at least 60 questions with answers.</li>
+<li>The eight-week plan with hours, and the date of your next mock loop.</li>
+<li>After every real interview: write down each question within the hour.</li>
+</ul>
+</div>
+</div>
+</div>
+
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-11.html"><span>Previous session</span>11 · Behavioral rounds, take-homes and work tests</a><a class="next" href="index.html"><span>Finished</span>Course 15 overview</a></nav>
+    </article>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

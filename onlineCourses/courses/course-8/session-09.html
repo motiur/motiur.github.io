@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Proof assistants: first proofs in Lean 4 — Course 8 · AI Courses</title>
-<meta name="description" content="State and prove two small theorems about groups and one about categories in Lean 4, and understand what a proof assistant checks that a test cannot.">
-<meta property="og:title" content="Proof assistants: first proofs in Lean 4 — Course 8 · AI Courses">
-<meta property="og:description" content="State and prove two small theorems about groups and one about categories in Lean 4, and understand what a proof assistant checks that a test cannot.">
+<title>Privacy for graph data — Course 8 · AI Courses</title>
+<meta name="description" content="Train an edge-level private GNN on a citation-like graph and plot accuracy against epsilon.">
+<meta property="og:title" content="Privacy for graph data — Course 8 · AI Courses">
+<meta property="og:description" content="Train an edge-level private GNN on a citation-like graph and plot accuracy against epsilon.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 8: Mathematics and AI</a><span>/</span><span>Session 9</span></nav>
+      <a href="index.html">Course 8: Privacy-Preserving Machine Learning</a><span>/</span><span>Session 9</span></nav>
     <p class="eyebrow">Session 09 of 12</p>
-    <h1>Proof assistants: first proofs in Lean 4</h1>
-    <p class="lead"><strong>Goal:</strong> State and prove two small theorems about groups and one about categories in Lean 4, and understand what a proof assistant checks that a test cannot.</p>
+    <h1>Privacy for graph data</h1>
+    <p class="lead"><strong>Goal:</strong> Train an edge-level private GNN on a citation-like graph and plot accuracy against epsilon.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_8_Mathematics_and_AI/notebooks/s09_lean_first_proofs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_8_Mathematics_and_AI/notebooks/s09_lean_first_proofs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_8_Mathematics_and_AI/notebooks/s09_lean_first_proofs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_8_Mathematics_and_AI/notebooks/s09_lean_first_proofs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_8_Privacy_Preserving_ML/notebooks/s09_privacy_for_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_8_Privacy_Preserving_ML/notebooks/s09_privacy_for_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_8_Privacy_Preserving_ML/notebooks/s09_privacy_for_graphs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_8_Privacy_Preserving_ML/notebooks/s09_privacy_for_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,25 +52,19 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 8</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>Groups and their actions</a></li><li><a href="session-02.html"><span>02</span>Representations and irreducibles</a></li><li><a href="session-03.html"><span>03</span>Steerable kernels</a></li><li><a href="session-04.html"><span>04</span>Mechanistic interpretability with mathematics: grokking</a></li><li><a href="session-05.html"><span>05</span>Category theory for deep learning I</a></li><li><a href="session-06.html"><span>06</span>Category theory for deep learning II: lenses and backprop</a></li><li><a href="session-07.html"><span>07</span>Architectures from structure</a></li><li><a href="session-08.html"><span>08</span>Sheaves on graphs</a></li><li class=current><a href="session-09.html"><span>09</span>Proof assistants: first proofs in Lean 4</a></li><li><a href="session-10.html"><span>10</span>AI for theorem proving</a></li><li><a href="session-11.html"><span>11</span>Autoformalization</a></li><li><a href="session-12.html"><span>12</span>AI for mathematical discovery</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>What models leak</a></li><li><a href="session-02.html"><span>02</span>Differential privacy from first principles</a></li><li><a href="session-03.html"><span>03</span>DP-SGD and privacy accounting</a></li><li><a href="session-04.html"><span>04</span>Auditing privacy</a></li><li><a href="session-05.html"><span>05</span>Federated learning</a></li><li><a href="session-06.html"><span>06</span>Attacking and defending federated learning</a></li><li><a href="session-07.html"><span>07</span>Private LLMs</a></li><li><a href="session-08.html"><span>08</span>Computing on encrypted data</a></li><li class=current><a href="session-09.html"><span>09</span>Privacy for graph data</a></li><li><a href="session-10.html"><span>10</span>Machine unlearning</a></li><li><a href="session-11.html"><span>11</span>Fairness, privacy and synthetic data</a></li><li><a href="session-12.html"><span>12</span>Capstone: privacy-preserving medical AI</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every Python cell without a NOT RUN label was run once on a CPU (November 2026). Cells labelled NOT RUN need a library, a GPU or a Lean installation. Lean code in this course was written carefully but was NOT compiled here: check it in Lean before you teach it.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on small built-in or synthetic data. Cells labelled NOT RUN need a library, a dataset download or a GPU; run them on Kaggle or Colab.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-this-first">Read this first<a class="anchor-link" href="#Read-this-first">¶</a></h3><p>This notebook's Lean code was <strong>not compiled</strong> when the notebook was made. It follows current Lean 4 and Mathlib conventions, but Mathlib renames lemmas often. Open each snippet in Lean (the web editor at live.lean-lang.org needs no installation), read the error if there is one, and fix it. Doing that is part of the lab.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Test-or-proof?">1. Test or proof?<a class="anchor-link" href="#1.-Test-or-proof?">¶</a></h3><p>A test checks finitely many cases. Below, Python checks 'the identity is unique' in every group with at most 5 elements, by brute force over multiplication tables. That is strong evidence and it is not a proof: it says nothing about a group with 6 elements, or infinitely many.</p>
+<h3 id="1.-What-is-being-protected">1. What is being protected<a class="anchor-link" href="#1.-What-is-being-protected">¶</a></h3><p>Edge-level DP hides whether any one edge exists (for example, whether two patients were in contact). Node-level DP hides a whole node with all its edges, which is much harder. This notebook does edge-level privacy; the features and labels are treated as public.</p>
 </div>
 </div>
 </div>
@@ -78,29 +72,16 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">groups_of_order</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""All n x n tables on {0..n-1} that are groups with identity 0 (brute force with pruning by rows)."""</span>
-    <span class="n">rows_for</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">]</span>         <span class="c1"># a * 0 = a</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]][</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="n">table</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">table</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span> <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">rows_for</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">table</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span> <span class="n">extend</span><span class="p">(</span><span class="n">table</span> <span class="o">+</span> <span class="p">[</span><span class="n">r</span><span class="p">])</span>
-    <span class="n">extend</span><span class="p">([]);</span> <span class="k">return</span> <span class="n">out</span>
-
-<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">groups_of_order</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
-        <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>                                                             <span class="c1"># exactly one left identity</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>           <span class="c1"># exactly one inverse each</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"order </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="si">}</span><span class="s2"> group tables checked"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"identity and inverses are unique in all"</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="s2">"tables. A proof covers every group at once."</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">800</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">n</span> <span class="o">//</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.004</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span> <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">|</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)[</span><span class="n">y</span><span class="p">]</span> <span class="o">@</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>          <span class="c1"># weak signal in the features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>                                   <span class="c1"># every row has length 1</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span><span class="mi">200</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">200</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">"| edges"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"| mean degree </span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -108,7 +89,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-The-same-statements-in-Lean-4">2. The same statements in Lean 4<a class="anchor-link" href="#2.-The-same-statements-in-Lean-4">¶</a></h3><p>Create a file <code>Session9.lean</code> in a project that depends on Mathlib, or paste into the web editor.</p>
+<h3 id="2.-Aggregation-perturbation">2. Aggregation perturbation<a class="anchor-link" href="#2.-Aggregation-perturbation">¶</a></h3><p>The graph is used only once: to add up each node's neighbours' features. Removing one edge between i and j changes row i by one unit-length vector and row j by another, so the L2 sensitivity is <code>sqrt(2)</code>. Add Gaussian noise for that sensitivity and everything after it is post-processing. This is the core idea of GAP (Sajadmanesh et al. 2023), reduced to one hop.</p>
 </div>
 </div>
 </div>
@@ -116,29 +97,17 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN and NOT COMPILED here. This is Lean 4 code kept in a Python string so the notebook stays one file.</span>
-<span class="n">LEAN_GROUPS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
-<span class="s2">import Mathlib</span>
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gaussian_sigma</span><span class="p">(</span><span class="n">sensitivity</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">delta</span><span class="p">);</span> <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>      <span class="c1"># zCDP: eps = rho + 2 sqrt(rho ln(1/delta))</span>
+    <span class="k">return</span> <span class="n">sensitivity</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">rho</span><span class="p">)</span>
 
-<span class="s2">-- 1. If e' behaves like an identity on the left, it is the identity.</span>
-<span class="s2">theorem left_identity_unique {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 := by</span>
-<span class="s2">  have h1 : e' * 1 = 1 := h 1</span>
-<span class="s2">  rw [mul_one] at h1</span>
-<span class="s2">  exact h1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">private_aggregate</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">agg</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">X</span>
+    <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">agg</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">gaussian_sigma</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">eps</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">agg</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">agg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="s2">-- 2. If a * b = 1 then b is the inverse of a. A step-by-step proof with `calc`.</span>
-<span class="s2">theorem inverse_unique {G : Type*} [Group G] (a b : G) (h : a * b = 1) : b = a⁻¹ := by</span>
-<span class="s2">  calc b = 1 * b := by rw [one_mul]</span>
-<span class="s2">    _ = (a⁻¹ * a) * b := by rw [inv_mul_cancel]</span>
-<span class="s2">    _ = a⁻¹ * (a * b) := by rw [mul_assoc]</span>
-<span class="s2">    _ = a⁻¹ * 1 := by rw [h]</span>
-<span class="s2">    _ = a⁻¹ := by rw [mul_one]</span>
-
-<span class="s2">-- The same fact is already in Mathlib. `exact?` will find its name for you.</span>
-<span class="s2">example {G : Type*} [Group G] (a b : G) (h : a * b = 1) : b = a⁻¹ := by</span>
-<span class="s2">  exact?</span>
-<span class="s2">"""</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">LEAN_GROUPS</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epsilon </span><span class="si">{</span><span class="n">eps</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">: noise per number </span><span class="si">{</span><span class="n">gaussian_sigma</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (a typical aggregated row has length </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -146,20 +115,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>How to read it:</p>
-<ul>
-<li><code>{G : Type*} [Group G]</code> says: let G be any type with a group structure. The theorem is about all groups.</li>
-<li>After <code>:=</code> comes the proof. <code>by</code> switches to tactic mode, where each line transforms the goal.</li>
-<li><code>rw [mul_one] at h1</code> rewrites <code>e' * 1</code> to <code>e'</code> inside the hypothesis <code>h1</code>.</li>
-<li><code>calc</code> chains equalities; each step names the fact that justifies it.</li>
-<li>If a lemma name has changed (for example <code>inv_mul_cancel</code> was <code>mul_left_inv</code> in older Mathlib), Lean says 'unknown identifier'. Type <code>exact?</code> or <code>rw?</code> at that step and Lean will search for the current name.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-A-fact-about-categories-from-Mathlib">3. A fact about categories from Mathlib<a class="anchor-link" href="#3.-A-fact-about-categories-from-Mathlib">¶</a></h3>
+<h3 id="3.-Train-a-classifier-on-%5Bown-features,-noisy-aggregate%5D">3. Train a classifier on [own features, noisy aggregate]<a class="anchor-link" href="#3.-Train-a-classifier-on-%5Bown-features,-noisy-aggregate%5D">¶</a></h3>
 </div>
 </div>
 </div>
@@ -167,25 +123,26 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN and NOT COMPILED here.</span>
-<span class="n">LEAN_CATEGORIES</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
-<span class="s2">import Mathlib</span>
-<span class="s2">open CategoryTheory</span>
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">agg</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">feats</span> <span class="o">=</span> <span class="n">X</span> <span class="k">if</span> <span class="n">agg</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">agg</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())]</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">);</span> <span class="n">yt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">32</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">net</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">train</span><span class="p">]),</span> <span class="n">yt</span><span class="p">[</span><span class="n">train</span><span class="p">]);</span> <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">();</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">net</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">test</span><span class="p">])</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">yt</span><span class="p">[</span><span class="n">test</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
-<span class="s2">-- Composing with the identity does nothing. In Mathlib, `f ≫ g` means 'f then g'.</span>
-<span class="s2">example {C : Type*} [Category C] {X Y : C} (f : X ⟶ Y) : 𝟙 X ≫ f = f := by</span>
-<span class="s2">  simp</span>
-
-<span class="s2">-- Inverses of an arrow are unique: if g and g' are both two-sided inverses of f, they are equal.</span>
-<span class="s2">theorem inv_unique {C : Type*} [Category C] {X Y : C} (f : X ⟶ Y) (g g' : Y ⟶ X)</span>
-<span class="s2">    (hg : f ≫ g = 𝟙 X) (hg' : g' ≫ f = 𝟙 Y) : g = g' := by</span>
-<span class="s2">  calc g = 𝟙 Y ≫ g := by rw [Category.id_comp]</span>
-<span class="s2">    _ = (g' ≫ f) ≫ g := by rw [hg']</span>
-<span class="s2">    _ = g' ≫ (f ≫ g) := by rw [Category.assoc]</span>
-<span class="s2">    _ = g' ≫ 𝟙 X := by rw [hg]</span>
-<span class="s2">    _ = g' := by rw [Category.comp_id]</span>
-<span class="s2">"""</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">LEAN_CATEGORIES</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">acc_none</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="kc">None</span><span class="p">);</span> <span class="n">acc_full</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">private_aggregate</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="n">eps_grid</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="n">accs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">run</span><span class="p">(</span><span class="n">private_aggregate</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">s</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">eps_grid</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no graph at all (perfect edge privacy)  accuracy </span><span class="si">{</span><span class="n">acc_none</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">,</span> <span class="n">accs</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"edge-level epsilon </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">                 accuracy </span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"graph with no privacy                   accuracy </span><span class="si">{</span><span class="n">acc_full</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">acc_full</span> <span class="o">&gt;</span> <span class="n">acc_none</span> <span class="ow">and</span> <span class="n">accs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">accs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">,</span> <span class="n">accs</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">acc_none</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">acc_full</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"edge-level epsilon"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"test accuracy"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"graph_accuracy_vs_epsilon.png"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -193,39 +150,43 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Compare <code>inv_unique</code> with <code>inverse_unique</code> above. It is the same proof. A group is a category with one object in which every arrow has an inverse, so the group theorem is a special case. Seeing that two proofs are one proof is what the language of categories is for.</p>
+<p>Read the curve against the two reference lines. Below some epsilon the noisy graph is no better than using no graph. An honest paper shows that 'no graph' baseline.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-What-Lean-checked,-and-what-it-did-not">4. What Lean checked, and what it did not<a class="anchor-link" href="#4.-What-Lean-checked,-and-what-it-did-not">¶</a></h3><ul>
-<li>Checked: every step follows from the axioms and earlier theorems. No case was skipped.</li>
-<li>Not checked: that the statement says what you meant. If you state the wrong theorem, Lean will happily verify the wrong theorem. Session 11 is about that gap.</li>
-<li><code>sorry</code> closes any goal and marks the proof as incomplete. Search for it before you trust a file.</li>
-</ul>
+<h3 id="4.-An-alternative:-randomized-response-on-the-edges">4. An alternative: randomized response on the edges<a class="anchor-link" href="#4.-An-alternative:-randomized-response-on-the-edges">¶</a></h3><p>Flip every entry of the adjacency matrix with probability <code>1 / (1 + e^epsilon)</code>. It is simple and needs no trusted server, but at small epsilon the graph fills with false edges.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Why-this-matters-for-AI">5. Why this matters for AI<a class="anchor-link" href="#5.-Why-this-matters-for-AI">¶</a></h3><p>A language model can write a proof that looks right and is wrong. With a proof assistant in the loop, the model proposes and Lean decides, so a wrong proof is simply rejected. This is the design behind AlphaProof and the open provers used in session 10.</p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">randomized_response</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">eps</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span> <span class="n">flip</span> <span class="o">=</span> <span class="n">flip</span> <span class="o">|</span> <span class="n">flip</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">flip</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>
+    <span class="n">Ar</span> <span class="o">=</span> <span class="n">randomized_response</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epsilon </span><span class="si">{</span><span class="n">eps</span><span class="si">}</span><span class="s2">: true edges </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">, edges after randomized response </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">Ar</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Compile both snippets. Record every error and how you fixed it.</li>
-<li>Prove in Lean: in a group, <code>(a * b)⁻¹ = b⁻¹ * a⁻¹</code>. First by <code>simp</code>, then by hand using <code>inverse_unique</code>.</li>
-<li>Prove: if <code>a * a = a</code> in a group, then <code>a = 1</code>.</li>
-<li>State (do not prove) in Lean: 'every group of prime order is cyclic'. Then find it in Mathlib.</li>
+<li>Two hops: the second aggregation touches the graph again, so the budget must be split between the hops. Implement it and compare with one hop at the same total epsilon.</li>
+<li>Why is node-level privacy harder? What is the sensitivity of <code>A @ X</code> if one node with degree 50 is removed? What does GAP do about it?</li>
+<li>Repeat on Cora with PyTorch Geometric (NOT RUN here) and report the same three lines.</li>
 </ol>
 </div>
 </div>
 </div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-08.html"><span>Previous session</span>08 · Sheaves on graphs</a><a class="next" href="session-10.html"><span>Next session</span>10 · AI for theorem proving</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-08.html"><span>Previous session</span>08 · Computing on encrypted data</a><a class="next" href="session-10.html"><span>Next session</span>10 · Machine unlearning</a></nav>
     </article>
   </div>
 </section>
@@ -235,7 +196,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap footer-inner">
     <div>
       <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
-      <p>From first principles to current research. 11 free courses with hands-on notebooks.</p>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>

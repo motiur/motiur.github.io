@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Learning for Agriculture and Climate · AI Courses</title>
+<meta name="description" content="Machine learning for food and climate, with Bangladesh as the running example: plant disease detection, remote sensing and crop mapping, yield prediction, weather forecasting and ML weather models, floods, downscaling, extremes and decisions, farm sensors, and validation that respects space and time.">
+<meta property="og:title" content="Machine Learning for Agriculture and Climate · AI Courses">
+<meta property="og:description" content="Machine learning for food and climate, with Bangladesh as the running example: plant disease detection, remote sensing and crop mapping, yield prediction, weather forecasting and ML weather models, floods, downscaling, extremes and decisions, farm sensors, and validation that respects space and time.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="course-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span><span>Course 13</span></nav>
+    <div class="ch-meta"><span class="course-num">Course 13</span><span class="badge badge-applied">Applied</span><span class="track">Deploy and apply · after Course 1</span></div>
+    <h1>Machine Learning for Agriculture and Climate</h1>
+    <p class="lead">Machine learning for food and climate, with Bangladesh as the running example: plant disease detection, remote sensing and crop mapping, yield prediction, weather forecasting and ML weather models, floods, downscaling, extremes and decisions, farm sensors, and validation that respects space and time.</p>
+    <ul class="chips"><li>Remote sensing</li><li>Crop mapping</li><li>Weather forecasting</li><li>Floods</li><li>Extremes</li><li>Spatial validation</li></ul>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m0 0-4.5-4.5M15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Start session 1</a>
+      <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/Course_13_ML_for_Agriculture_and_Climate_course_document.pdf"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5zM11.5 2.5V6H15M7.5 10h5M7.5 13h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Course document (PDF)</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/tree/main/Course_13_ML_for_Agriculture_and_Climate" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Folder on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap course-layout">
+    <div>
+      <h2 class="list-title">Sessions</h2>
+      <ol class="sessions">
+      <li class="session">
+        <div class="s-num">01</div>
+        <div class="s-body">
+          <h3><a href="session-01.html">Machine learning for agriculture and climate</a></h3>
+          <p>Map agriculture and climate problems to machine learning tasks and data, and measure how random cross-validation misleads on a district-by-year yield panel compared with leave-one-year-out and leave-region-out validation.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s01_problems_and_data.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s01_problems_and_data.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s01_problems_and_data.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">02</div>
+        <div class="s-body">
+          <h3><a href="session-02.html">Plant disease detection from leaf images</a></h3>
+          <p>Train a small CNN to classify leaf diseases, show that it learns shortcuts from lab photos, and make it more robust in the field and willing to abstain when unsure.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-02.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s02_plant_disease.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s02_plant_disease.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s02_plant_disease.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">2 NOT RUN cells</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">03</div>
+        <div class="s-body">
+          <h3><a href="session-03.html">Seeing crops from space</a></h3>
+          <p>Compute vegetation and water indices, mask clouds, build composites, and smooth a cloudy NDVI time series to estimate crop green-up dates.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-03.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s03_remote_sensing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s03_remote_sensing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s03_remote_sensing.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">04</div>
+        <div class="s-body">
+          <h3><a href="session-04.html">Crop type mapping</a></h3>
+          <p>Classify crop types from satellite time series with a random forest and a 1-D CNN, and validate the map with random, field-level and spatial block cross-validation.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-04.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s04_crop_mapping.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s04_crop_mapping.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s04_crop_mapping.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">05</div>
+        <div class="s-body">
+          <h3><a href="session-05.html">Predicting crop yield</a></h3>
+          <p>Build linear and gradient-boosting yield models from weather and satellite features, validate them on unseen years and an unusually hot year, and give prediction intervals with quantile regression.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-05.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s05_yield_prediction.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s05_yield_prediction.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s05_yield_prediction.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">06</div>
+        <div class="s-body">
+          <h3><a href="session-06.html">Weather data, baselines and forecast skill</a></h3>
+          <p>Build persistence and climatology baselines, score temperature forecasts with RMSE, skill scores and anomaly correlation, and evaluate probabilistic forecasts with CRPS, the Brier score and a reliability diagram.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-06.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s06_forecast_skill.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s06_forecast_skill.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s06_forecast_skill.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">07</div>
+        <div class="s-body">
+          <h3><a href="session-07.html">Machine learning weather prediction</a></h3>
+          <p>Simulate a chaotic toy atmosphere (Lorenz-96), train a small periodic CNN to step it forward 6 hours, roll it out to 25 days against persistence, climatology and a perfect model, and see how MSE training blurs long forecasts and how an ensemble measures its own uncertainty.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-07.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s07_ml_weather.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s07_ml_weather.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s07_ml_weather.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">2 NOT RUN cells</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">08</div>
+        <div class="s-body">
+          <h3><a href="session-08.html">Floods: mapping and forecasting</a></h3>
+          <p>Map flood water in synthetic radar images with Otsu&#x27;s threshold and a small U-Net, score the maps with pixel accuracy and IoU, test them under a calibration shift, and compare an LSTM with a linear-reservoir model for river flow using the Nash–Sutcliffe efficiency.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-08.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s08_floods.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s08_floods.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s08_floods.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">2 NOT RUN cells</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">09</div>
+        <div class="s-body">
+          <h3><a href="session-09.html">Downscaling and bias correction</a></h3>
+          <p>Bias-correct synthetic climate-model temperature and rainfall with the delta method, quantile mapping and quantile delta mapping, check whether each keeps the model&#x27;s future change, then downscale coarse rain fields with bicubic interpolation and a small CNN and compare them on RMSE and on the 99th percentile.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-09.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s09_downscaling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s09_downscaling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s09_downscaling.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">10</div>
+        <div class="s-body">
+          <h3><a href="session-10.html">Extremes, uncertainty and decisions</a></h3>
+          <p>Fit a generalized extreme value distribution to synthetic annual maximum rainfall, compute 10-, 50- and 100-year return levels with bootstrap intervals, and decide when to act on probabilistic forecasts with the cost–loss model, a reliability diagram and the economic value of a forecast.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-10.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s10_extremes_decisions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s10_extremes_decisions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s10_extremes_decisions.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">11</div>
+        <div class="s-body">
+          <h3><a href="session-11.html">Sensors, soil and water on the farm</a></h3>
+          <p>Simulate a soil-moisture sensor with noise, spikes, gaps and drift, clean it with a moving average and a Kalman filter, detect spikes and drift, and compare irrigation decisions made from raw and cleaned readings by water used and days of crop stress.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-11.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s11_farm_sensors.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s11_farm_sensors.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s11_farm_sensors.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">12</div>
+        <div class="s-body">
+          <h3><a href="session-12.html">Responsible machine learning for farmers and the climate, and the capstone</a></h3>
+          <p>Estimate the energy and CO2 of training and running models from stated assumptions, turn a rain probability into Bangla advice with honest uncertainty wording, compare the value of personal and one-size advice for farmers with different costs and losses, and write a model card.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-12.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s12_responsible_ml.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_13_ML_for_Agriculture_and_Climate/notebooks/s12_responsible_ml.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_13_ML_for_Agriculture_and_Climate/notebooks/s12_responsible_ml.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      </ol>
+    </div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>At a glance</h3>
+        <dl>
+          <dt>Sessions</dt><dd>12</dd>
+          <dt>Level</dt><dd>Applied</dd>
+          <dt>Prerequisites</dt><dd>Python, pandas and basic machine learning (Course 1); Courses 2 and 6 help.</dd>
+          <dt>Each session</dt><dd>3 video segments, a lab, a quiz and an assignment</dd>
+        </dl>
+      </div>
+      <div class="side-card prose small">
+        <h3>Before you start</h3>
+        <p>One notebook per session. Read them with their saved outputs on the course website or on GitHub, or open them in Google Colab or Kaggle Notebooks and run them from the top.</p>
+<ul>
+<li>Every cell without a NOT RUN label was run once, top to bottom, on a CPU in November 2026 (Python 3.13, NumPy 2.5, SciPy 1.18, pandas 3.0, scikit-learn 1.9 and matplotlib 3.11, plus PyTorch 2.15 in sessions 2, 4 and 7–9), and the outputs are saved in the notebooks. A second, independent run reproduced every printed number; only timings differ.</li>
+<li>All lab data are synthetic, generated in the notebooks to behave like the real thing: multispectral image time series with clouds, crop-phenology curves, district yield panels, weather series, a Lorenz-96 &quot;atmosphere&quot;, radar images with speckle, climate-model output and farm sensor streams. Each notebook says which real dataset its data stand in for, and a NOT RUN cell shows how to load that dataset (ERA5 from the Copernicus Climate Data Store, Sentinel-1 and Sentinel-2 from public STAC catalogues, PlantVillage, Sen1Floods11, WeatherBench 2, CMIP6). Synthetic data make the numbers illustrations, not findings about Bangladesh.</li>
+<li>Cells marked TODO are exercises for students. NOT RUN cells need a download, an account or a library that is not installed here (the table below says what each needs). They were written from the libraries' documented interfaces and have not been executed, so run each one before recording.</li>
+<li>Nothing extra needs installing for the runnable cells on Google Colab or Kaggle.</li>
+<li>Results that went against expectation are stated in each notebook's &quot;What to notice&quot; cell and in the course document. Examples: a leaf mask did worse than randomizing the background (session 2); smoothing did not improve green-up dates (session 3); even the linear model's 90% prediction intervals covered only 88% of the yields in held-out years (session 5); the rain-probability forecast had little skill (session 6); a model trained to forecast five days directly was worse than rolling out a one-step model until day 10 (session 7); a fixed radar threshold beat Otsu's method, and the CNN fell below Otsu on darker scenes (session 8); quantile delta mapping kept the change in heavy rain but not in the mean (session 9); deciding from a Kalman filter without drift correction caused the most crop-stress days (session 11).</li>
+</ul>
+
+      </div>
+    </aside>
+  </div>
+  <div class="wrap"><nav class="pager" aria-label="Other courses"><a class="prev" href="../course-12/index.html"><span>Previous course</span>AI for Accessibility</a><a class="next" href="../course-14/index.html"><span>Next course</span>AI Research in 2026</a></nav></div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

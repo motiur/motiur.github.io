@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finishing: write-up, reproduction and presentation — Course 5 · AI Courses</title>
-<meta name="description" content="Make your result reproducible, check that it is, and write it up so that another team could rebuild it.">
-<meta property="og:title" content="Finishing: write-up, reproduction and presentation — Course 5 · AI Courses">
-<meta property="og:description" content="Make your result reproducible, check that it is, and write it up so that another team could rebuild it.">
+<title>Release and write-up — Course 5 · AI Courses</title>
+<meta name="description" content="Package the model so a stranger can load it, and publish it.">
+<meta property="og:title" content="Release and write-up — Course 5 · AI Courses">
+<meta property="og:description" content="Package the model so a stranger can load it, and publish it.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 5: Winning Online AI Competitions</a><span>/</span><span>Session 12</span></nav>
+      <a href="index.html">Course 5: Building a Small Bangla Language Model</a><span>/</span><span>Session 12</span></nav>
     <p class="eyebrow">Session 12 of 12</p>
-    <h1>Finishing: write-up, reproduction and presentation</h1>
-    <p class="lead"><strong>Goal:</strong> Make your result reproducible, check that it is, and write it up so that another team could rebuild it.</p>
+    <h1>Release and write-up</h1>
+    <p class="lead"><strong>Goal:</strong> Package the model so a stranger can load it, and publish it.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s12_writeup_and_reproduction.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s12_writeup_and_reproduction.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_5_Winning_Online_AI_Competitions/notebooks/s12_writeup_and_reproduction.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Winning_Online_AI_Competitions/notebooks/s12_writeup_and_reproduction.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s12_release_and_writeup.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s12_release_and_writeup.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s12_release_and_writeup.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_5_Building_a_Small_Bangla_Language_Model/notebooks/s12_release_and_writeup.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,19 +52,13 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 5</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li class=current><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>Why small, and why Bangla</a></li><li><a href="session-02.html"><span>02</span>Bangla text and Unicode</a></li><li><a href="session-03.html"><span>03</span>Building the corpus</a></li><li><a href="session-04.html"><span>04</span>Tokenizers for Bangla</a></li><li><a href="session-05.html"><span>05</span>Designing the model</a></li><li><a href="session-06.html"><span>06</span>Training on free GPUs</a></li><li><a href="session-07.html"><span>07</span>Evaluation I, the model itself</a></li><li><a href="session-08.html"><span>08</span>Evaluation II, tasks and benchmarks</a></li><li><a href="session-09.html"><span>09</span>Following instructions</a></li><li><a href="session-10.html"><span>10</span>Smaller and faster</a></li><li><a href="session-11.html"><span>11</span>Responsible release</a></li><li class=current><a href="session-12.html"><span>12</span>Release and write-up</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Can-you-rebuild-your-own-submission?">1. Can you rebuild your own submission?<a class="anchor-link" href="#1.-Can-you-rebuild-your-own-submission?">¶</a></h3><p>A result you cannot reproduce is a result you cannot explain, defend or improve. Start with the three things that must be pinned: seeds, versions, and data.</p>
+<p><strong>Testing note:</strong> every code cell here was run once on a CPU (November 2026) using the small built-in sample. Cells marked TODO or NOT RUN need your data, a GPU or the network. The upload and demo cells were not run.</p>
 </div>
 </div>
 </div>
@@ -72,32 +66,26 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">platform</span><span class="o">,</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">sklearn</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
-    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PYTHONHASHSEED"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span><span class="p">;</span> <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="k">pass</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">file_hash</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">),</span> <span class="sa">b</span><span class="s2">""</span><span class="p">):</span> <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">environment</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">"python"</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"platform"</span><span class="p">:</span> <span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">(),</span> <span class="s2">"numpy"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">"pandas"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">"sklearn"</span><span class="p">:</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">environment</span><span class="p">())</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">SAMPLE_LINES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"আমি বাংলায় গান গাই।"</span><span class="p">,</span>
+    <span class="s2">"আমার সোনার বাংলা, আমি তোমায় ভালোবাসি।"</span><span class="p">,</span>
+    <span class="s2">"বাংলা আমার মাতৃভাষা।"</span><span class="p">,</span>
+    <span class="s2">"আজ আকাশ খুব পরিষ্কার।"</span><span class="p">,</span>
+    <span class="s2">"ছোট মেয়েটি নদীর ধারে খেলছিল।"</span><span class="p">,</span>
+    <span class="s2">"বাবা বাজার থেকে মাছ কিনে আনলেন।"</span><span class="p">,</span>
+    <span class="s2">"মা রান্নাঘরে ভাত রান্না করছেন।"</span><span class="p">,</span>
+    <span class="s2">"আমরা সবাই মিলে স্কুলে যাই।"</span><span class="p">,</span>
+    <span class="s2">"বৃষ্টি হলে মাঠে পানি জমে।"</span><span class="p">,</span>
+    <span class="s2">"পাখিরা সকালে গান গায়।"</span><span class="p">,</span>
+    <span class="s2">"দাদু প্রতিদিন সন্ধ্যায় গল্প বলেন।"</span><span class="p">,</span>
+    <span class="s2">"ছেলেটি বই পড়তে খুব ভালোবাসে।"</span><span class="p">,</span>
+    <span class="s2">"নদীতে অনেক নৌকা চলছে।"</span><span class="p">,</span>
+    <span class="s2">"শীতকালে আমরা পিঠা খাই।"</span><span class="p">,</span>
+    <span class="s2">"ঢাকা বাংলাদেশের রাজধানী।"</span><span class="p">,</span>
+    <span class="s2">"আমার বন্ধু ভালো ফুটবল খেলে।"</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-A-pipeline-that-records-what-it-did">2. A pipeline that records what it did<a class="anchor-link" href="#2.-A-pipeline-that-records-what-it-did">¶</a></h3><p>One function runs the whole pipeline from a config and writes the submission together with a small record: the config, the environment, the data hash, the score and the submission hash.</p>
 </div>
 </div>
 </div>
@@ -105,36 +93,92 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">HistGradientBoostingClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2000</span><span class="p">])</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">y</span><span class="p">[:</span><span class="mi">2000</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">2000</span><span class="p">:])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">run_pipeline</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
-    <span class="n">set_seed</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">])</span>
-    <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"train.csv"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">);</span> <span class="n">feats</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">"target"</span><span class="p">]</span>
-    <span class="n">oof</span><span class="p">,</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"folds"</span><span class="p">],</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="p">)):</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"max_iter"</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"learning_rate"</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">tr</span><span class="p">][</span><span class="n">feats</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">tr</span><span class="p">]);</span> <span class="n">oof</span><span class="p">[</span><span class="n">va</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">va</span><span class="p">][</span><span class="n">feats</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">];</span> <span class="n">pred</span> <span class="o">+=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">feats</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s2">"folds"</span><span class="p">]</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"submission_</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)),</span> <span class="s2">"target"</span><span class="p">:</span> <span class="n">pred</span><span class="p">})</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s2">"</span><span class="si">%.6f</span><span class="s2">"</span><span class="p">)</span>
-    <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tag"</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span> <span class="s2">"cv_auc"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">oof</span><span class="p">),</span> <span class="mi">6</span><span class="p">),</span> <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"train.csv"</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="s2">"train.csv"</span><span class="p">),</span> <span class="s2">"test.csv"</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">)},</span>
-              <span class="s2">"submission"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span> <span class="s2">"sha256"</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">path</span><span class="p">)},</span> <span class="s2">"environment"</span><span class="p">:</span> <span class="n">environment</span><span class="p">(),</span> <span class="s2">"finished"</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)}</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">"record_</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">record</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+    <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span>
+    <span class="n">block_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="n">n_layer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">n_head</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">d_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"seed"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">"folds"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"max_iter"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">"learning_rate"</span><span class="p">:</span> <span class="mf">0.06</span><span class="p">}</span>
-<span class="n">r1</span> <span class="o">=</span> <span class="n">run_pipeline</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s2">"final"</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"CV AUC"</span><span class="p">,</span> <span class="n">r1</span><span class="p">[</span><span class="s2">"cv_auc"</span><span class="p">],</span> <span class="s2">"| submission hash"</span><span class="p">,</span> <span class="n">r1</span><span class="p">[</span><span class="s2">"submission"</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">])</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Block</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">n_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qkv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">dropout</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">attn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qkv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">,</span> <span class="n">D</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">scaled_dot_product_attention</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">q</span><span class="p">),</span> <span class="n">split</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">split</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">is_causal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln1</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">gelu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln2</span><span class="p">(</span><span class="n">x</span><span class="p">)))))</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GPT</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tok</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">block_size</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">Block</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">n_layer</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">d_model</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tok</span><span class="o">.</span><span class="n">weight</span>          <span class="c1"># weight tying</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">)):</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_hidden</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tok</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">idx</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">return_hidden</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">h</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">targets</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+                                   <span class="n">targets</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">ignore_index</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span><span class="p">,</span> <span class="n">loss</span>
+
+    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">top_p</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_new_tokens</span><span class="p">):</span>
+            <span class="n">logits</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">idx</span><span class="p">[:,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">block_size</span><span class="p">:])</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">sp</span><span class="p">,</span> <span class="n">si</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">keep</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sp</span> <span class="o">&lt;</span> <span class="n">top_p</span>
+            <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">*</span> <span class="n">keep</span>
+            <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">nxt</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">idx</span><span class="p">,</span> <span class="n">nxt</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">idx</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-The-reproduction-test">3. The reproduction test<a class="anchor-link" href="#3.-The-reproduction-test">¶</a></h3><p>Run the pipeline again from the saved config and compare the submission hashes. Then change the seed and see how much the result moves: that is the noise floor of everything you concluded during the competition.</p>
 </div>
 </div>
 </div>
@@ -142,83 +186,49 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">saved</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"record_final.json"</span><span class="p">))</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">run_pipeline</span><span class="p">(</span><span class="n">saved</span><span class="p">[</span><span class="s2">"config"</span><span class="p">],</span> <span class="s2">"rerun"</span><span class="p">)</span>
-<span class="n">same</span> <span class="o">=</span> <span class="n">r2</span><span class="p">[</span><span class="s2">"submission"</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">]</span> <span class="o">==</span> <span class="n">saved</span><span class="p">[</span><span class="s2">"submission"</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"identical submission on rerun:"</span><span class="p">,</span> <span class="n">same</span><span class="p">,</span> <span class="s2">"| CV AUC"</span><span class="p">,</span> <span class="n">r2</span><span class="p">[</span><span class="s2">"cv_auc"</span><span class="p">])</span>
-<span class="k">assert</span> <span class="n">same</span> <span class="ow">and</span> <span class="n">r2</span><span class="p">[</span><span class="s2">"cv_auc"</span><span class="p">]</span> <span class="o">==</span> <span class="n">saved</span><span class="p">[</span><span class="s2">"cv_auc"</span><span class="p">]</span>
-<span class="n">seeds</span> <span class="o">=</span> <span class="p">[</span><span class="n">run_pipeline</span><span class="p">({</span><span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="n">s</span><span class="p">},</span> <span class="sa">f</span><span class="s2">"seed</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">"</span><span class="p">)[</span><span class="s2">"cv_auc"</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CV AUC over 5 seeds: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">seeds</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">seeds</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If the rerun does not match, look for: an unseeded random step, parallel threads summing in a different order, a GPU operation that is not deterministic, dictionary or file ordering, or a library version that changed. If you cannot get an exact match (common on GPUs), state the spread over reruns instead.</p>
-<p>The seed spread above is also the answer to 'did that feature help?'. An improvement smaller than this spread was not evidence.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-What-did-each-idea-contribute?-An-ablation-table">4. What did each idea contribute? An ablation table<a class="anchor-link" href="#4.-What-did-each-idea-contribute?-An-ablation-table">¶</a></h3><p>Judges and readers want to know which parts mattered. Remove one idea at a time from the final solution.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"final solution"</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span> <span class="s2">"fewer trees (50)"</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="s2">"max_iter"</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span> <span class="s2">"larger learning rate (0.3)"</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="s2">"learning_rate"</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">},</span> <span class="s2">"3 folds instead of 5"</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="s2">"folds"</span><span class="p">:</span> <span class="mi">3</span><span class="p">}}</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">variants</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">run_pipeline</span><span class="p">({</span><span class="o">**</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="n">s</span><span class="p">},</span> <span class="s2">"tmp"</span><span class="p">)[</span><span class="s2">"cv_auc"</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"variant"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">"cv_auc"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"sd"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"change"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">seeds</span><span class="p">[:</span><span class="mi">3</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-The-write-up-(TODO:-one-to-two-pages)">5. The write-up (TODO: one to two pages)<a class="anchor-link" href="#5.-The-write-up-(TODO:-one-to-two-pages)">¶</a></h3><p><strong>Title, team, final rank and score (public and private).</strong></p>
-<ol>
-<li><strong>Summary</strong> in four sentences: the task, the approach, the one idea that mattered most, the result.</li>
-<li><strong>Validation.</strong> The split, why it matches the test set, and a plot or table of local score against leaderboard score.</li>
-<li><strong>Data and features.</strong> What you built, with the gain of each (the ablation table).</li>
-<li><strong>Models.</strong> Each model with its key settings and its CV score.</li>
-<li><strong>Ensemble.</strong> The method, the weights, and the CV score of the blend.</li>
-<li><strong>What did not work.</strong> At least three things. This section is the most useful one to other people.</li>
-<li><strong>Compute and time.</strong> Hardware, training time, inference time.</li>
-<li><strong>Reproduction.</strong> The command to run, the seeds, the environment file, and the expected hash or score with its spread.</li>
-<li><strong>Use of AI tools and external data</strong>, as the rules require.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">"""# </span><span class="si">{competition}</span><span class="s2">: </span><span class="si">{rank}</span><span class="s2"> place solution</span>
-<span class="s2">Team: </span><span class="si">{team}</span><span class="s2"> | Public score: </span><span class="si">{public}</span><span class="s2"> | Private score: </span><span class="si">{private}</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tokenizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">trainers</span><span class="p">,</span> <span class="n">pre_tokenizers</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span> <span class="n">normalizers</span>
 
-<span class="s2">## Summary</span>
-<span class="s2">## Validation</span>
-<span class="s2">## Data and features</span>
-<span class="s2">## Models</span>
-<span class="s2">## Ensemble</span>
-<span class="s2">## What did not work</span>
-<span class="s2">## Compute and time</span>
-<span class="s2">## Reproduction</span>
-<span class="s2">Run `python run.py --config final.json`. Expected CV AUC </span><span class="si">{cv}</span><span class="s2"> ± </span><span class="si">{sd}</span><span class="s2">; submission sha256 </span><span class="si">{sha}</span><span class="s2">.</span>
-<span class="s2">## AI tools and external data</span>
-<span class="s2">"""</span>
-<span class="nb">open</span><span class="p">(</span><span class="s2">"WRITEUP.md"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">competition</span><span class="o">=</span><span class="s2">"&lt;name&gt;"</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="s2">"&lt;n&gt;th"</span><span class="p">,</span> <span class="n">team</span><span class="o">=</span><span class="s2">"&lt;team&gt;"</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="s2">"&lt;x&gt;"</span><span class="p">,</span> <span class="n">private</span><span class="o">=</span><span class="s2">"&lt;y&gt;"</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">r1</span><span class="p">[</span><span class="s2">"cv_auc"</span><span class="p">],</span> <span class="n">sd</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">seeds</span><span class="p">)),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sha</span><span class="o">=</span><span class="n">r1</span><span class="p">[</span><span class="s2">"submission"</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"WRITEUP.md"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()[:</span><span class="mi">260</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">train_bpe</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">specials</span><span class="o">=</span><span class="p">(</span><span class="s2">"[UNK]"</span><span class="p">,</span> <span class="s2">"&lt;|endoftext|&gt;"</span><span class="p">)):</span>
+    <span class="n">tok</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">BPE</span><span class="p">(</span><span class="n">unk_token</span><span class="o">=</span><span class="s2">"[UNK]"</span><span class="p">))</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">normalizer</span> <span class="o">=</span> <span class="n">normalizers</span><span class="o">.</span><span class="n">NFC</span><span class="p">()</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">pre_tokenizer</span> <span class="o">=</span> <span class="n">pre_tokenizers</span><span class="o">.</span><span class="n">Metaspace</span><span class="p">()</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">decoders</span><span class="o">.</span><span class="n">Metaspace</span><span class="p">()</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">trainers</span><span class="o">.</span><span class="n">BpeTrainer</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">special_tokens</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">specials</span><span class="p">))</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">train_from_iterator</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">trainer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tok</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># A tiny model and tokenizer trained on the built-in sample, so this notebook runs anywhere.</span>
+<span class="c1"># Replace with your own tokenizer file and checkpoint from sessions 4 and 6.</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tok</span> <span class="o">=</span> <span class="n">train_bpe</span><span class="p">(</span><span class="n">SAMPLE_LINES</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">EOT</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">token_to_id</span><span class="p">(</span><span class="s2">"&lt;|endoftext|&gt;"</span><span class="p">)</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">SAMPLE_LINES</span> <span class="o">*</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">ids</span> <span class="o">+=</span> <span class="n">tok</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span> <span class="o">+</span> <span class="p">[</span><span class="n">EOT</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">tok</span><span class="o">.</span><span class="n">get_vocab_size</span><span class="p">(),</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d_model</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPT</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_batch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">ix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">block_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">block_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ix</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">block_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ix</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_batch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">block_size</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">();</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tiny model trained, final loss"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -226,34 +236,131 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Before-you-publish-or-hand-over-code">6. Before you publish or hand over code<a class="anchor-link" href="#6.-Before-you-publish-or-hand-over-code">¶</a></h3><ul>
-<li>Read the rules on sharing: private sharing between teams during a competition is usually forbidden, while public posts are allowed.</li>
-<li>Prize winners are normally asked for code that reproduces the submission, and for a licence that permits the organiser to use it.</li>
-<li>Remove API tokens and personal paths. Search the repository for the word 'token'.</li>
-<li>Add a README with three commands: install, train, predict.</li>
+<h3 id="1.-Save-the-release-files">1. Save the release files<a class="anchor-link" href="#1.-Save-the-release-files">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">"release"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">"release/model.pt"</span><span class="p">)</span>
+<span class="n">tok</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"release/tokenizer.json"</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"release/config.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"release/README.md"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"# My small Bangla model</span><span class="se">\n\n</span><span class="s2">TODO: paste your model card here.</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">"release"</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Load-from-the-files-alone">2. Load from the files alone<a class="anchor-link" href="#2.-Load-from-the-files-alone">¶</a></h3><p>This is what a stranger does. Put the model code in a file of its own in your repository.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tokenizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"release/config.json"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">cfg2</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="o">**</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">GPT</span><span class="p">(</span><span class="n">cfg2</span><span class="p">)</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"release/model.pt"</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">))</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">tok2</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">"release/tokenizer.json"</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tok2</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"আমি"</span><span class="p">)</span><span class="o">.</span><span class="n">ids</span><span class="p">]),</span> <span class="mi">12</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tok2</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Check-that-the-reload-matches">3. Check that the reload matches<a class="anchor-link" href="#3.-Check-that-the-reload-matches">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">cfg</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"identical outputs:"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">model2</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Upload-to-the-Hugging-Face-Hub-(TODO,-NOT-RUN)">4. Upload to the Hugging Face Hub (TODO, NOT RUN)<a class="anchor-link" href="#4.-Upload-to-the-Hugging-Face-Hub-(TODO,-NOT-RUN)">¶</a></h3><p>Needs an account and a token.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># !pip install huggingface_hub</span>
+<span class="c1"># from huggingface_hub import HfApi, login</span>
+<span class="c1"># login()                                             # paste a write token</span>
+<span class="c1"># api = HfApi()</span>
+<span class="c1"># api.create_repo("YOUR-USERNAME/small-bangla-gpt", exist_ok=True)</span>
+<span class="c1"># api.upload_folder(folder_path="release", repo_id="YOUR-USERNAME/small-bangla-gpt")</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-A-small-demo-(TODO,-NOT-RUN)">5. A small demo (TODO, NOT RUN)<a class="anchor-link" href="#5.-A-small-demo-(TODO,-NOT-RUN)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># !pip install gradio</span>
+<span class="c1"># import gradio as gr</span>
+<span class="c1"># def complete(prompt, temperature=0.8):</span>
+<span class="c1">#     out = model2.generate(torch.tensor([tok2.encode(prompt).ids]), 60, temperature=temperature)</span>
+<span class="c1">#     return tok2.decode(out[0].tolist())</span>
+<span class="c1"># gr.Interface(complete, [gr.Textbox(label="শুরু করুন"), gr.Slider(0.1, 1.5, 0.8)], "text").launch()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Report-checklist-(TODO)">Report checklist (TODO)<a class="anchor-link" href="#Report-checklist-(TODO)">¶</a></h3><ul>
+<li>Goal and design brief</li>
+<li>Data, with the data card</li>
+<li>Tokenizer and model</li>
+<li>Training, with curves</li>
+<li>Evaluation: perplexity, human ratings, downstream task, instruction comparison, compression</li>
+<li>Limits</li>
+<li>What I would do next</li>
+<li>A classmate reproduced one number from the public release</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="7.-Presentation-(8-minutes)">7. Presentation (8 minutes)<a class="anchor-link" href="#7.-Presentation-(8-minutes)">¶</a></h3><ul>
-<li>1 slide: the task and the metric.</li>
-<li>1 slide: validation and how well it tracked the leaderboard.</li>
-<li>2 slides: what worked, with the ablation table.</li>
-<li>1 slide: what did not work.</li>
-<li>1 slide: what you would do with two more weeks.</li>
-</ul>
-<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Run your own pipeline twice and compare hashes. Fix it until they match, or measure the spread.</li>
-<li>Fill in the write-up for your competition.</li>
-<li>Swap repositories with another team and try to reproduce their score from their README alone. Report what was missing.</li>
-</ol>
-</div>
-</div>
-</div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-11.html"><span>Previous session</span>11 · Reasoning competitions: sample and vote, with and without a tool</a><a class="next" href="index.html"><span>Finished</span>Course 5 overview</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-11.html"><span>Previous session</span>11 · Responsible release</a><a class="next" href="index.html"><span>Finished</span>Course 5 overview</a></nav>
     </article>
   </div>
 </section>
@@ -263,7 +370,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap footer-inner">
     <div>
       <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
-      <p>From first principles to current research. 11 free courses with hands-on notebooks.</p>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>

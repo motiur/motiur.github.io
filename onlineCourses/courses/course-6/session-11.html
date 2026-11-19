@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spatio-temporal graphs — Course 6 · AI Courses</title>
-<meta name="description" content="Forecast a signal on a graph of sensors and show what the graph adds over treating each sensor alone.">
-<meta property="og:title" content="Spatio-temporal graphs — Course 6 · AI Courses">
-<meta property="og:description" content="Forecast a signal on a graph of sensors and show what the graph adds over treating each sensor alone.">
+<title>Reasoning competitions: sample and vote, with and without a tool — Course 6 · AI Courses</title>
+<meta name="description" content="Measure what voting over several samples adds, and what changes when the solver may run Python.">
+<meta property="og:title" content="Reasoning competitions: sample and vote, with and without a tool — Course 6 · AI Courses">
+<meta property="og:description" content="Measure what voting over several samples adds, and what changes when the solver may run Python.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 6: Geometric Deep Learning and Graphs</a><span>/</span><span>Session 11</span></nav>
+      <a href="index.html">Course 6: Winning Online AI Competitions</a><span>/</span><span>Session 11</span></nav>
     <p class="eyebrow">Session 11 of 12</p>
-    <h1>Spatio-temporal graphs</h1>
-    <p class="lead"><strong>Goal:</strong> Forecast a signal on a graph of sensors and show what the graph adds over treating each sensor alone.</p>
+    <h1>Reasoning competitions: sample and vote, with and without a tool</h1>
+    <p class="lead"><strong>Goal:</strong> Measure what voting over several samples adds, and what changes when the solver may run Python.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s11_spatio_temporal_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s11_spatio_temporal_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s11_spatio_temporal_graphs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_6_Geometric_Deep_Learning_and_Graphs/notebooks/s11_spatio_temporal_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_6_Winning_Online_AI_Competitions/notebooks/s11_reasoning_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_6_Winning_Online_AI_Competitions/notebooks/s11_reasoning_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_6_Winning_Online_AI_Competitions/notebooks/s11_reasoning_competitions.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_6_Winning_Online_AI_Competitions/notebooks/s11_reasoning_competitions.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,19 +52,29 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 6</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>The geometric blueprint</a></li><li><a href="session-02.html"><span>02</span>Message passing</a></li><li><a href="session-03.html"><span>03</span>How expressive GNNs are</a></li><li><a href="session-04.html"><span>04</span>When depth hurts</a></li><li><a href="session-05.html"><span>05</span>Graph transformers</a></li><li><a href="session-06.html"><span>06</span>Group-equivariant networks</a></li><li><a href="session-07.html"><span>07</span>E(3)-equivariant models for atoms</a></li><li><a href="session-08.html"><span>08</span>Curved spaces</a></li><li><a href="session-09.html"><span>09</span>Generative models on graphs and manifolds</a></li><li><a href="session-10.html"><span>10</span>Graphs meet LLMs</a></li><li class=current><a href="session-11.html"><span>11</span>Spatio-temporal graphs</a></li><li><a href="session-12.html"><span>12</span>Graph learning in medicine and the capstone</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>How competitions work, and a first submission</a></li><li><a href="session-02.html"><span>02</span>Metrics and leaderboards</a></li><li><a href="session-03.html"><span>03</span>Validation you can trust</a></li><li><a href="session-04.html"><span>04</span>Leakage</a></li><li><a href="session-05.html"><span>05</span>Tabular competitions: gradient boosting and feature engineering</a></li><li><a href="session-06.html"><span>06</span>Time series and small data</a></li><li><a href="session-07.html"><span>07</span>Image competitions: resolution and test-time augmentation</a></li><li><a href="session-08.html"><span>08</span>NLP and LLM competitions: predicting preferences</a></li><li><a href="session-09.html"><span>09</span>Code competitions: inference under a time limit</a></li><li><a href="session-10.html"><span>10</span>Ensembling</a></li><li class=current><a href="session-11.html"><span>11</span>Reasoning competitions: sample and vote, with and without a tool</a></li><li><a href="session-12.html"><span>12</span>Finishing: write-up, reproduction and presentation</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>How to use this notebook:</strong> run the cells from top to bottom. Cells marked <code>TODO</code> are for you to complete. The lab guide, quiz and assignment for this session are in the course document.</p>
-<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on small built-in or synthetic data. Cells labelled NOT RUN need a library, a dataset download or a GPU; run them on Kaggle or Colab.</p>
+<p><strong>Testing note:</strong> every cell without a NOT RUN label was run once on a CPU (November 2026) on synthetic or built-in data. Cells labelled NOT RUN need a Kaggle account, a competition's data, a GPU or an extra library.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Simulated-traffic-on-a-road-network">1. Simulated traffic on a road network<a class="anchor-link" href="#1.-Simulated-traffic-on-a-road-network">¶</a></h3><p>METR-LA needs a download, so the runnable part simulates 30 sensors. Congestion at one sensor spreads to its neighbours over the next steps, and there is a daily rhythm.</p>
+<h3 id="1.-The-setting">1. The setting<a class="anchor-link" href="#1.-The-setting">¶</a></h3><p>In competitions such as the AI Mathematical Olympiad, a model must return one integer per problem, offline and within a time limit. Strong solutions sample many attempts and vote, and let the model write and run code. This notebook uses a simulated solver so the statistics can be studied on a CPU; the real model goes in the last cell.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Problems-and-two-simulated-solvers">2. Problems and two simulated solvers<a class="anchor-link" href="#2.-Problems-and-two-simulated-solvers">¶</a></h3><p>Problems are arithmetic expressions with a known answer.</p>
+<ul>
+<li>The <strong>direct</strong> solver 'does the arithmetic in its head': each operation has a chance of a slip, and slips produce scattered wrong answers.</li>
+<li>The <strong>tool</strong> solver writes a Python expression and runs it. The arithmetic is then exact, but it sometimes writes the wrong program (a misread operator), and that mistake tends to repeat.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -72,21 +82,33 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">n</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3000</span>
-<span class="n">pos</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="p">((</span><span class="n">D</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[:,</span> <span class="p">[</span><span class="mi">4</span><span class="p">]])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">D</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">);</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>       <span class="c1"># connect each sensor to its 3 nearest</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_problem</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">n_ops</span><span class="p">):</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_ops</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)];</span> <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"+"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="s2">"*"</span><span class="p">])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_ops</span><span class="p">)]</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">o</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ops</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="k">return</span> <span class="n">expr</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">problems</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_problem</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">n_ops</span><span class="p">)</span> <span class="k">for</span> <span class="n">n_ops</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">)]</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">));</span> <span class="n">shock</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="n">P</span> <span class="o">@</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">shock</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-<span class="n">daily</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="mi">288</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>                                <span class="c1"># 288 five-minute steps a day</span>
-<span class="n">speed</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">-</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">daily</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.5</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"sensors"</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">"| time steps"</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s2">"| mean speed"</span><span class="p">,</span> <span class="n">speed</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">direct_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">slip</span><span class="o">=</span><span class="mf">0.12</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Evaluates left to right with correct precedence, but each operation may go slightly wrong."""</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">split</span><span class="p">();</span> <span class="n">terms</span><span class="p">,</span> <span class="n">sign</span> <span class="o">=</span> <span class="p">[],</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">op</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">],</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s2">"*"</span><span class="p">:</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">*</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sign</span> <span class="o">*</span> <span class="n">cur</span><span class="p">);</span> <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s2">"+"</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">slip</span><span class="p">:</span> <span class="n">cur</span> <span class="o">+=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>              <span class="c1"># an arithmetic slip</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="o">+</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">cur</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tool_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">misread</span><span class="o">=</span><span class="mf">0.15</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Writes a program. With some probability it misreads one operator; the same misreading is likely on every attempt."""</span>
+    <span class="n">program</span> <span class="o">=</span> <span class="n">expr</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>                                             <span class="c1"># the problem's 'trap', fixed per problem</span>
+    <span class="n">trap_pos</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">//</span> <span class="mi">2</span><span class="p">);</span> <span class="n">trap_prone</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span>
+    <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">misread</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">trap_prone</span> <span class="k">else</span> <span class="n">misread</span> <span class="o">/</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">toks</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">split</span><span class="p">();</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">trap_pos</span><span class="p">;</span> <span class="n">toks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"+"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">:</span> <span class="s2">"+"</span><span class="p">,</span> <span class="s2">"*"</span><span class="p">:</span> <span class="s2">"+"</span><span class="p">}[</span><span class="n">toks</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span> <span class="n">program</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">program</span>
 </pre></div>
 </div>
 </div>
@@ -94,7 +116,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Split-by-time,-never-at-random">2. Split by time, never at random<a class="anchor-link" href="#2.-Split-by-time,-never-at-random">¶</a></h3><p>Train on the first 70%, validate on the next 10%, test on the last 20%. Scale with training statistics only.</p>
+<h3 id="3.-Running-generated-code-safely">3. Running generated code safely<a class="anchor-link" href="#3.-Running-generated-code-safely">¶</a></h3><p>Never <code>eval</code> a model's output directly. At minimum: allow only what you expect, run with a time limit, and catch every error. In a real system, run the code in a separate process with no network and limited memory.</p>
 </div>
 </div>
 </div>
@@ -102,21 +124,22 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">i_tr</span><span class="p">,</span> <span class="n">i_va</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">T</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
-<span class="n">mu</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="n">speed</span><span class="p">[:</span><span class="n">i_tr</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">speed</span><span class="p">[:</span><span class="n">i_tr</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-<span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">speed</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sd</span>
-<span class="n">LAGS</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span>                                        <span class="c1"># use the last 30 minutes to predict 15 minutes ahead</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_python</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Run code in a separate Python process and return its last printed line, or None on any failure."""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-I"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="n">code</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"normal program :"</span><span class="p">,</span> <span class="n">run_python</span><span class="p">(</span><span class="s2">"print(17 * 3 - 4)"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"infinite loop  :"</span><span class="p">,</span> <span class="n">run_python</span><span class="p">(</span><span class="s2">"while True: pass"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"crash          :"</span><span class="p">,</span> <span class="n">run_python</span><span class="p">(</span><span class="s2">"print(1 / 0)"</span><span class="p">))</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">graph_hops</span><span class="p">):</span>
-    <span class="n">Xs</span><span class="p">,</span> <span class="n">Ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">LAGS</span><span class="p">),</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">H</span><span class="p">):</span>
-        <span class="n">past</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="n">LAGS</span><span class="p">:</span><span class="n">t</span><span class="p">]</span>                          <span class="c1"># (LAGS, n)</span>
-        <span class="n">feats</span> <span class="o">=</span> <span class="p">[</span><span class="n">past</span><span class="o">.</span><span class="n">T</span><span class="p">]</span>                              <span class="c1"># each sensor's own history</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">past</span><span class="o">.</span><span class="n">T</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">graph_hops</span><span class="p">):</span>
-            <span class="n">M</span> <span class="o">=</span> <span class="n">P</span> <span class="o">@</span> <span class="n">M</span><span class="p">;</span> <span class="n">feats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>                <span class="c1"># the average history of neighbours, then of their neighbours</span>
-        <span class="n">Xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span> <span class="n">Ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="n">H</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">Xs</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">Ys</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_arithmetic</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""For this notebook's expressions a whitelist is enough and much faster than a process per call."""</span>
+    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[0-9+\-* ]+"</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="k">assert</span> <span class="n">run_python</span><span class="p">(</span><span class="s2">"print(17 * 3 - 4)"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"47"</span> <span class="ow">and</span> <span class="n">run_python</span><span class="p">(</span><span class="s2">"while True: pass"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">safe_arithmetic</span><span class="p">(</span><span class="s2">"__import__('os')"</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -124,94 +147,147 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Three-forecasters">3. Three forecasters<a class="anchor-link" href="#3.-Three-forecasters">¶</a></h3><ol>
-<li>Persistence: the speed stays as it is now.</li>
-<li>Own history only: a linear model per reading, with no graph.</li>
-<li>Graph model: the same linear model, plus the neighbours' history (one and two hops). This is the diffusion-convolution idea with the nonlinearity and recurrence stripped away.</li>
+<h3 id="4.-Sample-and-vote">4. Sample and vote<a class="anchor-link" href="#4.-Sample-and-vote">¶</a></h3><p>Draw k attempts and return the most common answer.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">vote</span><span class="p">(</span><span class="n">answers</span><span class="p">):</span>
+    <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">answers</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">answers</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">accuracy</span><span class="p">(</span><span class="n">solver_kind</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">truth</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">solver_kind</span> <span class="o">==</span> <span class="s2">"direct"</span><span class="p">:</span> <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="n">direct_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="n">safe_arithmetic</span><span class="p">(</span><span class="n">tool_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="n">vote</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span> <span class="o">==</span> <span class="n">truth</span>
+    <span class="k">return</span> <span class="n">correct</span> <span class="o">/</span> <span class="p">(</span><span class="n">trials</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">problems</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"samples   direct solver   solver with Python"</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">33</span><span class="p">]:</span>
+    <span class="n">table</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">accuracy</span><span class="p">(</span><span class="s2">"direct"</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">accuracy</span><span class="p">(</span><span class="s2">"tool"</span><span class="p">,</span> <span class="n">k</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">7d</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">table</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">13.3f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">table</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">18.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">table</span><span class="p">[</span><span class="mi">33</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="ow">and</span> <span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Two different curves.</p>
+<ul>
+<li>The direct solver starts low and climbs steeply: its errors are scattered, so the correct answer is usually the single most common one even when it is rare.</li>
+<li>The tool solver starts high and gains less: when it misreads a problem, it tends to misread it the same way every time, and no amount of voting fixes a shared mistake.</li>
+</ul>
+<p>Voting removes independent errors. It cannot remove systematic ones. To fix those you need diversity: different prompts, different approaches, or a check.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-By-difficulty">5. By difficulty<a class="anchor-link" href="#5.-By-difficulty">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"operations   direct k=1   direct k=17   tool k=1   tool k=17"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_ops</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]):</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">problems</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">50</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span><span class="p">]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acc</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">vote</span><span class="p">([</span><span class="n">direct_solver</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"d"</span> <span class="k">else</span> <span class="n">safe_arithmetic</span><span class="p">(</span><span class="n">tool_solver</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">rng</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)])</span> <span class="o">==</span> <span class="n">t</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n_ops</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">acc</span><span class="p">(</span><span class="s1">'d'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">10.2f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">acc</span><span class="p">(</span><span class="s1">'d'</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">)</span><span class="si">:</span><span class="s2">11.2f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">acc</span><span class="p">(</span><span class="s1">'t'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">acc</span><span class="p">(</span><span class="s1">'t'</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">)</span><span class="si">:</span><span class="s2">9.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Combining-both,-and-stopping-early">6. Combining both, and stopping early<a class="anchor-link" href="#6.-Combining-both,-and-stopping-early">¶</a></h3><p>Run both kinds of attempt and vote over all of them: the two solvers fail in different ways. And stop sampling once the leader cannot be caught, which saves time for the hard problems.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mixed_vote_with_early_stop</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">max_k</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">lead</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_k</span><span class="p">):</span>
+        <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">direct_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">safe_arithmetic</span><span class="p">(</span><span class="n">tool_solver</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rng</span><span class="p">)))</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">top</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">lead</span><span class="p">:</span> <span class="k">break</span>                  <span class="c1"># the leader is far enough ahead</span>
+    <span class="k">return</span> <span class="n">vote</span><span class="p">(</span><span class="n">answers</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">mixed_vote_with_early_stop</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">]</span>
+<span class="n">acc_mixed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">a</span> <span class="o">==</span> <span class="n">t</span> <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">problems</span><span class="p">)]);</span> <span class="n">mean_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">out</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mixed voting with early stopping: accuracy </span><span class="si">{</span><span class="n">acc_mixed</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">mean_k</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> samples per problem on average (limit 16)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"for comparison at 17 samples: direct </span><span class="si">{</span><span class="n">table</span><span class="p">[</span><span class="mi">17</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | tool </span><span class="si">{</span><span class="n">table</span><span class="p">[</span><span class="mi">17</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7.-A-time-budget-across-problems">7. A time budget across problems<a class="anchor-link" href="#7.-A-time-budget-across-problems">¶</a></h3><p>With 50 problems and a fixed total time, do not give every problem the same share. Give each a base allowance, stop early on easy ones, and pass the saved time to the rest. And always return an answer: an integer guess scores more than a timeout.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="8.-With-a-real-model-(NOT-RUN-here)">8. With a real model (NOT RUN here)<a class="anchor-link" href="#8.-With-a-real-model-(NOT-RUN-here)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs GPUs and an open model that fits the competition's hardware; in competition, everything is loaded offline.</span>
+<span class="n">PROMPT_DIRECT</span> <span class="o">=</span> <span class="s2">"Solve the problem. Think step by step, then give the final answer as an integer inside </span><span class="se">\\</span><span class="s2">boxed{{}}.</span><span class="se">\n\n</span><span class="si">{problem}</span><span class="s2">"</span>
+<span class="n">PROMPT_TOOL</span> <span class="o">=</span> <span class="s2">"Solve the problem by writing Python code inside a ```python block. The code must print only the final integer.</span><span class="se">\n\n</span><span class="si">{problem}</span><span class="s2">"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_boxed</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"</span><span class="se">\\</span><span class="s2">boxed\{(-?\d+)\}"</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span> <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_code</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"```python\n(.*?)```"</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">);</span> <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1"># def solve(problem, llm, k=16):</span>
+<span class="c1">#     answers = []</span>
+<span class="c1">#     for i in range(k):</span>
+<span class="c1">#         if i % 2 == 0:</span>
+<span class="c1">#             out = run_python(extract_code(llm(PROMPT_TOOL.format(problem=problem), temperature=0.8)) or "", timeout=10)</span>
+<span class="c1">#             answers.append(int(out) if out and out.lstrip("-").isdigit() else None)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             answers.append(extract_boxed(llm(PROMPT_DIRECT.format(problem=problem), temperature=0.8)))</span>
+<span class="c1">#     return vote(answers) or 0</span>
+<span class="c1"># Evaluate on 50 problems you did not tune on. Report accuracy at k = 1, 4, 16 for each mode, and the time per problem.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
+<li>Make the tool solver's mistakes independent across attempts (remove the per-problem trap). How does its voting curve change?</li>
+<li>Add a verifier: an answer counts only if two different methods agree. What happens to accuracy and to the number of unanswered problems?</li>
+<li>Run the real-model cell on 20 problems from a past public set and compare the two modes.</li>
 </ol>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">sd</span><span class="p">)</span>       <span class="c1"># back in speed units</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">Xte0</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">i_va</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">results</span><span class="p">[</span><span class="s2">"persistence"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mae</span><span class="p">(</span><span class="n">Xte0</span><span class="p">[:,</span> <span class="n">LAGS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">yte</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">hops</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"own history"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s2">"graph, 1 hop"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"graph, 2 hops"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]:</span>
-    <span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span> <span class="o">=</span> <span class="n">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i_tr</span><span class="p">,</span> <span class="n">hops</span><span class="p">);</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">i_va</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">hops</span><span class="p">)</span>
-    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">mae</span><span class="p">(</span><span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="n">yte</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">14s</span><span class="si">}</span><span class="s2"> test MAE </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">results</span><span class="p">[</span><span class="s2">"graph, 1 hop"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">results</span><span class="p">[</span><span class="s2">"own history"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">results</span><span class="p">[</span><span class="s2">"persistence"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-A-sanity-check:-shuffle-the-graph">4. A sanity check: shuffle the graph<a class="anchor-link" href="#4.-A-sanity-check:-shuffle-the-graph">¶</a></h3><p>If the gain really comes from the road structure, a random graph with the same number of edges should not help.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">perm</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">P_true</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">P_true</span><span class="p">[</span><span class="n">perm</span><span class="p">][:,</span> <span class="n">perm</span><span class="p">]</span>                                 <span class="c1"># wrong neighbours</span>
-<span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span> <span class="o">=</span> <span class="n">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i_tr</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">windows</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">i_va</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">shuffled</span> <span class="o">=</span> <span class="n">mae</span><span class="p">(</span><span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">),</span> <span class="n">yte</span><span class="p">)</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">P_true</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shuffled graph MAE </span><span class="si">{</span><span class="n">shuffled</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  vs true graph </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">'graph, 1 hop'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  vs no graph </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">'own history'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">shuffled</span> <span class="o">&gt;</span> <span class="n">results</span><span class="p">[</span><span class="s2">"graph, 1 hop"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The shuffled graph is clearly worse than the true one. It may still beat using no graph at all, because averaging any group of sensors picks up the shared daily rhythm. Keep that in mind when a paper reports a gain from 'the graph'.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-METR-LA-with-a-neural-model-(NOT-RUN-here)">5. METR-LA with a neural model (NOT RUN here)<a class="anchor-link" href="#5.-METR-LA-with-a-neural-model-(NOT-RUN-here)">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs the METR-LA files (207 sensors, 5-minute readings, about 4 months) and a GPU for the neural model.</span>
-<span class="c1"># The DCRNN repository links the data: metr-la.h5 and the sensor graph adj_mx.pkl.</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">pickle</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s2">"metr-la.h5"</span><span class="p">)</span>                                   <span class="c1"># rows: time, columns: sensors</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">adj</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"adj_mx.pkl"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"latin1"</span><span class="p">)</span>
-<span class="c1"># 1. Zeros in this file mean missing readings. Mask them in the loss and in the metric.</span>
-<span class="c1"># 2. Split by time 70/10/20 and scale with training statistics.</span>
-<span class="c1"># 3. Run the three forecasters above first. They are your baselines.</span>
-<span class="c1"># 4. Then train a neural model (for example a GRU whose linear maps are replaced by graph convolutions) for horizons of 15, 30 and 60 minutes.</span>
-<span class="c1"># 5. Report masked MAE at each horizon and compare with the DCRNN paper's table.</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stretch-(TODO):-dengue-across-districts">Stretch (TODO): dengue across districts<a class="anchor-link" href="#Stretch-(TODO):-dengue-across-districts">¶</a></h3><p>Build a graph of Bangladesh's 64 districts (edges between districts that share a border), collect weekly case counts from DGHS bulletins, and forecast one and two weeks ahead. Use the same three baselines and the same time-based split. Report honestly if the graph does not help: reporting delays may matter more than geography.</p>
-</div>
-</div>
-</div>
-
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-10.html"><span>Previous session</span>10 · Graphs meet LLMs</a><a class="next" href="session-12.html"><span>Next session</span>12 · Graph learning in medicine and the capstone</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-10.html"><span>Previous session</span>10 · Ensembling</a><a class="next" href="session-12.html"><span>Next session</span>12 · Finishing: write-up, reproduction and presentation</a></nav>
     </article>
   </div>
 </section>
@@ -221,7 +297,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap footer-inner">
     <div>
       <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
-      <p>From first principles to current research. 11 free courses with hands-on notebooks.</p>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>

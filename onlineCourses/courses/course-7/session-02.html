@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Differential privacy from first principles — Course 7 · AI Courses</title>
-<meta name="description" content="Release private counts and means from a synthetic health table and plot the error against epsilon.">
-<meta property="og:title" content="Differential privacy from first principles — Course 7 · AI Courses">
-<meta property="og:description" content="Release private counts and means from a synthetic health table and plot the error against epsilon.">
+<title>Message passing — Course 7 · AI Courses</title>
+<meta name="description" content="Train a two-layer GCN for node classification and compare it with a model that ignores the graph.">
+<meta property="og:title" content="Message passing — Course 7 · AI Courses">
+<meta property="og:description" content="Train a two-layer GCN for node classification and compare it with a model that ignores the graph.">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +36,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <section class="nb-hero">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span>
-      <a href="index.html">Course 7: Privacy-Preserving Machine Learning</a><span>/</span><span>Session 2</span></nav>
+      <a href="index.html">Course 7: Geometric Deep Learning and Graphs</a><span>/</span><span>Session 2</span></nav>
     <p class="eyebrow">Session 02 of 12</p>
-    <h1>Differential privacy from first principles</h1>
-    <p class="lead"><strong>Goal:</strong> Release private counts and means from a synthetic health table and plot the error against epsilon.</p>
+    <h1>Message passing</h1>
+    <p class="lead"><strong>Goal:</strong> Train a two-layer GCN for node classification and compare it with a model that ignores the graph.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_7_Privacy_Preserving_ML/notebooks/s02_differential_privacy_basics.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
-      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_7_Privacy_Preserving_ML/notebooks/s02_differential_privacy_basics.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
-      <a class="btn btn-ghost" href="../../Course_7_Privacy_Preserving_ML/notebooks/s02_differential_privacy_basics.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
-      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_7_Privacy_Preserving_ML/notebooks/s02_differential_privacy_basics.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+      <a class="btn btn-primary" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_7_Geometric_Deep_Learning_and_Graphs/notebooks/s02_message_passing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Colab</a>
+      <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_7_Geometric_Deep_Learning_and_Graphs/notebooks/s02_message_passing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Open in Kaggle</a>
+      <a class="btn btn-ghost" href="../../Course_7_Geometric_Deep_Learning_and_Graphs/notebooks/s02_message_passing.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Download .ipynb</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/blob/main/Course_7_Geometric_Deep_Learning_and_Graphs/notebooks/s02_message_passing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
     </div>
   </div>
 </section>
@@ -52,7 +52,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap nb-layout">
     <aside class="nb-toc" aria-label="Sessions in this course">
       <p class="toc-title"><a href="index.html">Course 7</a></p>
-      <ol><li><a href="session-01.html"><span>01</span>What models leak</a></li><li class=current><a href="session-02.html"><span>02</span>Differential privacy from first principles</a></li><li><a href="session-03.html"><span>03</span>DP-SGD and privacy accounting</a></li><li><a href="session-04.html"><span>04</span>Auditing privacy</a></li><li><a href="session-05.html"><span>05</span>Federated learning</a></li><li><a href="session-06.html"><span>06</span>Attacking and defending federated learning</a></li><li><a href="session-07.html"><span>07</span>Private LLMs</a></li><li><a href="session-08.html"><span>08</span>Computing on encrypted data</a></li><li><a href="session-09.html"><span>09</span>Privacy for graph data</a></li><li><a href="session-10.html"><span>10</span>Machine unlearning</a></li><li><a href="session-11.html"><span>11</span>Fairness, privacy and synthetic data</a></li><li><a href="session-12.html"><span>12</span>Capstone: privacy-preserving medical AI</a></li></ol>
+      <ol><li><a href="session-01.html"><span>01</span>The geometric blueprint</a></li><li class=current><a href="session-02.html"><span>02</span>Message passing</a></li><li><a href="session-03.html"><span>03</span>How expressive GNNs are</a></li><li><a href="session-04.html"><span>04</span>When depth hurts</a></li><li><a href="session-05.html"><span>05</span>Graph transformers</a></li><li><a href="session-06.html"><span>06</span>Group-equivariant networks</a></li><li><a href="session-07.html"><span>07</span>E(3)-equivariant models for atoms</a></li><li><a href="session-08.html"><span>08</span>Curved spaces</a></li><li><a href="session-09.html"><span>09</span>Generative models on graphs and manifolds</a></li><li><a href="session-10.html"><span>10</span>Graphs meet LLMs</a></li><li><a href="session-11.html"><span>11</span>Spatio-temporal graphs</a></li><li><a href="session-12.html"><span>12</span>Graph learning in medicine and the capstone</a></li></ol>
     </aside>
     <article class="notebook prose">
       <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -64,7 +64,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-A-synthetic-health-table">1. A synthetic health table<a class="anchor-link" href="#1.-A-synthetic-health-table">¶</a></h3><p>Every row is one invented patient.</p>
+<h3 id="1.-A-citation-like-graph">1. A citation-like graph<a class="anchor-link" href="#1.-A-citation-like-graph">¶</a></h3><p>Cora needs a download, so the runnable part uses a synthetic graph with the same character: papers in the same topic cite each other more often, and the features are noisy.</p>
 </div>
 </div>
 </div>
@@ -72,107 +72,35 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"age"</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="s2">"diabetes"</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.12</span><span class="p">,</span>
-                   <span class="s2">"systolic_bp"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">220</span><span class="p">)})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"true diabetes count:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">diabetes</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"| true mean blood pressure: </span><span class="si">%.2f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">df</span><span class="o">.</span><span class="n">systolic_bp</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-The-Laplace-mechanism">2. The Laplace mechanism<a class="anchor-link" href="#2.-The-Laplace-mechanism">¶</a></h3><p>Adding or removing one patient changes a count by at most 1. That number is the sensitivity. Adding Laplace noise with scale <code>sensitivity / epsilon</code> gives epsilon-DP.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">laplace_count</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">eps</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
 
-<span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epsilon </span><span class="si">{</span><span class="n">eps</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">: private count </span><span class="si">{</span><span class="n">laplace_count</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">diabetes</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">rng</span><span class="p">)</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2">   (expected absolute error </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">eps</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-A-private-mean-needs-bounds">3. A private mean needs bounds<a class="anchor-link" href="#3.-A-private-mean-needs-bounds">¶</a></h3><p>First clip every value to a fixed range, so one person can move the sum by at most the width of the range. Then split the budget between a noisy sum and a noisy count.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">private_mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
-    <span class="n">noisy_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">lo</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="p">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">eps</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">noisy_n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">eps</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">lo</span> <span class="o">+</span> <span class="n">noisy_sum</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">noisy_n</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sbm</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">p_in</span><span class="p">,</span> <span class="n">p_out</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Stochastic block model: dense inside a block, sparse between blocks."""</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sizes</span><span class="p">)),</span> <span class="n">sizes</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="n">labels</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">p_in</span><span class="p">,</span> <span class="n">p_out</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">P</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">|</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">labels</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"true mean </span><span class="si">%.2f</span><span class="s2"> | private mean at epsilon 1: </span><span class="si">%.2f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">systolic_bp</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">private_mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">systolic_bp</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">rng</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Error-against-epsilon">4. Error against epsilon<a class="anchor-link" href="#4.-Error-against-epsilon">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="n">eps_grid</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="n">err_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">laplace_count</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">diabetes</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">diabetes</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)])</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">eps_grid</span><span class="p">]</span>
-<span class="n">err_mean</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">private_mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">systolic_bp</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">systolic_bp</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)])</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">eps_grid</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">,</span> <span class="n">err_count</span><span class="p">,</span> <span class="n">err_mean</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epsilon </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">5.2f</span><span class="si">}</span><span class="s2">   count error </span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2">   mean error </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">err_count</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">err_count</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">err_count</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.2</span>          <span class="c1"># at epsilon 1 the expected error is 1</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">,</span> <span class="n">err_count</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"count"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">,</span> <span class="n">err_mean</span><span class="p">,</span> <span class="s2">"s-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"epsilon"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"mean absolute error"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"error_vs_epsilon.png"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-The-Gaussian-mechanism-and-delta">5. The Gaussian mechanism and delta<a class="anchor-link" href="#5.-The-Gaussian-mechanism-and-delta">¶</a></h3><p>Gaussian noise gives (epsilon, delta)-DP. A simple and valid calibration goes through zero-concentrated DP: noise <code>sigma</code> on a query with L2 sensitivity <code>s</code> gives <code>rho = s² / (2 sigma²)</code>, and that implies <code>epsilon = rho + 2 sqrt(rho ln(1/delta))</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">gaussian_sigma</span><span class="p">(</span><span class="n">sensitivity</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span>
-    <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>          <span class="c1"># solves eps = rho + 2 sqrt(rho L)</span>
-    <span class="k">return</span> <span class="n">sensitivity</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">rho</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">norm_adj</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""GCN normalization: D^-1/2 (A + I) D^-1/2."""</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
 
-<span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epsilon </span><span class="si">{</span><span class="n">eps</span><span class="si">}</span><span class="s2">: sigma for a count = </span><span class="si">{</span><span class="n">gaussian_sigma</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GCN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_in</span><span class="p">,</span> <span class="n">d_hid</span><span class="p">,</span> <span class="n">d_out</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_in</span><span class="p">,</span> <span class="n">d_hid</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_hid</span><span class="p">,</span> <span class="n">d_out</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">A_hat</span><span class="p">):</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">A_hat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">l1</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">A_hat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Composition:-budgets-add-up">6. Composition: budgets add up<a class="anchor-link" href="#6.-Composition:-budgets-add-up">¶</a></h3><p>Answering k questions with epsilon each costs k times epsilon in total under basic composition. With Gaussian noise the rho values add, which is much cheaper for many questions.</p>
 </div>
 </div>
 </div>
@@ -180,13 +108,13 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">k</span><span class="p">,</span> <span class="n">eps_each</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1e-6</span>
-<span class="n">L</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span>
-<span class="n">rho_each</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">eps_each</span><span class="p">)</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="n">rho_total</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">rho_each</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"basic composition    : total epsilon ="</span><span class="p">,</span> <span class="n">k</span> <span class="o">*</span> <span class="n">eps_each</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"zCDP composition     : total epsilon = </span><span class="si">%.2f</span><span class="s2"> (at delta 1e-6)"</span> <span class="o">%</span> <span class="p">(</span><span class="n">rho_total</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">rho_total</span> <span class="o">*</span> <span class="n">L</span><span class="p">)))</span>
-<span class="k">assert</span> <span class="n">rho_total</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">rho_total</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">eps_each</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sbm</span><span class="p">([</span><span class="mi">100</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">p_in</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">p_out</span><span class="o">=</span><span class="mf">0.008</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">4</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)[</span><span class="n">y</span><span class="p">]</span> <span class="o">@</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.35</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>   <span class="c1"># weak class signal + noise</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span><span class="mi">40</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">200</span><span class="p">:]</span>                      <span class="c1"># only 40 labelled nodes</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">A_hat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">norm_adj</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">"edges"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"labelled"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -194,7 +122,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="7.-Check-the-definition-by-experiment">7. Check the definition by experiment<a class="anchor-link" href="#7.-Check-the-definition-by-experiment">¶</a></h3><p>Two neighbouring tables differ in one patient. For any output, the two probabilities may differ by a factor of at most e^epsilon.</p>
+<h3 id="2.-Train-a-GCN-and-an-MLP-on-the-same-40-labels">2. Train a GCN and an MLP on the same 40 labels<a class="anchor-link" href="#2.-Train-a-GCN-and-an-MLP-on-the-same-40-labels">¶</a></h3>
 </div>
 </div>
 </div>
@@ -202,14 +130,79 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span></span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">240</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">eps</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500_000</span><span class="p">)</span>       <span class="c1"># count on table D</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">241</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">eps</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500_000</span><span class="p">)</span>       <span class="c1"># count on D plus one patient</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">236</span><span class="p">,</span> <span class="mi">247</span><span class="p">)</span>
-<span class="n">pa</span><span class="p">,</span> <span class="n">pb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="n">worst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">pa</span> <span class="o">/</span> <span class="n">pb</span><span class="p">,</span> <span class="n">pb</span> <span class="o">/</span> <span class="n">pa</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"largest probability ratio seen: </span><span class="si">%.3f</span><span class="s2">   bound e^epsilon = </span><span class="si">%.3f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">worst</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">**</span> <span class="n">eps</span><span class="p">))</span>
-<span class="k">assert</span> <span class="n">worst</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">**</span> <span class="n">eps</span> <span class="o">*</span> <span class="mf">1.05</span>
+<div class="highlight hl-python"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">use_graph</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A_hat</span> <span class="k">if</span> <span class="n">use_graph</span> <span class="k">else</span> <span class="n">I</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y_t</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">();</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A_hat</span> <span class="k">if</span> <span class="n">use_graph</span> <span class="k">else</span> <span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">test</span><span class="p">]</span> <span class="o">==</span> <span class="n">y_t</span><span class="p">[</span><span class="n">test</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="n">acc_mlp</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">GCN</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">use_graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>     <span class="c1"># identity adjacency = no message passing</span>
+<span class="n">acc_gcn</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">GCN</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">use_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MLP (no graph) test accuracy: </span><span class="si">{</span><span class="n">acc_mlp</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"GCN            test accuracy: </span><span class="si">{</span><span class="n">acc_gcn</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">acc_gcn</span> <span class="o">&gt;</span> <span class="n">acc_mlp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-The-same-recipe,-three-aggregators">3. The same recipe, three aggregators<a class="anchor-link" href="#3.-The-same-recipe,-three-aggregators">¶</a></h3><p>GCN, GraphSAGE and GAT differ only in how a node combines its neighbours' messages.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">A_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">gcn_agg</span>  <span class="o">=</span> <span class="n">A_hat</span> <span class="o">@</span> <span class="n">H</span>                                              <span class="c1"># degree-normalized sum, self included</span>
+<span class="n">sage_agg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">H</span><span class="p">,</span> <span class="p">(</span><span class="n">A_t</span> <span class="o">@</span> <span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">A_t</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># self, then mean of neighbours</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>                                               <span class="c1"># GAT: attention score from the pair (i, j)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p">((</span><span class="n">H</span> <span class="o">@</span> <span class="n">a</span><span class="p">[:</span><span class="mi">8</span><span class="p">])[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">H</span> <span class="o">@</span> <span class="n">a</span><span class="p">[</span><span class="mi">8</span><span class="p">:])[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">A_t</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gat_agg</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">@</span> <span class="n">H</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gcn_agg</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">sage_agg</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">gat_agg</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"| attention rows sum to"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Cora-with-PyTorch-Geometric-(NOT-RUN-here)">4. Cora with PyTorch Geometric (NOT RUN here)<a class="anchor-link" href="#4.-Cora-with-PyTorch-Geometric-(NOT-RUN-here)">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># NOT RUN: needs `pip install torch_geometric` and a dataset download.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="s2">"Cora"</span><span class="p">);</span> <span class="n">g</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Net</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">GCNConv</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ei</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ei</span><span class="p">)),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ei</span><span class="p">)</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">();</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">net</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)[</span><span class="n">g</span><span class="o">.</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">train_mask</span><span class="p">])</span><span class="o">.</span><span class="n">backward</span><span class="p">();</span> <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"test accuracy"</span><span class="p">,</span> <span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">test_mask</span><span class="p">]</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">test_mask</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>   <span class="c1"># the GCN paper reports 81.5%</span>
 </pre></div>
 </div>
 </div>
@@ -218,15 +211,15 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="TODO">TODO<a class="anchor-link" href="#TODO">¶</a></h3><ol>
-<li>Release a private histogram of age in 10-year bins. What is the sensitivity of the whole histogram?</li>
-<li>Clip blood pressure to [100, 160] instead. The noise drops but a bias appears. Plot both effects.</li>
-<li>A colleague suggests running the private count 1,000 times and averaging. Explain what that does to the privacy guarantee.</li>
+<li>Run the Cora cell and report mean and standard deviation over 5 seeds.</li>
+<li>Swap <code>GCNConv</code> for <code>SAGEConv</code> and <code>GATConv</code>. Which is best, and is the gap larger than the seed noise?</li>
+<li>In the synthetic graph, raise <code>p_out</code> until the GCN stops beating the MLP. Why does that happen?</li>
 </ol>
 </div>
 </div>
 </div>
 
-      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-01.html"><span>Previous session</span>01 · What models leak</a><a class="next" href="session-03.html"><span>Next session</span>03 · DP-SGD and privacy accounting</a></nav>
+      <nav class="pager" aria-label="Other sessions"><a class="prev" href="session-01.html"><span>Previous session</span>01 · The geometric blueprint</a><a class="next" href="session-03.html"><span>Next session</span>03 · How expressive GNNs are</a></nav>
     </article>
   </div>
 </section>
@@ -236,7 +229,7 @@ window.MathJax = {tex: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['
   <div class="wrap footer-inner">
     <div>
       <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
-      <p>From first principles to current research. 11 free courses with hands-on notebooks.</p>
+      <p>From first principles to current research. 15 free courses with hands-on notebooks.</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
