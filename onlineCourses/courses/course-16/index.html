@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algorithms Behind Modern AI · AI Courses</title>
+<meta name="description" content="The data structures and algorithms inside modern AI systems, built from scratch and measured: arrays and cost, hashing and Bloom filters, tokenizers with heaps and tries, computation graphs and topological sort, dynamic programming from edit distance to the CTC loss, beam search and sampling, automata for constrained decoding, nearest-neighbour indexes, caches, queues and batching, and randomized algorithms for data pipelines.">
+<meta property="og:title" content="Algorithms Behind Modern AI · AI Courses">
+<meta property="og:description" content="The data structures and algorithms inside modern AI systems, built from scratch and measured: arrays and cost, hashing and Bloom filters, tokenizers with heaps and tries, computation graphs and topological sort, dynamic programming from edit distance to the CTC loss, beam search and sampling, automata for constrained decoding, nearest-neighbour indexes, caches, queues and batching, and randomized algorithms for data pipelines.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="../../index.html#courses">Courses</a>
+      <a href="../../index.html#paths">Learning paths</a>
+      <a href="../../index.html#notebooks">Notebooks</a>
+      <a class="gh" href="https://github.com/motiur/onlineCourses" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="course-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Courses</a><span>/</span><span>Course 16</span></nav>
+    <div class="ch-meta"><span class="course-num">Course 16</span><span class="badge badge-core">Core</span><span class="track">Foundations · after a data structures course</span></div>
+    <h1>Algorithms Behind Modern AI</h1>
+    <p class="lead">The data structures and algorithms inside modern AI systems, built from scratch and measured: arrays and cost, hashing and Bloom filters, tokenizers with heaps and tries, computation graphs and topological sort, dynamic programming from edit distance to the CTC loss, beam search and sampling, automata for constrained decoding, nearest-neighbour indexes, caches, queues and batching, and randomized algorithms for data pipelines.</p>
+    <ul class="chips"><li>Hashing</li><li>Tokenizers</li><li>Dynamic programming</li><li>Search &amp; decoding</li><li>Vector indexes</li><li>Caches &amp; queues</li></ul>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m0 0-4.5-4.5M15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Start session 1</a>
+      <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/Course_16_Algorithms_Behind_Modern_AI_course_document.pdf"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5zM11.5 2.5V6H15M7.5 10h5M7.5 13h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Course document (PDF)</a>
+      <a class="btn btn-ghost" href="https://github.com/motiur/onlineCourses/tree/main/Course_16_Algorithms_Behind_Modern_AI" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Folder on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap course-layout">
+    <div>
+      <h2 class="list-title">Sessions</h2>
+      <ol class="sessions">
+      <li class="session">
+        <div class="s-num">01</div>
+        <div class="s-body">
+          <h3><a href="session-01.html">Counting cost: arrays, memory and Big-O for models</a></h3>
+          <p>Count the multiply–adds of matrix products and of self-attention and compare the counts with measured time, read an array&#x27;s strides to tell views from copies, count the copies behind amortized appends, and build CSR sparse storage to see when sparse beats dense.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-01.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s01_counting_cost.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s01_counting_cost.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s01_counting_cost.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">02</div>
+        <div class="s-body">
+          <h3><a href="session-02.html">Hashing: dictionaries, the hashing trick and Bloom filters</a></h3>
+          <p>Build an open-addressing hash table and compare its probe counts with Knuth&#x27;s formulas, see why Python salts string hashes, train a classifier on hashed features of several sizes, and measure the errors of a Bloom filter and a count–min sketch against their formulas.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-02.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s02_hashing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s02_hashing.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s02_hashing.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">03</div>
+        <div class="s-body">
+          <h3><a href="session-03.html">Tokenizers: byte-pair encoding with heaps, linked lists and tries</a></h3>
+          <p>Train byte-pair encoding twice, by recounting everything and with linked symbols, a pair index and a heap, check that both give the same merges while counting their work, and encode text by replaying merges and by longest match in a trie.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-03.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s03_tokenizer_algorithms.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s03_tokenizer_algorithms.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s03_tokenizer_algorithms.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">04</div>
+        <div class="s-body">
+          <h3><a href="session-04.html">Computation graphs: topological sort and automatic differentiation</a></h3>
+          <p>Order a computation graph with Kahn&#x27;s algorithm and with depth-first search, run reverse-mode differentiation as one backward sweep and check it against PyTorch, count the cost of walking every path instead, and shrink a graph with dead-code elimination, constant folding and common-subexpression elimination.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-04.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s04_computation_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s04_computation_graphs.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s04_computation_graphs.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">05</div>
+        <div class="s-body">
+          <h3><a href="session-05.html">Dynamic programming I: edit distance and alignment</a></h3>
+          <p>Compute edit distance by plain recursion, with memoization and with a table and count the work of each, read an alignment and a word error rate from the backtrace, save memory and cells with two rows and a band, and reuse the same table for ROUGE-L and for DNA alignment.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-05.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s05_edit_distance.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s05_edit_distance.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s05_edit_distance.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">06</div>
+        <div class="s-body">
+          <h3><a href="session-06.html">Dynamic programming II: Viterbi, the forward algorithm and CTC</a></h3>
+          <p>Find the best path and the total probability over exponentially many paths with one table, implement Viterbi and the forward algorithm in log space, and compute the CTC loss from scratch, checked against brute force and against PyTorch.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-06.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s06_viterbi_ctc.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s06_viterbi_ctc.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s06_viterbi_ctc.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">07</div>
+        <div class="s-body">
+          <h3><a href="session-07.html">Decoding: heaps, beam search and sampling</a></h3>
+          <p>Implement greedy, beam and exact search for a small language model, select the top-k and top-p tokens without sorting everything, and sample with the Gumbel-max trick, counting the work each one does.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-07.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s07_decoding_search.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s07_decoding_search.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s07_decoding_search.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag ok">Runs fully on CPU</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">08</div>
+        <div class="s-body">
+          <h3><a href="session-08.html">Automata and tries: constrained decoding and structured outputs</a></h3>
+          <p>Build a trie and a finite automaton from scratch, use them to mask a model&#x27;s next-token choices so that every output fits a list or a pattern, and measure what the mask costs and how it changes the distribution.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-08.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s08_constrained_decoding.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s08_constrained_decoding.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s08_constrained_decoding.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">09</div>
+        <div class="s-body">
+          <h3><a href="session-09.html">Nearest neighbours I: k-d trees, LSH and MinHash</a></h3>
+          <p>Build a k-d tree and count how its pruning fails as the dimension grows, build locality-sensitive hash indexes for cosine and Jaccard similarity, and find the near-duplicate documents of a corpus without comparing all pairs.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-09.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s09_trees_and_lsh.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s09_trees_and_lsh.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s09_trees_and_lsh.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">10</div>
+        <div class="s-body">
+          <h3><a href="session-10.html">Nearest neighbours II: HNSW, IVF and product quantization</a></h3>
+          <p>Build a graph index, an inverted-file index and a product quantizer for vector search from scratch, and measure recall against distance computations and bytes per vector for each.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-10.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s10_vector_indexes.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s10_vector_indexes.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s10_vector_indexes.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">11</div>
+        <div class="s-body">
+          <h3><a href="session-11.html">Serving models: caches, queues and batching</a></h3>
+          <p>Count the attention scores that a KV cache saves, build an LRU cache and a prefix tree that shares cached prompts, and simulate static and continuous batching for a model server.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-11.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s11_caches_queues_batching.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s11_caches_queues_batching.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s11_caches_queues_batching.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      <li class="session">
+        <div class="s-num">12</div>
+        <div class="s-body">
+          <h3><a href="session-12.html">Randomized algorithms for data pipelines, and the capstone</a></h3>
+          <p>Sample uniformly from a stream, shuffle correctly, measure what a shuffle buffer does to sorted data, draw from a large discrete distribution in constant time, and start the capstone plan.</p>
+          <div class="s-actions">
+            <a class="btn btn-soft" href="session-12.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Read notebook</a>
+            <a class="btn btn-ghost" href="https://colab.research.google.com/github/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s12_sampling_and_shuffling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Colab</a>
+            <a class="btn btn-ghost" href="https://www.kaggle.com/kernels/welcome?src=https://github.com/motiur/onlineCourses/blob/main/Course_16_Algorithms_Behind_Modern_AI/notebooks/s12_sampling_and_shuffling.ipynb" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></svg>Kaggle</a>
+            <a class="btn btn-ghost" href="../../Course_16_Algorithms_Behind_Modern_AI/notebooks/s12_sampling_and_shuffling.ipynb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.5l3.5-3.5M4 15.5h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>.ipynb</a>
+            <span class="flag" title="Cells that need a GPU, a download or an account">1 NOT RUN cell</span>
+          </div>
+        </div>
+      </li>
+      </ol>
+    </div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>At a glance</h3>
+        <dl>
+          <dt>Sessions</dt><dd>12</dd>
+          <dt>Level</dt><dd>Core</dd>
+          <dt>Prerequisites</dt><dd>A first data structures and algorithms course, and Python at the level of Course 1.</dd>
+          <dt>Each session</dt><dd>3 video segments, a lab, a quiz and an assignment</dd>
+        </dl>
+      </div>
+      <div class="side-card prose small">
+        <h3>Before you start</h3>
+        <p>One notebook per session. Read them with their saved outputs on the course website or on GitHub, or open them in Google Colab or Kaggle Notebooks and run them from the top.</p>
+<ul>
+<li>Every cell without a NOT RUN label was run once, top to bottom, on a CPU in November 2026 (Python 3.13, NumPy 2.5, SciPy 1.18, scikit-learn 1.9 and matplotlib 3.11, plus PyTorch 2.15 in sessions 4 and 6, where it only checks our own gradients and our own CTC loss), and the outputs are saved in the notebooks.</li>
+<li>Operation counts (multiply–adds, probes, table cells, distance computations, cache hits) are exact, and a second, independent run reproduced every printed number. Timings do not reproduce: they come from one run on a shared server CPU, so treat them as rough and expect different numbers on your machine.</li>
+<li>The data are synthetic or small: made-up words with a Zipf distribution, short English and Bangla texts written into the notebooks, random vectors with planted neighbours, simulated request traces, and scikit-learn's digits in session 12. Each notebook finishes in under a minute on a CPU. The numbers show how each algorithm behaves; they are not benchmark results.</li>
+<li>Nothing extra needs installing for the runnable cells on Google Colab or Kaggle.</li>
+<li>Cells marked TODO are exercises for students. Cells marked NOT RUN need a library, a model download or a GPU (the table below says what each needs). They were written from the libraries' documentation and have not been executed, so run each one before recording.</li>
+<li>The batching experiments in session 11 are a simulation, not measurements of a real server.</li>
+<li>Results that went against expectation are stated in each notebook's &quot;What to notice&quot; cell and in the course document. Examples: signed hashing helped the classifier only at the two smallest table sizes (session 2); the two tokenizer encoders differed on only 1.4% of word types (session 3); a wider beam did not always find the exact best string, and one sampling test gave a p-value of 0.047 (session 7); no LSH setting reached a recall of 0.9, and the pure-Python k-d tree was slower than NumPy brute force from 16 dimensions (session 9); HNSW's layers saved only a few dozen distance computations per query, and the simple &quot;M nearest&quot; link rule never reached a recall of 0.99 (session 10); first-in-first-out and random eviction were almost as good as LRU, and far behind the optimal rule (session 11); a shuffle buffer of 512 gave a slightly higher accuracy than a full shuffle, within the spread over seeds (session 12).</li>
+</ul>
+
+      </div>
+    </aside>
+  </div>
+  <div class="wrap"><nav class="pager" aria-label="Other courses"><a class="prev" href="../course-15/index.html"><span>Previous course</span>Research Engineering Interviews</a><span></span></nav></div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand small" href="../../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 22 16 9l7 13M11.6 17.5h8.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Courses</span></a>
+      <p>From first principles to current research. 16 free courses with hands-on notebooks.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/motiur/onlineCourses">Source on GitHub</a>
+      <a href="https://github.com/motiur">github.com/motiur</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
